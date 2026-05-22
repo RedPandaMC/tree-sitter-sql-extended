@@ -94,6 +94,9 @@ export default {
     $.describe_detail,
     $.describe_uc_object,
     $.describe_query,
+    // Databricks resource management
+    $.add_resource_statement,
+    $.list_resource_statement,
   ),
 
   _dml_write: $ => seq(

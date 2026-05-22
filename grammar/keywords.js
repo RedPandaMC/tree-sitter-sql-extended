@@ -294,7 +294,9 @@ export default {
   keyword_uncache: _ => make_keyword("uncache"),
   // Resource management (#16)
   keyword_jar: _ => make_keyword("jar"),
+  keyword_jars: _ => make_keyword("jars"),
   keyword_archive: _ => make_keyword("archive"),
+  keyword_archives: _ => make_keyword("archives"),
   keyword_list: _ => make_keyword("list"),
   // CALL + EXECUTE IMMEDIATE (#13)
   keyword_call: _ => make_keyword("call"),

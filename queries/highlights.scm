@@ -384,6 +384,14 @@
   (keyword_recipients)
   (keyword_providers)
   (keyword_grants)
+  (keyword_jar)
+  (keyword_jars)
+  (keyword_archive)
+  (keyword_archives)
+  (keyword_list)
+  (keyword_lazy)
+  (keyword_uncache)
+  (keyword_clear)
 ] @keyword
 
 [
