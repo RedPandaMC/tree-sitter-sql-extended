@@ -1,4 +1,4 @@
-import { paren_list } from "../helpers.js";
+import { paren_list, comma_list } from "../helpers.js";
 
 export default {
 
@@ -47,6 +47,7 @@ export default {
   ),
 
   _alter_specifications: $ => choice(
+    $.add_partition,
     $.add_column,
     $.add_constraint,
     $.drop_constraint,
@@ -70,6 +71,22 @@ export default {
     optional($._if_not_exists),
     $.column_definition,
     optional($.column_position),
+  ),
+
+  // ALTER TABLE t ADD [IF NOT EXISTS] PARTITION (key=val [,...]) [LOCATION path] [PARTITION ...]
+  add_partition: $ => seq(
+    $.keyword_add,
+    optional($._if_not_exists),
+    repeat1(
+      seq(
+        $.keyword_partition,
+        paren_list(
+          seq($.identifier, '=', $._expression),
+          true,
+        ),
+        optional(seq($.keyword_location, $._literal_string)),
+      ),
+    ),
   ),
 
   add_constraint: $ => seq(
@@ -204,11 +221,23 @@ export default {
     optional($._if_exists),
     $.object_reference,
     choice(
-      // TODO Postgres allows a single "alter column" to set or drop default
       $.rename_object,
       $.rename_column,
       $.set_schema,
       $.change_ownership,
+      // Spark SQL / Databricks: redefine view body
+      seq($.keyword_as, $._dml_read),
+      // Spark SQL / Databricks: manage TBLPROPERTIES
+      seq(
+        $.keyword_set,
+        $.keyword_tblproperties,
+        paren_list($.table_option, true),
+      ),
+      seq(
+        $.keyword_unset,
+        $.keyword_tblproperties,
+        paren_list($._expression, true),
+      ),
     ),
   ),
 

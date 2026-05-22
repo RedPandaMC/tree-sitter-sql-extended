@@ -5,8 +5,10 @@ export default {
   set_statement: $ => seq(
     $.keyword_set,
     choice(
+      // SET CATALOG catalog_name (Unity Catalog / Spark SQL)
+      seq($.keyword_catalog, $.object_reference),
       seq(
-        optional(choice($.keyword_session, $.keyword_local)),
+        optional(choice($.keyword_session, $.keyword_local, $.keyword_global)),
         choice(
           seq(
             $.object_reference,
@@ -31,6 +33,13 @@ export default {
       seq($.keyword_transaction, $.keyword_snapshot, $._transaction_mode),
       seq($.keyword_session, $.keyword_characteristics, $.keyword_as, $.keyword_transaction, $._transaction_mode),
     ),
+  ),
+
+  // USE [DATABASE | SCHEMA | CATALOG] name
+  use_statement: $ => seq(
+    $.keyword_use,
+    optional(choice($.keyword_database, $.keyword_schema, $.keyword_catalog)),
+    $.object_reference,
   ),
 
   _transaction_mode: $ => seq(

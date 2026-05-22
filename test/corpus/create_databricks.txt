@@ -1,0 +1,19 @@
+
+================================================================================
+Shallow Clone
+================================================================================
+
+CREATE TABLE target SHALLOW CLONE source
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (create_table
+      (keyword_create)
+      (keyword_table)
+      (object_reference (identifier))
+      (shallow_clone
+        (keyword_shallow)
+        (keyword_clone)
+        (object_reference (identifier))))))

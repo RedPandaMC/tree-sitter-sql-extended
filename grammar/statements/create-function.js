@@ -7,49 +7,67 @@ export default {
   // context is done by _dollar_string.
   dollar_quote: () => /\$[^\$]*\$/,
 
-  create_function: $ => seq(
+  create_function: $ => prec.left(seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_function,
+    optional($._if_not_exists),
     $.object_reference,
-    $.function_arguments,
-    $.keyword_returns,
     choice(
-      $._type,
-      seq($.keyword_setof, $._type),
-      seq($.keyword_table, $.column_definitions),
-      $.keyword_trigger,
-    ),
-    repeat(
-      choice(
-        $.function_language,
-        $.function_volatility,
-        $.function_leakproof,
-        $.function_security,
-        $.function_safety,
-        $.function_strictness,
-        $.function_cost,
-        $.function_rows,
-        $.function_support,
+      // Standard form: FUNCTION name(args) RETURNS type [options] body
+      seq(
+        $.function_arguments,
+        optional(seq(
+          $.keyword_returns,
+          choice(
+            $._type,
+            seq($.keyword_setof, $._type),
+            seq($.keyword_table, $.column_definitions),
+            $.keyword_trigger,
+          ),
+        )),
+        repeat(
+          choice(
+            $.function_language,
+            $.function_volatility,
+            $.function_leakproof,
+            $.function_security,
+            $.function_safety,
+            $.function_strictness,
+            $.function_cost,
+            $.function_rows,
+            $.function_support,
+            $.function_handler,
+            $.function_environment,
+            $.function_parameter_style,
+          ),
+        ),
+        optional($.function_body),
+        repeat(
+          choice(
+            $.function_language,
+            $.function_volatility,
+            $.function_leakproof,
+            $.function_security,
+            $.function_safety,
+            $.function_strictness,
+            $.function_cost,
+            $.function_rows,
+            $.function_support,
+            $.function_handler,
+            $.function_environment,
+            $.function_parameter_style,
+          ),
+        ),
+      ),
+      // Hive/Databricks class-backed UDF: FUNCTION name AS 'java.class.Name' [USING jar]
+      seq(
+        $.keyword_as,
+        field('class', alias($._literal_string, $.literal)),
+        optional(seq($.keyword_using, $.keyword_jar, field('jar', alias($._literal_string, $.literal)))),
       ),
     ),
-    // ensure that there's only one function body -- other specifiers are less
-    // variable but the body can have all manner of conflicting stuff
-    $.function_body,
-    repeat(
-      choice(
-        $.function_language,
-        $.function_volatility,
-        $.function_leakproof,
-        $.function_security,
-        $.function_safety,
-        $.function_strictness,
-        $.function_cost,
-        $.function_rows,
-        $.function_support,
-      ),
-    ),
-  ),
+  )),
 
   _argmode: $ => choice(
     $.keyword_in,
@@ -163,6 +181,7 @@ export default {
         choice(
           $._single_quote_string,
           $._double_quote_string,
+          $._dollar_quoted_string,
         ),
         $.literal
       ),
@@ -241,6 +260,24 @@ export default {
   function_support: $ => seq(
     $.keyword_support,
     alias($._literal_string, $.literal),
+  ),
+
+  function_handler: $ => seq(
+    $.keyword_handler,
+    alias($._literal_string, $.literal),
+  ),
+
+  function_environment: $ => seq(
+    $.keyword_environment,
+    '(',
+    repeat(seq($.identifier, '=', alias($._literal_string, $.literal), optional(','))),
+    ')',
+  ),
+
+  function_parameter_style: $ => seq(
+    $.keyword_parameter,
+    $.keyword_style,
+    $.identifier,
   ),
 
 };

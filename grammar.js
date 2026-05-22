@@ -30,6 +30,13 @@ export default grammar({
     [$.between_expression, $.binary_expression],
     [$.time],
     [$.timestamp],
+    [$.from],
+    [$.create_sequence],
+    [$.alter_sequence],
+    [$.create_namespace],
+    [$.create_function],
+    [$.describe_history, $.describe_table],
+    [$.describe_detail, $.describe_table],
   ],
 
   precedences: $ => [

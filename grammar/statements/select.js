@@ -235,6 +235,7 @@ export default {
         $.object_reference,
         wrapped_in_parenthesis($.values),
       ),
+      optional($.tablesample),
       optional(
         seq(
           $._alias,
@@ -242,6 +243,17 @@ export default {
         ),
       ),
     ),
+  ),
+
+  tablesample: $ => seq(
+    $.keyword_tablesample,
+    '(',
+    choice(
+      seq($._natural_number, $.keyword_rows),
+      seq($._natural_number, $.keyword_percent),
+      seq($.keyword_bucket, $._natural_number, $.keyword_out, $.keyword_of, $._natural_number),
+    ),
+    ')',
   ),
 
   values: $ => seq(
