@@ -120,6 +120,33 @@ export default {
     $._spark_analyze,
   ),
 
+  // Override _drop_statement AFTER spreads to include Databricks DROP extensions
+  _drop_statement: $ => choice(
+    $.drop_table,
+    $.drop_table_purge,
+    $.drop_view,
+    $.drop_materialized_view,
+    $.drop_index,
+    $.drop_type,
+    $.drop_schema,
+    $.drop_database,
+    $.drop_role,
+    $.drop_sequence,
+    $.drop_extension,
+    $.drop_function,
+    $.drop_procedure,
+    $.drop_catalog,
+    $.drop_namespace,
+    $.drop_connection,
+    $.drop_credential,
+    $.drop_external_location,
+    $.drop_volume,
+    $.drop_share,
+    $.drop_recipient,
+    $.drop_provider,
+    $.drop_policy,
+  ),
+
   _dml_write: $ => seq(
     seq(
       optional(

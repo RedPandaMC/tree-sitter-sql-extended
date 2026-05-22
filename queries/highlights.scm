@@ -369,6 +369,8 @@
   (keyword_clustered)
   (keyword_buckets)
   (keyword_global)
+  (keyword_namespace)
+  (keyword_provider)
 ] @keyword
 
 [
