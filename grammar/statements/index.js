@@ -86,6 +86,7 @@ export default {
     $.comment_statement,
     $.set_statement,
     $.reset_statement,
+    $.use_statement,
     // Databricks / Delta / Unity Catalog
     $.restore_table_statement,
     $.convert_to_delta_statement,

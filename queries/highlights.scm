@@ -368,6 +368,7 @@
   (keyword_zorder)
   (keyword_clustered)
   (keyword_buckets)
+  (keyword_global)
 ] @keyword
 
 [
