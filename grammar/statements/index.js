@@ -97,6 +97,12 @@ export default {
     $.grant_statement,
     $.revoke_statement,
     $.deny_statement,
+    // Databricks DESCRIBE extensions
+    $.describe_table,
+    $.describe_history,
+    $.describe_detail,
+    $.describe_uc_object,
+    $.describe_query,
   ),
 
   ...create_rules,

@@ -371,6 +371,10 @@
   (keyword_global)
   (keyword_namespace)
   (keyword_provider)
+  (keyword_describe)
+  (keyword_detail)
+  (keyword_history)
+  (keyword_query)
 ] @keyword
 
 [

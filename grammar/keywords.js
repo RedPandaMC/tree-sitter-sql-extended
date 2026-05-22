@@ -255,6 +255,9 @@ export default {
   keyword_file: _ => make_keyword("file"),
   keyword_catalog: _ => make_keyword("catalog"),
 
+  keyword_describe: _ => make_keyword("describe"),
+  keyword_query: _ => make_keyword("query"),
+
   // Sprint 1+ Databricks / Spark SQL keywords
   // SELECT extensions (#2)
   keyword_qualify: _ => make_keyword("qualify"),
