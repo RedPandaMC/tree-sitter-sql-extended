@@ -255,6 +255,61 @@ export default {
   keyword_file: _ => make_keyword("file"),
   keyword_catalog: _ => make_keyword("catalog"),
 
+  // Sprint 1+ Databricks / Spark SQL keywords
+  // SELECT extensions (#2)
+  keyword_qualify: _ => make_keyword("qualify"),
+  keyword_pivot: _ => make_keyword("pivot"),
+  keyword_unpivot: _ => make_keyword("unpivot"),
+  keyword_tablesample: _ => make_keyword("tablesample"),
+  keyword_cluster: _ => make_keyword("cluster"),
+  keyword_distribute: _ => make_keyword("distribute"),
+  keyword_transform: _ => make_keyword("transform"),
+  keyword_clustered: _ => make_keyword("clustered"),
+  keyword_buckets: _ => make_keyword("buckets"),
+  // CREATE / DROP / SHOW / DESCRIBE extensions (#3, #5, #9, #10)
+  keyword_namespace: _ => make_keyword("namespace"),
+  keyword_streaming: _ => make_keyword("streaming"),
+  keyword_live: _ => make_keyword("live"),
+  keyword_provider: _ => make_keyword("provider"),
+  keyword_grants: _ => make_keyword("grants"),
+  keyword_history: _ => make_keyword("history"),
+  keyword_detail: _ => make_keyword("detail"),
+  // SET extensions (#14)
+  keyword_global: _ => make_keyword("global"),
+  // CACHE extensions (#15)
+  keyword_lazy: _ => make_keyword("lazy"),
+  keyword_clear: _ => make_keyword("clear"),
+  keyword_uncache: _ => make_keyword("uncache"),
+  // Resource management (#16)
+  keyword_jar: _ => make_keyword("jar"),
+  keyword_archive: _ => make_keyword("archive"),
+  keyword_list: _ => make_keyword("list"),
+  // CALL + EXECUTE IMMEDIATE (#13)
+  keyword_call: _ => make_keyword("call"),
+  // INSERT / LOAD extensions (#12)
+  keyword_changes: _ => make_keyword("changes"),
+  keyword_directory: _ => make_keyword("directory"),
+  keyword_load: _ => make_keyword("load"),
+  keyword_inpath: _ => make_keyword("inpath"),
+  // ALTER TABLE extensions — Iceberg branches/tags (#4)
+  keyword_branch: _ => make_keyword("branch"),
+  keyword_tag: _ => make_keyword("tag"),
+  keyword_identity: _ => make_keyword("identity"),
+  // Procedural scripting (#17)
+  keyword_elseif: _ => make_keyword("elseif"),
+  keyword_loop: _ => make_keyword("loop"),
+  keyword_repeat: _ => make_keyword("repeat"),
+  keyword_signal: _ => make_keyword("signal"),
+  keyword_resignal: _ => make_keyword("resignal"),
+  keyword_leave: _ => make_keyword("leave"),
+  keyword_iterate: _ => make_keyword("iterate"),
+  keyword_diagnostics: _ => make_keyword("diagnostics"),
+  keyword_sqlstate: _ => make_keyword("sqlstate"),
+  // Spark 4.x (#21)
+  keyword_var: _ => make_keyword("var"),
+  keyword_variable: _ => make_keyword("variable"),
+  keyword_variant: _ => make_keyword("variant"),
+
   keyword_trigger: _ => make_keyword('trigger'),
   keyword_function: _ => make_keyword("function"),
   keyword_returns: _ => make_keyword("returns"),
