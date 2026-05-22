@@ -1,12 +1,11 @@
 export default {
 
-  // CACHE [LAZY] TABLE name [OPTIONS (...)] [AS query]
+  // CACHE [LAZY] TABLE name [AS query]
   cache_table: $ => prec.left(seq(
     $.keyword_cache,
     optional($.keyword_lazy),
     $.keyword_table,
     $.object_reference,
-    optional($.storage_parameters),
     optional(seq($.keyword_as, $._dml_read)),
   )),
 
