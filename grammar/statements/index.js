@@ -16,6 +16,8 @@ import select_rules from "./select.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
 
+import databricks_rules from "../dialects/databricks/index.js";
+
 export default {
 
   block: $ => seq(
@@ -84,6 +86,16 @@ export default {
     $.comment_statement,
     $.set_statement,
     $.reset_statement,
+    // Databricks / Delta / Unity Catalog
+    $.restore_table_statement,
+    $.convert_to_delta_statement,
+    $.fsck_repair_statement,
+    $.reorg_table_statement,
+    $.generate_statement,
+    $.msck_repair_statement,
+    $.grant_statement,
+    $.revoke_statement,
+    $.deny_statement,
   ),
 
   ...create_rules,
@@ -94,6 +106,18 @@ export default {
   ...merge_rules,
   ...refresh_rules,
   ...comment_rules,
+
+  // Databricks dialect rules (overrides _vacuum_table; adds Delta/UC/restore/grant rules)
+  ...databricks_rules,
+
+  // Override _optimize_statement AFTER spreads to include Delta OPTIMIZE and Spark ANALYZE TABLE
+  _optimize_statement: $ => choice(
+    $._compute_stats,
+    $._vacuum_table,
+    $._optimize_table,
+    $._delta_optimize,
+    $._spark_analyze,
+  ),
 
   _dml_write: $ => seq(
     seq(
