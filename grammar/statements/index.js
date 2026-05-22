@@ -15,23 +15,14 @@ import copy_rules from "./copy.js";
 import select_rules from "./select.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
+import show_rules from "./show.js";
+import compound_rules from "./compound.js";
 
 import databricks_rules from "../dialects/databricks/index.js";
 
 export default {
 
-  block: $ => seq(
-    $.keyword_begin,
-    optional(';'),
-    repeat(
-      seq(
-        $.statement,
-        ';'
-      ),
-    ),
-    $.keyword_end,
-  ),
-
+  // Top-level composition rule — the grammar entry point
   statement: $ => seq(
     optional(seq(
       $.keyword_explain,
@@ -46,34 +37,30 @@ export default {
     ),
   ),
 
-  while_statement: $ => prec.left(seq(
-    $.keyword_while,
-    optional_parenthesis($._expression),
-    choice(
-      seq(
-        $.statement,
-        optional(';'),
-      ),
-      seq(
-        $.keyword_begin,
-        repeat($.statement),
-        $.keyword_end,
-      ),
-    ),
-  )),
+  // ===== ALL SPREADS — guaranteed before overrides =====
 
-  var_declarations: $ => seq($.keyword_declare, repeat1($.var_declaration)),
-  var_declaration: $ => seq(
-    $.identifier,
-    $._type,
-    optional(
-      seq(
-        choice($.keyword_default, '='),
-        $.literal,
-      ),
-    ),
-    optional(','),
-  ),
+  ...create_rules,
+  ...alter_rules,
+  ...drop_rules,
+  ...rename_rules,
+  ...optimize_rules,
+  ...merge_rules,
+  ...refresh_rules,
+  ...comment_rules,
+  ...databricks_rules,
+  ...delete_rules,
+  ...insert_rules,
+  ...update_rules,
+  ...truncate_rules,
+  ...copy_rules,
+  ...select_rules,
+  ...set_rules,
+  ...show_rules,
+  ...compound_rules,
+
+  // ===== ALL OVERRIDES — MUST BE LAST =====
+  // These intentionally supersede anything defined in the spreads above.
+  // Never add inline rules below this comment unless they are overrides.
 
   _ddl_statement: $ => choice(
     $._create_statement,
@@ -109,19 +96,34 @@ export default {
     $.describe_query,
   ),
 
-  ...create_rules,
-  ...alter_rules,
-  ...drop_rules,
-  ...rename_rules,
-  ...optimize_rules,
-  ...merge_rules,
-  ...refresh_rules,
-  ...comment_rules,
+  _dml_write: $ => seq(
+    seq(
+      optional(
+        $._cte,
+      ),
+      choice(
+        $._delete_statement,
+        $._insert_statement,
+        $._update_statement,
+        $._truncate_statement,
+        $._copy_statement,
+      ),
+    ),
+  ),
 
-  // Databricks dialect rules (overrides _vacuum_table; adds Delta/UC/restore/grant rules)
-  ...databricks_rules,
+  _dml_read: $ => seq(
+    optional(optional_parenthesis($._cte)),
+    optional_parenthesis(
+      choice(
+        $._select_statement,
+        $.set_operation,
+        $._show_statement,
+        $._unload_statement,
+      ),
+    ),
+  ),
 
-  // Override _optimize_statement AFTER spreads to include Delta OPTIMIZE and Spark ANALYZE TABLE
+  // Override _optimize_statement to include Delta OPTIMIZE and Spark ANALYZE TABLE
   _optimize_statement: $ => choice(
     $._compute_stats,
     $._vacuum_table,
@@ -130,14 +132,14 @@ export default {
     $._spark_analyze,
   ),
 
-  // Override _refresh_statement AFTER spreads to include REFRESH TABLE/FUNCTION
+  // Override _refresh_statement to include REFRESH TABLE/FUNCTION
   _refresh_statement: $ => choice(
     $.refresh_materialized_view,
     $.refresh_table_databricks,
     $.refresh_function,
   ),
 
-  // Override _show_statement AFTER spreads to include Databricks SHOW extensions
+  // Override _show_statement to include Databricks SHOW extensions
   _show_statement: $ => seq(
     $.keyword_show,
     choice(
@@ -155,7 +157,7 @@ export default {
     ),
   ),
 
-  // Override _drop_statement AFTER spreads to include Databricks DROP extensions
+  // Override _drop_statement to include Databricks DROP extensions
   _drop_statement: $ => choice(
     $.drop_table,
     $.drop_table_purge,
@@ -180,73 +182,6 @@ export default {
     $.drop_recipient,
     $.drop_provider,
     $.drop_policy,
-  ),
-
-  _dml_write: $ => seq(
-    seq(
-      optional(
-        $._cte,
-      ),
-      choice(
-        $._delete_statement,
-        $._insert_statement,
-        $._update_statement,
-        $._truncate_statement,
-        $._copy_statement,
-      ),
-    ),
-  ),
-
-  ...delete_rules,
-  ...insert_rules,
-  ...update_rules,
-  ...truncate_rules,
-  ...copy_rules,
-
-  _dml_read: $ => seq(
-    optional(optional_parenthesis($._cte)),
-    optional_parenthesis(
-      choice(
-        $._select_statement,
-        $.set_operation,
-        $._show_statement,
-        $._unload_statement,
-      ),
-    ),
-  ),
-
-  ...select_rules,
-  ...set_rules,
-
-  _show_create: $ => seq(
-    $.keyword_create,
-    choice(
-      // Trino/Presto/MySQL
-      $.keyword_schema,
-      $.keyword_table,
-      seq(optional($.keyword_materialized), $.keyword_view),
-      // MySQL
-      $.keyword_user,
-      $.keyword_trigger,
-      $.keyword_procedure,
-      $.keyword_function
-    ),
-    $.object_reference
-  ),
-
-  _show_tables: $ => seq(
-    $.keyword_tables,
-    optional(seq($.keyword_from, $._qualified_field)),
-    optional(seq($.keyword_like, $._expression))
-  ),
-
-  // athena
-  _unload_statement: $ => seq(
-    $.keyword_unload,
-    wrapped_in_parenthesis($._select_statement),
-    $.keyword_to,
-    $._single_quote_string,
-    $.storage_parameters,
   ),
 
 };

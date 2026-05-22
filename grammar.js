@@ -32,6 +32,7 @@ export default grammar({
     [$.timestamp],
     [$.from],
     [$.create_sequence],
+    [$.alter_sequence],
   ],
 
   precedences: $ => [
