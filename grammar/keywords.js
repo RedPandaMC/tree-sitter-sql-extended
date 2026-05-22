@@ -265,6 +265,8 @@ export default {
   keyword_pivot: _ => make_keyword("pivot"),
   keyword_unpivot: _ => make_keyword("unpivot"),
   keyword_tablesample: _ => make_keyword("tablesample"),
+  keyword_percent: _ => make_keyword("percent"),
+  keyword_bucket: _ => make_keyword("bucket"),
   keyword_cluster: _ => make_keyword("cluster"),
   keyword_distribute: _ => make_keyword("distribute"),
   keyword_transform: _ => make_keyword("transform"),
@@ -295,6 +297,11 @@ export default {
   keyword_uncache: _ => make_keyword("uncache"),
   // Resource management (#16)
   keyword_jar: _ => make_keyword("jar"),
+  // CREATE FUNCTION Databricks options
+  keyword_handler: _ => make_keyword("handler"),
+  keyword_environment: _ => make_keyword("environment"),
+  keyword_parameter: _ => make_keyword("parameter"),
+  keyword_style: _ => make_keyword("style"),
   keyword_shallow: _ => make_keyword("shallow"),
   keyword_deep: _ => make_keyword("deep"),
   keyword_clone: _ => make_keyword("clone"),
