@@ -100,6 +100,8 @@ export default {
     // Databricks CALL + EXECUTE IMMEDIATE
     $.call_statement,
     $.execute_immediate_statement,
+    // Databricks CREATE extensions
+    $.create_namespace,
   ),
 
   _dml_write: $ => seq(

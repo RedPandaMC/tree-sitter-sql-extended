@@ -8,6 +8,7 @@ import show_rules from "./show.js";
 import cache_rules from "./cache.js";
 import resource_rules from "./resource.js";
 import call_rules from "./call.js";
+import create_rules from "./create.js";
 
 export default {
   ...vacuum_rules,
@@ -20,4 +21,5 @@ export default {
   ...cache_rules,
   ...resource_rules,
   ...call_rules,
+  ...create_rules,
 };

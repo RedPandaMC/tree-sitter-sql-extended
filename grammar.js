@@ -33,6 +33,7 @@ export default grammar({
     [$.from],
     [$.create_sequence],
     [$.alter_sequence],
+    [$.create_namespace],
   ],
 
   precedences: $ => [
