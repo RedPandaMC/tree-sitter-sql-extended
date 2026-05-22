@@ -71,6 +71,7 @@ export default {
     $.stored_as,
     $.storage_location,
     $.table_sort,
+    $.table_cluster,
     $.row_format,
     seq(
       $.keyword_tblproperties,
@@ -79,6 +80,17 @@ export default {
     seq($.keyword_without, $.keyword_oids),
     $.storage_parameters,
     $.table_option,
+  ),
+
+  // CLUSTERED BY (col [, ...]) [SORTED BY (col [, ...])] INTO n BUCKETS
+  table_cluster: $ => seq(
+    $.keyword_clustered,
+    $.keyword_by,
+    paren_list($.field, true),
+    optional(seq($.keyword_sort, $.keyword_by, paren_list($.field, true))),
+    $.keyword_into,
+    $.literal,
+    $.keyword_buckets,
   ),
 
   stored_as: $ => seq(

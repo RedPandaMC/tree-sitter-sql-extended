@@ -21,6 +21,7 @@ export default {
       $.object_reference,
       optional($._partition_spec),
       $.keyword_compute,
+      optional($.keyword_delta),
       $.keyword_statistics,
       optional(choice(
         $.keyword_noscan,
@@ -28,15 +29,27 @@ export default {
         seq($.keyword_for, $.keyword_all, $.keyword_columns),
       )),
     ),
-    // ANALYZE TABLES [FROM db] COMPUTE STATISTICS [NOSCAN]
+    // ANALYZE TABLES [FROM db] COMPUTE [DELTA] STATISTICS [NOSCAN]
     seq(
       $.keyword_analyze,
       $.keyword_tables,
       optional(seq($.keyword_from, $.object_reference)),
       $.keyword_compute,
+      optional($.keyword_delta),
       $.keyword_statistics,
       optional($.keyword_noscan),
     ),
+    // ANALYZE TABLES IN db COMPUTE [DELTA] STATISTICS [NOSCAN]
+    prec.left(2, seq(
+      $.keyword_analyze,
+      $.keyword_tables,
+      $.keyword_in,
+      $.object_reference,
+      $.keyword_compute,
+      optional($.keyword_delta),
+      $.keyword_statistics,
+      optional($.keyword_noscan),
+    )),
   )),
 
 };

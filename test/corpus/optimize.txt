@@ -313,3 +313,39 @@ ANALYZE TABLES FROM mydb COMPUTE STATISTICS NOSCAN;
     (keyword_compute)
     (keyword_statistics)
     (keyword_noscan)))
+
+================================================================================
+Spark: ANALYZE TABLES IN db
+================================================================================
+
+ANALYZE TABLES IN mydb COMPUTE STATISTICS;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (keyword_analyze)
+    (keyword_tables)
+    (keyword_in)
+    (object_reference
+      name: (identifier))
+    (keyword_compute)
+    (keyword_statistics)))
+
+================================================================================
+Spark: ANALYZE TABLE COMPUTE DELTA STATISTICS
+================================================================================
+
+ANALYZE TABLE my_table COMPUTE DELTA STATISTICS;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (keyword_analyze)
+    (keyword_table)
+    (object_reference
+      name: (identifier))
+    (keyword_compute)
+    (keyword_delta)
+    (keyword_statistics)))

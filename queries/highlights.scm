@@ -366,6 +366,8 @@
   (keyword_sync)
   (keyword_volume)
   (keyword_zorder)
+  (keyword_clustered)
+  (keyword_buckets)
 ] @keyword
 
 [
