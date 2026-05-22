@@ -87,7 +87,7 @@ export default {
     $.keyword_clustered,
     $.keyword_by,
     paren_list($.field, true),
-    optional(seq($.keyword_sort, $.keyword_by, paren_list($.field, true))),
+    optional(seq($.keyword_sorted, $.keyword_by, paren_list($.field, true))),
     $.keyword_into,
     $.literal,
     $.keyword_buckets,

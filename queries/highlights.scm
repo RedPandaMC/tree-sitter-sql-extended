@@ -393,6 +393,8 @@
   (keyword_uncache)
   (keyword_clear)
   (keyword_call)
+  (keyword_sorted)
+  (keyword_unset)
 ] @keyword
 
 [

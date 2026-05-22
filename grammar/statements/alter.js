@@ -204,11 +204,23 @@ export default {
     optional($._if_exists),
     $.object_reference,
     choice(
-      // TODO Postgres allows a single "alter column" to set or drop default
       $.rename_object,
       $.rename_column,
       $.set_schema,
       $.change_ownership,
+      // Spark SQL / Databricks: redefine view body
+      seq($.keyword_as, $._dml_read),
+      // Spark SQL / Databricks: manage TBLPROPERTIES
+      seq(
+        $.keyword_set,
+        $.keyword_tblproperties,
+        paren_list($.table_option, true),
+      ),
+      seq(
+        $.keyword_unset,
+        $.keyword_tblproperties,
+        paren_list($._expression, true),
+      ),
     ),
   ),
 
