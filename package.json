@@ -1,18 +1,25 @@
 {
-  "name": "@derekstride/tree-sitter-sql",
+  "name": "@redpandamc/tree-sitter-sql-extended",
   "version": "0.3.11",
-  "description": "Tree-sitter Grammar for SQL",
+  "description": "Tree-sitter SQL grammar with dialect extensions (Databricks, Spark, PostgreSQL, MySQL)",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "install": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter generate && node-gyp-build",
+    "install": "node scripts/generate.js && node-gyp-build",
+    "generate": "node scripts/generate.js",
+    "generate:force": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter generate",
+    "build": "npm run generate && node-gyp-build",
+    "test:corpus": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:keywords": "bash scripts/test-keywords.sh",
+    "test:node": "node --test bindings/node/*_test.js",
+    "test": "npm run test:corpus && npm run test:keywords && npm run test:node",
+    "parse": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter parse",
     "prestart": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter build --wasm",
     "start": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter playground",
     "release": "commit-and-tag-version",
-    "test": "node --test bindings/node/*_test.js",
     "prebuildify": "prebuildify --napi --strip"
   },
-  "author": "derek stride",
+  "author": "redpandamc",
   "license": "MIT",
   "dependencies": {
     "node-addon-api": "^7.1.0",
@@ -38,12 +45,12 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/derekstride/tree-sitter-sql.git"
+    "url": "git+https://github.com/redpandamc/tree-sitter-sql-extended.git"
   },
   "bugs": {
-    "url": "https://github.com/derekstride/tree-sitter-sql/issues"
+    "url": "https://github.com/redpandamc/tree-sitter-sql-extended/issues"
   },
-  "homepage": "https://github.com/derekstride/tree-sitter-sql#readme",
+  "homepage": "https://github.com/redpandamc/tree-sitter-sql-extended#readme",
   "commit-and-tag-version": {
     "skip": {
       "tag": true
