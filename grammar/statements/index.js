@@ -126,6 +126,24 @@ export default {
     $._spark_analyze,
   ),
 
+  // Override _show_statement AFTER spreads to include Databricks SHOW extensions
+  _show_statement: $ => seq(
+    $.keyword_show,
+    choice(
+      $._show_create,
+      $.keyword_all,
+      $._show_tables,
+      $._show_catalogs,
+      $._show_namespaces,
+      $._show_volumes,
+      $._show_grants,
+      $._show_uc_list,
+      $._show_tblproperties,
+      $._show_partitions,
+      $._show_columns,
+    ),
+  ),
+
   // Override _drop_statement AFTER spreads to include Databricks DROP extensions
   _drop_statement: $ => choice(
     $.drop_table,
@@ -188,15 +206,6 @@ export default {
 
   ...select_rules,
   ...set_rules,
-
-  _show_statement: $ => seq(
-    $.keyword_show,
-    choice(
-      $._show_create,
-      $.keyword_all, // Postgres
-      $._show_tables // trino/presto
-    ),
-  ),
 
   _show_create: $ => seq(
     $.keyword_create,

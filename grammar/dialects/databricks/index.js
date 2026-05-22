@@ -4,6 +4,7 @@ import restore_rules from "./restore.js";
 import grant_rules from "./grant.js";
 import drop_rules from "./drop.js";
 import describe_rules from "./describe.js";
+import show_rules from "./show.js";
 
 export default {
   ...vacuum_rules,
@@ -12,4 +13,5 @@ export default {
   ...grant_rules,
   ...drop_rules,
   ...describe_rules,
+  ...show_rules,
 };

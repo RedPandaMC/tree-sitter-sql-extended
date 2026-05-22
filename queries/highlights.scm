@@ -375,6 +375,15 @@
   (keyword_detail)
   (keyword_history)
   (keyword_query)
+  (keyword_catalogs)
+  (keyword_namespaces)
+  (keyword_volumes)
+  (keyword_connections)
+  (keyword_credentials)
+  (keyword_shares)
+  (keyword_recipients)
+  (keyword_providers)
+  (keyword_grants)
 ] @keyword
 
 [

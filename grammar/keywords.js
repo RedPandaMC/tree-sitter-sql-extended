@@ -269,6 +269,15 @@ export default {
   keyword_transform: _ => make_keyword("transform"),
   keyword_clustered: _ => make_keyword("clustered"),
   keyword_buckets: _ => make_keyword("buckets"),
+  // Plural forms needed for SHOW extensions (#9)
+  keyword_catalogs: _ => make_keyword("catalogs"),
+  keyword_namespaces: _ => make_keyword("namespaces"),
+  keyword_volumes: _ => make_keyword("volumes"),
+  keyword_connections: _ => make_keyword("connections"),
+  keyword_credentials: _ => make_keyword("credentials"),
+  keyword_shares: _ => make_keyword("shares"),
+  keyword_recipients: _ => make_keyword("recipients"),
+  keyword_providers: _ => make_keyword("providers"),
   // CREATE / DROP / SHOW / DESCRIBE extensions (#3, #5, #9, #10)
   keyword_namespace: _ => make_keyword("namespace"),
   keyword_streaming: _ => make_keyword("streaming"),
