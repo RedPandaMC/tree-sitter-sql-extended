@@ -97,6 +97,10 @@ export default {
     $.grant_statement,
     $.revoke_statement,
     $.deny_statement,
+    // Databricks CACHE extensions
+    $.cache_table,
+    $.uncache_table,
+    $.clear_cache,
     // Databricks DESCRIBE extensions
     $.describe_table,
     $.describe_history,
@@ -124,6 +128,13 @@ export default {
     $._optimize_table,
     $._delta_optimize,
     $._spark_analyze,
+  ),
+
+  // Override _refresh_statement AFTER spreads to include REFRESH TABLE/FUNCTION
+  _refresh_statement: $ => choice(
+    $.refresh_materialized_view,
+    $.refresh_table_databricks,
+    $.refresh_function,
   ),
 
   // Override _show_statement AFTER spreads to include Databricks SHOW extensions

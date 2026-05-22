@@ -5,6 +5,7 @@ import grant_rules from "./grant.js";
 import drop_rules from "./drop.js";
 import describe_rules from "./describe.js";
 import show_rules from "./show.js";
+import cache_rules from "./cache.js";
 
 export default {
   ...vacuum_rules,
@@ -14,4 +15,5 @@ export default {
   ...drop_rules,
   ...describe_rules,
   ...show_rules,
+  ...cache_rules,
 };
