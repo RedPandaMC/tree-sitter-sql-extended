@@ -7,9 +7,12 @@
   "scripts": {
     "install": "node scripts/generate.js && node-gyp-build",
     "generate": "node scripts/generate.js",
+    "generate:databricks": "node scripts/generate.js databricks",
+    "generate:all": "npm run generate && npm run generate:databricks",
     "generate:force": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter generate",
     "build": "npm run generate && node-gyp-build",
     "test:corpus": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:corpus:databricks": "cd databricks && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
     "test:keywords": "bash scripts/test-keywords.sh",
     "test:node": "node --test bindings/node/*_test.js",
     "test": "npm run test:corpus && npm run test:keywords && npm run test:node",

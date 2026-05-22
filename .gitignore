@@ -15,6 +15,10 @@ package-lock.json
 /src/tree_sitter/
 /src/parser.c
 /src/*.json
+/databricks/src/tree_sitter/
+/databricks/src/parser.c
+/databricks/src/*.json
+/databricks/tmp/
 
 ## Generated Entries
 

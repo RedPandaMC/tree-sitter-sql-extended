@@ -1,4 +1,4 @@
-import { paren_list } from "../../helpers.js";
+import { paren_list } from "../../grammar/helpers.js";
 
 export default {
 
