@@ -44,24 +44,10 @@ export default {
       $.keyword_table,
       optional($._if_not_exists),
       $.object_reference,
-      choice(
-        seq(
-          $.column_definitions,
-          repeat($._table_settings),
-          optional(
-            seq(
-              $.keyword_as,
-              $._select_statement,
-            ),
-          )
-        ),
-        seq(
-          repeat($._table_settings),
-          seq(
-            $.keyword_as,
-            $.create_query,
-          ),
-        ),
+      seq(
+        optional($.column_definitions),
+        repeat($._table_settings),
+        optional(seq($.keyword_as, $.create_query)),
       ),
     ),
   ),
@@ -79,7 +65,15 @@ export default {
     ),
     seq($.keyword_without, $.keyword_oids),
     $.storage_parameters,
+    // Databricks SHALLOW CLONE / DEEP CLONE
+    $.shallow_clone,
     $.table_option,
+  ),
+
+  shallow_clone: $ => seq(
+    choice($.keyword_shallow, $.keyword_deep),
+    $.keyword_clone,
+    $.object_reference,
   ),
 
   // CLUSTERED BY (col [, ...]) [SORTED BY (col [, ...])] INTO n BUCKETS
