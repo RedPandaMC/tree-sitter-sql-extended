@@ -97,6 +97,9 @@ export default {
     // Databricks resource management
     $.add_resource_statement,
     $.list_resource_statement,
+    // Databricks CALL + EXECUTE IMMEDIATE
+    $.call_statement,
+    $.execute_immediate_statement,
   ),
 
   _dml_write: $ => seq(

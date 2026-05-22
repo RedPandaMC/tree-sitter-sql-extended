@@ -7,6 +7,7 @@ import describe_rules from "./describe.js";
 import show_rules from "./show.js";
 import cache_rules from "./cache.js";
 import resource_rules from "./resource.js";
+import call_rules from "./call.js";
 
 export default {
   ...vacuum_rules,
@@ -18,4 +19,5 @@ export default {
   ...show_rules,
   ...cache_rules,
   ...resource_rules,
+  ...call_rules,
 };

@@ -392,6 +392,7 @@
   (keyword_lazy)
   (keyword_uncache)
   (keyword_clear)
+  (keyword_call)
 ] @keyword
 
 [
