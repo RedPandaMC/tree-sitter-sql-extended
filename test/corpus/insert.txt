@@ -466,71 +466,6 @@ FROM
           (identifier))))))
 
 ================================================================================
-Insert overwrite with partition
-================================================================================
-
-INSERT OVERWRITE tab1
-PARTITION (key1 = 'val1', key2 = 'val2')
-SELECT
-  col1,
-  col2
-FROM
-(
-  SELECT
-    *
-  FROM
-    tab2
-  WHERE
-    key1 >= 'val'
-) a1;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (insert
-      (keyword_insert)
-      (keyword_overwrite)
-      (object_reference
-        (identifier))
-      (table_partition
-        (keyword_partition)
-        (identifier)
-        (literal)
-        (identifier)
-        (literal))
-      (select
-        (keyword_select)
-        (select_expression
-          (term
-            (field
-              (identifier)))
-          (term
-            (field
-              (identifier)))))
-      (from
-        (keyword_from)
-        (relation
-          (subquery
-            (select
-              (keyword_select)
-              (select_expression
-                (term
-                  (all_fields))))
-            (from
-              (keyword_from)
-              (relation
-                (object_reference
-                  (identifier)))
-              (where
-                (keyword_where)
-                (binary_expression
-                  (field
-                    (identifier))
-                  (literal)))))
-          (identifier))))))
-
-================================================================================
 Insert from unioned select
 ================================================================================
 
@@ -564,52 +499,6 @@ INSERT INTO some_table
           (select_expression
             (term
               (literal))))))))
-
-================================================================================
-COPY FROM STDIN CSV
-================================================================================
-
-COPY some_table (a, b, c) FROM STDIN (FORMAT CSV);
-
---------------------------------------------------------------------------------
-(program
-  (statement
-    (keyword_copy)
-    (object_reference
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (keyword_from)
-    (keyword_stdin)
-    (keyword_format)
-    (keyword_csv)))
-
-================================================================================
-COPY FROM FILE
-================================================================================
-
-COPY some_table (a, b, c) FROM '/tmp/data.csv' (FORMAT CSV);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (keyword_copy)
-    (object_reference
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (keyword_from)
-    (keyword_format)
-    (keyword_csv)))
 
 ================================================================================
 ON DUPLICATE KEY UPDATE
@@ -672,48 +561,3 @@ ON DUPLICATE KEY UPDATE
             name: (identifier))
           right: (literal))))))
 
-================================================================================
-COPY FROM STDIN CSV WITH OPTIONS
-================================================================================
-
-COPY some_table (a, b, c) FROM STDIN WITH
-(
-    FORMAT CSV
-    DELIMITER ';'
-    QUOTE '"'
-    ESCAPE '\'
-    FREEZE true
-    HEADER MATCH
-    NULL 'NaN'
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (keyword_copy)
-    (object_reference
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (column
-      (identifier))
-    (keyword_from)
-    (keyword_stdin)
-    (keyword_with)
-    (keyword_format)
-    (keyword_csv)
-    (keyword_delimiter)
-    (identifier)
-    (keyword_quote)
-    (identifier)
-    (keyword_escape)
-    (identifier)
-    (keyword_freeze)
-    (keyword_true)
-    (keyword_header)
-    (keyword_match)
-    (keyword_null)
-    (identifier)))

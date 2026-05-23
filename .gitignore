@@ -1,5 +1,6 @@
 ## Custom
 
+.grammar-cache/
 tmp/
 Cargo.lock
 node_modules
@@ -14,6 +15,22 @@ package-lock.json
 /src/tree_sitter/
 /src/parser.c
 /src/*.json
+/databricks/src/tree_sitter/
+/databricks/src/parser.c
+/databricks/src/*.json
+/databricks/tmp/
+/spark/src/tree_sitter/
+/spark/src/parser.c
+/spark/src/*.json
+/spark/tmp/
+/postgres/src/tree_sitter/
+/postgres/src/parser.c
+/postgres/src/*.json
+/postgres/tmp/
+/mysql/src/tree_sitter/
+/mysql/src/parser.c
+/mysql/src/*.json
+/mysql/tmp/
 
 ## Generated Entries
 

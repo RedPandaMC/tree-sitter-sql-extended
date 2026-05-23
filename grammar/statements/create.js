@@ -17,9 +17,7 @@ export default {
       $.create_database,
       $.create_role,
       $.create_sequence,
-      $.create_extension,
       $.create_trigger,
-      $.create_policy,
       prec.left(seq(
         $.create_schema,
         repeat($._create_statement),
@@ -46,60 +44,9 @@ export default {
       $.object_reference,
       seq(
         optional($.column_definitions),
-        repeat($._table_settings),
         optional(seq($.keyword_as, $.create_query)),
       ),
     ),
-  ),
-
-  _table_settings: $ => choice(
-    $.table_partition,
-    $.stored_as,
-    $.storage_location,
-    $.table_sort,
-    $.table_cluster,
-    $.row_format,
-    seq(
-      $.keyword_tblproperties,
-      paren_list($.table_option, true),
-    ),
-    seq($.keyword_without, $.keyword_oids),
-    $.storage_parameters,
-    // Databricks SHALLOW CLONE / DEEP CLONE
-    $.shallow_clone,
-    $.table_option,
-  ),
-
-  shallow_clone: $ => seq(
-    choice($.keyword_shallow, $.keyword_deep),
-    $.keyword_clone,
-    $.object_reference,
-  ),
-
-  // CLUSTERED BY (col [, ...]) [SORTED BY (col [, ...])] INTO n BUCKETS
-  table_cluster: $ => seq(
-    $.keyword_clustered,
-    $.keyword_by,
-    paren_list($.field, true),
-    optional(seq($.keyword_sorted, $.keyword_by, paren_list($.field, true))),
-    $.keyword_into,
-    $.literal,
-    $.keyword_buckets,
-  ),
-
-  stored_as: $ => seq(
-      $.keyword_stored,
-      $.keyword_as,
-      choice(
-          $.keyword_parquet,
-          $.keyword_csv,
-          $.keyword_sequencefile,
-          $.keyword_textfile,
-          $.keyword_rcfile,
-          $.keyword_orc,
-          $.keyword_avro,
-          $.keyword_jsonfile,
-      ),
   ),
 
   storage_parameters: $ => seq(
@@ -108,92 +55,6 @@ export default {
       seq($.identifier, optional(seq('=', choice($.literal, $.array)))),
       true
     ),
-  ),
-
-  storage_location: $ => prec.right(
-      seq(
-          $.keyword_location,
-          field('path', alias($._literal_string, $.literal)),
-          optional(
-              seq(
-                  $.keyword_cached,
-                  $.keyword_in,
-                  field('pool', alias($._literal_string, $.literal)),
-                  optional(
-                      choice(
-                          $.keyword_uncached,
-                          seq(
-                              $.keyword_with,
-                              $.keyword_replication,
-                              '=',
-                              field('value', alias($._natural_number, $.literal)),
-                          ),
-                      ),
-                  ),
-              )
-          )
-      ),
-  ),
-
-  row_format: $ => seq(
-      $.keyword_row,
-      $.keyword_format,
-      $.keyword_delimited,
-      optional(
-          seq(
-              $.keyword_fields,
-              $.keyword_terminated,
-              $.keyword_by,
-              field('fields_terminated_char', alias($._literal_string, $.literal)),
-              optional(
-                  seq(
-                      $.keyword_escaped,
-                      $.keyword_by,
-                      field('escaped_char', alias($._literal_string, $.literal)),
-                  )
-              )
-          )
-      ),
-      optional(
-          seq(
-              $.keyword_lines,
-              $.keyword_terminated,
-              $.keyword_by,
-              field('row_terminated_char', alias($._literal_string, $.literal)),
-          )
-      )
-  ),
-
-  table_sort: $ => seq(
-      $.keyword_sort,
-      $.keyword_by,
-      paren_list($.identifier, true),
-  ),
-
-  table_partition: $ => seq(
-    choice(
-      // Postgres/MySQL style
-      seq(
-        $.keyword_partition,
-        $.keyword_by,
-        choice(
-          $.keyword_range,
-          $.keyword_hash,
-        )
-      ),
-      // Hive style
-      seq(
-        $.keyword_partitioned,
-        $.keyword_by,
-      ),
-      // Spark SQL
-      $.keyword_partition,
-    ),
-    choice(
-      paren_list($.identifier),// postgres & Impala (CTAS)
-      $.column_definitions, // impala/hive external tables
-      paren_list($._key_value_pair, true), // Spark SQL
-    )
   ),
 
   table_option: $ => choice(
@@ -466,27 +327,14 @@ export default {
     ),
   ),
 
-  create_extension: $ => prec.left(seq(
-    $.keyword_create,
-    $.keyword_extension,
-    optional($._if_not_exists),
-    $.identifier,
-    optional($.keyword_with),
-    optional(seq($.keyword_schema, $.identifier)),
-    optional(seq($.keyword_version, choice($.identifier, alias($._literal_string, $.literal)))),
-    optional($.keyword_cascade),
-  )),
-
   create_trigger: $ => seq(
     $.keyword_create,
     optional($._or_replace),
-    // mariadb
-    optional(seq($.keyword_definer, '=', $.identifier)),
     optional($.keyword_constraint),
     // sqlite
     optional($._temporary),
     $.keyword_trigger,
-    // sqlite/mariadb
+    // sqlite
     optional($._if_not_exists),
     $.object_reference,
     choice(
@@ -512,8 +360,6 @@ export default {
           $.keyword_for,
           optional($.keyword_each),
           choice($.keyword_row, $.keyword_statement),
-          // mariadb
-          optional(seq(choice($.keyword_follows, $.keyword_precedes), $.identifier)),
         ),
         seq($.keyword_when, wrapped_in_parenthesis($._expression)),
       ),
@@ -574,75 +420,6 @@ export default {
 
   enum_elements: $ => seq(
     paren_list(field("enum_element", alias($._literal_string, $.literal))),
-  ),
-
-  // Postgres row level security
-  create_policy: $ => prec.right(
-    seq(
-      $.keyword_create,
-      $.keyword_policy,
-      $.object_reference,
-      $.keyword_on,
-      $.object_reference,
-      optional(
-        seq(
-          $.keyword_as,
-          choice(
-            $.keyword_permissive,
-            $.keyword_restrictive,
-          ),
-        ),
-      ),
-      optional(
-        seq(
-          $.keyword_for,
-          choice(
-            $.keyword_all,
-            $.keyword_select,
-            $.keyword_insert,
-            $.keyword_update,
-            $.keyword_delete,
-          ),
-        ),
-      ),
-      optional(
-        seq(
-          $.keyword_to,
-          choice(
-            $.object_reference,
-            $.keyword_public,
-            $.keyword_current_role,
-            $.keyword_current_user,
-            $.keyword_session_user,
-          ),
-          repeat(
-            seq(
-              ',',
-              choice(
-                $.object_reference,
-                $.keyword_public,
-                $.keyword_current_role,
-                $.keyword_current_user,
-                $.keyword_session_user,
-              ),
-            ),
-          ),
-        ),
-      ),
-      optional(
-        seq(
-          $.keyword_using,
-          $.parenthesized_expression,
-        ),
-      ),
-      optional(
-        seq(
-          $.keyword_with,
-          $.keyword_check,
-          $.parenthesized_expression,
-        ),
-      ),
-    ),
   ),
 
 };

@@ -2,12 +2,12 @@
 name = "tree-sitter-sequel"
 description = "Tree-sitter Grammar for SQL"
 version = "0.3.11"
-authors = ["derek stride"]
+authors = ["redpandamc"]
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "sql"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/derekstride/tree-sitter-sql.git"
+repository = "https://github.com/redpandamc/tree-sitter-sql-extended.git"
 edition = "2021"
 autoexamples = false
 

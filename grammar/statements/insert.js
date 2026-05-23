@@ -27,7 +27,6 @@ export default {
       ),
     ),
     $.object_reference,
-    optional($.table_partition), // Spark SQL
     optional(
       seq(
         $.keyword_as,

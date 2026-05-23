@@ -21,17 +21,80 @@ jobs:
         uses: tree-sitter/setup-action@v2
         with:
           install-lib: false
+
+      # Cache generated parsers keyed on grammar source
+      - uses: actions/cache@v4
+        with:
+          path: |
+            src/parser.c
+            src/node-types.json
+            spark/src/parser.c
+            spark/src/node-types.json
+            databricks/src/parser.c
+            databricks/src/node-types.json
+            postgres/src/parser.c
+            postgres/src/node-types.json
+            mysql/src/parser.c
+            mysql/src/node-types.json
+          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**') }}
+
+      # Base SQL grammar
       - run: tree-sitter generate
-      - name: Run tests
+      # Spark SQL dialect grammar
+      - run: cd spark && tree-sitter generate grammar.js
+      # Databricks SQL dialect grammar (extends Spark)
+      - run: cd databricks && tree-sitter generate grammar.js
+      # PostgreSQL dialect grammar
+      - run: cd postgres && tree-sitter generate grammar.js
+      # MySQL dialect grammar
+      - run: cd mysql && tree-sitter generate grammar.js
+
+      - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: true
           test-node: true
           node-version: "22"
           test-python: true
-          # test-go: true
-          # test-swift: true
+
+      - name: Run tests (Spark SQL)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: true
+          node-version: "22"
+          test-python: false
+          grammar-path: spark
+
+      - name: Run tests (Databricks SQL)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: true
+          node-version: "22"
+          test-python: false
+          grammar-path: databricks
+
+      - name: Run tests (PostgreSQL)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: true
+          node-version: "22"
+          test-python: false
+          grammar-path: postgres
+
+      - name: Run tests (MySQL)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: true
+          node-version: "22"
+          test-python: false
+          grammar-path: mysql
+
       - run: scripts/test-keywords.sh
+
   validate_tests:
     runs-on: ["ubuntu-latest"]
     strategy:
@@ -40,19 +103,21 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           STATUS=0
-          if [[ $(grep -rn --exclude=errors.txt ERROR test/ | wc -l) -gt 0 ]]; then
-              echo "Found 'ERROR' in tests: "
-              grep -rn --exclude=errors.txt ERROR test/ | cut -f1,2 -d:
-              STATUS=1
-          fi
-          if [[ $(grep -rn --exclude=errors.txt MISSING test/ | wc -l) -gt 0 ]]; then
-              echo "Found 'MISSING' in tests: "
-              grep -rn --exclude=errors.txt MISSING test/ | cut -f1,2 -d:
-              STATUS=1
-          fi
-          if [[ $(grep -rn --exclude=errors.txt UNEXPECTED test/ | wc -l) -gt 0 ]]; then
-              echo "Found 'UNEXPECTED' in tests: "
-              grep -rn --exclude=errors.txt UNEXPECTED test/ | cut -f1,2 -d:
-              STATUS=1
-          fi
+          for dir in test spark/test databricks/test postgres/test mysql/test; do
+            if [[ $(grep -rn --exclude=errors.txt ERROR "$dir/" 2>/dev/null | wc -l) -gt 0 ]]; then
+                echo "Found 'ERROR' in $dir: "
+                grep -rn --exclude=errors.txt ERROR "$dir/" | cut -f1,2 -d:
+                STATUS=1
+            fi
+            if [[ $(grep -rn --exclude=errors.txt MISSING "$dir/" 2>/dev/null | wc -l) -gt 0 ]]; then
+                echo "Found 'MISSING' in $dir: "
+                grep -rn --exclude=errors.txt MISSING "$dir/" | cut -f1,2 -d:
+                STATUS=1
+            fi
+            if [[ $(grep -rn --exclude=errors.txt UNEXPECTED "$dir/" 2>/dev/null | wc -l) -gt 0 ]]; then
+                echo "Found 'UNEXPECTED' in $dir: "
+                grep -rn --exclude=errors.txt UNEXPECTED "$dir/" | cut -f1,2 -d:
+                STATUS=1
+            fi
+          done
           exit $STATUS
