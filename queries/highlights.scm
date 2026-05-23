@@ -285,8 +285,7 @@
   (keyword_plain)
   (keyword_storage)
   (keyword_compression)
-  (keyword_duplicate)
-  (keyword_while)
+(keyword_duplicate)
   (keyword_catalog)
   (keyword_bucket)
   (keyword_global)
@@ -297,7 +296,7 @@
   (keyword_percent)
   (keyword_style)
   (keyword_tablesample)
-] @keyword
+ ] @keyword
 
 [
  (keyword_restrict)

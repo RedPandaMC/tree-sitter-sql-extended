@@ -15,7 +15,6 @@ import select_rules from "./select.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
 import show_rules from "./show.js";
-import compound_rules from "./compound.js";
 
 export default {
 
@@ -29,7 +28,6 @@ export default {
       $._ddl_statement,
       $._dml_write,
       optional_parenthesis($._dml_read),
-      $.while_statement,
     ),
   ),
 
@@ -50,7 +48,6 @@ export default {
   ...select_rules,
   ...set_rules,
   ...show_rules,
-  ...compound_rules,
 
   // ===== ALL OVERRIDES — MUST BE LAST =====
   // These intentionally supersede anything defined in the spreads above.
