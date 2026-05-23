@@ -286,6 +286,8 @@ export default {
   keyword_streaming: _ => make_keyword("streaming"),
   keyword_live: _ => make_keyword("live"),
   keyword_provider: _ => make_keyword("provider"),
+  keyword_options: _ => make_keyword("options"),
+  keyword_url: _ => make_keyword("url"),
   keyword_grants: _ => make_keyword("grants"),
   keyword_history: _ => make_keyword("history"),
   keyword_detail: _ => make_keyword("detail"),
