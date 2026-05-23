@@ -7,11 +7,6 @@
  (insert)
 ] @indent.begin
 
-
-(block
-  (keyword_begin)
-) @indent.begin
-
 (column_definitions ")" @indent.branch)
 
 (subquery ")" @indent.branch)
