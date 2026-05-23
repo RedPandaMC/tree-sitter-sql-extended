@@ -1,5 +1,5 @@
 import spark from '../spark/grammar.js';
-import { optional_parenthesis } from '../grammar/helpers.js';
+import { optional_parenthesis, paren_list } from '../grammar/helpers.js';
 
 import vacuum_rules   from './grammar/vacuum.js';
 import optimize_rules from './grammar/optimize.js';
@@ -32,6 +32,19 @@ export default grammar(spark, {
     [$.create_namespace, $.create_function],
     [$.describe_history, $.describe_table],
     [$.describe_detail, $.describe_table],
+    [$.iceberg_partition_field, $.column_definition],
+    [$.create_table_like, $.create_table],
+    [$.create_streaming_table],
+    [$.create_live_table],
+    [$.create_catalog],
+    [$.create_volume],
+    [$.create_connection],
+    [$.create_credential],
+    [$.create_external_location],
+    [$.create_share],
+    [$.create_recipient],
+    [$.create_provider],
+    [$.create_policy],
   ],
 
   rules: {
@@ -77,6 +90,18 @@ export default grammar(spark, {
       $.execute_immediate_statement,
       // Databricks CREATE extensions
       $.create_namespace,
+      $.create_streaming_table,
+      $.create_live_table,
+      $.create_table_like,
+      $.create_catalog,
+      $.create_volume,
+      $.create_connection,
+      $.create_credential,
+      $.create_external_location,
+      $.create_share,
+      $.create_recipient,
+      $.create_provider,
+      $.create_policy,
     ),
 
     _optimize_statement: $ => choice(
@@ -135,6 +160,33 @@ export default grammar(spark, {
       $.drop_recipient,
       $.drop_provider,
       $.drop_policy,
+    ),
+
+    // Iceberg partition transform: year(ts), bucket(16, id), identity(col), etc.
+    // Also handles plain column identifiers for backward compatibility.
+    iceberg_partition_field: $ => choice(
+      seq(
+        field('transform', $.identifier),
+        '(',
+        optional(seq(field('size', $.literal), ',')),
+        field('column', $.identifier),
+        ')',
+      ),
+      field('column', $.identifier),
+    ),
+
+    // Override Spark's table_partition to support Iceberg-style transforms.
+    table_partition: $ => seq(
+      choice(
+        seq($.keyword_partition, $.keyword_by, choice($.keyword_range, $.keyword_hash)),
+        seq($.keyword_partitioned, $.keyword_by),
+        $.keyword_partition,
+      ),
+      choice(
+        paren_list($.iceberg_partition_field, true),
+        $.column_definitions,
+        paren_list($._key_value_pair, true),
+      ),
     ),
 
     // Databricks-specific rule definitions

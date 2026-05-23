@@ -54,3 +54,9 @@
 (keyword_providers) @keyword
 (keyword_tblproperties) @keyword
 (keyword_partitions) @keyword
+(keyword_streaming) @keyword
+(keyword_live) @keyword
+(keyword_policy) @keyword
+(keyword_cluster) @keyword
+(keyword_options) @keyword
+(keyword_url) @keyword
