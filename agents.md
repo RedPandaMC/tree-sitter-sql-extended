@@ -4,34 +4,27 @@
 
 A tree-sitter SQL parser forked from DerekStride/tree-sitter-sql. The upstream ships a
 "permissive" SQL grammar that mixes PostgreSQL, Hive/Spark, MySQL, and MariaDB syntax into one
-compiled parser. This fork extends it further with Databricks/Unity Catalog support.
-
-The goal of the architecture work in progress is to replace the single mixed grammar with a
-hierarchy of independently compiled dialect grammars using tree-sitter's `grammar(base, overrides)`
-extension pattern.
+compiled parser. This fork extends it with Databricks/Unity Catalog support and restructures the
+grammar into independently compiled dialect grammars.
 
 ---
 
-## Grammar hierarchy (target architecture)
+## Grammar hierarchy
 
 ```
 grammar.js                ← ANSI SQL base (clean, no dialect-specific rules)
-  ├── spark/grammar.js    ← grammar(base, spark_rules)
-  │     └── databricks/grammar.js  ← grammar(spark, databricks_rules)
-  ├── postgres/grammar.js ← grammar(base, postgres_rules)
-  └── mysql/grammar.js    ← grammar(base, mysql_rules)
+  ├── spark/grammar.js    ← grammar(base, spark_rules)     [CLUSTERED BY, STORED AS, TBLPROPERTIES, ANALYZE TABLE]
+  │     └── databricks/grammar.js  ← grammar(spark, databricks_rules)  [OPTIMIZE/VACUUM delta, RESTORE, Unity Catalog]
+  ├── postgres/grammar.js ← grammar(base, postgres_rules)  [COPY FROM/TO, VACUUM, CREATE EXTENSION/POLICY]
+  └── mysql/grammar.js    ← grammar(base, mysql_rules)     [ENGINE=, CHARSET=, MariaDB OPTIMIZE TABLE]
 ```
 
 Each dialect compiles to its own `<dialect>/src/parser.c` independently. Changing Databricks rules
-only requires regenerating `databricks/src/parser.c` — the base and Postgres parsers are
-unaffected.
-
-**Current state**: the base grammar still contains mixed dialect rules inherited from upstream.
-Migration is in progress dialect by dialect.
+only requires regenerating `databricks/src/parser.c` — base and Postgres parsers are unaffected.
 
 ---
 
-## Current directory layout
+## Directory layout
 
 ```
 grammar.js                      # Entry point — spreads all rule groups
@@ -44,16 +37,15 @@ grammar/
   column-lists.js               # Column definitions and constraints
   statements/
     index.js                    # Composes all statement rules; dispatch lists (_ddl_statement etc.)
-    create.js                   # CREATE TABLE/VIEW/INDEX/TYPE/ROLE/SEQUENCE/EXTENSION/POLICY/TRIGGER
-    alter.js                    # ALTER TABLE/VIEW/TYPE/POLICY/SEQUENCE/ROLE/INDEX/DATABASE
-    drop.js                     # DROP TABLE/VIEW/INDEX/TYPE/SCHEMA/SEQUENCE/EXTENSION/FUNCTION
+    create.js                   # CREATE TABLE/VIEW/INDEX/TYPE/ROLE/SEQUENCE/TRIGGER/FUNCTION/PROCEDURE
+    alter.js                    # ALTER TABLE/VIEW/TYPE/SEQUENCE/ROLE/INDEX/DATABASE/SCHEMA
+    drop.js                     # DROP TABLE/VIEW/INDEX/TYPE/SCHEMA/SEQUENCE/FUNCTION/PROCEDURE/ROLE
     select.js                   # SELECT, CTEs, window functions, joins, set operations
     insert.js                   # INSERT INTO ... VALUES / SELECT
     update.js                   # UPDATE ... SET ... WHERE
     delete.js                   # DELETE FROM
     merge.js                    # MERGE INTO ... USING ... WHEN MATCHED
-    copy.js                     # PostgreSQL COPY FROM/TO
-    optimize.js                 # VACUUM (PG), ANALYZE/COMPUTE STATS (Hive/Impala), OPTIMIZE (Athena)
+    optimize.js                 # OPTIMIZE TABLE ... REWRITE DATA (Iceberg/Athena)
     show.js                     # SHOW TABLES/SCHEMAS/COLUMNS
     set.js                      # SET variable = value
     refresh.js                  # REFRESH MATERIALIZED VIEW
@@ -61,21 +53,63 @@ grammar/
     rename.js                   # RENAME TABLE/COLUMN
     compound.js                 # IF/WHILE/FOR blocks
     comment.js                  # COMMENT ON ...
-    create-function.js          # CREATE FUNCTION (with PG dollar-quoted body support)
+    create-function.js          # CREATE FUNCTION (with dollar-quoted body support)
     create-procedure.js         # CREATE PROCEDURE
-  dialects/
-    databricks/                 # Databricks/Unity Catalog extensions (active)
-      index.js                  # Spreads all Databricks rule sub-modules
-      vacuum.js, optimize.js, restore.js, grant.js, drop.js
-      describe.js, show.js, cache.js, resource.js, call.js, create.js
-    postgres/, mysql/, snowflake/, ...  # Stubs (empty) — to be replaced by dialect grammars
 src/
   parser.c                      # Generated C parser (do not edit manually)
   scanner.c                     # External scanner for dollar-quoted strings
 queries/
   highlights.scm                # Syntax highlighting (tree-sitter query language)
   indents.scm                   # Indentation rules
-test/corpus/                    # Corpus-based tests (44 .txt files)
+test/corpus/                    # Base SQL corpus tests
+
+spark/                          # Spark/Hive SQL dialect
+  grammar.js                    # grammar(base, spark_rules)
+  grammar/
+    create.js                   # _table_settings, table_cluster, stored_as, row_format, table_partition
+    optimize.js                 # _compute_stats, _spark_analyze, _partition_spec
+  src/parser.c                  # Generated independently from base
+  src/scanner.c                 # Delegates to ../../src/scanner.c via #define macros
+  queries/highlights.scm
+  test/corpus/
+  tree-sitter.json
+
+databricks/                     # Databricks SQL (extends spark/)
+  grammar.js                    # grammar(spark, databricks_rules)
+  grammar/
+    vacuum.js, optimize.js, restore.js, grant.js, drop.js
+    describe.js, show.js, cache.js, resource.js, call.js, create.js
+  src/parser.c
+  src/scanner.c
+  queries/highlights.scm
+  test/corpus/
+  tree-sitter.json
+
+postgres/                       # PostgreSQL dialect
+  grammar.js                    # grammar(base, postgres_rules)
+  grammar/
+    copy.js                     # COPY FROM/TO
+    optimize.js                 # VACUUM FULL/ANALYZE/PARALLEL
+    create.js                   # CREATE EXTENSION, CREATE POLICY
+    alter.js                    # ALTER POLICY, RLS enable/disable
+    drop.js                     # DROP EXTENSION
+  src/parser.c
+  src/scanner.c
+  queries/highlights.scm
+  test/corpus/
+  tree-sitter.json
+
+mysql/                          # MySQL/MariaDB dialect
+  grammar.js                    # grammar(base, mysql_rules)
+  grammar/
+    create.js                   # ENGINE=, CHARSET=, inline index syntax
+    optimize.js                 # MariaDB OPTIMIZE TABLE
+  src/parser.c
+  src/scanner.c
+  queries/highlights.scm
+  test/corpus/
+  tree-sitter.json
+
 scripts/
   generate.js                   # Hash-cached wrapper around tree-sitter generate
   test-keywords.sh              # Validates keyword/highlights.scm sync
@@ -101,65 +135,48 @@ rules: {
 }
 ```
 
-`grammar/statements/index.js` follows the same pattern. It spreads 17 core statement modules plus
-the Databricks dialect rules, then **overrides** the dispatch lists at the end:
+`grammar/statements/index.js` follows the same pattern. It spreads the ANSI core statement
+modules, then overrides the dispatch lists at the end:
 
 ```javascript
 // Spreads come first (define all rule names)
 ...create_rules,
-...databricks_rules,   // ← only active dialect currently
+...optimize_rules,
+// ...
 
-// Overrides come last (extend dispatch lists to include dialect rules)
+// Overrides come last (dispatch lists must enumerate every valid choice explicitly)
 _ddl_statement: $ => choice(
   $._create_statement,
-  ...
-  $.restore_table_statement,   // ← Databricks
-  $.grant_statement,           // ← Databricks
+  $._alter_statement,
+  // ...
 ),
 ```
 
-The override pattern is necessary because `choice()` must list every valid alternative explicitly.
-When the multi-grammar migration is complete, dialect overrides move into each dialect's
-`grammar(base, overrides)` and `statements/index.js` will only contain ANSI SQL dispatch lists.
+Dialect grammars extend the base using tree-sitter's `grammar(base, overrides)` pattern. A rule
+in `overrides` **replaces** the base rule entirely for that dialect — there is no automatic
+merging. Dispatch lists must therefore re-enumerate all base alternatives plus the new ones.
 
 ---
 
-## What dialect rules are currently mixed into core
+## How to add a new ANSI SQL statement
 
-| File | Mixed-in dialect rules |
-|------|----------------------|
-| `statements/copy.js` | 100% PostgreSQL `COPY FROM/TO` |
-| `statements/optimize.js` | PG `VACUUM`, Hive `COMPUTE STATISTICS`, Athena `OPTIMIZE REWRITE`, MariaDB `OPTIMIZE TABLE` |
-| `statements/create.js` | PG `CREATE EXTENSION`, `CREATE POLICY`; Hive/Spark `CLUSTERED BY`, `STORED AS`, `TBLPROPERTIES`, `ROW FORMAT`, `LOCATION` |
-| `statements/alter.js` | PG `ALTER POLICY`, `ALTER TYPE` (composite attrs), RLS enable/disable; MySQL `CHANGE COLUMN`, `MODIFY COLUMN`, column `FIRST`/`AFTER` |
-| `statements/drop.js` | PG `DROP EXTENSION` |
-| `statements/create-function.js` | PG dollar-quoted function bodies, PG function options (`LANGUAGE`, `VOLATILE`, `STRICT`, `SECURITY DEFINER`, etc.) |
+1. **Find the file**: look in `grammar/statements/` — pick the file matching the statement type.
 
-These will move into their respective dialect override grammars as migration proceeds.
-
----
-
-## How to add a new SQL statement (to current base grammar)
-
-1. **Find the file**: look in `grammar/statements/` — pick the file matching the statement type
-   (e.g. `create.js` for `CREATE STREAMING TABLE`).
-
-2. **Define the rule**:
+2. **Define the rule** in that file:
    ```javascript
    create_streaming_table: $ => seq(
      $.keyword_create, $.keyword_streaming, $.keyword_table,
      $.object_reference,
-     // ...
    ),
    ```
 
 3. **Wire into the dispatch list** in `grammar/statements/index.js`:
    ```javascript
-   _ddl_statement: $ => choice(
-     $._create_statement,
+   _create_statement: $ => seq(choice(
+     $.create_table,
      // ...
      $.create_streaming_table,  // ← add here
-   ),
+   )),
    ```
 
 4. **New keywords**: add to `grammar/keywords.js` using `make_keyword()`:
@@ -179,59 +196,107 @@ These will move into their respective dialect override grammars as migration pro
 
 ---
 
-## How to add a new dialect (target architecture)
+## How to add a new dialect
+
+Use `spark/grammar.js` as the canonical example of `grammar(base, overrides)`.
 
 1. **Create the dialect directory**:
    ```
    <dialect>/
-     grammar.js          # The dialect grammar file
-     grammar/            # Dialect-specific rule files
-     src/                # Generated parser (created by tree-sitter generate)
-     queries/highlights.scm  # Dialect-specific highlight additions
-     test/corpus/        # Dialect-specific corpus tests
+     grammar.js              # The dialect grammar file
+     grammar/                # Dialect-specific rule files
+     src/scanner.c           # Delegate to base scanner (see below)
+     queries/highlights.scm  # Dialect-specific highlight additions (can be empty)
+     test/corpus/            # Dialect-specific corpus tests
+     tree-sitter.json        # Registers the dialect grammar + metadata
    ```
 
-2. **Write `<dialect>/grammar.js`** using `grammar(parent, overrides)`:
+2. **Write `<dialect>/grammar.js`**:
    ```javascript
-   import base from '../grammar.js'; // or '../spark/grammar.js' for Databricks
+   import base from '../grammar.js'; // or '../spark/grammar.js' for Spark extensions
+   import my_create_rules from './grammar/create.js';
 
    export default grammar(base, {
      name: 'my_dialect_sql',
 
-     conflicts: ($, original) => [
-       ...original($),
-       // add dialect-specific conflicts here
-     ],
-
      rules: {
-       // Override dispatch lists to include new statements
-       _ddl_statement: ($, original) => choice(
-         original($),        // inherits all base DDL
-         $.my_new_statement,
-       ),
+       // Override dispatch lists — must re-enumerate ALL base alternatives plus new ones
+       _create_statement: $ => seq(choice(
+         $.create_table,
+         $.create_view,
+         // ... (copy from base)
+         $.my_new_statement,  // ← dialect addition
+       )),
 
        // Define new rules
        my_new_statement: $ => seq(
          $.keyword_my, $.keyword_statement, $.object_reference,
        ),
+
+       ...my_create_rules,
      },
    });
    ```
 
-3. **Register in `tree-sitter.json`**:
+3. **Create `<dialect>/src/scanner.c`** to delegate to the base external scanner:
+   ```c
+   #define tree_sitter_sql_external_scanner_create      tree_sitter_my_dialect_sql_external_scanner_create
+   #define tree_sitter_sql_external_scanner_destroy     tree_sitter_my_dialect_sql_external_scanner_destroy
+   #define tree_sitter_sql_external_scanner_scan        tree_sitter_my_dialect_sql_external_scanner_scan
+   #define tree_sitter_sql_external_scanner_serialize   tree_sitter_my_dialect_sql_external_scanner_serialize
+   #define tree_sitter_sql_external_scanner_deserialize tree_sitter_my_dialect_sql_external_scanner_deserialize
+   #include "../../src/scanner.c"
+   ```
+
+4. **Create `<dialect>/tree-sitter.json`** with the grammar registration and metadata block.
+   See `spark/tree-sitter.json` for the exact structure required.
+
+5. **Add npm scripts** in `package.json`:
    ```json
-   { "name": "my_dialect_sql", "scope": "source.my_dialect.sql", "path": "my_dialect" }
+   "generate:my_dialect": "node scripts/generate.js my_dialect",
+   "test:corpus:my_dialect": "cd my_dialect && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test"
    ```
 
-4. **Generate the parser**:
+6. **Generate the parser**:
    ```bash
-   node scripts/generate.js my_dialect/grammar.js
+   npm run generate:my_dialect
    ```
 
-5. **Add CI step** in `.github/workflows/ci.yml`:
+7. **Add CI steps** in `.github/workflows/ci.yml`:
    ```yaml
-   - run: tree-sitter generate my_dialect/grammar.js
+   - run: cd my_dialect && tree-sitter generate grammar.js
    ```
+   and a `parser-test-action` step for `grammar-path: my_dialect`.
+
+---
+
+## Dev workflow
+
+```bash
+# Generate all parsers (hash-cached — skips unchanged grammars)
+npm run generate:all
+
+# Generate individual parsers
+npm run generate              # base SQL
+npm run generate:spark        # Spark/Hive dialect
+npm run generate:databricks   # Databricks dialect (depends on spark)
+npm run generate:postgres     # PostgreSQL dialect
+npm run generate:mysql        # MySQL/MariaDB dialect
+
+# Force regeneration (bypasses cache)
+npm run generate:force
+
+# Run tests
+npm run test:corpus           # base SQL corpus (440+ tests)
+npm run test:corpus:spark     # Spark corpus
+npm run test:corpus:databricks  # Databricks corpus (78 tests)
+npm run test:corpus:postgres  # PostgreSQL corpus
+npm run test:corpus:mysql     # MySQL corpus
+npm run test:keywords         # Keyword/highlights sync check
+
+# Debug a parse tree
+npm run parse -- path/to/file.sql
+```
 
 ---
 
@@ -255,14 +320,14 @@ SQL INPUT HERE
 
 - Section separator: `=` repeated 80 times (name above, SQL below)
 - Output separator: `-` repeated 80 times
-- Run `make format` to normalise spacing before committing
+- Run `npm run generate && npm run test:corpus` to validate
 
 ---
 
 ## Hash-based grammar caching
 
 `scripts/generate.js` hashes all files in `grammar/` plus the grammar entry point. If the hash
-matches `.grammar-cache/<grammar>.hash`, it skips `tree-sitter generate`. Use
+matches `.grammar-cache/<name>.hash`, it skips `tree-sitter generate`. Use
 `npm run generate:force` to bypass the cache. The `.grammar-cache/` directory is gitignored.
 
 ---
@@ -273,8 +338,8 @@ Every keyword reachable in a parse tree (present in `src/node-types.json`) must 
 `@keyword` capture in `queries/highlights.scm`. The check runs automatically via
 `npm run test:keywords`. If it fails:
 
-1. Add the missing keyword to `queries/highlights.scm`: `(keyword_foo) @keyword`
+1. Add the missing keyword: `(keyword_foo) @keyword` in `queries/highlights.scm`
 2. Or if the keyword is intentionally not highlighted, re-examine whether it needs to exist
 
-Unreachable keywords (defined in `grammar/keywords.js` but not referenced by any rule) are
-excluded from the check — tree-sitter rejects query captures for unreachable node types.
+This check applies to the **base** grammar only. Dialect-specific keywords live in the dialect's
+own `queries/highlights.scm` and are not checked by `test-keywords.sh`.

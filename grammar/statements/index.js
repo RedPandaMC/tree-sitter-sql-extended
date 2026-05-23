@@ -11,7 +11,6 @@ import delete_rules from "./delete.js";
 import insert_rules from "./insert.js";
 import update_rules from "./update.js";
 import truncate_rules from "./truncate.js";
-import copy_rules from "./copy.js";
 import select_rules from "./select.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
@@ -48,7 +47,6 @@ export default {
   ...insert_rules,
   ...update_rules,
   ...truncate_rules,
-  ...copy_rules,
   ...select_rules,
   ...set_rules,
   ...show_rules,

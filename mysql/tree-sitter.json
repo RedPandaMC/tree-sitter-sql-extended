@@ -12,5 +12,18 @@
         "queries/highlights.scm"
       ]
     }
-  ]
+  ],
+  "metadata": {
+    "version": "0.3.11",
+    "license": "MIT",
+    "description": "Tree-sitter MySQL grammar (extends base SQL)",
+    "authors": [
+      {
+        "name": "redpandamc"
+      }
+    ],
+    "links": {
+      "repository": "git+https://github.com/redpandamc/tree-sitter-sql-extended.git"
+    }
+  }
 }
