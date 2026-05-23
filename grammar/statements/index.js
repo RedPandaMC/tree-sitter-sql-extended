@@ -79,7 +79,6 @@ export default {
       $._insert_statement,
       $._update_statement,
       $._truncate_statement,
-      $._copy_statement,
     ),
   ),
 
@@ -93,12 +92,6 @@ export default {
         $._unload_statement,
       ),
     ),
-  ),
-
-  _optimize_statement: $ => choice(
-    $._compute_stats,
-    $._vacuum_table,
-    $._optimize_table,
   ),
 
   _refresh_statement: $ => choice(

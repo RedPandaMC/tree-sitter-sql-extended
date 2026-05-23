@@ -1,5 +1,3 @@
-import { comma_list } from "../helpers.js";
-
 export default {
 
   _drop_statement: $ => seq(
@@ -13,7 +11,6 @@ export default {
       $.drop_database,
       $.drop_role,
       $.drop_sequence,
-      $.drop_extension,
       $.drop_function,
       $.drop_procedure,
     ),
@@ -101,14 +98,6 @@ export default {
           $.object_reference,
       ),
     ),
-  ),
-
-  drop_extension: $ => seq(
-    $.keyword_drop,
-    $.keyword_extension,
-    optional($._if_exists),
-    comma_list($.identifier, true),
-    optional(choice($.keyword_cascade, $.keyword_restrict)),
   ),
 
   drop_function: $ => seq(

@@ -1,4 +1,4 @@
-import base from '../grammar.js';
+import spark from '../spark/grammar.js';
 import { optional_parenthesis } from '../grammar/helpers.js';
 
 import vacuum_rules   from './grammar/vacuum.js';
@@ -13,7 +13,7 @@ import resource_rules from './grammar/resource.js';
 import call_rules     from './grammar/call.js';
 import create_rules   from './grammar/create.js';
 
-export default grammar(base, {
+export default grammar(spark, {
   name: 'databricks_sql',
 
   conflicts: $ => [
@@ -80,11 +80,11 @@ export default grammar(base, {
     ),
 
     _optimize_statement: $ => choice(
-      $._compute_stats,
-      $._vacuum_table,
-      $._optimize_table,
-      $._delta_optimize,
-      $._spark_analyze,
+      $._optimize_table,   // Iceberg (from base via spark)
+      $._compute_stats,    // Hive/Impala (from spark)
+      $._spark_analyze,    // Spark ANALYZE (from spark)
+      $._delta_optimize,   // Databricks Delta
+      $._vacuum_table,     // Databricks Delta vacuum
     ),
 
     _refresh_statement: $ => choice(
@@ -121,7 +121,6 @@ export default grammar(base, {
       $.drop_database,
       $.drop_role,
       $.drop_sequence,
-      $.drop_extension,
       $.drop_function,
       $.drop_procedure,
       // Databricks drops

@@ -1,0 +1,16 @@
+{
+  "grammars": [
+    {
+      "name": "postgres_sql",
+      "camelcase": "PostgresSQL",
+      "scope": "source.postgres.sql",
+      "path": ".",
+      "file-types": [
+        "sql"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ]
+}

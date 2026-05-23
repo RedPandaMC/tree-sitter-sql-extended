@@ -30,13 +30,6 @@ export default {
       $.keyword_dry,
       $.keyword_run,
     ),
-    // Standard/PostgreSQL: VACUUM [FULL|PARALLEL|ANALYZE] name [(cols)]
-    prec.left(seq(
-      $.keyword_vacuum,
-      optional($._vacuum_option),
-      $.object_reference,
-      optional(paren_list($.field)),
-    )),
   ),
 
 };

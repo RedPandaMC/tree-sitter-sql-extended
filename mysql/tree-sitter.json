@@ -1,0 +1,16 @@
+{
+  "grammars": [
+    {
+      "name": "mysql_sql",
+      "camelcase": "MySQLSQL",
+      "scope": "source.mysql.sql",
+      "path": ".",
+      "file-types": [
+        "sql"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ]
+}

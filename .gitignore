@@ -19,6 +19,18 @@ package-lock.json
 /databricks/src/parser.c
 /databricks/src/*.json
 /databricks/tmp/
+/spark/src/tree_sitter/
+/spark/src/parser.c
+/spark/src/*.json
+/spark/tmp/
+/postgres/src/tree_sitter/
+/postgres/src/parser.c
+/postgres/src/*.json
+/postgres/tmp/
+/mysql/src/tree_sitter/
+/mysql/src/parser.c
+/mysql/src/*.json
+/mysql/tmp/
 
 ## Generated Entries
 
