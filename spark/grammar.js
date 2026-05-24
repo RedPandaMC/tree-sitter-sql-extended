@@ -2,6 +2,7 @@ import base from '../grammar.js';
 import { paren_list, optional_parenthesis } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
+import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 
 export default grammar(base, {
@@ -26,10 +27,10 @@ export default grammar(base, {
     [$.var_declarations],
     [$.loop_statement],
     [$.lateral_cross_join],
+    [$.select_except_clause],
   ],
 
   rules: {
-
     // Re-add $.block to program (removed from base — procedural blocks are Spark-specific)
     program: $ => seq(
       repeat(
@@ -114,6 +115,23 @@ export default grammar(base, {
       $._spark_analyze,
     ),
 
+    // Override _ddl_statement to add Spark 4.0 variable statements
+    _ddl_statement: $ => choice(
+      $._create_statement,
+      $._alter_statement,
+      $._drop_statement,
+      $._rename_statement,
+      $._optimize_statement,
+      $._merge_statement,
+      $._refresh_statement,
+      $.comment_statement,
+      $.set_statement,
+      $.reset_statement,
+      $.use_statement,
+      $.declare_variable_statement,
+      $.set_variable_statement,
+    ),
+
     // Spark SQL: INSERT OVERWRITE ... PARTITION (...)
     insert: $ => seq(
       choice(
@@ -154,9 +172,42 @@ export default grammar(base, {
       ),
     ),
 
+    // Override term to support SELECT * EXCEPT
+    term: $ => seq(
+      field(
+        'value',
+        choice(
+          $.all_fields,
+          $._expression,
+        ),
+      ),
+      optional($._alias),
+      optional($.select_except_clause),
+    ),
+
+    // Override relation to support standalone LATERAL subquery
+    relation: $ => prec.right(
+      seq(
+        choice(
+          $.subquery,
+          $.invocation,
+          $.object_reference,
+          $.lateral_subquery,
+          $.values,
+        ),
+        optional($.tablesample),
+        optional(
+          seq(
+            $._alias,
+            optional(alias($._column_list, $.list)),
+          ),
+        ),
+      ),
+    ),
+
     ...spark_create_rules,
     ...spark_optimize_rules,
+    ...spark_spark4_rules,
     ...spark_scripting_rules,
-
   },
 });

@@ -132,5 +132,4 @@ export default {
       seq($.keyword_condition, field('condition_number', alias($._integer, $.literal))),
     ),
   ),
-
 };

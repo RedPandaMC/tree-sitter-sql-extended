@@ -347,6 +347,8 @@ export default {
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
   keyword_variant: _ => make_keyword("variant"),
+  keyword_source: _ => make_keyword("source"),
+  keyword_except: _ => make_keyword("except"),
 
   keyword_trigger: _ => make_keyword('trigger'),
   keyword_function: _ => make_keyword("function"),
