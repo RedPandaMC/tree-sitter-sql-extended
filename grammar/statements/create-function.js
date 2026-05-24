@@ -280,4 +280,18 @@ export default {
     $.identifier,
   ),
 
+  // T-SQL style variable declarations within function bodies
+  var_declarations: $ => seq($.keyword_declare, repeat1($.var_declaration)),
+  var_declaration: $ => seq(
+    $.identifier,
+    $._type,
+    optional(
+      seq(
+        choice($.keyword_default, '='),
+        $.literal,
+      ),
+    ),
+    optional(','),
+  ),
+
 };

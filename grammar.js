@@ -59,13 +59,12 @@ export default grammar({
 
   rules: {
     program: $ => seq(
-      // any number of transactions, statements, or blocks with a terminating ;
+      // any number of transactions or statements with a terminating ;
       repeat(
         seq(
           choice(
             $.transaction,
             $.statement,
-            $.block,
           ),
           ';',
         ),
