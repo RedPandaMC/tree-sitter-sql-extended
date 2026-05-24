@@ -2,7 +2,7 @@ import base from '../grammar.js';
 import { paren_list, optional_parenthesis } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
-import spark_spark4_rules from './grammar/spark4.js';
+import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 
 export default grammar(base, {
@@ -31,8 +31,7 @@ export default grammar(base, {
   ],
 
   rules: {
-
-    // Re-add $.block to program (procedural blocks are Spark-specific)
+    // Re-add $.block to program (removed from base — procedural blocks are Spark-specific)
     program: $ => seq(
       repeat(
         seq(
@@ -210,6 +209,5 @@ export default grammar(base, {
     ...spark_optimize_rules,
     ...spark_spark4_rules,
     ...spark_scripting_rules,
-
   },
 });

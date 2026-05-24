@@ -12,6 +12,8 @@ import cache_rules    from './grammar/cache.js';
 import resource_rules from './grammar/resource.js';
 import call_rules     from './grammar/call.js';
 import create_rules   from './grammar/create.js';
+import alter_rules    from './grammar/alter.js';
+import apply_rules    from './grammar/apply.js';
 
 export default grammar(spark, {
   name: 'databricks_sql',
@@ -88,6 +90,8 @@ export default grammar(spark, {
       // Databricks CALL + EXECUTE IMMEDIATE
       $.call_statement,
       $.execute_immediate_statement,
+      // Databricks APPLY CHANGES (DLT)
+      $.apply_changes_statement,
       // Databricks CREATE extensions
       $.create_namespace,
       $.create_streaming_table,
@@ -189,6 +193,25 @@ export default grammar(spark, {
       ),
     ),
 
+    // Override _alter_specifications to add Iceberg/Unity Catalog specs
+    _alter_specifications: $ => choice(
+      // Base ANSI specs
+      $.add_partition,
+      $.add_column,
+      $.add_constraint,
+      $.drop_constraint,
+      $.alter_column,
+      $.modify_column,
+      $.change_column,
+      $.drop_column,
+      $.rename_object,
+      $.rename_column,
+      $.set_schema,
+      $.change_ownership,
+      // Iceberg / Unity Catalog specs
+      $._alter_table_iceberg_spec,
+    ),
+
     // Databricks-specific rule definitions
     ...vacuum_rules,
     ...optimize_rules,
@@ -201,6 +224,8 @@ export default grammar(spark, {
     ...resource_rules,
     ...call_rules,
     ...create_rules,
+    ...alter_rules,
+    ...apply_rules,
 
   },
 });

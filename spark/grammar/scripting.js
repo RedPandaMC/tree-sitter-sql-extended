@@ -2,6 +2,7 @@ import { optional_parenthesis, comma_list, paren_list } from "../../grammar/help
 
 export default {
 
+  // Spark SQL 3.4+ top-level BEGIN/END block
   block: $ => seq(
     $.keyword_begin,
     optional(seq($.keyword_atomic)),
@@ -14,6 +15,7 @@ export default {
     $.keyword_end,
   ),
 
+  // IF condition THEN statements [ELSEIF ...] [ELSE ...] END IF
   if_statement: $ => seq(
     $.keyword_if,
     $._expression,
@@ -33,6 +35,7 @@ export default {
     $.keyword_if,
   ),
 
+  // FOR var IN query DO statements END FOR
   for_statement: $ => seq(
     $.keyword_for,
     field('variable', $.identifier),
@@ -44,6 +47,7 @@ export default {
     $.keyword_for,
   ),
 
+  // WHILE condition DO statements END WHILE
   while_statement: $ => seq(
     $.keyword_while,
     optional_parenthesis($._expression),
@@ -53,6 +57,7 @@ export default {
     $.keyword_while,
   ),
 
+  // [label:] LOOP ... END LOOP [label]
   loop_statement: $ => seq(
     optional(seq(field('label', $.identifier), ':')),
     $.keyword_loop,
@@ -61,6 +66,7 @@ export default {
     $.keyword_loop,
   ),
 
+  // REPEAT ... UNTIL condition END REPEAT
   repeat_statement: $ => seq(
     $.keyword_repeat,
     repeat(seq($.statement, ';')),
@@ -70,16 +76,19 @@ export default {
     $.keyword_repeat,
   ),
 
+  // LEAVE label (exit a loop or block)
   leave_statement: $ => seq(
     $.keyword_leave,
     field('label', $.identifier),
   ),
 
+  // ITERATE label (continue to next iteration)
   iterate_statement: $ => seq(
     $.keyword_iterate,
     field('label', $.identifier),
   ),
 
+  // SIGNAL [SQLSTATE 'value'] [SET MESSAGE_TEXT = 'msg']
   signal_statement: $ => seq(
     $.keyword_signal,
     optional(seq(
@@ -95,6 +104,7 @@ export default {
     )),
   ),
 
+  // RESIGNAL [SQLSTATE 'value'] [SET MESSAGE_TEXT = 'msg']
   resignal_statement: $ => seq(
     $.keyword_resignal,
     optional(seq(
@@ -110,6 +120,7 @@ export default {
     )),
   ),
 
+  // GET DIAGNOSTICS variable = RETURNED_SQLSTATE | MESSAGE_TEXT | ...
   get_diagnostics_statement: $ => seq(
     $.keyword_get,
     $.keyword_diagnostics,
@@ -121,5 +132,4 @@ export default {
       seq($.keyword_condition, field('condition_number', alias($._integer, $.literal))),
     ),
   ),
-
 };
