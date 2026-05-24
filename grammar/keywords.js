@@ -322,6 +322,9 @@ export default {
   keyword_branch: _ => make_keyword("branch"),
   keyword_tag: _ => make_keyword("tag"),
   keyword_identity: _ => make_keyword("identity"),
+  keyword_position: _ => make_keyword("position"),
+  keyword_distributed: _ => make_keyword("distributed"),
+  keyword_ordered: _ => make_keyword("ordered"),
   // Procedural scripting (#17)
   keyword_elseif: _ => make_keyword("elseif"),
   keyword_loop: _ => make_keyword("loop"),
@@ -385,6 +388,7 @@ export default {
   keyword_deferred: _ => make_keyword("deferred"),
   keyword_constraints    : _ => make_keyword("constraints"),
   keyword_snapshot: _ => make_keyword("snapshot"),
+  keyword_appends: _ => make_keyword("appends"),
   keyword_characteristics: _ => make_keyword("characteristics"),
   keyword_follows: _ => make_keyword("follows"),
   keyword_precedes: _ => make_keyword("precedes"),
