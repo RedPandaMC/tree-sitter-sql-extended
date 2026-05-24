@@ -1,4 +1,30 @@
+import { wrapped_in_parenthesis } from '../../grammar/helpers.js';
+
 export default {
+
+  // SHOW CREATE {SCHEMA|TABLE|VIEW|USER|TRIGGER|PROCEDURE|FUNCTION}
+  _show_create: $ => seq(
+    $.keyword_create,
+    choice(
+      $.keyword_schema,
+      $.keyword_table,
+      seq(optional($.keyword_materialized), $.keyword_view),
+      $.keyword_user,
+      $.keyword_trigger,
+      $.keyword_procedure,
+      $.keyword_function
+    ),
+    $.object_reference
+  ),
+
+  // Athena / Spark UNLOAD
+  _unload_statement: $ => seq(
+    $.keyword_unload,
+    wrapped_in_parenthesis($._select_statement),
+    $.keyword_to,
+    $._single_quote_string,
+    $.storage_parameters,
+  ),
 
   // SHOW CATALOGS [LIKE pattern]
   _show_catalogs: $ => seq(

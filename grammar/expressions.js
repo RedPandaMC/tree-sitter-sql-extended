@@ -15,19 +15,15 @@ export default {
       $.window_function,
       $.subquery,
       $.cast,
-      alias($.implicit_cast, $.cast),
-      $.collate_expression,
       $.exists,
       $.invocation,
       $.binary_expression,
       $.subscript,
-      $.variant_path_expression,
       $.unary_expression,
       $.array,
       $.interval,
       $.between_expression,
       $.parenthesized_expression,
-      $.object_id,
     )
   ),
 
@@ -105,12 +101,6 @@ export default {
     $.keyword_end,
   ),
 
-  implicit_cast: $ => seq(
-    $._expression,
-    '::',
-    $._type,
-  ),
-
   cast: $ => seq(
     field('name', $.keyword_cast),
     wrapped_in_parenthesis(
@@ -120,13 +110,6 @@ export default {
         $._type,
       ),
     ),
-  ),
-
-  // Spark 4.x: COLLATE expression
-  collate_expression: $ => seq(
-    $._expression,
-    $.keyword_collate,
-    field('collation', $.identifier),
   ),
 
   exists: $ => seq(
@@ -202,16 +185,6 @@ export default {
         ),
       ),
       "]",
-    ),
-  ),
-
-  // Spark 4.x: variant_path_expression for field access using : notation
-  // e.g., data:field1:field2 or data:array[0].field
-  variant_path_expression: $ => prec.left(
-    seq(
-      field('expression', choice($._expression, $.variant_path_expression)),
-      ':',
-      field('path', $.identifier),
     ),
   ),
 
@@ -387,28 +360,20 @@ export default {
       $._decimal_number,
       $._literal_string,
       $._bit_string,
-      $._string_casting,
       $.keyword_true,
       $.keyword_false,
       $.keyword_null,
     ),
   ),
   _double_quote_string: _ => /"[^"]*"/,
-  _backtick_quoted_string: _ => /`[^`]*`/,
-  // The norm specify that between two consecutive string must be a return,
-  // but this is good enough.
-  _single_quote_string: _ => seq(/([uU]&|[nN])?'([^']|'')*'/, repeat(/'([^']|'')*'/)),
-
-  _postgres_escape_string: _ => /(e|E)'([^']|\\')*'/,
+  _single_quote_string: _ => seq(
+    /([uU]&|[nN])?'([^']|'')*'/,
+    repeat(/'([^']|'')*'/),
+  ),
 
   _literal_string: $ => prec(
     1,
-    choice(
-      $._single_quote_string,
-      $._double_quote_string,
-      $._dollar_quoted_string,
-      $._postgres_escape_string,
-    ),
+    $._single_quote_string,
   ),
   _natural_number: _ => /\d+/,
   _integer: $ => seq(
@@ -421,35 +386,13 @@ export default {
     /((\d+(_\d+)*)?[.]\d+(_\d+)*(e[+-]?\d+(_\d+)*)?)|(\d+(_\d+)*[.](e[+-]?\d+(_\d+)*)?)/
   ),
   _bit_string: $ => seq(/[bBxX]'([^']|'')*'/, repeat(/'([^']|'')*'/)),
-  // The identifier should be followed by a string (no parenthesis allowed)
-  _string_casting: $ => seq($.identifier, $._single_quote_string),
 
   bang: _ => '!',
 
   identifier: $ => choice(
     $._identifier,
     $._double_quote_string,
-    $._backtick_quoted_string,
-    $._tsql_parameter,
-    seq("`", $._identifier, "`"),
   ),
-  _tsql_parameter: $ => seq('@', $._identifier),
-  // support nordic chars and umlaue
   _identifier: _ => /[A-Za-z_\u00C0-\u017F][0-9A-Za-z_\u00C0-\u017F]*/,
-
-  object_id: $ => seq(
-    $.keyword_object_id,
-    wrapped_in_parenthesis(
-      seq(
-        alias($._literal_string, $.literal),
-        optional(
-          seq(
-            ',',
-            alias($._literal_string, $.literal),
-          ),
-        ),
-      ),
-    ),
-  ),
 
 };

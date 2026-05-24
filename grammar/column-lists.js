@@ -101,7 +101,6 @@ export default {
       $.array,
       $.invocation,
       $.keyword_current_timestamp,
-      alias($.implicit_cast, $.cast),
   ),
 
   constraints: $ => seq(

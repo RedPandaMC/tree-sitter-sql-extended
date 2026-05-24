@@ -33,6 +33,15 @@ export default grammar(base, {
       $._mariadb_optimize_table,
     ),
 
+    _backtick_quoted_string: _ => /`[^`]*`/,
+
+    identifier: $ => choice(
+      $._identifier,
+      $._double_quote_string,
+      $._backtick_quoted_string,
+      seq("`", $._identifier, "`"),
+    ),
+
     ...mysql_create_rules,
     ...mysql_optimize_rules,
 

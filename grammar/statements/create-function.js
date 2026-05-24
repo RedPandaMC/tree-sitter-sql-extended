@@ -2,11 +2,6 @@ import { paren_list, wrapped_in_parenthesis } from "../helpers.js";
 
 export default {
 
-  // This is only used in create function statement, it is not needed to check
-  // the start tag match the end one. The usage of this syntax in other
-  // context is done by _dollar_string.
-  dollar_quote: () => /\$[^\$]*\$/,
-
   create_function: $ => prec.left(seq(
     $.keyword_create,
     optional($._or_replace),
@@ -121,22 +116,6 @@ export default {
     $._function_return,
   ),
 
-  _tsql_function_body_statement: $ => seq(
-    optional($.keyword_as),
-    $.keyword_begin,
-    optional($.var_declarations),
-    choice(
-      repeat($.statement),
-      repeat1(seq(
-        $.keyword_begin,
-        repeat($.statement),
-        $.keyword_end,
-      )),
-    ),
-    $._function_return,
-    $.keyword_end,
-  ),
-
   function_body: $ => choice(
     seq(
       $._function_return,
@@ -155,45 +134,8 @@ export default {
     ),
     seq(
       $.keyword_as,
-      alias($._dollar_quoted_string_start_tag, $.dollar_quote),
-      optional(
-        seq(
-          $.keyword_declare,
-          repeat1(
-            $.function_declaration,
-          ),
-        ),
-      ),
-      $.keyword_begin,
-      repeat1(
-        seq(
-          $._function_body_statement,
-          ';',
-        ),
-      ),
-      $.keyword_end,
-      optional(';'),
-      alias($._dollar_quoted_string_end_tag, $.dollar_quote),
+      alias($._single_quote_string, $.literal),
     ),
-    seq(
-      $.keyword_as,
-      alias(
-        choice(
-          $._single_quote_string,
-          $._double_quote_string,
-          $._dollar_quoted_string,
-        ),
-        $.literal
-      ),
-    ),
-    seq(
-      $.keyword_as,
-      alias($._dollar_quoted_string_start_tag, $.dollar_quote),
-      $._function_body_statement,
-      optional(';'),
-      alias($._dollar_quoted_string_end_tag, $.dollar_quote),
-    ),
-    $._tsql_function_body_statement,
   ),
 
   function_language: $ => seq(
@@ -280,7 +222,6 @@ export default {
     $.identifier,
   ),
 
-  // T-SQL style variable declarations within function bodies
   var_declarations: $ => seq($.keyword_declare, repeat1($.var_declaration)),
   var_declaration: $ => seq(
     $.identifier,

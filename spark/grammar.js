@@ -28,6 +28,14 @@ export default grammar(base, {
     [$.loop_statement],
     [$.lateral_cross_join],
     [$.select_except_clause],
+    [$.values],
+    [$.select_expression],
+    [$.select_expression, $._select_statement],
+    [$.set_operation],
+    [$.set_operation, $._select_statement],
+    [$.group_by],
+    [$.subquery, $.lateral_subquery],
+    [$.order_target],
   ],
 
   rules: {

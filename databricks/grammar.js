@@ -24,11 +24,7 @@ export default grammar(spark, {
     [$._column, $._qualified_field],
     [$.object_reference],
     [$.between_expression, $.binary_expression],
-    [$.time],
-    [$.timestamp],
     [$.from],
-    [$.create_sequence],
-    [$.alter_sequence],
     [$.create_function],
     [$.create_namespace],
     [$.create_namespace, $.create_function],
@@ -47,6 +43,16 @@ export default grammar(spark, {
     [$.create_recipient],
     [$.create_provider],
     [$.create_policy],
+    [$.term],
+    [$.values],
+    [$.select_expression],
+    [$.select_expression, $._select_statement],
+    [$.set_operation],
+    [$.set_operation, $._select_statement],
+    [$.group_by],
+    [$.subquery, $.lateral_subquery],
+    [$.order_target],
+    [$.lateral_cross_join],
   ],
 
   rules: {
@@ -74,6 +80,8 @@ export default grammar(spark, {
       $.grant_statement,
       $.revoke_statement,
       $.deny_statement,
+      // Databricks / Spark UNLOAD (Athena)
+      $._unload_statement,
       // Databricks CACHE
       $.cache_table,
       $.uncache_table,

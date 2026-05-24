@@ -5,41 +5,11 @@ export default {
   set_statement: $ => seq(
     $.keyword_set,
     choice(
-      // SET CATALOG catalog_name (Unity Catalog / Spark SQL)
-      seq($.keyword_catalog, $.object_reference),
-      seq(
-        optional(choice($.keyword_session, $.keyword_local, $.keyword_global)),
-        choice(
-          seq(
-            $.object_reference,
-            choice($.keyword_to, '='),
-            choice(
-              $.literal,
-              $.keyword_default,
-              $.identifier,
-              $.keyword_on,
-              $.keyword_off,
-            ),
-          ),
-          seq($.keyword_schema, $.literal),
-          seq($.keyword_names, $.literal),
-          seq($.keyword_time, $.keyword_zone, choice($.literal, $.keyword_local, $.keyword_default)),
-          seq($.keyword_session, $.keyword_authorization, choice($.identifier, $.keyword_default)),
-          seq($.keyword_role, choice($.identifier, $.keyword_none)),
-        ),
-      ),
       seq($.keyword_constraints, choice($.keyword_all, comma_list($.identifier, true)), choice($.keyword_deferred, $.keyword_immediate)),
       seq($.keyword_transaction, $._transaction_mode),
       seq($.keyword_transaction, $.keyword_snapshot, $._transaction_mode),
       seq($.keyword_session, $.keyword_characteristics, $.keyword_as, $.keyword_transaction, $._transaction_mode),
     ),
-  ),
-
-  // USE [DATABASE | SCHEMA | CATALOG] name
-  use_statement: $ => seq(
-    $.keyword_use,
-    optional(choice($.keyword_database, $.keyword_schema, $.keyword_catalog)),
-    $.object_reference,
   ),
 
   _transaction_mode: $ => seq(
@@ -67,6 +37,12 @@ export default {
       seq($.keyword_session, $.keyword_authorization),
       $.keyword_role,
     ),
+  ),
+
+  use_statement: $ => seq(
+    $.keyword_use,
+    optional(choice($.keyword_database, $.keyword_schema, $.keyword_catalog)),
+    $.object_reference,
   ),
 
 };

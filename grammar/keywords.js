@@ -184,8 +184,7 @@ export default {
   keyword_like: _ => choice(make_keyword("like"),make_keyword("ilike")),
   keyword_rlike: _ => choice(make_keyword("rlike"),make_keyword("regexp")),
   keyword_similar: _ => make_keyword("similar"),
-  keyword_unsigned: _ => make_keyword("unsigned"),
-  keyword_zerofill: _ => make_keyword("zerofill"),
+
   keyword_conflict: _ => make_keyword("conflict"),
   keyword_do: _ => make_keyword("do"),
   keyword_nothing: _ => make_keyword("nothing"),
@@ -346,7 +345,7 @@ export default {
   // Spark 4.x (#21)
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
-  keyword_variant: _ => make_keyword("variant"),
+
   keyword_source: _ => make_keyword("source"),
   keyword_except: _ => make_keyword("except"),
 
@@ -453,7 +452,6 @@ export default {
   keyword_avro: _ => make_keyword("avro"),
   keyword_sequencefile: _ => make_keyword("sequencefile"),
   keyword_orc: _ => make_keyword("orc"),
-  keyword_avro: _ => make_keyword("avro"),
   keyword_jsonfile: _ => make_keyword("jsonfile"),
 
   // Operators
@@ -489,26 +487,17 @@ export default {
   keyword_bit: _ => make_keyword("bit"),
   keyword_binary: _ => make_keyword("binary"),
   keyword_varbinary: _ => make_keyword("varbinary"),
-  keyword_image: _ => make_keyword("image"),
 
-  keyword_smallserial: _ => choice(make_keyword("smallserial"),make_keyword("serial2")),
-  keyword_serial: _ => choice(make_keyword("serial"),make_keyword("serial4")),
-  keyword_bigserial: _ => choice(make_keyword("bigserial"),make_keyword("serial8")),
-  keyword_tinyint: _ => choice(make_keyword("tinyint"),make_keyword("int1")),
-  keyword_smallint: _ => choice(make_keyword("smallint"),make_keyword("int2")),
-  keyword_mediumint: _ => choice(make_keyword("mediumint"),make_keyword("int3")),
-  keyword_int: _ => choice(make_keyword("int"), make_keyword("integer"), make_keyword("int4")),
-  keyword_bigint: _ => choice(make_keyword("bigint"),make_keyword("int8")),
+  keyword_smallint: _ => make_keyword("smallint"),
+  keyword_int: _ => choice(make_keyword("int"), make_keyword("integer")),
+  keyword_bigint: _ => make_keyword("bigint"),
   keyword_decimal: _ => make_keyword("decimal"),
   keyword_numeric: _ => make_keyword("numeric"),
-  keyword_real: _ => choice(make_keyword("real"),make_keyword("float4")),
+  keyword_real: _ => make_keyword("real"),
   keyword_float: _ => make_keyword("float"),
   keyword_double: _ => make_keyword("double"),
   keyword_precision: _ => make_keyword("precision"),
-  keyword_inet: _ => make_keyword("inet"),
 
-  keyword_money: _ => make_keyword("money"),
-  keyword_smallmoney: _ => make_keyword("smallmoney"),
   keyword_varying: _ => make_keyword("varying"),
 
   keyword_char: _ => choice(make_keyword("char"), make_keyword("character")),
@@ -522,32 +511,20 @@ export default {
   ),
   keyword_nvarchar: _ => make_keyword("nvarchar"),
   keyword_text: _ => make_keyword("text"),
-  keyword_string: _ => make_keyword("string"),
-  keyword_uuid: _ => make_keyword("uuid"),
 
   keyword_json: _ => make_keyword("json"),
-  keyword_jsonb: _ => make_keyword("jsonb"),
   keyword_xml: _ => make_keyword("xml"),
-
-  keyword_bytea: _ => make_keyword("bytea"),
 
   keyword_enum: _ => make_keyword("enum"),
 
   keyword_date: _ => make_keyword("date"),
-  keyword_datetime: _ => make_keyword("datetime"),
-  keyword_datetime2: _ => make_keyword("datetime2"),
-  keyword_smalldatetime: _ => make_keyword("smalldatetime"),
-  keyword_datetimeoffset: _ => make_keyword("datetimeoffset"),
   keyword_time: _ => make_keyword("time"),
   keyword_timestamp: _ => make_keyword("timestamp"),
-  keyword_timestamptz: _ => make_keyword('timestamptz'),
   keyword_interval: _ => make_keyword("interval"),
 
-  keyword_geometry: _ => make_keyword("geometry"),
-  keyword_geography: _ => make_keyword("geography"),
-  keyword_box2d: _ => make_keyword("box2d"),
-  keyword_box3d: _ => make_keyword("box3d"),
+  keyword_array: _ => make_keyword("array"), // not included in _type since it's a constructor literal
 
+  // PostgreSQL-specific types (non-ANSI)
   keyword_oid: _ => make_keyword("oid"),
   keyword_oids: _ => make_keyword("oids"),
   keyword_name: _ => make_keyword("name"),
@@ -555,7 +532,5 @@ export default {
   keyword_regnamespace: _ => make_keyword("regnamespace"),
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
-
-  keyword_array: _ => make_keyword("array"), // not included in _type since it's a constructor literal
 
 }

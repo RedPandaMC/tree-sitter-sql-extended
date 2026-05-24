@@ -31,16 +31,14 @@ export default {
     ),
   ),
 
-  // ===== ALL SPREADS — guaranteed before overrides =====
-
   ...create_rules,
   ...alter_rules,
   ...drop_rules,
   ...rename_rules,
   ...optimize_rules,
   ...merge_rules,
-  ...refresh_rules,
   ...comment_rules,
+  ...refresh_rules,
   ...delete_rules,
   ...insert_rules,
   ...update_rules,
@@ -48,10 +46,6 @@ export default {
   ...select_rules,
   ...set_rules,
   ...show_rules,
-
-  // ===== ALL OVERRIDES — MUST BE LAST =====
-  // These intentionally supersede anything defined in the spreads above.
-  // Dialect grammars (databricks/grammar.js etc.) extend these via grammar(base, overrides).
 
   _ddl_statement: $ => choice(
     $._create_statement,
@@ -61,10 +55,7 @@ export default {
     $._optimize_statement,
     $._merge_statement,
     $._refresh_statement,
-    $.comment_statement,
     $.set_statement,
-    $.reset_statement,
-    $.use_statement,
   ),
 
   _dml_write: $ => seq(
@@ -83,8 +74,6 @@ export default {
       choice(
         $._select_statement,
         $.set_operation,
-        $._show_statement,
-        $._unload_statement,
       ),
     ),
   ),
