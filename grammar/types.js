@@ -9,15 +9,8 @@ export default {
         $.bit,
         $.binary,
         $.varbinary,
-        $.keyword_image,
 
-        $.keyword_smallserial,
-        $.keyword_serial,
-        $.keyword_bigserial,
-
-        $.tinyint,
         $.smallint,
-        $.mediumint,
         $.int,
         $.bigint,
         $.decimal,
@@ -25,51 +18,20 @@ export default {
         $.double,
         $.float,
 
-        $.keyword_money,
-        $.keyword_smallmoney,
-
         $.char,
         $.varchar,
         $.nchar,
         $.nvarchar,
-        $.numeric,
-        $.keyword_string,
-        $.keyword_text,
-
-        $.keyword_uuid,
-
-        $.keyword_json,
-        $.keyword_jsonb,
-        $.keyword_xml,
-
-        $.keyword_bytea,
-        $.keyword_inet,
-
-        $.enum,
 
         $.keyword_date,
-        $.keyword_datetime,
-        $.keyword_datetime2,
-        $.datetimeoffset,
-        $.keyword_smalldatetime,
         $.time,
         $.timestamp,
-        $.keyword_timestamptz,
         $.keyword_interval,
 
-        $.keyword_geometry,
-        $.keyword_geography,
-        $.keyword_box2d,
-        $.keyword_box3d,
+        $.keyword_json,
+        $.keyword_xml,
 
-        $.keyword_oid,
-        $.keyword_name,
-        $.keyword_regclass,
-        $.keyword_regnamespace,
-        $.keyword_regproc,
-        $.keyword_regtype,
-
-        $.keyword_variant,
+        $.enum,
 
         field("custom_type", $.object_reference)
       ),
@@ -90,11 +52,9 @@ export default {
     ']'
   ),
 
-  tinyint: $ => unsigned_type($, parametric_type($, $.keyword_tinyint)),
-  smallint: $ => unsigned_type($, parametric_type($, $.keyword_smallint)),
-  mediumint: $ => unsigned_type($, parametric_type($, $.keyword_mediumint)),
-  int: $ => unsigned_type($, parametric_type($, $.keyword_int)),
-  bigint: $ => unsigned_type($, parametric_type($, $.keyword_bigint)),
+  smallint: $ => parametric_type($, $.keyword_smallint),
+  int: $ => parametric_type($, $.keyword_int),
+  bigint: $ => parametric_type($, $.keyword_bigint),
 
   bit: $ => choice(
       $.keyword_bit,
@@ -108,17 +68,13 @@ export default {
   binary: $ => parametric_type($, $.keyword_binary, ['precision']),
   varbinary: $ => parametric_type($, $.keyword_varbinary, ['precision']),
 
-  // TODO: should qualify against /\\b(0?[1-9]|[1-4][0-9]|5[0-4])\\b/g
-  float: $  => choice(
-    parametric_type($, $.keyword_float, ['precision']),
-    unsigned_type($, parametric_type($, $.keyword_float, ['precision', 'scale'])),
-  ),
+  float: $  => parametric_type($, $.keyword_float, ['precision']),
 
   double: $ => choice(
     make_keyword("float8"),
-    unsigned_type($, parametric_type($, $.keyword_double, ['precision', 'scale'])),
-    unsigned_type($, parametric_type($, seq($.keyword_double, $.keyword_precision), ['precision', 'scale'])),
-    unsigned_type($, parametric_type($, $.keyword_real, ['precision', 'scale'])),
+    parametric_type($, $.keyword_double, ['precision', 'scale']),
+    parametric_type($, seq($.keyword_double, $.keyword_precision), ['precision', 'scale']),
+    parametric_type($, $.keyword_real, ['precision', 'scale']),
   ),
 
   decimal: $ => choice(
@@ -139,7 +95,6 @@ export default {
     $.keyword_time,
     $.keyword_zone,
   ),
-  datetimeoffset: $ => parametric_type($, $.keyword_datetimeoffset),
   time: $ => seq(
     parametric_type($, $.keyword_time),
     optional($._include_time_zone),
@@ -148,7 +103,6 @@ export default {
     parametric_type($, $.keyword_timestamp),
     optional($._include_time_zone),
   ),
-  timestamptz: $ => parametric_type($, $.keyword_timestamptz),
 
   enum: $ => seq(
     $.keyword_enum,
@@ -173,17 +127,6 @@ export default {
 
 };
 
-function unsigned_type($, type) {
-  return choice(
-    seq($.keyword_unsigned, type),
-    seq(
-      type,
-      optional($.keyword_unsigned),
-      optional($.keyword_zerofill),
-    ),
-  )
-}
-
 function parametric_type($, type, params = ['size']) {
   return prec.right(1,
     choice(
@@ -192,9 +135,7 @@ function parametric_type($, type, params = ['size']) {
         type,
         wrapped_in_parenthesis(
           seq(
-            // first parameter is guaranteed, shift it out of the array
             field(params.shift(), alias($._natural_number, $.literal)),
-            // then, fill in the ", next" until done
             ...params.map(p => seq(',', field(p, alias($._natural_number, $.literal)))),
           ),
         ),

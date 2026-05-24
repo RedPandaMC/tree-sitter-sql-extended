@@ -15,13 +15,6 @@ export default grammar({
     $.marginalia,
   ],
 
-
-  externals: $ => [
-    $._dollar_quoted_string_start_tag,
-    $._dollar_quoted_string_end_tag,
-    $._dollar_quoted_string,
-  ],
-
   conflicts: $ => [
     [$.object_reference, $._qualified_field],
     [$.field, $._qualified_field],
