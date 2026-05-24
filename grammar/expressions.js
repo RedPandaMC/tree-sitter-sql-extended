@@ -16,10 +16,12 @@ export default {
       $.subquery,
       $.cast,
       alias($.implicit_cast, $.cast),
+      $.collate_expression,
       $.exists,
       $.invocation,
       $.binary_expression,
       $.subscript,
+      $.variant_path_expression,
       $.unary_expression,
       $.array,
       $.interval,
@@ -120,6 +122,13 @@ export default {
     ),
   ),
 
+  // Spark 4.x: COLLATE expression
+  collate_expression: $ => seq(
+    $._expression,
+    $.keyword_collate,
+    field('collation', $.identifier),
+  ),
+
   exists: $ => seq(
     $.keyword_exists,
     $.subquery,
@@ -193,6 +202,16 @@ export default {
         ),
       ),
       "]",
+    ),
+  ),
+
+  // Spark 4.x: variant_path_expression for field access using : notation
+  // e.g., data:field1:field2 or data:array[0].field
+  variant_path_expression: $ => prec.left(
+    seq(
+      field('expression', choice($._expression, $.variant_path_expression)),
+      ':',
+      field('path', $.identifier),
     ),
   ),
 

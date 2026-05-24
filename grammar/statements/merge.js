@@ -4,7 +4,8 @@ export default {
 
   _merge_statement: $=> seq(
     $.keyword_merge,
-    $.keyword_into,
+    optional($.keyword_into),
+    optional($.keyword_table),
     $.object_reference,
     optional($._alias),
     $.keyword_using,
@@ -13,8 +14,10 @@ export default {
       $.object_reference
     ),
     optional($._alias),
-    $.keyword_on,
-    optional_parenthesis(field("predicate", $._expression)),
+    optional(seq(
+      $.keyword_on,
+      optional_parenthesis(field("predicate", $._expression)),
+    )),
     repeat1($.when_clause)
   ),
 
@@ -22,6 +25,10 @@ export default {
     $.keyword_when,
     optional($.keyword_not),
     $.keyword_matched,
+    optional(seq(
+      $.keyword_by,
+      $.keyword_source,
+    )),
     optional(
       seq(
         $.keyword_and,

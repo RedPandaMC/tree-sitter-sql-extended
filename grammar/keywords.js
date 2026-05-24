@@ -332,10 +332,17 @@ export default {
   keyword_iterate: _ => make_keyword("iterate"),
   keyword_diagnostics: _ => make_keyword("diagnostics"),
   keyword_sqlstate: _ => make_keyword("sqlstate"),
+  keyword_returned_sqlstate: _ => make_keyword("returned_sqlstate"),
+  keyword_message_text: _ => make_keyword("message_text"),
+  keyword_message: _ => make_keyword("message"),
+  keyword_condition: _ => make_keyword("condition"),
+  keyword_get: _ => make_keyword("get"),
   // Spark 4.x (#21)
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
   keyword_variant: _ => make_keyword("variant"),
+  keyword_source: _ => make_keyword("source"),
+  keyword_except: _ => make_keyword("except"),
 
   keyword_trigger: _ => make_keyword('trigger'),
   keyword_function: _ => make_keyword("function"),

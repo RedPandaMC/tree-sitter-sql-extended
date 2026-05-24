@@ -69,6 +69,8 @@ export default {
         $.keyword_regproc,
         $.keyword_regtype,
 
+        $.keyword_variant,
+
         field("custom_type", $.object_reference)
       ),
       optional($.array_size_definition)
