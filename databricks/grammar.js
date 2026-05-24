@@ -12,6 +12,7 @@ import cache_rules    from './grammar/cache.js';
 import resource_rules from './grammar/resource.js';
 import call_rules     from './grammar/call.js';
 import create_rules   from './grammar/create.js';
+import apply_rules    from './grammar/apply.js';
 
 export default grammar(spark, {
   name: 'databricks_sql',
@@ -88,6 +89,8 @@ export default grammar(spark, {
       // Databricks CALL + EXECUTE IMMEDIATE
       $.call_statement,
       $.execute_immediate_statement,
+      // Databricks APPLY CHANGES (DLT)
+      $.apply_changes_statement,
       // Databricks CREATE extensions
       $.create_namespace,
       $.create_streaming_table,
@@ -201,6 +204,7 @@ export default grammar(spark, {
     ...resource_rules,
     ...call_rules,
     ...create_rules,
+    ...apply_rules,
 
   },
 });
