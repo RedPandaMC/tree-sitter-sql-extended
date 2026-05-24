@@ -36,7 +36,9 @@ jobs:
             postgres/src/node-types.json
             mysql/src/parser.c
             mysql/src/node-types.json
-          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**') }}
+            snowflake/src/parser.c
+            snowflake/src/node-types.json
+          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
 
       # Base SQL grammar
       - run: tree-sitter generate
@@ -48,6 +50,8 @@ jobs:
       - run: cd postgres && tree-sitter generate grammar.js
       # MySQL dialect grammar
       - run: cd mysql && tree-sitter generate grammar.js
+      # Snowflake dialect grammar
+      - run: cd snowflake && tree-sitter generate grammar.js
 
       - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
@@ -93,6 +97,15 @@ jobs:
           test-python: false
           grammar-path: mysql
 
+      - name: Run tests (Snowflake)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: true
+          node-version: "22"
+          test-python: false
+          grammar-path: snowflake
+
       - run: scripts/test-keywords.sh
 
   validate_tests:
@@ -103,7 +116,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           STATUS=0
-          for dir in test spark/test databricks/test postgres/test mysql/test; do
+          for dir in test spark/test databricks/test postgres/test mysql/test snowflake/test; do
             if [[ $(grep -rn --exclude=errors.txt ERROR "$dir/" 2>/dev/null | wc -l) -gt 0 ]]; then
                 echo "Found 'ERROR' in $dir: "
                 grep -rn --exclude=errors.txt ERROR "$dir/" | cut -f1,2 -d:

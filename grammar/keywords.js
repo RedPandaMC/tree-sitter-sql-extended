@@ -346,6 +346,35 @@ export default {
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
 
+  // Common dialect types
+  keyword_string: _ => make_keyword("string"),
+
+  // Snowflake dialect keywords
+  keyword_at: _ => make_keyword("at"),
+  keyword_one: _ => make_keyword("one"),
+  keyword_per: _ => make_keyword("per"),
+  keyword_past: _ => make_keyword("past"),
+  keyword_next: _ => make_keyword("next"),
+  keyword_match_recognize: _ => make_keyword("match_recognize"),
+  keyword_measures: _ => make_keyword("measures"),
+  keyword_pattern: _ => make_keyword("pattern"),
+  keyword_define: _ => make_keyword("define"),
+  keyword_skip: _ => make_keyword("skip"),
+  keyword_let: _ => make_keyword("let"),
+  keyword_raise: _ => make_keyword("raise"),
+  keyword_exception: _ => make_keyword("exception"),
+  keyword_task: _ => make_keyword("task"),
+  keyword_stream: _ => make_keyword("stream"),
+  keyword_dynamic: _ => make_keyword("dynamic"),
+  keyword_warehouse: _ => make_keyword("warehouse"),
+  keyword_schedule: _ => make_keyword("schedule"),
+  keyword_secure: _ => make_keyword("secure"),
+  keyword_masking: _ => make_keyword("masking"),
+  keyword_target_lag: _ => make_keyword("target_lag"),
+  keyword_access: _ => make_keyword("access"),
+  keyword_secondary: _ => make_keyword("secondary"),
+  keyword_roles: _ => make_keyword("roles"),
+
   keyword_source: _ => make_keyword("source"),
   keyword_except: _ => make_keyword("except"),
 
