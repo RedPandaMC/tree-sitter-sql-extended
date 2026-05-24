@@ -1,3 +1,7 @@
+; ============================================================
+; Identifiers, fields & aliases
+; ============================================================
+
 (object_reference
   name: (identifier) @type)
 
@@ -29,6 +33,10 @@
     name: (keyword_cast) @function.call
     parameter: [(literal)]?)))
 
+; ============================================================
+; Literals
+; ============================================================
+
 (literal) @string
 (comment) @comment @spell
 (marginalia) @comment
@@ -41,10 +49,18 @@
 
 (parameter) @parameter
 
+; ============================================================
+; Boolean
+; ============================================================
+
 [
  (keyword_true)
  (keyword_false)
 ] @boolean
+
+; ============================================================
+; Attributes
+; ============================================================
 
 [
  (keyword_asc)
@@ -71,6 +87,10 @@
  (keyword_strict)
 ] @attribute
 
+; ============================================================
+; Storage class
+; ============================================================
+
 [
  (keyword_materialized)
  (keyword_recursive)
@@ -81,6 +101,10 @@
  (keyword_volatile)
 ] @storageclass
 
+; ============================================================
+; Conditional
+; ============================================================
+
 [
  (keyword_case)
  (keyword_when)
@@ -88,6 +112,11 @@
  (keyword_else)
 ] @conditional
 
+; ============================================================
+; Keywords
+; ============================================================
+
+; --- DML & query ---
 [
   (keyword_select)
   (keyword_from)
@@ -111,11 +140,19 @@
   (keyword_value)
   (keyword_attribute)
   (keyword_set)
+] @keyword
+
+; --- Join type ---
+[
   (keyword_left)
   (keyword_right)
   (keyword_outer)
   (keyword_inner)
   (keyword_full)
+] @keyword
+
+; --- Query clause ---
+[
   (keyword_order)
   (keyword_partition)
   (keyword_group)
@@ -125,6 +162,10 @@
   (keyword_having)
   (keyword_limit)
   (keyword_offset)
+] @keyword
+
+; --- DDL object ---
+[
   (keyword_table)
   (keyword_tables)
   (keyword_key)
@@ -159,14 +200,14 @@
   (keyword_schema)
   (keyword_owner)
   (keyword_authorization)
+] @keyword
+
+; --- Query modifiers ---
+[
   (keyword_all)
   (keyword_any)
   (keyword_some)
   (keyword_returning)
-  (keyword_begin)
-  (keyword_commit)
-  (keyword_rollback)
-  (keyword_transaction)
   (keyword_only)
   (keyword_like)
   (keyword_rlike)
@@ -176,6 +217,10 @@
   (keyword_modify)
   (keyword_after)
   (keyword_before)
+] @keyword
+
+; --- Window frame ---
+[
   (keyword_range)
   (keyword_rows)
   (keyword_groups)
@@ -183,6 +228,10 @@
   (keyword_current)
   (keyword_ties)
   (keyword_others)
+] @keyword
+
+; --- Table & column properties ---
+[
   (keyword_zerofill)
   (keyword_row)
   (keyword_comment)
@@ -196,6 +245,10 @@
   (keyword_rewrite)
   (keyword_optimize)
   (keyword_cache)
+] @keyword
+
+; --- Function / procedure ---
+[
   (keyword_language)
   (keyword_called)
   (keyword_conflict)
@@ -219,6 +272,10 @@
   (keyword_support)
   (keyword_trigger)
   (keyword_unsafe)
+] @keyword
+
+; --- Role / sequence / database ---
+[
   (keyword_admin)
   (keyword_connection)
   (keyword_cycle)
@@ -247,10 +304,22 @@
   (keyword_disable)
   (keyword_security)
   (keyword_extension)
+] @keyword
+
+; --- Parameter modes ---
+[
   (keyword_out)
   (keyword_inout)
   (keyword_variadic)
   (keyword_ordinality)
+] @keyword
+
+; --- Transaction & session ---
+[
+  (keyword_begin)
+  (keyword_commit)
+  (keyword_rollback)
+  (keyword_transaction)
   (keyword_session)
   (keyword_isolation)
   (keyword_level)
@@ -269,6 +338,10 @@
   (keyword_snapshot)
   (keyword_characteristics)
   (keyword_off)
+] @keyword
+
+; --- Trigger ---
+[
   (keyword_each)
   (keyword_instead)
   (keyword_of)
@@ -278,13 +351,21 @@
   (keyword_referencing)
   (keyword_statement)
   (keyword_execute)
+] @keyword
+
+; --- Column storage ---
+[
   (keyword_procedure)
   (keyword_extended)
   (keyword_main)
   (keyword_plain)
   (keyword_storage)
   (keyword_compression)
-(keyword_duplicate)
+] @keyword
+
+; --- Dialect-compat (reachable in base grammar) ---
+[
+  (keyword_duplicate)
   (keyword_catalog)
   (keyword_bucket)
   (keyword_global)
@@ -295,7 +376,11 @@
   (keyword_percent)
   (keyword_style)
   (keyword_tablesample)
- ] @keyword
+] @keyword
+
+; ============================================================
+; Type qualifiers
+; ============================================================
 
 [
  (keyword_restrict)
@@ -318,6 +403,10 @@
  (keyword_maxvalue)
  (keyword_minvalue)
 ] @type.qualifier
+
+; ============================================================
+; Built-in types
+; ============================================================
 
 [
   (keyword_int)
@@ -371,6 +460,10 @@
   (keyword_interval)
 ] @type.builtin
 
+; ============================================================
+; Keyword operators
+; ============================================================
+
 [
   (keyword_in)
   (keyword_and)
@@ -383,6 +476,10 @@
   (keyword_except)
   (keyword_intersect)
 ] @keyword.operator
+
+; ============================================================
+; Operators
+; ============================================================
 
 [
   "+"
@@ -402,6 +499,10 @@
   (op_other)
   (op_unary_other)
 ] @operator
+
+; ============================================================
+; Punctuation
+; ============================================================
 
 [
   "("

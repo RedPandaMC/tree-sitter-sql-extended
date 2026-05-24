@@ -1,3 +1,5 @@
+; inherits: spark_sql
+
 ; Databricks/Unity Catalog keywords
 (keyword_optimize) @keyword
 (keyword_zorder) @keyword
@@ -29,16 +31,14 @@
 (keyword_hours) @keyword
 (keyword_dry) @keyword
 (keyword_run) @keyword
-(keyword_cache) @keyword
 (keyword_uncache) @keyword
 (keyword_lazy) @keyword
 (keyword_history) @keyword
 (keyword_detail) @keyword
 (keyword_noscan) @keyword
+; override: base classifies as @type.qualifier; COMPUTE STATISTICS is a Databricks verb
 (keyword_statistics) @keyword
 (keyword_compute) @keyword
-(keyword_immediate) @keyword
-(keyword_jar) @keyword
 (keyword_jars) @keyword
 (keyword_archive) @keyword
 (keyword_archives) @keyword
