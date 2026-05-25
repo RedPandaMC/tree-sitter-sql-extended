@@ -65,7 +65,6 @@
 [
  (keyword_asc)
  (keyword_desc)
- (keyword_unsigned)
  (keyword_nulls)
  (keyword_last)
  (keyword_auto_increment)
@@ -126,8 +125,6 @@
   (keyword_primary)
   (keyword_delete)
   (keyword_create)
-  (keyword_show)
-  (keyword_unload)
   (keyword_insert)
   (keyword_merge)
   (keyword_distinct)
@@ -140,6 +137,7 @@
   (keyword_value)
   (keyword_attribute)
   (keyword_set)
+  (keyword_source)
 ] @keyword
 
 ; --- Join type ---
@@ -232,7 +230,6 @@
 
 ; --- Table & column properties ---
 [
-  (keyword_zerofill)
   (keyword_row)
   (keyword_comment)
   (keyword_location)
@@ -252,17 +249,10 @@
   (keyword_language)
   (keyword_called)
   (keyword_conflict)
-  (keyword_declare)
   (keyword_filter)
   (keyword_function)
   (keyword_input)
-  (keyword_name)
-  (keyword_oid)
   (keyword_precision)
-  (keyword_regclass)
-  (keyword_regnamespace)
-  (keyword_regproc)
-  (keyword_regtype)
   (keyword_restricted)
   (keyword_return)
   (keyword_returns)
@@ -303,7 +293,6 @@
   (keyword_enable)
   (keyword_disable)
   (keyword_security)
-  (keyword_extension)
 ] @keyword
 
 ; --- Parameter modes ---
@@ -330,14 +319,12 @@
   (keyword_committed)
   (keyword_uncommitted)
   (keyword_deferrable)
-  (keyword_names)
   (keyword_zone)
   (keyword_immediate)
   (keyword_deferred)
   (keyword_constraints)
   (keyword_snapshot)
   (keyword_characteristics)
-  (keyword_off)
 ] @keyword
 
 ; --- Trigger ---
@@ -366,9 +353,7 @@
 ; --- Dialect-compat (reachable in base grammar) ---
 [
   (keyword_duplicate)
-  (keyword_catalog)
   (keyword_bucket)
-  (keyword_global)
   (keyword_jar)
   (keyword_environment)
   (keyword_handler)
@@ -414,49 +399,27 @@
   (keyword_boolean)
   (keyword_binary)
   (keyword_varbinary)
-  (keyword_image)
   (keyword_bit)
-  (keyword_inet)
-  (keyword_smallserial)
-  (keyword_serial)
-  (keyword_bigserial)
   (keyword_smallint)
-  (keyword_mediumint)
   (keyword_bigint)
-  (keyword_tinyint)
   (keyword_decimal)
   (keyword_float)
   (keyword_double)
   (keyword_numeric)
   (keyword_real)
   (double)
-  (keyword_money)
-  (keyword_smallmoney)
   (keyword_char)
   (keyword_nchar)
   (keyword_varchar)
   (keyword_nvarchar)
   (keyword_varying)
-  (keyword_text)
   (keyword_string)
-  (keyword_uuid)
   (keyword_json)
-  (keyword_jsonb)
   (keyword_xml)
-  (keyword_bytea)
   (keyword_enum)
   (keyword_date)
-  (keyword_datetime)
   (keyword_time)
-  (keyword_datetime2)
-  (keyword_datetimeoffset)
-  (keyword_smalldatetime)
   (keyword_timestamp)
-  (keyword_timestamptz)
-  (keyword_geometry)
-  (keyword_geography)
-  (keyword_box2d)
-  (keyword_box3d)
   (keyword_interval)
 ] @type.builtin
 
@@ -488,7 +451,6 @@
   "/"
   "%"
   "^"
-  ":="
   "="
   "<"
   "<="

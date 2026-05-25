@@ -345,6 +345,7 @@ export default {
   // Spark 4.x (#21)
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
+  keyword_variant: _ => make_keyword("variant"),
 
   // Common dialect types
   keyword_string: _ => make_keyword("string"),
