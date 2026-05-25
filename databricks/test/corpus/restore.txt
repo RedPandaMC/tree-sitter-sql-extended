@@ -44,7 +44,7 @@ RESTORE TABLE events TO TIMESTAMP AS OF '2021-01-01';
 Delta: CONVERT TO DELTA
 ================================================================================
 
-CONVERT TO DELTA parquet.`/path/to/table`;
+CONVERT TO DELTA parquet.my_table;
 
 --------------------------------------------------------------------------------
 

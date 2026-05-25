@@ -22,7 +22,7 @@ KEYS (id);
       (keyword_keys)
       (list
         (column
-          name: (identifier))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO with table keyword
@@ -51,9 +51,9 @@ KEYS (id, name);
       (keyword_keys)
       (list
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO with SELECT source
@@ -79,22 +79,23 @@ KEYS (id);
           (keyword_select)
           (select_expression
             (term
-              value: (all_fields)))
-          (from
-            (keyword_from)
-            (relation
-              (object_reference
-                name: (identifier)))
-            (where
-              (keyword_where)
-              (binary_expression
-                (field
-                  name: (identifier))
-                (literal))))))
+              value: (all_fields))))
+        (from
+          (keyword_from)
+          (relation
+            (object_reference
+              name: (identifier)))
+          (where
+            (keyword_where)
+            predicate: (binary_expression
+              left: (field
+                name: (identifier))
+              right: (literal
+                (keyword_true))))))
       (keyword_keys)
       (list
         (column
-          name: (identifier))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO with SEQUENCE BY
@@ -121,7 +122,7 @@ SEQUENCE BY seq_col;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_sequence)
       (keyword_by)
       (identifier))))
@@ -151,11 +152,11 @@ COLUMNS (id, name AS source_name, ts AS source_ts);
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_columns)
       (list
         (column
-          name: (identifier))
+          (identifier))
         (column_mapping
           target: (identifier)
           (keyword_as)
@@ -174,7 +175,7 @@ APPLY CHANGES INTO with COLUMNS *
 APPLY CHANGES INTO my_table
 FROM source_table
 KEYS (id)
-COLUMNS *;
+COLUMNS ALL;
 
 --------------------------------------------------------------------------------
 
@@ -192,9 +193,9 @@ COLUMNS *;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_columns)
-      (keyword_all)))))
+      (keyword_all))))
 
 ================================================================================
 APPLY CHANGES INTO with WHEN MATCHED DELETE
@@ -221,11 +222,11 @@ WHEN MATCHED THEN DELETE;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_matched)
       (keyword_then)
-      (keyword_delete)))))
+      (keyword_delete))))
 
 ================================================================================
 APPLY CHANGES INTO with WHEN MATCHED UPDATE
@@ -252,7 +253,7 @@ WHEN MATCHED THEN UPDATE SET name = source.name, ts = source.ts;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_matched)
       (keyword_then)
@@ -272,7 +273,7 @@ WHEN MATCHED THEN UPDATE SET name = source.name, ts = source.ts;
           right: (field
             (object_reference
               name: (identifier))
-            name: (identifier))))))))
+            name: (identifier)))))))
 
 ================================================================================
 APPLY CHANGES INTO with WHEN MATCHED UPSERT
@@ -299,7 +300,7 @@ WHEN MATCHED THEN UPSERT SET name = source.name;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_matched)
       (keyword_then)
@@ -312,7 +313,7 @@ WHEN MATCHED THEN UPSERT SET name = source.name;
           right: (field
             (object_reference
               name: (identifier))
-            name: (identifier))))))))
+            name: (identifier)))))))
 
 ================================================================================
 APPLY CHANGES INTO with WHEN NOT MATCHED INSERT
@@ -339,12 +340,12 @@ WHEN NOT MATCHED THEN INSERT;
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_not)
       (keyword_matched)
       (keyword_then)
-      (keyword_insert)))))
+      (keyword_insert))))
 
 ================================================================================
 APPLY CHANGES INTO with WHEN NOT MATCHED INSERT with columns
@@ -371,7 +372,7 @@ WHEN NOT MATCHED THEN INSERT (id, name, ts);
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_not)
       (keyword_matched)
@@ -379,11 +380,11 @@ WHEN NOT MATCHED THEN INSERT (id, name, ts);
       (keyword_insert)
       (list
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier)))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO with VIEW keyword
@@ -411,7 +412,7 @@ KEYS (id);
       (keyword_keys)
       (list
         (column
-          name: (identifier)))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO with FLOW keyword
@@ -439,7 +440,7 @@ KEYS (id);
       (keyword_keys)
       (list
         (column
-          name: (identifier)))))))
+          (identifier))))))
 
 ================================================================================
 APPLY CHANGES INTO full DLT syntax
@@ -469,18 +470,18 @@ WHEN NOT MATCHED THEN INSERT (id, name, ts) VALUES (source.id, source.name, sour
       (keyword_keys)
       (list
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_sequence)
       (keyword_by)
       (identifier)
       (keyword_columns)
       (list
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_when)
       (keyword_matched)
       (keyword_then)
@@ -508,11 +509,11 @@ WHEN NOT MATCHED THEN INSERT (id, name, ts) VALUES (source.id, source.name, sour
       (keyword_insert)
       (list
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier))
+          (identifier))
         (column
-          name: (identifier)))
+          (identifier)))
       (keyword_values)
       (list
         (field
@@ -526,4 +527,4 @@ WHEN NOT MATCHED THEN INSERT (id, name, ts) VALUES (source.id, source.name, sour
         (field
           (object_reference
             name: (identifier))
-          name: (identifier)))))))
+          name: (identifier))))))

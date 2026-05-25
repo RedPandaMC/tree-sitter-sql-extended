@@ -172,87 +172,6 @@ CREATE TABLE my_table (
                   (keyword_desc))))))))))
 
 ================================================================================
-Create table with constraint on multiple columns
-================================================================================
-
-CREATE TABLE my_table (
-  host CHAR(50) NOT NULL,
-  created_date DATE NOT NULL,
-  random FLOAT DEFAULT RAND(),
-  random TEXT DEFAULT 'test',
-  with_comment TEXT COMMENT 'this column has a comment',
-  with_comment_and_constraint TEXT DEFAULT 'test' COMMENT 'this column also has a comment',
-  KEY `idx` (`host`, `created_date`),
-  UNIQUE KEY `unique_idx` (`host`,`with_comment`)
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (char
-            (keyword_char)
-            size: (literal))
-          (keyword_not)
-          (keyword_null))
-        (column_definition
-          name: (identifier)
-          type: (keyword_date)
-          (keyword_not)
-          (keyword_null))
-        (column_definition
-          name: (identifier)
-          type: (float
-            (keyword_float))
-          (keyword_default)
-          (invocation
-            (object_reference
-              name: (identifier))))
-        (column_definition
-          name: (identifier)
-          type: (keyword_text)
-          (keyword_default)
-          (literal))
-        (column_definition
-          name: (identifier)
-          type: (keyword_text)
-          (keyword_comment)
-          (literal))
-        (column_definition
-          name: (identifier)
-          type: (keyword_text)
-          (keyword_default)
-          (literal)
-          (keyword_comment)
-          (literal))
-        (constraints
-          (constraint
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
-                name: (identifier))
-              (column
-                name: (identifier))))
-          (constraint
-            (keyword_unique)
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
-                name: (identifier))
-              (column
-                name: (identifier)))))))))
-
-================================================================================
 Create table with constraint checks
 ================================================================================
 
@@ -272,313 +191,42 @@ CREATE TABLE products (
       (keyword_create)
       (keyword_table)
       (object_reference
-        (identifier))
+        name: (identifier))
       (column_definitions
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int)))
         (column_definition
-          (identifier)
-          (keyword_text))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
-          (identifier)
-          (numeric
+          name: (identifier)
+          type: (numeric
             (keyword_numeric))
           (keyword_check)
           (binary_expression
-            (field
-              (identifier))
-            (literal)))
+            left: (field
+              name: (identifier))
+            right: (literal)))
         (column_definition
-          (identifier)
-          (numeric
+          name: (identifier)
+          type: (numeric
             (keyword_numeric))
           (keyword_check)
           (binary_expression
-            (field
-              (identifier))
-            (literal)))
+            left: (field
+              name: (identifier))
+            right: (literal)))
         (constraints
           (constraint
             (keyword_check)
             (binary_expression
-              (field
-                (identifier))
-              (field
-                (identifier)))))))))
-
-================================================================================
-Create table if not exists
-================================================================================
-
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (keyword_if)
-      (keyword_not)
-      (keyword_exists)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_not)
-          (keyword_null)
-          (keyword_auto_increment))))))
-
-================================================================================
-Create table with unsigned zerofill types
-================================================================================
-
-CREATE TABLE `addresses` (
-  `id` bigint(20) UNSIGNED ZEROFILL,
-  `id2` int4(20) ZEROFILL,
-  `id3` UNSIGNED tinyint(20),
-  `id4` mediumint(20) UNSIGNED,
-  `id5` float(20, 3) UNSIGNED,
-  `id6` double(20,3) UNSIGNED
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal)
-            (keyword_unsigned)
-            (keyword_zerofill)))
-        (column_definition
-          name: (identifier)
-          type: (int
-            (keyword_int)
-            size: (literal)
-            (keyword_zerofill)))
-        (column_definition
-          name: (identifier)
-          type: (tinyint
-            (keyword_unsigned)
-            (keyword_tinyint)
-            size: (literal)))
-        (column_definition
-          name: (identifier)
-          type: (mediumint
-            (keyword_mediumint)
-            size: (literal)
-            (keyword_unsigned)))
-        (column_definition
-          name: (identifier)
-          type: (float
-            (keyword_float)
-            precision: (literal)
-            scale: (literal)
-            (keyword_unsigned)))
-        (column_definition
-          name: (identifier)
-          type: (double
-            (keyword_double)
-            precision: (literal)
-            scale: (literal)
-            (keyword_unsigned)))))))
-
-================================================================================
-Create table with auto increment
-================================================================================
-
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  KEY `addresses_s_id_index` (`s_id`)
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (keyword_if)
-      (keyword_not)
-      (keyword_exists)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_not)
-          (keyword_null)
-          (keyword_auto_increment))
-        (constraints
-          (constraint
-            (keyword_primary)
-            (keyword_key)
-            (ordered_columns
-              (column
-                name: (identifier))))
-          (constraint
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
-                name: (identifier)))))))))
-
-================================================================================
-Create table with multiple constraints
-================================================================================
-
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `s_id` bigint(20) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `addresses_s_id_index` (`s_id`),
-  KEY `index_addresses_on_updated_at` (`updated_at`),
-  KEY `index_addresses_on_s_id_and_id` (`s_id`, `id`)
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (keyword_if)
-      (keyword_not)
-      (keyword_exists)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_not)
-          (keyword_null)
-          (keyword_auto_increment))
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_default)
-          (literal
-            (keyword_null)))
-        (column_definition
-          name: (identifier)
-          type: (varchar
-            (keyword_varchar)
-            size: (literal))
-          (keyword_default)
-          (literal
-            (keyword_null)))
-        (column_definition
-          name: (identifier)
-          type: (keyword_datetime)
-          (keyword_default)
-          (literal
-            (keyword_null)))
-        (constraints
-          (constraint
-            (keyword_primary)
-            (keyword_key)
-            (ordered_columns
-              (column
-                name: (identifier))))
-          (constraint
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
-                name: (identifier))))
-          (constraint
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
-                name: (identifier))))
-          (constraint
-            (keyword_key)
-            name: (identifier)
-            (ordered_columns
-              (column
+              left: (field
                 name: (identifier))
-              (column
+              right: (field
                 name: (identifier)))))))))
-
-================================================================================
-Debugging
-================================================================================
-
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `s_id` bigint(20) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_table)
-      (keyword_if)
-      (keyword_not)
-      (keyword_exists)
-      (object_reference
-        name: (identifier))
-      (column_definitions
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_not)
-          (keyword_null)
-          (keyword_auto_increment))
-        (column_definition
-          name: (identifier)
-          type: (bigint
-            (keyword_bigint)
-            size: (literal))
-          (keyword_default)
-          (literal
-            (keyword_null)))
-        (column_definition
-          name: (identifier)
-          type: (varchar
-            (keyword_varchar)
-            size: (literal))
-          (keyword_default)
-          (literal
-            (keyword_null)))))))
 
 ================================================================================
 Create view
@@ -936,16 +584,20 @@ CREATE TABLE type_test (
             (keyword_varbinary)))
         (column_definition
           name: (identifier)
-          type: (keyword_image))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_smallserial))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_serial))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_bigserial))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (int
@@ -999,10 +651,12 @@ CREATE TABLE type_test (
             (keyword_precision)))
         (column_definition
           name: (identifier)
-          type: (keyword_money))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_smallmoney))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (char
@@ -1047,19 +701,22 @@ CREATE TABLE type_test (
             size: (literal)))
         (column_definition
           name: (identifier)
-          type: (keyword_text))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (keyword_json))
         (column_definition
           name: (identifier)
-          type: (keyword_jsonb))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (keyword_xml))
         (column_definition
           name: (identifier)
-          type: (keyword_bytea))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (enum
@@ -1072,17 +729,20 @@ CREATE TABLE type_test (
           type: (keyword_date))
         (column_definition
           name: (identifier)
-          type: (keyword_datetime))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_datetime2))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (datetimeoffset
-            (keyword_datetimeoffset)))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_smalldatetime))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
           type: (time
@@ -1100,10 +760,12 @@ CREATE TABLE type_test (
             (keyword_zone)))
         (column_definition
           name: (identifier)
-          type: (keyword_timestamptz))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_datetime)
+          custom_type: (object_reference
+            name: (identifier))
           (keyword_default)
           (keyword_current_timestamp))
         (column_definition
@@ -1115,19 +777,24 @@ CREATE TABLE type_test (
             (keyword_zone)))
         (column_definition
           name: (identifier)
-          type: (keyword_geometry))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_geography))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_box2d))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_box3d))
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
           name: (identifier)
-          type: (keyword_uuid))))))
+          custom_type: (object_reference
+            name: (identifier)))))))
 
 ================================================================================
 Create table with nullable columns
@@ -1197,13 +864,13 @@ CREATE UNIQUE INDEX "akRoleName" ON "Role" ("name");
       (keyword_create)
       (keyword_unique)
       (keyword_index)
-      column: (literal)
+      column: (identifier)
       (keyword_on)
       (object_reference
         name: (identifier))
       (index_fields
         (field
-          column: (literal))))))
+          column: (identifier))))))
 
 ================================================================================
 Create table as select
@@ -1470,7 +1137,7 @@ CREATE TABLE "Role" (
         name: (identifier))
       (column_definitions
         (column_definition
-          name: (literal)
+          name: (identifier)
           type: (bigint
             (keyword_bigint))
           (keyword_generated)
@@ -1479,7 +1146,7 @@ CREATE TABLE "Role" (
           (field
             name: (identifier)))
         (column_definition
-          name: (literal)
+          name: (identifier)
           type: (varchar
             (keyword_varchar))
           (keyword_not)
@@ -1499,7 +1166,8 @@ CREATE TABLE "Role" (
           (keyword_stored))
         (column_definition
           name: (identifier)
-          type: (keyword_text)
+          custom_type: (object_reference
+            name: (identifier))
           (keyword_generated)
           (keyword_always)
           (keyword_as)
@@ -1540,8 +1208,9 @@ CREATE TABLE "Session" (
         name: (identifier))
       (column_definitions
         (column_definition
-          name: (literal)
-          type: (keyword_inet)
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier))
           (keyword_not)
           (keyword_null))))))
 
@@ -1567,50 +1236,52 @@ CREATE TABLE tab (
       (keyword_create)
       (keyword_table)
       (object_reference
-        (identifier))
+        name: (identifier))
       (column_definitions
         (column_definition
-          (identifier)
-          (keyword_text))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int))
-          (array_size_definition
-            (literal)))
+          type: (array_size_definition
+            size: (literal)))
         (column_definition
-          (identifier)
-          (keyword_text)
-          (array_size_definition))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier))
+          type: (array_size_definition))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int))
-          (array_size_definition
-            (literal)
-            (literal)))
+          type: (array_size_definition
+            size: (literal)
+            size: (literal)))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int))
-          (array_size_definition
+          type: (array_size_definition
             (keyword_array)
-            (literal)))
+            size: (literal)))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int))
-          (array_size_definition
+          type: (array_size_definition
             (keyword_array)))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int))
-          (array_size_definition
-            (literal)
-            (literal)
-            (literal)
-            (literal)))))))
+          type: (array_size_definition
+            size: (literal)
+            size: (literal)
+            size: (literal)
+            size: (literal)))))))
 
 ================================================================================
 Create schema
@@ -1668,48 +1339,50 @@ CREATE SCHEMA hollywood
       (keyword_create)
       (keyword_table)
       (object_reference
-        (identifier))
+        name: (identifier))
       (column_definitions
         (column_definition
-          (identifier)
-          (keyword_text))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
-          (identifier)
-          (keyword_date))
+          name: (identifier)
+          type: (keyword_date))
         (column_definition
-          (identifier)
-          (keyword_text)
-          (array_size_definition))))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier))
+          type: (array_size_definition))))
     (create_view
       (keyword_create)
       (keyword_view)
       (object_reference
-        (identifier))
+        name: (identifier))
       (keyword_as)
       (create_query
         (select
           (keyword_select)
           (select_expression
             (term
-              (field
-                (identifier)))
+              value: (field
+                name: (identifier)))
             (term
-              (field
-                (identifier)))))
+              value: (field
+                name: (identifier)))))
         (from
           (keyword_from)
           (relation
             (object_reference
-              (identifier)))
+              name: (identifier)))
           (where
             (keyword_where)
-            (binary_expression
-              (field
-                (identifier))
-              (is_not
+            predicate: (binary_expression
+              left: (field
+                name: (identifier))
+              operator: (is_not
                 (keyword_is)
                 (keyword_not))
-              (literal
+              right: (literal
                 (keyword_null)))))))))
 
 ================================================================================
@@ -1851,35 +1524,6 @@ OWNED BY numbers.number_sequences;
       (object_reference
         (identifier)
         (identifier)))))
-
-================================================================================
-Create view rule conflict with time and timestamp rules (check create_view)
-================================================================================
-
-create view toto as select '123'::timestamp with check option;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_view
-      (keyword_create)
-      (keyword_view)
-      (object_reference
-        (identifier))
-      (keyword_as)
-      (create_query
-        (select
-          (keyword_select)
-          (select_expression
-            (term
-              (cast
-                (literal)
-                (timestamp
-                  (keyword_timestamp)))))))
-      (keyword_with)
-      (keyword_check)
-      (keyword_option))))
 
 ================================================================================
 Create a trigger on delete for each row

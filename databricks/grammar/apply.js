@@ -7,15 +7,13 @@ export default {
     $.keyword_changes,
     $.keyword_into,
     optional($.keyword_table),
-    field('target', $.object_reference),
+    $.object_reference,
     $.keyword_from,
-    field('source', choice($.subquery, $.object_reference)),
-    optional(seq(
-      choice($.keyword_view, $.keyword_flow),
-    )),
+    choice($.subquery, $.object_reference),
+    optional(choice($.keyword_view, $.keyword_flow)),
     optional(seq(
       $.keyword_keys,
-      paren_list($.identifier, true),
+      alias($._column_list, $.list),
     )),
     optional(seq(
       $.keyword_sequence,
@@ -26,7 +24,7 @@ export default {
       $.keyword_columns,
       choice(
         $.keyword_all,
-        paren_list($._column_mapping, true),
+        alias($._apply_column_mapping_list, $.list),
       ),
     )),
     optional(seq(
@@ -39,8 +37,8 @@ export default {
       $.keyword_then,
       choice(
         $.keyword_delete,
-        seq($.keyword_update, $._set_values),
-        seq($.keyword_upsert, $._set_values),
+        seq($.keyword_update, $.keyword_set, $.assignment_list),
+        seq($.keyword_upsert, $.keyword_set, $.assignment_list),
       ),
     )),
     optional(seq(
@@ -53,11 +51,19 @@ export default {
       )),
       $.keyword_then,
       $.keyword_insert,
-      optional($._insert_values),
+      optional(alias($._column_list, $.list)),
+      optional(seq($.keyword_values, $.list)),
     )),
   ),
 
-  _column_mapping: $ => seq(
+  // Parenthesized list of column refs and column mappings (for COLUMNS clause)
+  _apply_column_mapping_list: $ => seq(
+    '(',
+    comma_list(choice(alias($._column, $.column), $.column_mapping), true),
+    ')',
+  ),
+
+  column_mapping: $ => seq(
     field('target', $.identifier),
     $.keyword_as,
     field('source', $._expression),

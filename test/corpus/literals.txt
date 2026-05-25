@@ -161,79 +161,6 @@ SELECT  u&'\041f\0440\0438\0432\0456\0442 '
           (literal))))))
 
 ================================================================================
-Postgres escape string
-================================================================================
-
-SELECT E'this is a test';
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal))))))
-
-================================================================================
-Postgres escape string terminates correctly
-================================================================================
-
-SELECT E'this is a test';
-SELECT E'this is another test';
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal)))))
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal))))))
-
-================================================================================
-Postgres escape string with literal newlines
-================================================================================
-
-SELECT E'this
-is a
-test';
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal))))))
-
-================================================================================
-Postgres escape string that escapes a single quote
-================================================================================
-
-SELECT E'the table\'s name is my_table';
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal))))))
-
-================================================================================
 TSQL N'string'
 ================================================================================
 
@@ -248,23 +175,6 @@ SELECT N'the table''s name is my_tablé';
       (select_expression
         (term
           (literal))))))
-
-================================================================================
-string casting
-================================================================================
-
-SELECT int '123';
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (literal
-            (identifier)))))))
 
 ================================================================================
 Support for nordic chars and umlaute

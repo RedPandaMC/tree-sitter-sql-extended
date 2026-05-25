@@ -89,7 +89,7 @@ export default {
   ),
 
   // SIGNAL [SQLSTATE 'value'] [SET MESSAGE_TEXT = 'msg']
-  signal_statement: $ => seq(
+  signal_statement: $ => prec.right(seq(
     $.keyword_signal,
     optional(seq(
       $.keyword_sqlstate,
@@ -97,15 +97,14 @@ export default {
     )),
     optional(seq(
       $.keyword_set,
-      $.keyword_message,
-      $.keyword_text,
+      $.keyword_message_text,
       '=',
       alias($._single_quote_string, $.literal),
     )),
-  ),
+  )),
 
   // RESIGNAL [SQLSTATE 'value'] [SET MESSAGE_TEXT = 'msg']
-  resignal_statement: $ => seq(
+  resignal_statement: $ => prec.right(seq(
     $.keyword_resignal,
     optional(seq(
       $.keyword_sqlstate,
@@ -113,12 +112,11 @@ export default {
     )),
     optional(seq(
       $.keyword_set,
-      $.keyword_message,
-      $.keyword_text,
+      $.keyword_message_text,
       '=',
       alias($._single_quote_string, $.literal),
     )),
-  ),
+  )),
 
   // GET DIAGNOSTICS variable = RETURNED_SQLSTATE | MESSAGE_TEXT | ...
   get_diagnostics_statement: $ => seq(

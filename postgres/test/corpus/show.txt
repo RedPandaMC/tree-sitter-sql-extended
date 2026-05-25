@@ -89,7 +89,7 @@ SHOW TABLES FROM tpch.tiny LIKE 'p%';
     (keyword_tables)
     (keyword_from)
     (object_reference
-      (identifier))
-    (identifier)
+      schema: (identifier)
+      name: (identifier))
     (keyword_like)
     (literal)))

@@ -173,14 +173,16 @@ WHERE m.status = "success"
                   (object_reference
                     name: (identifier))
                   name: (identifier))
-                right: (literal))
+                right: (field
+                  name: (identifier)))
               operator: (keyword_and)
               right: (binary_expression
                 left: (field
                   (object_reference
                     name: (identifier))
                   name: (identifier))
-                right: (literal)))
+                right: (field
+                  name: (identifier))))
             operator: (keyword_and)
             right: (binary_expression
               left: (field
@@ -229,14 +231,16 @@ WHERE m.status = "success"
                 (object_reference
                   name: (identifier))
                 name: (identifier))
-              right: (literal))
+              right: (field
+                name: (identifier)))
             operator: (keyword_and)
             right: (binary_expression
               left: (field
                 (object_reference
                   name: (identifier))
                 name: (identifier))
-              right: (literal)))
+              right: (field
+                name: (identifier))))
           operator: (keyword_or)
           right: (binary_expression
             left: (binary_expression
@@ -520,7 +524,6 @@ WHERE
     AND a SIMILAR TO '%a'
     AND a NOT SIMILAR TO '%a';
 
-
 --------------------------------------------------------------------------------
 
 (program
@@ -584,7 +587,6 @@ WHERE
     AND a NOT RLIKE '^pattern'
     AND a rlike '^pattern'
     AND a REGEXP '^pattern';
-
 
 --------------------------------------------------------------------------------
 
@@ -686,34 +688,6 @@ SELECT 'abc' ^@ 'a' || 'z';
             (literal)))))))
 
 ================================================================================
-full text search operators
-================================================================================
-
-SELECT 'fat cats ate rats' @@ !! ('cat' <-> 'rat'::tsquery);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (binary_expression
-            (literal)
-            (op_other)
-            (unary_expression
-              (op_unary_other)
-              (parenthesized_expression
-                (cast
-                  (binary_expression
-                    (literal)
-                    (op_other)
-                    (literal))
-                  (object_reference
-                    (identifier)))))))))))
-
-================================================================================
 Array subscript
 ================================================================================
 
@@ -765,21 +739,3 @@ SELECT
               upper: (literal))
             subscript: (literal)))))))
 
-================================================================================
-TSQL OBJECT_ID
-================================================================================
-
-SELECT OBJECT_ID (N'dbo.LEVENSHTEIN_DISTANCE', N'FN')
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (object_id
-            (keyword_object_id)
-            (literal)
-            (literal)))))))

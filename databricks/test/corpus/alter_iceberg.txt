@@ -15,7 +15,7 @@ ALTER TABLE my_table CREATE TAG v1 AS OF '2024-01-01';
         name: (identifier))
       (keyword_create)
       (keyword_tag)
-      (identifier)
+      tag_name: (identifier)
       (keyword_as)
       (keyword_of)
       (literal))))
@@ -39,7 +39,7 @@ ALTER TABLE my_catalog.my_schema.my_table CREATE TAG v1;
         name: (identifier))
       (keyword_create)
       (keyword_tag)
-      (identifier))))
+      tag_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: CREATE TAG IF NOT EXISTS
@@ -61,7 +61,7 @@ ALTER TABLE my_table CREATE TAG IF NOT EXISTS v1 AS OF '2024-01-01';
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (identifier)
+      tag_name: (identifier)
       (keyword_as)
       (keyword_of)
       (literal))))
@@ -83,7 +83,7 @@ ALTER TABLE my_table CREATE BRANCH dev_branch AS OF 1234567890;
         name: (identifier))
       (keyword_create)
       (keyword_branch)
-      (identifier)
+      branch_name: (identifier)
       (keyword_as)
       (keyword_of)
       (literal))))
@@ -108,7 +108,7 @@ ALTER TABLE my_table CREATE BRANCH IF NOT EXISTS dev_branch;
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (identifier))))
+      branch_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: DROP TAG
@@ -127,7 +127,7 @@ ALTER TABLE my_table DROP TAG v1;
         name: (identifier))
       (keyword_drop)
       (keyword_tag)
-      (identifier))))
+      tag_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: DROP TAG IF EXISTS
@@ -148,7 +148,7 @@ ALTER TABLE my_table DROP TAG IF EXISTS v1;
       (keyword_tag)
       (keyword_if)
       (keyword_exists)
-      (identifier))))
+      tag_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: DROP BRANCH
@@ -167,7 +167,7 @@ ALTER TABLE my_table DROP BRANCH dev_branch;
         name: (identifier))
       (keyword_drop)
       (keyword_branch)
-      (identifier))))
+      branch_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: DROP BRANCH IF EXISTS
@@ -188,13 +188,13 @@ ALTER TABLE my_table DROP BRANCH IF EXISTS dev_branch;
       (keyword_branch)
       (keyword_if)
       (keyword_exists)
-      (identifier))))
+      branch_name: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: ALTER TAG
 ================================================================================
 
-ALTER TABLE my_table ALTER TAG v1 REPLACE AS OF '2024-06-01';
+ALTER TABLE my_table ALTER TAG v1 AS OF '2024-06-01' REPLACE;
 
 --------------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ ALTER TABLE my_table ALTER TAG v1 REPLACE AS OF '2024-06-01';
         name: (identifier))
       (keyword_alter)
       (keyword_tag)
-      (identifier)
+      tag_name: (identifier)
       (keyword_as)
       (keyword_of)
       (literal)
@@ -230,7 +230,7 @@ ALTER TABLE my_table ALTER BRANCH dev_branch REPLACE;
         name: (identifier))
       (keyword_alter)
       (keyword_branch)
-      (identifier)
+      branch_name: (identifier)
       (keyword_replace))))
 
 ================================================================================
@@ -250,7 +250,7 @@ ALTER TABLE my_table SET LOCATION 's3://bucket/path';
         name: (identifier))
       (keyword_set)
       (keyword_location)
-      (literal))))
+      location: (literal))))
 
 ================================================================================
 ALTER TABLE Iceberg: SET TBLPROPERTIES
@@ -271,11 +271,11 @@ ALTER TABLE my_table SET TBLPROPERTIES ('key1' = 'value1', 'key2' = 'value2');
       (keyword_tblproperties)
       (list
         (binary_expression
-          (literal)
-          (literal))
+          left: (literal)
+          right: (literal))
         (binary_expression
-          (literal)
-          (literal))))))
+          left: (literal)
+          right: (literal))))))
 
 ================================================================================
 ALTER TABLE Iceberg: UNSET TBLPROPERTIES
@@ -302,7 +302,7 @@ ALTER TABLE my_table UNSET TBLPROPERTIES ('key1', 'key2');
 ALTER TABLE Iceberg: UNSET TBLPROPERTIES IF EXISTS
 ================================================================================
 
-ALTER TABLE my_table UNSET TBLPROPERTIES IF EXISTS ('key1');
+ALTER TABLE my_table UNSET TBLPROPERTIES ('key1') IF EXISTS;
 
 --------------------------------------------------------------------------------
 
@@ -318,7 +318,7 @@ ALTER TABLE my_table UNSET TBLPROPERTIES IF EXISTS ('key1');
       (list
         (literal))
       (keyword_if)
-      (keyword_exists)))))
+      (keyword_exists))))
 
 ================================================================================
 ALTER TABLE Iceberg: ALTER COLUMN POSITION AFTER
@@ -337,10 +337,10 @@ ALTER TABLE my_table ALTER COLUMN col1 POSITION AFTER col2;
         name: (identifier))
       (keyword_alter)
       (keyword_column)
-      (identifier)
+      column: (identifier)
       (keyword_position)
       (keyword_after)
-      (identifier))))
+      after_column: (identifier))))
 
 ================================================================================
 ALTER TABLE Iceberg: ALTER COLUMN POSITION FIRST
@@ -359,9 +359,9 @@ ALTER TABLE my_table ALTER COLUMN col1 POSITION FIRST;
         name: (identifier))
       (keyword_alter)
       (keyword_column)
-      (identifier)
+      column: (identifier)
       (keyword_position)
-      (keyword_first)))))
+      (keyword_first))))
 
 ================================================================================
 ALTER TABLE Iceberg: ALTER COLUMN FIRST (no POSITION keyword)
@@ -380,8 +380,8 @@ ALTER TABLE my_table ALTER COLUMN col1 FIRST;
         name: (identifier))
       (keyword_alter)
       (keyword_column)
-      (identifier)
-      (keyword_first)))))
+      column: (identifier)
+      (keyword_first))))
 
 ================================================================================
 ALTER TABLE Iceberg: SET WRITE mode APPENDS
@@ -400,7 +400,7 @@ ALTER TABLE my_table SET WRITE APPENDS;
         name: (identifier))
       (keyword_set)
       (keyword_write)
-      (keyword_appends)))))
+      (keyword_appends))))
 
 ================================================================================
 ALTER TABLE Iceberg: SET WRITE mode OVERWRITE
@@ -419,13 +419,13 @@ ALTER TABLE my_table SET WRITE OVERWRITE;
         name: (identifier))
       (keyword_set)
       (keyword_write)
-      (keyword_overwrite)))))
+      (keyword_overwrite))))
 
 ================================================================================
 ALTER TABLE Iceberg: COMMIT SNAPSHOT
 ================================================================================
 
-ALTER TABLE my_table ALTER TABLE my_table COMMIT SNAPSHOT;
+ALTER TABLE my_table ALTER TABLE my_other_table COMMIT SNAPSHOT;
 
 --------------------------------------------------------------------------------
 
@@ -441,4 +441,4 @@ ALTER TABLE my_table ALTER TABLE my_table COMMIT SNAPSHOT;
       (object_reference
         name: (identifier))
       (keyword_commit)
-      (keyword_snapshot)))))
+      (keyword_snapshot))))
