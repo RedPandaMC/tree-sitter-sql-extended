@@ -21,8 +21,6 @@ export default grammar({
     [$._column, $._qualified_field],
     [$.object_reference],
     [$.between_expression, $.binary_expression],
-    [$.time],
-    [$.timestamp],
     [$.create_function],
   ],
 

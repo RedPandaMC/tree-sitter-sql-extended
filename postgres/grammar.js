@@ -9,6 +9,16 @@ import pg_drop_rules from './grammar/drop.js';
 export default grammar(base, {
   name: 'postgres_sql',
 
+  conflicts: $ => [
+    [$.object_reference, $._qualified_field],
+    [$._column, $._qualified_field],
+    [$.object_reference],
+    [$.between_expression, $.binary_expression],
+    [$.time],
+    [$.timestamp],
+    [$.create_function],
+  ],
+
   externals: $ => [
     $._dollar_quoted_string_start_tag,
     $._dollar_quoted_string_end_tag,

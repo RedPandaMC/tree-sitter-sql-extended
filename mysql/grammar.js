@@ -5,6 +5,15 @@ import mysql_optimize_rules from './grammar/optimize.js';
 export default grammar(base, {
   name: 'mysql_sql',
 
+  conflicts: $ => [
+    [$.object_reference, $._qualified_field],
+    [$.field, $._qualified_field],
+    [$._column, $._qualified_field],
+    [$.object_reference],
+    [$.between_expression, $.binary_expression],
+    [$.create_function],
+  ],
+
   rules: {
 
     create_table: $ => prec.left(
