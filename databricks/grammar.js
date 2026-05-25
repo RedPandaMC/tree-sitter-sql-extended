@@ -1,5 +1,5 @@
 import spark from '../spark/grammar.js';
-import { optional_parenthesis, paren_list } from '../grammar/helpers.js';
+import { optional_parenthesis, paren_list, comma_list } from '../grammar/helpers.js';
 
 import vacuum_rules   from './grammar/vacuum.js';
 import optimize_rules from './grammar/optimize.js';
@@ -100,6 +100,8 @@ export default grammar(spark, {
       $.execute_immediate_statement,
       // Databricks APPLY CHANGES (DLT)
       $.apply_changes_statement,
+      // Databricks SHOW
+      $._show_statement,
       // Databricks CREATE extensions
       $.create_namespace,
       $.create_streaming_table,
@@ -219,6 +221,19 @@ export default grammar(spark, {
       // Iceberg / Unity Catalog specs
       $._alter_table_iceberg_spec,
     ),
+
+    // Override set_statement to add Databricks-specific SET forms
+    set_statement: $ => prec.right(choice(
+      // Inherited from Spark
+      seq($.keyword_set, $.keyword_constraints, choice($.keyword_all, comma_list($.identifier, true)), choice($.keyword_deferred, $.keyword_immediate)),
+      seq($.keyword_set, $.keyword_transaction, $._transaction_mode),
+      seq($.keyword_set, $.keyword_transaction, $.keyword_snapshot, $._transaction_mode),
+      seq($.keyword_set, $.keyword_session, $.keyword_characteristics, $.keyword_as, $.keyword_transaction, $._transaction_mode),
+      seq($.keyword_set, $.object_reference, '=', $._expression),
+      // Databricks-specific
+      seq($.keyword_set, $.keyword_catalog, $.object_reference),
+      seq($.keyword_set, optional($.keyword_global), $.keyword_time, $.keyword_zone, choice($._expression, $.keyword_local)),
+    )),
 
     // Databricks-specific rule definitions
     ...vacuum_rules,

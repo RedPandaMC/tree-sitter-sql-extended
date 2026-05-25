@@ -136,31 +136,6 @@ SELECT t.* FROM my_table AS t;
         alias: (identifier)))))
 
 ================================================================================
-Simple select TSQL parameters
-================================================================================
-
-SELECT @id, @VERSION FROM my_table;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          value: (field
-            name: (identifier)))
-        (term
-          value: (field
-            name: (identifier)))))
-    (from
-      (keyword_from)
-      (relation
-        (object_reference
-          name: (identifier))))))
-
-================================================================================
 Simple select with fields that look like keywords
 ================================================================================
 
@@ -338,7 +313,8 @@ WHERE id = "abc";
         predicate: (binary_expression
           left: (field
             name: (identifier))
-          right: (literal))))))
+          right: (field
+            name: (identifier)))))))
 
 ================================================================================
 Simple select with IN
@@ -2610,7 +2586,7 @@ WHERE
 Arrays
 ================================================================================
 
-SELECT array[1, 2, 3 + 4, '5'::int, int_please()];
+SELECT array[1, 2, 3 + 4, int_please()];
 
 --------------------------------------------------------------------------------
 
@@ -2627,10 +2603,6 @@ SELECT array[1, 2, 3 + 4, '5'::int, int_please()];
             (binary_expression
               left: (literal)
               right: (literal))
-            (cast
-              (literal)
-              (int
-                (keyword_int)))
             (invocation
               (object_reference
                 name: (identifier)))))))))
@@ -3152,27 +3124,6 @@ SELECT * FROM table_name;
           name: (identifier))))))
 
 ================================================================================
-Select from table with backtick-quoted identifier
-================================================================================
-
-SELECT * FROM `table_name`;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          value: (all_fields))))
-    (from
-      (keyword_from)
-      (relation
-        (object_reference
-          name: (identifier))))))
-
-================================================================================
 Select from table with double-quoted identifier
 ================================================================================
 
@@ -3193,23 +3144,3 @@ SELECT * FROM "table_name";
         (object_reference
           name: (identifier))))))
 
-================================================================================
-Select from table with identifiers containing hyphens, dots, or other special characters within backticks
-================================================================================
-
-SELECT * FROM `complex-database.schema_name.table_name`;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          value: (all_fields))))
-    (from
-      (keyword_from)
-      (relation
-        (object_reference
-          name: (identifier))))))

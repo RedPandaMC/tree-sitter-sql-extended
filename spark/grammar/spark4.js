@@ -45,4 +45,18 @@ export default {
     paren_list(field('column', $.identifier), true),
   ),
 
+  // Spark 4.0: expr COLLATE collation_name
+  collate_expression: $ => prec.left(5, seq(
+    $._expression,
+    $.keyword_collate,
+    field('collation', $.identifier),
+  )),
+
+  // Spark 4.0: col:key1:key2  (semi-structured variant path access)
+  variant_path_expression: $ => prec.left(10, seq(
+    $._expression,
+    ':',
+    $.identifier,
+  )),
+
 };

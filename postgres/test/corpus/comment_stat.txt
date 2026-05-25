@@ -2,7 +2,7 @@
 Comment on table
 ================================================================================
 
-COMMENT ON TABLE my_schema.my_table IS "this table is a test";
+COMMENT ON TABLE my_schema.my_table IS 'this table is a test';
 
 --------------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ COMMENT ON TABLE my_schema.my_table IS "this table is a test";
 Comment on table with FQN
 ================================================================================
 
-COMMENT ON TABLE my_database.my_schema.my_table IS "this table is a test";
+COMMENT ON TABLE my_database.my_schema.my_table IS 'this table is a test';
 
 --------------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ COMMENT ON COLUMN my_database.my_schema.my_table.my_column IS NULL;
 Comment on cast
 ================================================================================
 
-COMMENT ON CAST (varchar AS text) IS "convert varchar to text";
+COMMENT ON CAST (varchar AS text) IS 'convert varchar to text';
 
 --------------------------------------------------------------------------------
 
@@ -98,11 +98,12 @@ COMMENT ON CAST (varchar AS text) IS "convert varchar to text";
       (keyword_comment)
       (keyword_on)
       (cast
-        (keyword_cast)
-        (field
-          (identifier))
+        name: (keyword_cast)
+        parameter: (field
+          name: (identifier))
         (keyword_as)
-        (keyword_text))
+        custom_type: (object_reference
+          name: (identifier)))
       (keyword_is)
       (literal))))
 
@@ -110,7 +111,7 @@ COMMENT ON CAST (varchar AS text) IS "convert varchar to text";
 Comment on materialized view
 ================================================================================
 
-COMMENT ON MATERIALIZED VIEW matview IS "this view is materialized";
+COMMENT ON MATERIALIZED VIEW matview IS 'this view is materialized';
 
 --------------------------------------------------------------------------------
 
@@ -130,7 +131,7 @@ COMMENT ON MATERIALIZED VIEW matview IS "this view is materialized";
 Comment on trigger
 ================================================================================
 
-COMMENT ON TRIGGER on_insert ON users IS "new user has been added";
+COMMENT ON TRIGGER on_insert ON users IS 'new user has been added';
 
 --------------------------------------------------------------------------------
 
@@ -162,12 +163,13 @@ COMMENT ON FUNCTION schema_test.do_somthing(arg1 text) IS 'Do something';
       (keyword_on)
       (keyword_function)
       (object_reference
-        (identifier)
-        (identifier))
+        schema: (identifier)
+        name: (identifier))
       (function_arguments
         (function_argument
           (identifier)
-          (keyword_text)))
+          custom_type: (object_reference
+            name: (identifier))))
       (keyword_is)
       (literal))))
 
@@ -205,12 +207,13 @@ COMMENT ON FUNCTION schema_test.do_somthing(OUT arg1 text) IS 'Do something';
       (keyword_on)
       (keyword_function)
       (object_reference
-        (identifier)
-        (identifier))
+        schema: (identifier)
+        name: (identifier))
       (function_arguments
         (function_argument
           (keyword_out)
           (identifier)
-          (keyword_text)))
+          custom_type: (object_reference
+            name: (identifier))))
       (keyword_is)
       (literal))))

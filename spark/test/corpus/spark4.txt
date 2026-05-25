@@ -12,52 +12,50 @@ WHEN NOT MATCHED BY SOURCE THEN DELETE;
 
 (program
   (statement
-    (merge_statement
-      (keyword_merge)
-      (keyword_into)
-      (object_reference
+    (keyword_merge)
+    (keyword_into)
+    (object_reference
+      name: (identifier))
+    alias: (identifier)
+    (keyword_using)
+    (object_reference
+      name: (identifier))
+    alias: (identifier)
+    (keyword_on)
+    predicate: (binary_expression
+      left: (field
+        (object_reference
+          name: (identifier))
         name: (identifier))
-      (object_reference
-        name: (identifier))
-      (keyword_using)
-      (object_reference
-        name: (identifier))
-      (keyword_on)
-      (binary_expression
-        (field
+      right: (field
+        (object_reference
+          name: (identifier))
+        name: (identifier)))
+    (when_clause
+      (keyword_when)
+      (keyword_matched)
+      (keyword_by)
+      (keyword_source)
+      (keyword_then)
+      (keyword_update)
+      (keyword_set)
+      (assignment
+        left: (field
           (object_reference
             name: (identifier))
           name: (identifier))
-        (field
+        right: (field
           (object_reference
             name: (identifier))
-          name: (identifier)))
-      (when_clause
-        (keyword_when)
-        (keyword_matched)
-        (keyword_by)
-        (keyword_source)
-        (keyword_then)
-        (keyword_update)
-        (keyword_set)
-        (assignment_list
-          (assignment
-            left: (field
-              (object_reference
-                name: (identifier))
-              name: (identifier))
-            right: (field
-              (object_reference
-                name: (identifier))
-              name: (identifier)))))
-      (when_clause
-        (keyword_when)
-        (keyword_not)
-        (keyword_matched)
-        (keyword_by)
-        (keyword_source)
-        (keyword_then)
-        (keyword_delete)))))
+          name: (identifier))))
+    (when_clause
+      (keyword_when)
+      (keyword_not)
+      (keyword_matched)
+      (keyword_by)
+      (keyword_source)
+      (keyword_then)
+      (keyword_delete))))
 
 ================================================================================
 Spark 4.x: MERGE BY SOURCE without INTO keyword
@@ -72,31 +70,30 @@ WHEN NOT MATCHED BY SOURCE THEN INSERT;
 
 (program
   (statement
-    (merge_statement
-      (keyword_merge)
-      (object_reference
-        name: (identifier))
-      (keyword_using)
-      (object_reference
-        name: (identifier))
-      (keyword_on)
-      (binary_expression
-        (field
-          (object_reference
-            name: (identifier))
+    (keyword_merge)
+    (object_reference
+      name: (identifier))
+    (keyword_using)
+    (object_reference
+      name: (identifier))
+    (keyword_on)
+    predicate: (binary_expression
+      left: (field
+        (object_reference
           name: (identifier))
-        (field
-          (object_reference
-            name: (identifier))
-          name: (identifier)))
-      (when_clause
-        (keyword_when)
-        (keyword_not)
-        (keyword_matched)
-        (keyword_by)
-        (keyword_source)
-        (keyword_then)
-        (keyword_insert)))))
+        name: (identifier))
+      right: (field
+        (object_reference
+          name: (identifier))
+        name: (identifier)))
+    (when_clause
+      (keyword_when)
+      (keyword_not)
+      (keyword_matched)
+      (keyword_by)
+      (keyword_source)
+      (keyword_then)
+      (keyword_insert))))
 
 ================================================================================
 Spark 4.x: MERGE BY SOURCE with predicate
@@ -111,38 +108,38 @@ WHEN MATCHED BY SOURCE AND target.active = true THEN DELETE;
 
 (program
   (statement
-    (merge_statement
-      (keyword_merge)
-      (keyword_into)
-      (object_reference
+    (keyword_merge)
+    (keyword_into)
+    (object_reference
+      name: (identifier))
+    (keyword_using)
+    (object_reference
+      name: (identifier))
+    (keyword_on)
+    predicate: (binary_expression
+      left: (field
+        (object_reference
+          name: (identifier))
         name: (identifier))
-      (keyword_using)
-      (object_reference
-        name: (identifier))
-      (keyword_on)
-      (binary_expression
-        (field
+      right: (field
+        (object_reference
+          name: (identifier))
+        name: (identifier)))
+    (when_clause
+      (keyword_when)
+      (keyword_matched)
+      (keyword_by)
+      (keyword_source)
+      (keyword_and)
+      predicate: (binary_expression
+        left: (field
           (object_reference
             name: (identifier))
           name: (identifier))
-        (field
-          (object_reference
-            name: (identifier))
-          name: (identifier)))
-      (when_clause
-        (keyword_when)
-        (keyword_matched)
-        (keyword_by)
-        (keyword_source)
-        (keyword_and)
-        (binary_expression
-          (field
-            (object_reference
-              name: (identifier))
-            name: (identifier))
-          (literal))
-        (keyword_then)
-        (keyword_delete)))))
+        right: (literal
+          (keyword_true)))
+      (keyword_then)
+      (keyword_delete))))
 
 ================================================================================
 Spark 4.x: VARIANT type in column definition
@@ -191,12 +188,12 @@ SELECT name COLLATE utf8_bin AS upper_name FROM users;
             (keyword_collate)
             collation: (identifier))
           (keyword_as)
-          alias: (identifier)))
-      (from
-        (keyword_from)
-        (relation
-          (object_reference
-            name: (identifier)))))))
+          alias: (identifier))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
 
 ================================================================================
 Spark 4.x: variant_path_expression
@@ -217,12 +214,12 @@ SELECT data:field1:field2 FROM my_table;
               (field
                 name: (identifier))
               (identifier))
-            (identifier))))
-      (from
-        (keyword_from)
-        (relation
-          (object_reference
-            name: (identifier)))))))
+            (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
 
 ================================================================================
 Spark 4.x: SET VAR variable
@@ -237,7 +234,7 @@ SET VAR my_var = 'value';
     (set_variable_statement
       (keyword_set)
       (keyword_var)
-      (identifier)
+      name: (identifier)
       (literal))))
 
 ================================================================================
@@ -253,7 +250,7 @@ SET VARIABLE my_var = 123;
     (set_variable_statement
       (keyword_set)
       (keyword_variable)
-      (identifier)
+      name: (identifier)
       (literal))))
 
 ================================================================================
@@ -268,8 +265,7 @@ DECLARE my_var INT DEFAULT 0;
   (statement
     (declare_variable_statement
       (keyword_declare)
-      (keyword_variable)
-      (identifier)
+      name: (identifier)
       (int
         (keyword_int))
       (keyword_default)
@@ -290,7 +286,7 @@ DECLARE OR REPLACE VARIABLE my_var VARCHAR(100) = 'test';
       (keyword_or)
       (keyword_replace)
       (keyword_variable)
-      (identifier)
+      name: (identifier)
       (varchar
         (keyword_varchar)
         size: (literal))
@@ -313,14 +309,13 @@ SELECT * EXCEPT (col1, col2) FROM my_table;
           value: (all_fields)
           (select_except_clause
             (keyword_except)
-            (list
-              (identifier)
-              (identifier)))))
-      (from
-        (keyword_from)
-        (relation
-          (object_reference
-            name: (identifier)))))))
+            column: (identifier)
+            column: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
 
 ================================================================================
 Spark 4.x: LATERAL subquery in FROM clause
@@ -336,26 +331,25 @@ SELECT * FROM LATERAL (SELECT id, name FROM other_table) AS sub;
       (keyword_select)
       (select_expression
         (term
-          value: (all_fields)))
-      (from
-        (keyword_from)
-        (relation
-          (lateral_subquery
-            (keyword_lateral)
-            (subquery
-              (select
-                (keyword_select)
-                (select_expression
-                  (term
-                    value: (field
-                      name: (identifier)))
-                  (term
-                    value: (field
-                      name: (identifier)))))
-                (from
-                  (keyword_from)
-                  (relation
-                    (object_reference
-                      name: (identifier)))))
-            (keyword_as)
-            alias: (identifier))))))))
+          value: (all_fields))))
+    (from
+      (keyword_from)
+      (relation
+        (lateral_subquery
+          (keyword_lateral)
+          (select
+            (keyword_select)
+            (select_expression
+              (term
+                value: (field
+                  name: (identifier)))
+              (term
+                value: (field
+                  name: (identifier)))))
+          (from
+            (keyword_from)
+            (relation
+              (object_reference
+                name: (identifier))))
+          (keyword_as)
+          alias: (identifier))))))

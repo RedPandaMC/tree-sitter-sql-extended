@@ -143,6 +143,37 @@ export default grammar(base, {
       ),
     ),
 
+    _ddl_statement: $ => choice(
+      $._create_statement,
+      $._alter_statement,
+      $._drop_statement,
+      $._rename_statement,
+      $._optimize_statement,
+      $._merge_statement,
+      $._refresh_statement,
+      $.set_statement,
+      $.reset_statement,
+      $.comment_statement,
+      $._show_statement,
+    ),
+
+    set_statement: $ => seq(
+      $.keyword_set,
+      choice(
+        seq($.keyword_constraints, choice($.keyword_all, $.identifier), choice($.keyword_deferred, $.keyword_immediate)),
+        seq($.keyword_transaction, $._transaction_mode),
+        seq($.keyword_transaction, $.keyword_snapshot, $._transaction_mode),
+        seq($.keyword_session, $.keyword_characteristics, $.keyword_as, $.keyword_transaction, $._transaction_mode),
+        seq(
+          $.object_reference,
+          choice(
+            seq('=', choice($.literal, $.keyword_on, $.keyword_off, $.identifier)),
+            seq($.keyword_to, choice($.literal, $.keyword_default, $.keyword_on, $.keyword_off, $.identifier)),
+          ),
+        ),
+      ),
+    ),
+
     reset_statement: $ => seq(
       $.keyword_reset,
       choice(
@@ -157,6 +188,16 @@ export default grammar(base, {
       $.keyword_use,
       optional($.keyword_schema),
       $.object_reference,
+    ),
+
+    _show_statement: $ => seq(
+      $.keyword_show,
+      choice(
+        seq($.keyword_create, choice($.keyword_table, $.keyword_view, $.keyword_schema, $.keyword_user), $.object_reference),
+        $.keyword_all,
+        seq($.keyword_tables, optional(seq($.keyword_from, $.object_reference)), optional(seq($.keyword_like, alias($._literal_string, $.literal)))),
+        $.object_reference,
+      ),
     ),
 
     comment_statement: $ => seq(

@@ -1,5 +1,5 @@
 import base from '../grammar.js';
-import { paren_list, optional_parenthesis } from '../grammar/helpers.js';
+import { paren_list, optional_parenthesis, comma_list } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
@@ -36,6 +36,9 @@ export default grammar(base, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
+    [$.collate_expression, $.binary_expression],
+    [$.variant_path_expression, $.binary_expression],
+    [$.set_statement, $._ddl_statement],
   ],
 
   rules: {
@@ -46,7 +49,6 @@ export default grammar(base, {
           choice(
             $.transaction,
             $.statement,
-            $.block,
           ),
           ';',
         ),
@@ -67,6 +69,7 @@ export default grammar(base, {
         $._ddl_statement,
         $._dml_write,
         optional_parenthesis($._dml_read),
+        $.block,
         $.while_statement,
         $.if_statement,
         $.for_statement,
@@ -139,6 +142,91 @@ export default grammar(base, {
       $.declare_variable_statement,
       $.set_variable_statement,
     ),
+
+    // Override set_statement to add scripting assignment: SET var = expr
+    set_statement: $ => prec.right(choice(
+      seq($.keyword_set, $.keyword_constraints, choice($.keyword_all, comma_list($.identifier, true)), choice($.keyword_deferred, $.keyword_immediate)),
+      seq($.keyword_set, $.keyword_transaction, $._transaction_mode),
+      seq($.keyword_set, $.keyword_transaction, $.keyword_snapshot, $._transaction_mode),
+      seq($.keyword_set, $.keyword_session, $.keyword_characteristics, $.keyword_as, $.keyword_transaction, $._transaction_mode),
+      seq($.keyword_set, $.object_reference, '=', $._expression),
+    )),
+
+    // Override _type to add VARIANT
+    _type: $ => prec.left(
+      choice(
+        $.keyword_variant,
+        $.keyword_boolean,
+        $.bit,
+        $.binary,
+        $.varbinary,
+        $.smallint,
+        $.int,
+        $.bigint,
+        $.decimal,
+        $.numeric,
+        $.double,
+        $.float,
+        $.char,
+        $.varchar,
+        $.nchar,
+        $.nvarchar,
+        $.keyword_date,
+        $.time,
+        $.timestamp,
+        $.keyword_interval,
+        $.keyword_json,
+        $.keyword_xml,
+        $.keyword_string,
+        $.enum,
+        field("custom_type", $.object_reference),
+      ),
+    ),
+
+    // Override _expression to add collate and variant_path
+    _expression: $ => prec(1, choice(
+      $.literal,
+      alias($._qualified_field, $.field),
+      $.parameter,
+      $.list,
+      $.case,
+      $.window_function,
+      $.subquery,
+      $.cast,
+      $.exists,
+      $.invocation,
+      $.binary_expression,
+      $.subscript,
+      $.unary_expression,
+      $.array,
+      $.interval,
+      $.between_expression,
+      $.parenthesized_expression,
+      $.collate_expression,
+      $.variant_path_expression,
+    )),
+
+    // Override when_clause to allow bare INSERT (no values) for MERGE BY SOURCE
+    when_clause: $ => prec.left(seq(
+      $.keyword_when,
+      optional($.keyword_not),
+      $.keyword_matched,
+      optional(seq(
+        $.keyword_by,
+        $.keyword_source,
+      )),
+      optional(seq(
+        $.keyword_and,
+        optional_parenthesis(field("predicate", $._expression)),
+      )),
+      $.keyword_then,
+      choice(
+        $.keyword_delete,
+        seq($.keyword_update, $._set_values),
+        seq($.keyword_insert, optional($._insert_values)),
+        optional($.where),
+      ),
+    )),
 
     // Spark SQL: INSERT OVERWRITE ... PARTITION (...)
     insert: $ => seq(

@@ -55,15 +55,16 @@ CREATE TYPE cities AS (
       (keyword_create)
       (keyword_type)
       (object_reference
-        (identifier))
+        name: (identifier))
       (keyword_as)
       (column_definitions
         (column_definition
-          (identifier)
-          (keyword_text))
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier)))
         (column_definition
-          (identifier)
-          (int
+          name: (identifier)
+          type: (int
             (keyword_int)))))))
 
 ================================================================================
@@ -274,7 +275,8 @@ ADD ATTRIBUTE label text
       (keyword_add)
       (keyword_attribute)
       (identifier)
-      (keyword_text))))
+      custom_type: (object_reference
+        name: (identifier)))))
 
 ================================================================================
 Alter type drop attribute

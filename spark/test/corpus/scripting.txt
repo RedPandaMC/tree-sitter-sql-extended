@@ -9,18 +9,16 @@ END;
 --------------------------------------------------------------------------------
 
 (program
-  (block
-    (keyword_begin)
-    (statement
-      (select
-        (keyword_select)
-        (select_expression
-          (term
-            (value
-              (literal))
-            (keyword_as)
-            (identifier)))))
-    (keyword_end)))
+  (statement
+    (block
+      (keyword_begin)
+      (statement
+        (select
+          (keyword_select)
+          (select_expression
+            (term
+              value: (literal)))))
+      (keyword_end))))
 
 ================================================================================
 BEGIN ATOMIC block
@@ -34,28 +32,31 @@ END;
 --------------------------------------------------------------------------------
 
 (program
-  (block
-    (keyword_begin)
-    (keyword_atomic)
-    (statement
-      (insert
-        (keyword_insert)
-        (keyword_into)
-        (object_reference
-          (identifier))
-        (list
-          (literal))))
-    (statement
-      (update
-        (keyword_update)
-        (object_reference
-          (identifier))
-        (keyword_set
+  (statement
+    (block
+      (keyword_begin)
+      (keyword_atomic)
+      (statement
+        (insert
+          (keyword_insert)
+          (keyword_into)
+          (object_reference
+            name: (identifier))
+          (keyword_values)
+          (list
+            (literal))))
+      (statement
+        (update
+          (keyword_update)
+          (relation
+            (object_reference
+              name: (identifier)))
+          (keyword_set)
           (assignment
-            (field
-              (identifier))
-            (literal)))))
-    (keyword_end)))
+            left: (field
+              name: (identifier))
+            right: (literal))))
+      (keyword_end))))
 
 ================================================================================
 IF THEN ELSE END IF
@@ -70,30 +71,29 @@ END IF;
 --------------------------------------------------------------------------------
 
 (program
-  (if_statement
-    (keyword_if)
-    (binary_expression
-      (field
-        (identifier))
-      (binary_relation
-        (literal))
-      (literal))
-    (keyword_then)
-    (statement
-      (set_statement
-        (keyword_set)
-        (object_reference
-          (identifier))
-        (literal)))
-    (keyword_else)
-    (statement
-      (set_statement
-        (keyword_set)
-        (object_reference
-          (identifier))
-        (literal)))
-    (keyword_end)
-    (keyword_if)))
+  (statement
+    (if_statement
+      (keyword_if)
+      (binary_expression
+        left: (field
+          name: (identifier))
+        right: (literal))
+      (keyword_then)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (literal)))
+      (keyword_else)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (literal)))
+      (keyword_end)
+      (keyword_if))))
 
 ================================================================================
 IF THEN ELSEIF ELSE END IF
@@ -110,46 +110,41 @@ END IF;
 --------------------------------------------------------------------------------
 
 (program
-  (if_statement
-    (keyword_if)
-    (binary_expression
-      (field
-        (identifier))
-      (binary_relation
-        (literal))
-      (literal))
-    (keyword_then)
-    (statement
-      (set_statement
-        (keyword_set)
-        (object_reference
-          (identifier))
-        (literal)))
-    (keyword_elseif)
-    (binary_expression
-      (field
-        (identifier))
-      (binary_relation
-        (literal))
-      (literal))
-    (keyword_then)
-    (statement
-      (set_statement
-        (keyword_set)
-        (object_reference
-          (identifier))
-        (unary_expression
-          (operand
-            (literal)))))
-    (keyword_else)
-    (statement
-      (set_statement
-        (keyword_set)
-        (object_reference
-          (identifier))
-        (literal)))
-    (keyword_end)
-    (keyword_if)))
+  (statement
+    (if_statement
+      (keyword_if)
+      (binary_expression
+        left: (field
+          name: (identifier))
+        right: (literal))
+      (keyword_then)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (literal)))
+      (keyword_elseif)
+      (binary_expression
+        left: (field
+          name: (identifier))
+        right: (literal))
+      (keyword_then)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (literal)))
+      (keyword_else)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (literal)))
+      (keyword_end)
+      (keyword_if))))
 
 ================================================================================
 FOR loop
@@ -162,135 +157,142 @@ END FOR;
 --------------------------------------------------------------------------------
 
 (program
-  (for_statement
-    (keyword_for)
-    (field
-      (identifier))
-    (keyword_in)
-    (select
-      (keyword_select)
-      (select_expression
-        (term
-          (all_fields))))
-    (keyword_do)
-    (statement
-      (insert
-        (keyword_insert)
-        (keyword_into)
-        (object_reference
-          (identifier))
-        (list
-          (field
+  (statement
+    (for_statement
+      (keyword_for)
+      variable: (identifier)
+      (keyword_in)
+      (select
+        (keyword_select)
+        (select_expression
+          (term
+            value: (all_fields))))
+      (from
+        (keyword_from)
+        (relation
+          (object_reference
+            name: (identifier))))
+      (keyword_do)
+      (statement
+        (insert
+          (keyword_insert)
+          (keyword_into)
+          (object_reference
+            name: (identifier))
+          (keyword_values)
+          (list
             (field
-              (identifier))))))
-    (keyword_end)
-    (keyword_for)))
+              (object_reference
+                name: (identifier))
+              name: (identifier)))))
+      (keyword_end)
+      (keyword_for))))
 
 ================================================================================
 WHILE loop
 ================================================================================
 
-WHILE @i < 10 DO
-  SET @i = @i + 1;
+WHILE i < 10 DO
+  SET i = i + 1;
 END WHILE;
 
 --------------------------------------------------------------------------------
 
 (program
-  (while_statement
-    (keyword_while)
-    (binary_expression
-      (parameter)
-      (binary_relation
-        (literal))
-      (literal))
-    (keyword_do)
-    (statement
-      (set_statement
-        (keyword_set)
-        (parameter)
-        (binary_expression
-          (parameter)
-          (binary_plus
-            (literal)))))
-    (keyword_end)
-    (keyword_while)))
+  (statement
+    (while_statement
+      (keyword_while)
+      (binary_expression
+        left: (field
+          name: (identifier))
+        right: (literal))
+      (keyword_do)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))))
+      (keyword_end)
+      (keyword_while))))
 
 ================================================================================
 LOOP with LEAVE
 ================================================================================
 
-label:
 LOOP
-  SET @i = @i + 1;
-  IF @i >= 10 THEN
-    LEAVE label;
+  SET i = i + 1;
+  IF i >= 10 THEN
+    LEAVE lbl;
   END IF;
-END LOOP label;
+END LOOP;
 
 --------------------------------------------------------------------------------
 
 (program
-  (loop_statement
-    (keyword_loop)
-    (statement
-      (set_statement
-        (keyword_set)
-        (parameter)
-        (binary_expression
-          (parameter)
-          (binary_plus
-            (literal)))))
-    (statement
-      (if_statement
-        (keyword_if)
-        (binary_expression
-          (parameter)
-          (binary_relation
-            (literal))
-          (literal))
-        (keyword_then)
-        (statement
-          (leave_statement
-            (keyword_leave)
-            (identifier)))
-        (keyword_end)
-        (keyword_if)))
-    (keyword_end)
-    (keyword_loop)
-    (keyword_iterate
-      (identifier))))
+  (statement
+    (loop_statement
+      (keyword_loop)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))))
+      (statement
+        (if_statement
+          (keyword_if)
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))
+          (keyword_then)
+          (statement
+            (leave_statement
+              (keyword_leave)
+              label: (identifier)))
+          (keyword_end)
+          (keyword_if)))
+      (keyword_end)
+      (keyword_loop))))
 
 ================================================================================
 REPEAT UNTIL loop
 ================================================================================
 
 REPEAT
-  SET @i = @i + 1;
-UNTIL @i >= 10
+  SET i = i + 1;
+UNTIL i >= 10
 END REPEAT;
 
 --------------------------------------------------------------------------------
 
 (program
-  (repeat_statement
-    (keyword_repeat)
-    (statement
-      (set_statement
-        (keyword_set)
-        (parameter)
-        (binary_expression
-          (parameter)
-          (binary_plus
-            (literal)))))
-    (keyword_until)
-    (binary_expression
-      (parameter)
-      (binary_relation
-        (literal))
-      (literal))
-    (keyword_end)
-    (keyword_repeat)))
+  (statement
+    (repeat_statement
+      (keyword_repeat)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))))
+      (keyword_until)
+      (binary_expression
+        left: (field
+          name: (identifier))
+        right: (literal))
+      (keyword_end)
+      (keyword_repeat))))
 
 ================================================================================
 SIGNAL statement
@@ -301,14 +303,14 @@ SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Custom error';
 --------------------------------------------------------------------------------
 
 (program
-  (signal_statement
-    (keyword_signal)
-    (keyword_sqlstate)
-    (literal)
-    (keyword_set)
-    (keyword_message)
-    (keyword_text)
-    (literal)))
+  (statement
+    (signal_statement
+      (keyword_signal)
+      (keyword_sqlstate)
+      (literal)
+      (keyword_set)
+      (keyword_message_text)
+      (literal))))
 
 ================================================================================
 RESIGNAL statement
@@ -319,63 +321,63 @@ RESIGNAL SQLSTATE '22012' SET MESSAGE_TEXT = 'Division by zero';
 --------------------------------------------------------------------------------
 
 (program
-  (resignal_statement
-    (keyword_resignal)
-    (keyword_sqlstate)
-    (literal)
-    (keyword_set)
-    (keyword_message)
-    (keyword_text)
-    (literal)))
+  (statement
+    (resignal_statement
+      (keyword_resignal)
+      (keyword_sqlstate)
+      (literal)
+      (keyword_set)
+      (keyword_message_text)
+      (literal))))
 
 ================================================================================
 GET DIAGNOSTICS RETURNED_SQLSTATE
 ================================================================================
 
-GET DIAGNOSTICS @state = RETURNED_SQLSTATE;
+GET DIAGNOSTICS state = RETURNED_SQLSTATE;
 
 --------------------------------------------------------------------------------
 
 (program
-  (get_diagnostics_statement
-    (keyword_get)
-    (keyword_diagnostics)
-    (parameter)
-    (literal)
-    (keyword_returned_sqlstate)))
+  (statement
+    (get_diagnostics_statement
+      (keyword_get)
+      (keyword_diagnostics)
+      variable: (identifier)
+      (keyword_returned_sqlstate))))
 
 ================================================================================
 GET DIAGNOSTICS MESSAGE_TEXT
 ================================================================================
 
-GET DIAGNOSTICS @msg = MESSAGE_TEXT;
+GET DIAGNOSTICS msg = MESSAGE_TEXT;
 
 --------------------------------------------------------------------------------
 
 (program
-  (get_diagnostics_statement
-    (keyword_get)
-    (keyword_diagnostics)
-    (parameter)
-    (literal)
-    (keyword_message_text)))
+  (statement
+    (get_diagnostics_statement
+      (keyword_get)
+      (keyword_diagnostics)
+      variable: (identifier)
+      (keyword_message_text))))
 
 ================================================================================
 GET DIAGNOSTICS CONDITION
 ================================================================================
 
-GET DIAGNOSTICS @err = CONDITION 1;
+GET DIAGNOSTICS err = CONDITION 1;
 
 --------------------------------------------------------------------------------
 
 (program
-  (get_diagnostics_statement
-    (keyword_get)
-    (keyword_diagnostics)
-    (parameter)
-    (literal)
-    (keyword_condition)
-    (literal)))
+  (statement
+    (get_diagnostics_statement
+      (keyword_get)
+      (keyword_diagnostics)
+      variable: (identifier)
+      (keyword_condition)
+      condition_number: (literal))))
 
 ================================================================================
 Nested BEGIN END within scripting block
@@ -392,77 +394,75 @@ END;
 --------------------------------------------------------------------------------
 
 (program
-  (block
-    (keyword_begin)
-    (statement
-      (if_statement
-        (keyword_if)
-        (field
-          (identifier))
-        (keyword_then)
-        (statement
-          (block
-            (keyword_begin)
-            (statement
-              (select
-                (keyword_select)
-                (select_expression
-                  (term
-                    (value
-                      (literal))
-                    (keyword_as)
-                    (identifier)))))
-            (keyword_end)))
-        (keyword_end)
-        (keyword_if)))
-    (keyword_end)))
+  (statement
+    (block
+      (keyword_begin)
+      (statement
+        (if_statement
+          (keyword_if)
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))
+          (keyword_then)
+          (statement
+            (block
+              (keyword_begin)
+              (statement
+                (select
+                  (keyword_select)
+                  (select_expression
+                    (term
+                      value: (literal)))))
+              (keyword_end)))
+          (keyword_end)
+          (keyword_if)))
+      (keyword_end))))
 
 ================================================================================
 ITERATE statement
 ================================================================================
 
-my_label:
 LOOP
-  SET @i = @i + 1;
-  IF @i < 5 THEN
-    ITERATE my_label;
+  SET i = i + 1;
+  IF i < 5 THEN
+    ITERATE lbl;
   END IF;
-  LEAVE my_label;
-END LOOP my_label;
+  LEAVE lbl;
+END LOOP;
 
 --------------------------------------------------------------------------------
 
 (program
-  (loop_statement
-    (keyword_loop)
-    (statement
-      (set_statement
-        (keyword_set)
-        (parameter)
-        (binary_expression
-          (parameter)
-          (binary_plus
-            (literal)))))
-    (statement
-      (if_statement
-        (keyword_if)
-        (binary_expression
-          (parameter)
-          (binary_relation
-            (literal))
-          (literal))
-        (keyword_then)
-        (statement
-          (iterate_statement
-            (keyword_iterate)
-            (identifier)))
-        (keyword_end)
-        (keyword_if)))
-    (statement
-      (leave_statement
-        (keyword_leave)
-        (identifier)))
-    (keyword_end)
-    (keyword_loop)
-    (keyword_iterate
-      (identifier))))
+  (statement
+    (loop_statement
+      (keyword_loop)
+      (statement
+        (set_statement
+          (keyword_set)
+          (object_reference
+            name: (identifier))
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))))
+      (statement
+        (if_statement
+          (keyword_if)
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))
+          (keyword_then)
+          (statement
+            (iterate_statement
+              (keyword_iterate)
+              label: (identifier)))
+          (keyword_end)
+          (keyword_if)))
+      (statement
+        (leave_statement
+          (keyword_leave)
+          label: (identifier)))
+      (keyword_end)
+      (keyword_loop))))

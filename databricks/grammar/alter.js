@@ -22,7 +22,7 @@ export default {
       $.keyword_branch,
       field('branch_name', $.identifier),
       optional(seq($.keyword_as, $.keyword_of, $._expression)),
-      optional(seq($.keyword_replace)),
+      optional($.keyword_replace),
     ),
     // Iceberg TAG
     seq(
@@ -43,7 +43,7 @@ export default {
       $.keyword_tag,
       field('tag_name', $.identifier),
       optional(seq($.keyword_as, $.keyword_of, $._expression)),
-      optional(seq($.keyword_replace)),
+      optional($.keyword_replace),
     ),
     // Iceberg column position
     seq(
@@ -53,7 +53,7 @@ export default {
       $.keyword_position,
       choice(
         seq($.keyword_after, field('after_column', $.identifier)),
-        seq($.keyword_first),
+        $.keyword_first,
       ),
     ),
     // Iceberg column FIRST
@@ -69,20 +69,17 @@ export default {
       $.keyword_location,
       field('location', alias($._literal_string, $.literal)),
     ),
-    // Iceberg SET TBLPROPERTIES
+    // Iceberg SET TBLPROPERTIES — keys may be quoted strings
     seq(
       $.keyword_set,
       $.keyword_tblproperties,
-      paren_list(seq($.identifier, '=', $._expression), true),
+      $.list,
     ),
-    // Iceberg UNSET TBLPROPERTIES
+    // Iceberg UNSET TBLPROPERTIES — keys may be quoted strings, IF EXISTS optional after list
     seq(
       $.keyword_unset,
       $.keyword_tblproperties,
-      choice(
-        paren_list($.identifier, true),
-        $.identifier,
-      ),
+      $.list,
       optional($._if_exists),
     ),
     // Iceberg table WRITE mode
@@ -95,7 +92,7 @@ export default {
     seq(
       $.keyword_alter,
       $.keyword_table,
-      field('table', $.identifier),
+      $.object_reference,
       $.keyword_commit,
       $.keyword_snapshot,
     ),
