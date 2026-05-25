@@ -20,11 +20,14 @@ jobs:
           install-lib: false
 
       # Cache generated parsers + hash state keyed on all grammar source files.
+      # src/tree_sitter/ headers are included so the test_node job can compile
+      # the native binding without needing to re-run tree-sitter generate.
       - uses: actions/cache@v4
         with:
           path: |
             src/parser.c
             src/node-types.json
+            src/tree_sitter/
             spark/src/parser.c
             spark/src/node-types.json
             databricks/src/parser.c
@@ -115,11 +118,15 @@ jobs:
           node-version: "22"
 
       # Re-use the same parser cache so generation is skipped on cache hit.
+      # src/tree_sitter/ headers must be cached alongside parser.c: they are
+      # generated together by tree-sitter generate and required by node-gyp to
+      # compile binding.cc (include_dirs: ["src"] → #include "tree_sitter/parser.h").
       - uses: actions/cache@v4
         with:
           path: |
             src/parser.c
             src/node-types.json
+            src/tree_sitter/
             .grammar-cache/
           key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
 
