@@ -1,0 +1,84 @@
+{
+  "name": "@redpandamc/tree-sitter-sql-extended",
+  "version": "0.3.11",
+  "description": "Tree-sitter SQL grammar with dialect extensions (Databricks, Spark, PostgreSQL, MySQL)",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "scripts": {
+    "install": "node scripts/generate.js && node-gyp-build",
+    "generate": "node scripts/generate.js",
+    "generate:databricks": "node scripts/generate.js databricks",
+    "generate:spark": "node scripts/generate.js spark",
+    "generate:postgres": "node scripts/generate.js postgres",
+    "generate:mysql": "node scripts/generate.js mysql",
+    "generate:snowflake": "node scripts/generate.js snowflake",
+    "test:corpus:snowflake": "cd snowflake && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "generate:all": "npm run generate && npm run generate:spark && npm run generate:postgres && npm run generate:mysql && npm run generate:databricks && npm run generate:snowflake",
+    "generate:force": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter generate",
+    "build": "npm run generate && node-gyp-build",
+    "test:corpus": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:corpus:databricks": "cd databricks && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:corpus:spark": "cd spark && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:corpus:postgres": "cd postgres && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:corpus:mysql": "cd mysql && npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter test",
+    "test:keywords": "bash scripts/test-keywords.sh",
+    "test:node": "node --test bindings/node/*_test.js",
+    "test": "npm run test:corpus && npm run test:keywords && npm run test:node",
+    "parse": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter parse",
+    "prestart": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter build --wasm",
+    "start": "npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter playground",
+    "release": "commit-and-tag-version",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "author": "redpandamc",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "devDependencies": {
+    "commit-and-tag-version": "^12.0.0",
+    "node-gyp": "^10.0.1",
+    "prebuildify": "^6.0.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "gypfile": true,
+  "directories": {
+    "test": "test"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redpandamc/tree-sitter-sql-extended.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redpandamc/tree-sitter-sql-extended/issues"
+  },
+  "homepage": "https://github.com/redpandamc/tree-sitter-sql-extended#readme",
+  "commit-and-tag-version": {
+    "skip": {
+      "tag": true
+    }
+  },
+  "keywords": [
+    "parser",
+    "sql"
+  ],
+  "files": [
+    "grammar.js",
+    "grammar/**",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "tree-sitter.json"
+  ]
+}
