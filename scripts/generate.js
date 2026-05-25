@@ -14,9 +14,10 @@ import { execSync } from 'child_process';
 import { createHash } from 'crypto';
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'fs';
 import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 
 const CLI = 'npx --yes --package=tree-sitter-cli@v0.26.3 -- tree-sitter';
-const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
 function hashDir(dir) {
   const hash = createHash('sha256');
