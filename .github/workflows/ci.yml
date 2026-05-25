@@ -22,7 +22,9 @@ jobs:
         with:
           install-lib: false
 
-      # Cache generated parsers keyed on grammar source
+      # Cache generated parsers and hash files keyed on grammar source.
+      # Including .grammar-cache/ lets generate.js skip regeneration when
+      # the grammar is unchanged, so both this step and npm ci are fast.
       - uses: actions/cache@v4
         with:
           path: |
@@ -38,20 +40,17 @@ jobs:
             mysql/src/node-types.json
             snowflake/src/parser.c
             snowflake/src/node-types.json
+            .grammar-cache/
           key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
 
-      # Base SQL grammar
-      - run: tree-sitter generate
-      # Spark SQL dialect grammar
-      - run: cd spark && tree-sitter generate grammar.js
-      # Databricks SQL dialect grammar (extends Spark)
-      - run: cd databricks && tree-sitter generate grammar.js
-      # PostgreSQL dialect grammar
-      - run: cd postgres && tree-sitter generate grammar.js
-      # MySQL dialect grammar
-      - run: cd mysql && tree-sitter generate grammar.js
-      # Snowflake dialect grammar
-      - run: cd snowflake && tree-sitter generate grammar.js
+      # Generate parsers via the hash-caching wrapper so that a cache hit
+      # skips generation entirely (no double-generate on npm ci either).
+      - run: node scripts/generate.js
+      - run: node scripts/generate.js spark
+      - run: node scripts/generate.js databricks
+      - run: node scripts/generate.js postgres
+      - run: node scripts/generate.js mysql
+      - run: node scripts/generate.js snowflake
 
       - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
