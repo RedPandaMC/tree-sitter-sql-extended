@@ -122,7 +122,7 @@ export default grammar(spark, {
         $._show_namespaces,
         $._show_volumes,
         $._show_grants,
-        $._show_uc_list,
+        $._show_uc_object_type,
         $._show_tblproperties,
         $._show_partitions,
         $._show_columns,
@@ -154,19 +154,6 @@ export default grammar(spark, {
       $.drop_recipient,
       $.drop_provider,
       $.drop_policy,
-    ),
-
-    // Iceberg partition transform: year(ts), bucket(16, id), identity(col), etc.
-    // Also handles plain column identifiers for backward compatibility.
-    iceberg_partition_field: $ => choice(
-      seq(
-        field('transform', $.identifier),
-        '(',
-        optional(seq(field('size', $.literal), ',')),
-        field('column', $.identifier),
-        ')',
-      ),
-      field('column', $.identifier),
     ),
 
     // Override Spark's table_partition to support Iceberg-style transforms.

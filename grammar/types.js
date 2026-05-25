@@ -34,7 +34,7 @@ export default {
 
         $.enum,
 
-        field("custom_type", $.object_reference)
+        field('custom_type', $.object_reference)
       ),
       optional($.array_size_definition)
     ),
@@ -49,7 +49,7 @@ export default {
 
   _array_size_definition: $ => seq(
     '[',
-    optional(field("size", alias($._integer, $.literal))),
+    optional(field('size', alias($._integer, $.literal))),
     ']'
   ),
 
@@ -107,7 +107,7 @@ export default {
 
   enum: $ => seq(
     $.keyword_enum,
-    paren_list(field("value", alias($._literal_string, $.literal)), true)
+    paren_list(field('value', alias($._literal_string, $.literal)), true)
   ),
 
   array: $ => seq(

@@ -64,7 +64,7 @@ export default {
   ),
 
   // SHOW CONNECTIONS | CREDENTIALS | SHARES | RECIPIENTS | PROVIDERS
-  _show_uc_list: $ => choice(
+  _show_uc_object_type: $ => choice(
     $.keyword_connections,
     $.keyword_credentials,
     $.keyword_shares,

@@ -15,7 +15,7 @@ FROM my_cte;
   (statement
     (keyword_with)
     (cte
-      (identifier)
+      name: (identifier)
       (keyword_as)
       (statement
         (select
@@ -64,7 +64,7 @@ FROM second;
   (statement
     (keyword_with)
     (cte
-      (identifier)
+      name: (identifier)
       (keyword_as)
       (statement
         (insert
@@ -87,7 +87,7 @@ FROM second;
             (term
               value: (all_fields))))))
     (cte
-      (identifier)
+      name: (identifier)
       (keyword_as)
       (statement
         (select

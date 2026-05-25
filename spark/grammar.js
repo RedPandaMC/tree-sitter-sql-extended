@@ -164,7 +164,7 @@ export default grammar(base, {
         $.keyword_xml,
         $.keyword_string,
         $.enum,
-        field("custom_type", $.object_reference),
+        field('custom_type', $.object_reference),
       ),
     ),
 
@@ -202,7 +202,7 @@ export default grammar(base, {
       )),
       optional(seq(
         $.keyword_and,
-        optional_parenthesis(field("predicate", $._expression)),
+        optional_parenthesis(field('predicate', $._expression)),
       )),
       $.keyword_then,
       choice(
