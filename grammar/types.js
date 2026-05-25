@@ -30,6 +30,7 @@ export default {
 
         $.keyword_json,
         $.keyword_xml,
+        $.keyword_string,
 
         $.enum,
 

@@ -1,0 +1,74 @@
+================================================================================
+Simple variant colon access
+================================================================================
+
+SELECT src:name FROM raw_data;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (sf_variant_access
+            (field
+              name: (identifier))
+            (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
+
+================================================================================
+Nested variant path
+================================================================================
+
+SELECT col:address.city FROM customers;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (sf_variant_access
+            (field
+              name: (identifier))
+            (identifier)
+            (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
+
+================================================================================
+Variant array index access
+================================================================================
+
+SELECT payload:items[0] FROM events;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (subscript
+            expression: (sf_variant_access
+              (field
+                name: (identifier))
+              (identifier))
+            subscript: (literal)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))

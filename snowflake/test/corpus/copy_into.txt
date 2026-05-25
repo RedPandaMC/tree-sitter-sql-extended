@@ -1,0 +1,58 @@
+================================================================================
+COPY INTO table from stage
+================================================================================
+
+COPY INTO my_table FROM @my_stage;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (sf_copy_into
+      (keyword_copy)
+      (keyword_into)
+      (object_reference
+        name: (identifier))
+      (keyword_from)
+      (sf_stage_ref))))
+
+================================================================================
+COPY INTO stage from table
+================================================================================
+
+COPY INTO @my_stage FROM my_table;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (sf_copy_into
+      (keyword_copy)
+      (keyword_into)
+      (sf_stage_ref)
+      (keyword_from)
+      (object_reference
+        name: (identifier)))))
+
+================================================================================
+COPY INTO with FILE_FORMAT option
+================================================================================
+
+COPY INTO my_table FROM @my_stage FILE_FORMAT = (TYPE = 'CSV');
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (sf_copy_into
+      (keyword_copy)
+      (keyword_into)
+      (object_reference
+        name: (identifier))
+      (keyword_from)
+      (sf_stage_ref)
+      (sf_copy_property
+        (identifier)
+        (sf_copy_kv
+          (identifier)
+          (literal))))))
