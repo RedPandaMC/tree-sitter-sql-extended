@@ -46,11 +46,19 @@ if (!existsSync(grammarPath)) {
 }
 
 // Compute a hash covering the grammar entry point, the shared grammar/ rules,
-// and (for dialects) the dialect's own grammar/ rules.
+// and (for dialects) the dialect's own grammar/ rules plus any parent entry
+// files (e.g. spark/grammar.js for databricks, grammar.js for all dialects).
 const sharedHash = hashDir(join(ROOT, 'grammar'));
 const dialectHash = dialect ? hashDir(join(grammarDir, 'grammar')) : '';
 const entryHash = readFileSync(grammarPath, 'utf8');
-const currentHash = [sharedHash, dialectHash, entryHash].join('|');
+
+// Include parent grammar entry files so that changes to grammar.js (base)
+// or spark/grammar.js (for databricks) invalidate the dialect hash.
+const parentHashes = [];
+if (dialect) parentHashes.push(readFileSync(join(ROOT, 'grammar.js'), 'utf8'));
+if (dialect === 'databricks') parentHashes.push(readFileSync(join(ROOT, 'spark', 'grammar.js'), 'utf8'));
+
+const currentHash = [sharedHash, dialectHash, entryHash, ...parentHashes].join('|');
 
 mkdirSync(join(ROOT, '.grammar-cache'), { recursive: true });
 const cacheKey = dialect || 'base';

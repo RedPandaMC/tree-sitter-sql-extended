@@ -8,26 +8,26 @@ on:
     branches:
       - 'main'
 jobs:
+  # ── Corpus + Rust + Python ──────────────────────────────────────────────────
+  # Grammar corpus tests are OS-independent. Run them once on ubuntu rather
+  # than in a 3-OS matrix to avoid paying 3x the cost for identical results.
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-2025]
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up the repo
-        uses: tree-sitter/setup-action@v2
+      - uses: actions/checkout@v4
+      - uses: tree-sitter/setup-action@v2
         with:
           install-lib: false
 
-      # Cache generated parsers keyed on grammar source
+      # Cache generated parsers + hash state keyed on all grammar source files.
+      # src/tree_sitter/ headers are included so the test_node job can compile
+      # the native binding without needing to re-run tree-sitter generate.
       - uses: actions/cache@v4
         with:
           path: |
             src/parser.c
             src/node-types.json
+            src/tree_sitter/
             spark/src/parser.c
             spark/src/node-types.json
             databricks/src/parser.c
@@ -38,35 +38,33 @@ jobs:
             mysql/src/node-types.json
             snowflake/src/parser.c
             snowflake/src/node-types.json
+            .grammar-cache/
           key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
 
-      # Base SQL grammar
-      - run: tree-sitter generate
-      # Spark SQL dialect grammar
-      - run: cd spark && tree-sitter generate grammar.js
-      # Databricks SQL dialect grammar (extends Spark)
-      - run: cd databricks && tree-sitter generate grammar.js
-      # PostgreSQL dialect grammar
-      - run: cd postgres && tree-sitter generate grammar.js
-      # MySQL dialect grammar
-      - run: cd mysql && tree-sitter generate grammar.js
-      # Snowflake dialect grammar
-      - run: cd snowflake && tree-sitter generate grammar.js
+      # Generate in dependency order; independent dialects run in parallel.
+      # base → [spark | postgres | mysql | snowflake] → databricks
+      - name: Generate parsers
+        run: |
+          node scripts/generate.js
+          node scripts/generate.js spark &
+          node scripts/generate.js postgres &
+          node scripts/generate.js mysql &
+          node scripts/generate.js snowflake &
+          wait
+          node scripts/generate.js databricks
 
       - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: true
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: true
 
       - name: Run tests (Spark SQL)
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: false
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: false
           grammar-path: spark
 
@@ -74,8 +72,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: false
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: false
           grammar-path: databricks
 
@@ -83,8 +80,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: false
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: false
           grammar-path: postgres
 
@@ -92,8 +88,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: false
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: false
           grammar-path: mysql
 
@@ -101,13 +96,47 @@ jobs:
         uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: false
-          test-node: true
-          node-version: "22"
+          test-node: false
           test-python: false
           grammar-path: snowflake
 
       - run: scripts/test-keywords.sh
 
+  # ── Node native binding (OS matrix) ─────────────────────────────────────────
+  # node-gyp compiles parser.c to a native .node addon. The result is
+  # platform-specific, so this job stays as a 3-OS matrix.
+  test_node:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-2025]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Re-use the same parser cache so generation is skipped on cache hit.
+      # src/tree_sitter/ headers must be cached alongside parser.c: they are
+      # generated together by tree-sitter generate and required by node-gyp to
+      # compile binding.cc (include_dirs: ["src"] → #include "tree_sitter/parser.h").
+      - uses: actions/cache@v4
+        with:
+          path: |
+            src/parser.c
+            src/node-types.json
+            src/tree_sitter/
+            .grammar-cache/
+          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
+
+      # npm ci runs the install hook: node scripts/generate.js && node-gyp-build
+      # generate.js skips regeneration on cache hit; node-gyp-build compiles the
+      # native addon from src/parser.c.
+      - run: npm ci
+      - run: node --test bindings/node/*_test.js
+
+  # ── Validate corpus file integrity ──────────────────────────────────────────
   validate_tests:
     runs-on: ["ubuntu-latest"]
     strategy:

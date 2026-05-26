@@ -2446,7 +2446,7 @@ FROM test_data;
   (statement
     (keyword_with)
     (cte
-      (identifier)
+      name: (identifier)
       (keyword_as)
       (statement
         (select

@@ -9,9 +9,14 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-# package.json and tree-sitter.json
+# package.json and tree-sitter.json (root + all dialects)
 sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" package.json
 sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" tree-sitter.json
+sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" spark/tree-sitter.json
+sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" databricks/tree-sitter.json
+sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" postgres/tree-sitter.json
+sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" mysql/tree-sitter.json
+sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/" snowflake/tree-sitter.json
 
 # Cargo.toml (first occurrence — the [package] version)
 sed -i "0,/^version = .*/s/^version = .*/version = \"$VERSION\"/" Cargo.toml

@@ -78,8 +78,6 @@ export default {
     ),
   ),
 
-  _refresh_statement: $ => choice(
-    $.refresh_materialized_view,
-  ),
+  _refresh_statement: $ => $.refresh_materialized_view,
 
 };
