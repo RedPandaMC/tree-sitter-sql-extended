@@ -500,4 +500,67 @@ CREATE POLICY my_policy ON my_schema.my_table
           (int
             (keyword_int)))))))
 
+================================================================================
+Postgres: Create unlogged table
+================================================================================
 
+CREATE UNLOGGED TABLE tableName (
+    id NUMERIC
+);
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (create_table
+      (keyword_create)
+      (keyword_unlogged)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (column_definitions
+        (column_definition
+          (identifier)
+          (numeric
+            (keyword_numeric)))))))
+
+================================================================================
+Postgres: Create index CONCURRENTLY with USING HASH
+================================================================================
+
+CREATE UNIQUE INDEX CONCURRENTLY
+IF NOT EXISTS idx1
+ON tab USING HASH(col ASC)
+WHERE tab.col > 10;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (create_index
+      (keyword_create)
+      (keyword_unique)
+      (keyword_index)
+      (keyword_concurrently)
+      (keyword_if)
+      (keyword_not)
+      (keyword_exists)
+      (identifier)
+      (keyword_on)
+      (object_reference
+        (identifier))
+      (keyword_using)
+      (keyword_hash)
+      (index_fields
+        (field
+          (identifier)
+          (direction
+            (keyword_asc))))
+      (where
+        (keyword_where)
+        (binary_expression
+          (field
+            (object_reference
+              (identifier))
+            (identifier))
+          (literal))))))

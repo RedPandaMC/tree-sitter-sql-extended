@@ -270,72 +270,6 @@ ON CONFLICT DO UPDATE SET dname = EXCLUDED.dname;
           name: (identifier))))))
 
 ================================================================================
-Simple insert with low priority
-================================================================================
-
-INSERT LOW_PRIORITY my_table
-VALUES('foo','bar', 3);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (insert
-      (keyword_insert)
-      (keyword_low_priority)
-      (object_reference
-        name: (identifier))
-      (keyword_values)
-      (list
-        (literal)
-        (literal)
-        (literal)))))
-
-================================================================================
-Simple insert with delayed
-================================================================================
-
-INSERT DELAYED my_table
-VALUES('foo','bar', 3);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (insert
-      (keyword_insert)
-      (keyword_delayed)
-      (object_reference
-        name: (identifier))
-      (keyword_values)
-      (list
-        (literal)
-        (literal)
-        (literal)))))
-
-================================================================================
-Simple insert with high priority
-================================================================================
-
-INSERT HIGH_PRIORITY my_table
-VALUES('foo','bar', 3);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (insert
-      (keyword_insert)
-      (keyword_high_priority)
-      (object_reference
-        name: (identifier))
-      (keyword_values)
-      (list
-        (literal)
-        (literal)
-        (literal)))))
-
-================================================================================
 Simple insert with ignore
 ================================================================================
 
@@ -356,64 +290,6 @@ VALUES('foo','bar', 3);
         (literal)
         (literal)
         (literal)))))
-
-================================================================================
-Insert overwrite
-================================================================================
-
-INSERT OVERWRITE tab1
-SELECT
-  col1,
-  col2
-FROM
-(
-  SELECT
-    *
-  FROM
-    tab2
-  WHERE
-    key1 >= 'val'
-) a1;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (insert
-      (keyword_insert)
-      (keyword_overwrite)
-      (object_reference
-        (identifier))
-      (select
-        (keyword_select)
-        (select_expression
-          (term
-            (field
-              (identifier)))
-          (term
-            (field
-              (identifier)))))
-      (from
-        (keyword_from)
-        (relation
-          (subquery
-            (select
-              (keyword_select)
-              (select_expression
-                (term
-                  (all_fields))))
-            (from
-              (keyword_from)
-              (relation
-                (object_reference
-                  (identifier)))
-              (where
-                (keyword_where)
-                (binary_expression
-                  (field
-                    (identifier))
-                  (literal)))))
-          (identifier))))))
 
 ================================================================================
 Insert from unioned select

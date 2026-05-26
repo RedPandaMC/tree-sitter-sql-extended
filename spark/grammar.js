@@ -219,13 +219,6 @@ export default grammar(base, {
         $.keyword_insert,
         $.keyword_replace
       ),
-      optional(
-        choice(
-          $.keyword_low_priority,
-          $.keyword_delayed,
-          $.keyword_high_priority,
-        ),
-      ),
       optional($.keyword_ignore),
       optional(
         choice(
@@ -284,6 +277,48 @@ export default grammar(base, {
           ),
         ),
       ),
+    ),
+
+    // Hive/Spark: ALTER TABLE t ADD [IF NOT EXISTS] PARTITION (key=val) [LOCATION path]
+    add_partition: $ => seq(
+      $.keyword_add,
+      optional($._if_not_exists),
+      repeat1(
+        seq(
+          $.keyword_partition,
+          paren_list(
+            seq($.identifier, '=', $._expression),
+            true,
+          ),
+          optional(seq($.keyword_location, $._literal_string)),
+        ),
+      ),
+    ),
+
+    _alter_specifications: $ => choice(
+      $.add_partition,
+      $.add_column,
+      $.add_constraint,
+      $.drop_constraint,
+      $.alter_column,
+      $.modify_column,
+      $.change_column,
+      $.drop_column,
+      $.rename_object,
+      $.rename_column,
+      $.set_schema,
+      $.change_ownership,
+    ),
+
+    tablesample: $ => seq(
+      $.keyword_tablesample,
+      '(',
+      choice(
+        seq($._natural_number, $.keyword_rows),
+        seq($._natural_number, $.keyword_percent),
+        seq($.keyword_bucket, $._natural_number, $.keyword_out, $.keyword_of, $._natural_number),
+      ),
+      ')',
     ),
 
     ...spark_create_rules,

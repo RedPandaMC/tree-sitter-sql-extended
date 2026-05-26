@@ -50,4 +50,13 @@ export default {
   _partition_spec: $ => seq(
     $.keyword_partition, paren_list($.table_option, true),
   ),
+
+  _optimize_table: $ => seq(
+    $.keyword_optimize,
+    $.object_reference,
+    $.keyword_rewrite,
+    $.keyword_data,
+    optional(seq($.keyword_using, $.keyword_bin_pack)),
+    optional($.where),
+  ),
 };

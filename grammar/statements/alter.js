@@ -46,7 +46,6 @@ export default {
   ),
 
   _alter_specifications: $ => choice(
-    $.add_partition,
     $.add_column,
     $.add_constraint,
     $.drop_constraint,
@@ -70,22 +69,6 @@ export default {
     optional($._if_not_exists),
     $.column_definition,
     optional($.column_position),
-  ),
-
-  // ALTER TABLE t ADD [IF NOT EXISTS] PARTITION (key=val [,...]) [LOCATION path] [PARTITION ...]
-  add_partition: $ => seq(
-    $.keyword_add,
-    optional($._if_not_exists),
-    repeat1(
-      seq(
-        $.keyword_partition,
-        paren_list(
-          seq($.identifier, '=', $._expression),
-          true,
-        ),
-        optional(seq($.keyword_location, $._literal_string)),
-      ),
-    ),
   ),
 
   add_constraint: $ => seq(
