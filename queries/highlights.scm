@@ -137,7 +137,6 @@
   (keyword_value)
   (keyword_attribute)
   (keyword_set)
-  (keyword_source)
 ] @keyword
 
 ; --- Join type ---

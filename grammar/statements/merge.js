@@ -25,10 +25,6 @@ export default {
     $.keyword_when,
     optional($.keyword_not),
     $.keyword_matched,
-    optional(seq(
-      $.keyword_by,
-      $.keyword_source,
-    )),
     optional(
       seq(
         $.keyword_and,

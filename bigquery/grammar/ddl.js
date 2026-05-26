@@ -1,6 +1,37 @@
-import { comma_list, paren_list, wrapped_in_parenthesis } from '../../grammar/helpers.js';
+import { comma_list, paren_list, optional_parenthesis } from '../../grammar/helpers.js';
 
 export default {
+
+  // Override when_clause to add WHEN NOT MATCHED BY SOURCE (BQ/SQL Server extension)
+  when_clause: $ => prec.left(seq(
+    $.keyword_when,
+    optional($.keyword_not),
+    $.keyword_matched,
+    optional(seq(
+      $.keyword_by,
+      $.keyword_source,
+    )),
+    optional(
+      seq(
+        $.keyword_and,
+        optional_parenthesis(field('predicate', $._expression))
+      )
+    ),
+    $.keyword_then,
+    choice(
+      $.keyword_delete,
+      seq(
+        $.keyword_update,
+        $._set_values,
+      ),
+      seq(
+        $.keyword_insert,
+        $._insert_values
+      ),
+      optional($.where)
+    )
+  )),
+
 
   // OPTIONS (key = value, ...)
   bq_options_clause: $ => seq(
