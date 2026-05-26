@@ -38,8 +38,10 @@ jobs:
             mysql/src/node-types.json
             snowflake/src/parser.c
             snowflake/src/node-types.json
+            mariadb/src/parser.c
+            mariadb/src/node-types.json
             .grammar-cache/
-          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
+          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**', 'mariadb/grammar.js', 'mariadb/grammar/**') }}
 
       # Generate in dependency order; independent dialects run in parallel.
       # base → [spark | postgres | mysql | snowflake] → databricks
@@ -52,6 +54,7 @@ jobs:
           node scripts/generate.js snowflake &
           wait
           node scripts/generate.js databricks
+          node scripts/generate.js mariadb
 
       - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
@@ -99,6 +102,14 @@ jobs:
           test-node: false
           test-python: false
           grammar-path: snowflake
+
+      - name: Run tests (MariaDB)
+        uses: tree-sitter/parser-test-action@v3
+        with:
+          test-rust: false
+          test-node: false
+          test-python: false
+          grammar-path: mariadb
 
       - run: scripts/test-keywords.sh
 

@@ -598,4 +598,12 @@ export default {
   keyword_breadth:      _ => make_keyword("breadth"),
   keyword_depth:        _ => make_keyword("depth"),
 
+  // MariaDB dialect keywords (#31)
+  keyword_system:       _ => make_keyword("system"),
+  keyword_system_time:  _ => make_keyword("system_time"),
+  keyword_versioning:   _ => make_keyword("versioning"),
+  keyword_period:       _ => make_keyword("period"),
+  keyword_package:      _ => make_keyword("package"),
+  keyword_body:         _ => make_keyword("body"),
+
 }
