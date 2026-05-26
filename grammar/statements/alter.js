@@ -265,7 +265,7 @@ export default {
         $.keyword_reset,
         choice(
           $.keyword_all,
-          field("configuration_parameter", $.identifier)
+          field('configuration_parameter', $.identifier)
         ),
       ),
       seq(
@@ -300,7 +300,7 @@ export default {
             $.keyword_reset,
             choice(
               $.keyword_all,
-              field("option", $.identifier),
+              field('option', $.identifier),
             )),
         ),
       )
@@ -308,13 +308,13 @@ export default {
   )),
 
   set_configuration: $ => seq(
-    field("option", $.identifier),
+    field('option', $.identifier),
     choice(
       seq($.keyword_from, $.keyword_current),
       seq(
         choice($.keyword_to, "="),
         choice(
-          field("parameter", $.identifier),
+          field('parameter', $.identifier),
           $.literal,
           $.keyword_default
         )
@@ -342,7 +342,7 @@ export default {
         $.keyword_set,
         choice(
           seq($.keyword_tablespace, $.identifier),
-          paren_list(seq($.identifier, '=', field("value", $.literal)))
+          paren_list(seq($.identifier, '=', field('value', $.literal)))
         ),
       ),
     ),
@@ -360,9 +360,9 @@ export default {
           seq($.keyword_increment, optional($.keyword_by), $.literal),
           seq($.keyword_minvalue, choice($.literal, seq($.keyword_no, $.keyword_minvalue))),
           seq($.keyword_maxvalue, choice($.literal, seq($.keyword_no, $.keyword_maxvalue))),
-          seq($.keyword_start, optional($.keyword_with), field("start", alias($._integer, $.literal))),
-          seq($.keyword_restart, optional($.keyword_with), field("restart", alias($._integer, $.literal))),
-          seq($.keyword_cache, field("cache", alias($._integer, $.literal))),
+          seq($.keyword_start, optional($.keyword_with), field('start', alias($._integer, $.literal))),
+          seq($.keyword_restart, optional($.keyword_with), field('restart', alias($._integer, $.literal))),
+          seq($.keyword_cache, field('cache', alias($._integer, $.literal))),
           seq(optional($.keyword_no), $.keyword_cycle),
           seq($.keyword_owned, $.keyword_by, choice($.keyword_none, $.object_reference)),
         ),

@@ -15,8 +15,8 @@ export default {
   ),
 
   cte: $ => seq(
-    $.identifier,
-    optional(paren_list(field("argument", $.identifier))),
+    field('name', $.identifier),
+    optional(paren_list(field('argument', $.identifier))),
     $.keyword_as,
     optional(
       seq(
@@ -114,7 +114,7 @@ export default {
           $.keyword_preceding,
         ),
         seq(
-            field("start",
+            field('start',
               choice(
                 $.identifier,
                 $.binary_expression,
@@ -126,7 +126,7 @@ export default {
         ),
         $._current_row,
         seq(
-            field("end",
+            field('end',
               choice(
                 $.identifier,
                 $.binary_expression,
@@ -307,7 +307,7 @@ export default {
     choice(
       seq(
         $.keyword_on,
-        field("predicate", $._expression),
+        field('predicate', $._expression),
       ),
       seq(
         $.keyword_using,
@@ -328,7 +328,7 @@ export default {
           optional(
             seq(
               $.keyword_as,
-              field("alias", $.identifier),
+              field('alias', $.identifier),
               paren_list($.identifier),
             )
           )
@@ -390,7 +390,7 @@ export default {
 
   where: $ => seq(
     $.keyword_where,
-    field("predicate", $._expression),
+    field('predicate', $._expression),
   ),
 
   group_by: $ => seq(

@@ -16,7 +16,7 @@ export default {
     optional($._alias),
     optional(seq(
       $.keyword_on,
-      optional_parenthesis(field("predicate", $._expression)),
+      optional_parenthesis(field('predicate', $._expression)),
     )),
     repeat1($.when_clause)
   ),
@@ -32,7 +32,7 @@ export default {
     optional(
       seq(
         $.keyword_and,
-        optional_parenthesis(field("predicate", $._expression))
+        optional_parenthesis(field('predicate', $._expression))
       )
     ),
     $.keyword_then,

@@ -124,9 +124,9 @@ export default {
   ),
 
   _operator_class: $ => seq(
-    field("opclass", $.identifier),
+    field('opclass', $.identifier),
     optional(
-      field("opclass_parameters", wrapped_in_parenthesis(comma_list($.term)))
+      field('opclass_parameters', wrapped_in_parenthesis(comma_list($.term)))
     )
   ),
 
@@ -142,9 +142,9 @@ export default {
 
   _index_field: $ => seq(
     choice(
-      field("expression", wrapped_in_parenthesis($._expression)),
-      field("function", $.invocation),
-      field("column", $._column),
+      field('expression', wrapped_in_parenthesis($._expression)),
+      field('function', $.invocation),
+      field('column', $._column),
     ),
     optional(seq($.keyword_collate, $.identifier)),
     optional($._operator_class),
@@ -185,7 +185,7 @@ export default {
     optional(
       seq(
         optional($._if_not_exists),
-        field("column", $._column),
+        field('column', $._column),
       ),
     ),
     $.keyword_on,
@@ -269,22 +269,22 @@ export default {
   )),
 
   _role_options: $ => choice(
-    field("option", $.identifier),
+    field('option', $.identifier),
     seq(
       $.keyword_valid,
       $.keyword_until,
-      field("valid_until", alias($._literal_string, $.literal))
+      field('valid_until', alias($._literal_string, $.literal))
     ),
     seq(
       $.keyword_connection,
       $.keyword_limit,
-      field("connection_limit", alias($._integer, $.literal))
+      field('connection_limit', alias($._integer, $.literal))
     ),
     seq(
       optional($.keyword_encrypted),
       $.keyword_password,
       choice(
-        field("password", alias($._literal_string, $.literal)),
+        field('password', alias($._literal_string, $.literal)),
         $.keyword_null,
       ),
     ),
@@ -314,13 +314,13 @@ export default {
     repeat(
       choice(
         seq($.keyword_as, $._type),
-        seq($.keyword_increment, optional($.keyword_by), field("increment", alias($._integer, $.literal))),
+        seq($.keyword_increment, optional($.keyword_by), field('increment', alias($._integer, $.literal))),
         seq($.keyword_minvalue, choice($.literal, seq($.keyword_no, $.keyword_minvalue))),
         seq($.keyword_no, $.keyword_minvalue),
         seq($.keyword_maxvalue, choice($.literal, seq($.keyword_no, $.keyword_maxvalue))),
         seq($.keyword_no, $.keyword_maxvalue),
-        seq($.keyword_start, optional($.keyword_with), field("start", alias($._integer, $.literal))),
-        seq($.keyword_cache, field("cache", alias($._integer, $.literal))),
+        seq($.keyword_start, optional($.keyword_with), field('start', alias($._integer, $.literal))),
+        seq($.keyword_cache, field('cache', alias($._integer, $.literal))),
         seq(optional($.keyword_no), $.keyword_cycle),
         seq($.keyword_owned, $.keyword_by, choice($.keyword_none, $.object_reference)),
       )
@@ -419,7 +419,7 @@ export default {
   )),
 
   enum_elements: $ => seq(
-    paren_list(field("enum_element", alias($._literal_string, $.literal))),
+    paren_list(field('enum_element', alias($._literal_string, $.literal))),
   ),
 
 };

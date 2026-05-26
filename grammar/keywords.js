@@ -499,7 +499,6 @@ export default {
   _if_exists: $ => seq($.keyword_if, $.keyword_exists),
   _if_not_exists: $ => seq($.keyword_if, $.keyword_not, $.keyword_exists),
   _or_replace: $ => seq($.keyword_or, $.keyword_replace),
-  _default_null: $ => seq($.keyword_default, $.keyword_null),
   _current_row: $ => seq($.keyword_current, $.keyword_row),
   _exclude_current_row: $ => seq($.keyword_exclude, $.keyword_current, $.keyword_row),
   _exclude_group: $ => seq($.keyword_exclude, $.keyword_group),

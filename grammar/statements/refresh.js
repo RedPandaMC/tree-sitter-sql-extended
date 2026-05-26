@@ -1,6 +1,4 @@
 export default {
-  _refresh_statement: ($) => $.refresh_materialized_view,
-
   refresh_materialized_view: ($) =>
     prec.right(
       seq(

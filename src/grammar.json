@@ -2052,19 +2052,6 @@
         }
       ]
     },
-    "_default_null": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "keyword_default"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "keyword_null"
-        }
-      ]
-    },
     "_current_row": {
       "type": "SEQ",
       "members": [
@@ -15279,15 +15266,6 @@
         }
       ]
     },
-    "_refresh_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "refresh_materialized_view"
-        }
-      ]
-    },
     "refresh_materialized_view": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -16139,8 +16117,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "CHOICE",
@@ -18601,6 +18583,10 @@
           }
         }
       ]
+    },
+    "_refresh_statement": {
+      "type": "SYMBOL",
+      "name": "refresh_materialized_view"
     }
   },
   "extras": [
@@ -18640,21 +18626,6 @@
     [
       "between_expression",
       "binary_expression"
-    ],
-    [
-      "time"
-    ],
-    [
-      "timestamp"
-    ],
-    [
-      "from"
-    ],
-    [
-      "create_sequence"
-    ],
-    [
-      "alter_sequence"
     ],
     [
       "create_function"
