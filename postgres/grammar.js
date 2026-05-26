@@ -1,10 +1,11 @@
 import base from '../grammar.js';
-import { wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
+import { comma_list, optional_parenthesis, paren_list, wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 import pg_copy_rules from './grammar/copy.js';
 import pg_optimize_rules from './grammar/optimize.js';
 import pg_create_rules from './grammar/create.js';
 import pg_alter_rules from './grammar/alter.js';
 import pg_drop_rules from './grammar/drop.js';
+import pg_replication_rules from './grammar/replication.js';
 
 export default grammar(base, {
   name: 'postgres_sql',
@@ -89,6 +90,8 @@ export default grammar(base, {
         $.create_extension,
         $.create_trigger,
         $.create_policy,
+        $.create_publication,
+        $.create_subscription,
         prec.left(seq(
           $.create_schema,
           repeat($._create_statement),
@@ -165,6 +168,7 @@ export default grammar(base, {
         $.alter_role,
         $.alter_sequence,
         $.alter_policy,
+        $.alter_publication,
       ),
     ),
 
@@ -182,6 +186,8 @@ export default grammar(base, {
         $.drop_extension,
         $.drop_function,
         $.drop_procedure,
+        $.drop_publication,
+        $.drop_subscription,
       ),
     ),
 
@@ -253,7 +259,116 @@ export default grammar(base, {
       $.reset_statement,
       $.comment_statement,
       $._show_statement,
+      $.do_statement,
     ),
+
+    // PostgreSQL: DO $$ ... $$ anonymous block
+    do_statement: $ => seq(
+      $.keyword_do,
+      optional(seq($.keyword_language, $.identifier)),
+      $._dollar_quoted_string,
+    ),
+
+    // PostgreSQL: override cte to add SEARCH/CYCLE clauses (PG 14+)
+    cte: $ => seq(
+      field('name', $.identifier),
+      optional(paren_list(field('argument', $.identifier))),
+      $.keyword_as,
+      optional(seq(
+        optional($.keyword_not),
+        $.keyword_materialized,
+      )),
+      wrapped_in_parenthesis(
+        alias(
+          choice($._dml_read, $._dml_write),
+          $.statement,
+        ),
+      ),
+      optional($._cte_search_clause),
+      optional($._cte_cycle_clause),
+    ),
+
+    _cte_search_clause: $ => seq(
+      $.keyword_search,
+      choice($.keyword_breadth, $.keyword_depth),
+      $.keyword_first,
+      $.keyword_by,
+      comma_list($.identifier, true),
+      $.keyword_set,
+      $.identifier,
+    ),
+
+    _cte_cycle_clause: $ => seq(
+      $.keyword_cycle,
+      comma_list($.identifier, true),
+      $.keyword_set,
+      $.identifier,
+      $.keyword_default,
+      $._expression,
+      $.keyword_using,
+      $.identifier,
+    ),
+
+    // PostgreSQL: override _column_constraint to add GENERATED AS IDENTITY
+    _column_constraint: $ => prec.left(choice(
+      choice(
+        $.keyword_null,
+        $._not_null,
+      ),
+      seq(
+        $.keyword_references,
+        $.object_reference,
+        paren_list($.identifier, true),
+        repeat(
+          seq(
+            $.keyword_on,
+            choice($.keyword_delete, $.keyword_update),
+            choice(
+              seq($.keyword_no, $.keyword_action),
+              $.keyword_restrict,
+              $.keyword_cascade,
+              seq(
+                $.keyword_set,
+                choice($.keyword_null, $.keyword_default),
+                optional(paren_list($.identifier, true)),
+              ),
+            ),
+          ),
+        ),
+      ),
+      $._default_expression,
+      $._primary_key,
+      $.direction,
+      $._column_comment,
+      $._check_constraint,
+      // Computed generated column: GENERATED ALWAYS AS (expr) STORED
+      seq(
+        optional(seq($.keyword_generated, $.keyword_always)),
+        $.keyword_as,
+        $._expression,
+      ),
+      // Identity column: GENERATED {ALWAYS|BY DEFAULT} AS IDENTITY [(opts)]
+      seq(
+        $.keyword_generated,
+        choice(
+          $.keyword_always,
+          seq($.keyword_by, $.keyword_default),
+        ),
+        $.keyword_as,
+        $.keyword_identity,
+        optional(wrapped_in_parenthesis(
+          repeat1(choice(
+            seq($.keyword_start, optional($.keyword_with), alias($._integer, $.literal)),
+            seq($.keyword_increment, optional($.keyword_by), alias($._integer, $.literal)),
+            seq($.keyword_minvalue, alias($._integer, $.literal)),
+            seq($.keyword_maxvalue, alias($._integer, $.literal)),
+            seq($.keyword_no, choice($.keyword_minvalue, $.keyword_maxvalue, $.keyword_cycle)),
+            $.keyword_cycle,
+          )),
+        )),
+      ),
+      $.keyword_unique,
+    )),
 
     set_statement: $ => seq(
       $.keyword_set,
@@ -373,6 +488,11 @@ export default grammar(base, {
     keyword_regnamespace:   _ => make_keyword("regnamespace"),
     keyword_regproc:        _ => make_keyword("regproc"),
     keyword_regtype:        _ => make_keyword("regtype"),
+    keyword_publication:    _ => make_keyword("publication"),
+    keyword_subscription:   _ => make_keyword("subscription"),
+    keyword_search:         _ => make_keyword("search"),
+    keyword_breadth:        _ => make_keyword("breadth"),
+    keyword_depth:          _ => make_keyword("depth"),
     keyword_ilike:          _ => make_keyword("ilike"),
     keyword_setof:          _ => make_keyword("setof"),
     keyword_variadic:       _ => make_keyword("variadic"),
@@ -397,6 +517,7 @@ export default grammar(base, {
     ...pg_create_rules,
     ...pg_alter_rules,
     ...pg_drop_rules,
+    ...pg_replication_rules,
 
   },
 });
