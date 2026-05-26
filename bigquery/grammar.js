@@ -136,7 +136,8 @@ export default grammar(base, {
       // BigQuery-specific
       $.bq_struct,
       $.bq_typed_literal,
-      $.bq_triple_quoted_string,
+      $.bq_triple_double_quoted_string,
+      $.bq_triple_single_quoted_string,
       $.bq_ml_function,
     )),
 
