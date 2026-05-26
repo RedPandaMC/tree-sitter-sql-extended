@@ -3,7 +3,6 @@ MySQL: Create table with generated always (STORED/VIRTUAL)
 ================================================================================
 
 CREATE TABLE "Role" (
-  "roleId" bigint generated always as identity,
   "name" varchar NOT NULL,
   height_in numeric GENERATED ALWAYS AS (height_cm / 2.54) STORED,
   item_type_name TEXT GENERATED ALWAYS AS (
@@ -27,15 +26,6 @@ CREATE TABLE "Role" (
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (bigint
-            (keyword_bigint))
-          (keyword_generated)
-          (keyword_always)
-          (keyword_as)
-          (field
-            name: (identifier)))
-        (column_definition
-          name: (identifier)
           type: (varchar
             (keyword_varchar))
           (keyword_not)
@@ -47,11 +37,10 @@ CREATE TABLE "Role" (
           (keyword_generated)
           (keyword_always)
           (keyword_as)
-          (parenthesized_expression
-            (binary_expression
-              left: (field
-                name: (identifier))
-              right: (literal)))
+          (binary_expression
+            left: (field
+              name: (identifier))
+            right: (literal))
           (keyword_stored))
         (column_definition
           name: (identifier)
@@ -60,22 +49,21 @@ CREATE TABLE "Role" (
           (keyword_generated)
           (keyword_always)
           (keyword_as)
-          (parenthesized_expression
-            (case
-              (keyword_case)
-              (field
-                name: (identifier))
-              (keyword_when)
-              (literal)
-              (keyword_then)
-              (literal)
-              (keyword_when)
-              (literal)
-              (keyword_then)
-              (literal)
-              (keyword_else)
-              (literal)
-              (keyword_end)))
+          (case
+            (keyword_case)
+            (field
+              name: (identifier))
+            (keyword_when)
+            (literal)
+            (keyword_then)
+            (literal)
+            (keyword_when)
+            (literal)
+            (keyword_then)
+            (literal)
+            (keyword_else)
+            (literal)
+            (keyword_end))
           (keyword_virtual))))))
 
 ================================================================================

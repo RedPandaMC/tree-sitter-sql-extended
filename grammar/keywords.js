@@ -574,4 +574,28 @@ export default {
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
 
+  // MySQL Sprint 8 keywords (#28)
+  keyword_rollup:      _ => make_keyword("rollup"),
+  keyword_event:       _ => make_keyword("event"),
+  keyword_every:       _ => make_keyword("every"),
+  keyword_starts:      _ => make_keyword("starts"),
+  keyword_ends:        _ => make_keyword("ends"),
+  keyword_invisible:   _ => make_keyword("invisible"),
+  keyword_visible:     _ => make_keyword("visible"),
+  keyword_enclosed:    _ => make_keyword("enclosed"),
+  keyword_respect:     _ => make_keyword("respect"),
+  keyword_completion:  _ => make_keyword("completion"),
+  keyword_preserve:    _ => make_keyword("preserve"),
+  keyword_slave:       _ => make_keyword("slave"),
+  keyword_json_table:  _ => make_keyword("json_table"),
+  keyword_path:        _ => make_keyword("path"),
+  keyword_infile:      _ => make_keyword("infile"),
+
+  // PostgreSQL replication / CTE keywords (#31)
+  keyword_publication:  _ => make_keyword("publication"),
+  keyword_subscription: _ => make_keyword("subscription"),
+  keyword_search:       _ => make_keyword("search"),
+  keyword_breadth:      _ => make_keyword("breadth"),
+  keyword_depth:        _ => make_keyword("depth"),
+
 }
