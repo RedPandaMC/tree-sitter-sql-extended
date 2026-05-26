@@ -827,30 +827,6 @@ CREATE TABLE tableName (
           (keyword_null))))))
 
 ================================================================================
-Create unlogged table
-================================================================================
-
-CREATE UNLOGGED TABLE tableName (
-    id NUMERIC
-);
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_table
-      (keyword_create)
-      (keyword_unlogged)
-      (keyword_table)
-      (object_reference
-        (identifier))
-      (column_definitions
-        (column_definition
-          (identifier)
-          (numeric
-            (keyword_numeric)))))))
-
-================================================================================
 Create unique index
 ================================================================================
 

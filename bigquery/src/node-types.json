@@ -66,133 +66,6 @@
     }
   },
   {
-    "type": "add_partition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_add",
-          "named": true
-        },
-        {
-          "type": "keyword_exists",
-          "named": true
-        },
-        {
-          "type": "keyword_if",
-          "named": true
-        },
-        {
-          "type": "keyword_location",
-          "named": true
-        },
-        {
-          "type": "keyword_not",
-          "named": true
-        },
-        {
-          "type": "keyword_partition",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "all_fields",
     "named": true,
     "fields": {},
@@ -1147,10 +1020,6 @@
         },
         {
           "type": "add_constraint",
-          "named": true
-        },
-        {
-          "type": "add_partition",
           "named": true
         },
         {
@@ -5579,6 +5448,16 @@
             "named": true
           }
         ]
+      },
+      "index_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -5594,35 +5473,11 @@
           "named": true
         },
         {
-          "type": "keyword_brin",
-          "named": true
-        },
-        {
-          "type": "keyword_btree",
-          "named": true
-        },
-        {
-          "type": "keyword_concurrently",
-          "named": true
-        },
-        {
           "type": "keyword_create",
           "named": true
         },
         {
           "type": "keyword_exists",
-          "named": true
-        },
-        {
-          "type": "keyword_gin",
-          "named": true
-        },
-        {
-          "type": "keyword_gist",
-          "named": true
-        },
-        {
-          "type": "keyword_hash",
           "named": true
         },
         {
@@ -5646,10 +5501,6 @@
           "named": true
         },
         {
-          "type": "keyword_spgist",
-          "named": true
-        },
-        {
           "type": "keyword_unique",
           "named": true
         },
@@ -5663,10 +5514,6 @@
         },
         {
           "type": "tablespace",
-          "named": true
-        },
-        {
-          "type": "tablet_split",
           "named": true
         },
         {
@@ -7899,10 +7746,6 @@
           "named": true
         },
         {
-          "type": "index_hint",
-          "named": true
-        },
-        {
           "type": "join",
           "named": true
         },
@@ -8821,19 +8664,11 @@
           "named": true
         },
         {
-          "type": "keyword_delayed",
-          "named": true
-        },
-        {
           "type": "keyword_do",
           "named": true
         },
         {
           "type": "keyword_duplicate",
-          "named": true
-        },
-        {
-          "type": "keyword_high_priority",
           "named": true
         },
         {
@@ -8853,19 +8688,11 @@
           "named": true
         },
         {
-          "type": "keyword_low_priority",
-          "named": true
-        },
-        {
           "type": "keyword_nothing",
           "named": true
         },
         {
           "type": "keyword_on",
-          "named": true
-        },
-        {
-          "type": "keyword_overwrite",
           "named": true
         },
         {
@@ -9150,10 +8977,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "index_hint",
-          "named": true
-        },
         {
           "type": "join",
           "named": true
@@ -10990,7 +10813,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "alter_database",
@@ -11189,15 +11012,7 @@
           "named": true
         },
         {
-          "type": "keyword_bin_pack",
-          "named": true
-        },
-        {
           "type": "keyword_cascade",
-          "named": true
-        },
-        {
-          "type": "keyword_data",
           "named": true
         },
         {
@@ -11233,10 +11048,6 @@
           "named": true
         },
         {
-          "type": "keyword_optimize",
-          "named": true
-        },
-        {
           "type": "keyword_recursive",
           "named": true
         },
@@ -11246,10 +11057,6 @@
         },
         {
           "type": "keyword_restrict",
-          "named": true
-        },
-        {
-          "type": "keyword_rewrite",
           "named": true
         },
         {
@@ -11322,10 +11129,6 @@
         },
         {
           "type": "when_clause",
-          "named": true
-        },
-        {
-          "type": "where",
           "named": true
         }
       ]
@@ -11765,18 +11568,6 @@
       "required": true,
       "types": [
         {
-          "type": "keyword_bucket",
-          "named": true
-        },
-        {
-          "type": "keyword_of",
-          "named": true
-        },
-        {
-          "type": "keyword_out",
-          "named": true
-        },
-        {
           "type": "keyword_percent",
           "named": true
         },
@@ -11805,29 +11596,6 @@
         },
         {
           "type": "keyword_tablespace",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tablet_split",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_into",
-          "named": true
-        },
-        {
-          "type": "keyword_split",
-          "named": true
-        },
-        {
-          "type": "keyword_tablets",
           "named": true
         }
       ]
@@ -12958,10 +12726,6 @@
     "named": true
   },
   {
-    "type": "keyword_bin_pack",
-    "named": true
-  },
-  {
     "type": "keyword_binary",
     "named": true
   },
@@ -12971,18 +12735,6 @@
   },
   {
     "type": "keyword_boolean",
-    "named": true
-  },
-  {
-    "type": "keyword_brin",
-    "named": true
-  },
-  {
-    "type": "keyword_btree",
-    "named": true
-  },
-  {
-    "type": "keyword_bucket",
     "named": true
   },
   {
@@ -13127,10 +12879,6 @@
   },
   {
     "type": "keyword_definer",
-    "named": true
-  },
-  {
-    "type": "keyword_delayed",
     "named": true
   },
   {
@@ -13290,14 +13038,6 @@
     "named": true
   },
   {
-    "type": "keyword_gin",
-    "named": true
-  },
-  {
-    "type": "keyword_gist",
-    "named": true
-  },
-  {
     "type": "keyword_group",
     "named": true
   },
@@ -13315,10 +13055,6 @@
   },
   {
     "type": "keyword_having",
-    "named": true
-  },
-  {
-    "type": "keyword_high_priority",
     "named": true
   },
   {
@@ -13454,19 +13190,11 @@
     "named": true
   },
   {
-    "type": "keyword_location",
-    "named": true
-  },
-  {
     "type": "keyword_logged",
     "named": true
   },
   {
     "type": "keyword_loop",
-    "named": true
-  },
-  {
-    "type": "keyword_low_priority",
     "named": true
   },
   {
@@ -13574,10 +13302,6 @@
     "named": true
   },
   {
-    "type": "keyword_optimize",
-    "named": true
-  },
-  {
     "type": "keyword_options",
     "named": true
   },
@@ -13607,10 +13331,6 @@
   },
   {
     "type": "keyword_over",
-    "named": true
-  },
-  {
-    "type": "keyword_overwrite",
     "named": true
   },
   {
@@ -13734,10 +13454,6 @@
     "named": true
   },
   {
-    "type": "keyword_rewrite",
-    "named": true
-  },
-  {
     "type": "keyword_right",
     "named": true
   },
@@ -13818,14 +13534,6 @@
     "named": true
   },
   {
-    "type": "keyword_spgist",
-    "named": true
-  },
-  {
-    "type": "keyword_split",
-    "named": true
-  },
-  {
     "type": "keyword_stable",
     "named": true
   },
@@ -13883,10 +13591,6 @@
   },
   {
     "type": "keyword_tablespace",
-    "named": true
-  },
-  {
-    "type": "keyword_tablets",
     "named": true
   },
   {

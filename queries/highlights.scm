@@ -10,12 +10,7 @@
     name: (identifier) @function.call))
 
 [
-  (keyword_gist)
-  (keyword_btree)
   (keyword_hash)
-  (keyword_spgist)
-  (keyword_gin)
-  (keyword_brin)
   (keyword_array)
 ] @function.call
 
@@ -131,7 +126,6 @@
   (keyword_replace)
   (keyword_update)
   (keyword_into)
-  (keyword_overwrite)
   (keyword_matched)
   (keyword_values)
   (keyword_value)
@@ -231,15 +225,12 @@
 [
   (keyword_row)
   (keyword_comment)
-  (keyword_location)
   (keyword_stored)
   (keyword_virtual)
   (keyword_analyze)
   (keyword_explain)
   (keyword_verbose)
   (keyword_truncate)
-  (keyword_rewrite)
-  (keyword_optimize)
   (keyword_cache)
 ] @keyword
 
@@ -281,8 +272,6 @@
   (keyword_start)
   (keyword_restart)
   (keyword_tablespace)
-  (keyword_split)
-  (keyword_tablets)
   (keyword_until)
   (keyword_user)
   (keyword_valid)
@@ -352,7 +341,6 @@
 ; --- Dialect-compat (reachable in base grammar) ---
 [
   (keyword_duplicate)
-  (keyword_bucket)
   (keyword_jar)
   (keyword_environment)
   (keyword_handler)
@@ -371,9 +359,6 @@
  (keyword_unbounded)
  (keyword_unique)
  (keyword_cascade)
- (keyword_delayed)
- (keyword_high_priority)
- (keyword_low_priority)
  (keyword_ignore)
  (keyword_nothing)
  (keyword_check)
@@ -382,7 +367,6 @@
  (keyword_cascaded)
  (keyword_wait)
  (keyword_nowait)
- (keyword_bin_pack)
  (keyword_statistics)
  (keyword_maxvalue)
  (keyword_minvalue)

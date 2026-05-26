@@ -210,7 +210,6 @@ export default {
       $.keyword_only,
     ),
     comma_list($.relation, true),
-    optional($.index_hint),
     repeat(
       choice(
         $.join,
@@ -251,7 +250,6 @@ export default {
     choice(
       seq($._natural_number, $.keyword_rows),
       seq($._natural_number, $.keyword_percent),
-      seq($.keyword_bucket, $._natural_number, $.keyword_out, $.keyword_of, $._natural_number),
     ),
     ')',
   ),
@@ -302,7 +300,6 @@ export default {
     ),
     $.keyword_join,
     $.relation,
-    optional($.index_hint),
     optional($.join),
     choice(
       seq(

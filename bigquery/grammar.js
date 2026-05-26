@@ -67,7 +67,6 @@ export default grammar(base, {
       $._alter_statement,
       $._drop_statement,
       $._rename_statement,
-      $._optimize_statement,
       $._merge_statement,
       $._refresh_statement,
       $.set_statement,

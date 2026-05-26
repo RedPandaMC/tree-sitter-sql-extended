@@ -12,18 +12,10 @@ export default {
       $.keyword_insert,
       $.keyword_replace
     ),
-    optional(
-      choice(
-        $.keyword_low_priority,
-        $.keyword_delayed,
-        $.keyword_high_priority,
-      ),
-    ),
     optional($.keyword_ignore),
     optional(
       choice(
         $.keyword_into,
-        $.keyword_overwrite, // Spark SQL
       ),
     ),
     $.object_reference,

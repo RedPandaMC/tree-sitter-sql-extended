@@ -22,9 +22,7 @@ CREATE INDEX ON tab(col);
 Create named index with options
 ================================================================================
 
-CREATE UNIQUE INDEX CONCURRENTLY
-IF NOT EXISTS idx1
-ON tab USING HASH(col ASC)
+CREATE UNIQUE INDEX IF NOT EXISTS idx1 ON tab(col ASC)
 WHERE tab.col > 10;
 
 --------------------------------------------------------------------------------
@@ -35,7 +33,6 @@ WHERE tab.col > 10;
       (keyword_create)
       (keyword_unique)
       (keyword_index)
-      (keyword_concurrently)
       (keyword_if)
       (keyword_not)
       (keyword_exists)
@@ -43,8 +40,6 @@ WHERE tab.col > 10;
       (keyword_on)
       (object_reference
         (identifier))
-      (keyword_using)
-      (keyword_hash)
       (index_fields
         (field
           (identifier)
@@ -202,30 +197,3 @@ CREATE INDEX idx_covering ON tree.sitter (other_id, foo) INCLUDE (bar, baz);
           (field
             column: (identifier)))))))
 
-================================================================================
-index with TABLESPACE & Tablet Split
-================================================================================
-
-CREATE INDEX code_idx ON films (code) TABLESPACE indexspace SPLIT INTO 2 TABLETS;
-
---------------------------------------------------------------------------------
-
-(program
-  (statement
-    (create_index
-      (keyword_create)
-      (keyword_index)
-      column: (identifier)
-      (keyword_on)
-      (object_reference
-        name: (identifier))
-      (index_fields
-        (field
-          column: (identifier)))
-      (tablespace
-        (keyword_tablespace)
-        (identifier))
-      (tablet_split
-        (keyword_split)
-        (keyword_into)
-        (keyword_tablets)))))

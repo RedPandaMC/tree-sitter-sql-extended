@@ -60,10 +60,62 @@ export default grammar(base, {
       ),
     ),
 
-    _optimize_statement: $ => choice(
-      $._optimize_table,
-      $._vacuum_table,
+    create_table: $ => prec.left(
+      seq(
+        $.keyword_create,
+        optional(
+          choice(
+            $._temporary,
+            $.keyword_unlogged,
+          )
+        ),
+        $.keyword_table,
+        optional($._if_not_exists),
+        $.object_reference,
+        seq(
+          optional($.column_definitions),
+          optional(seq($.keyword_as, $.create_query)),
+        ),
+      ),
     ),
+
+    create_index: $ => seq(
+      $.keyword_create,
+      optional($.keyword_unique),
+      $.keyword_index,
+      optional($.keyword_concurrently),
+      optional(
+        seq(
+          optional($._if_not_exists),
+          field('column', $._column),
+        ),
+      ),
+      $.keyword_on,
+      optional($.keyword_only),
+      seq(
+        $.object_reference,
+        optional(
+          seq(
+            $.keyword_using,
+            choice(
+              $.keyword_btree,
+              $.keyword_hash,
+              $.keyword_gist,
+              $.keyword_spgist,
+              $.keyword_gin,
+              $.keyword_brin,
+              field('index_type', $.identifier),
+            ),
+          ),
+        ),
+        $.index_fields,
+      ),
+      optional($.covering_columns),
+      optional($.tablespace),
+      optional($.where),
+    ),
+
+    _optimize_statement: $ => $._vacuum_table,
 
     _alter_statement: $ => seq(
       choice(
