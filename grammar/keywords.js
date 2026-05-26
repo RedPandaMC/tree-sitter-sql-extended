@@ -553,6 +553,17 @@ export default {
 
   keyword_array: _ => make_keyword("array"), // not included in _type since it's a constructor literal
 
+  // BigQuery-specific keywords
+  keyword_struct: _ => make_keyword("struct"),
+  keyword_export: _ => make_keyword("export"),
+  keyword_model: _ => make_keyword("model"),
+  keyword_ml: _ => make_keyword("ml"),
+  keyword_predict: _ => make_keyword("predict"),
+  keyword_evaluate: _ => make_keyword("evaluate"),
+  keyword_assert: _ => make_keyword("assert"),
+  keyword_continue: _ => make_keyword("continue"),
+  keyword_error: _ => make_keyword("error"),
+
   // PostgreSQL-specific types (non-ANSI)
   keyword_oid: _ => make_keyword("oid"),
   keyword_oids: _ => make_keyword("oids"),

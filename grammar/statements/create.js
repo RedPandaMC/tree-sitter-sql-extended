@@ -32,13 +32,7 @@ export default {
   create_table: $ => prec.left(
     seq(
       $.keyword_create,
-      optional(
-        choice(
-          $._temporary,
-          $.keyword_unlogged,
-          $.keyword_external,
-        )
-      ),
+      optional($._temporary),
       $.keyword_table,
       optional($._if_not_exists),
       $.object_reference,
@@ -181,7 +175,6 @@ export default {
     $.keyword_create,
     optional($.keyword_unique),
     $.keyword_index,
-    optional($.keyword_concurrently),
     optional(
       seq(
         optional($._if_not_exists),
@@ -195,21 +188,13 @@ export default {
       optional(
         seq(
           $.keyword_using,
-          choice(
-            $.keyword_btree,
-            $.keyword_hash,
-            $.keyword_gist,
-            $.keyword_spgist,
-            $.keyword_gin,
-            $.keyword_brin
-          ),
+          field('index_type', $.identifier),
         ),
       ),
       $.index_fields
     ),
     optional($.covering_columns),
     optional($.tablespace),
-    optional($.tablet_split),
     optional(
       $.where,
     ),
