@@ -1,5 +1,5 @@
 import base from '../grammar.js';
-import { wrapped_in_parenthesis } from '../grammar/helpers.js';
+import { wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 import pg_copy_rules from './grammar/copy.js';
 import pg_optimize_rules from './grammar/optimize.js';
 import pg_create_rules from './grammar/create.js';
@@ -36,6 +36,42 @@ export default grammar(base, {
         $._truncate_statement,
         $._copy_statement,
       ),
+    ),
+
+    // PostgreSQL: INSERT supports ON CONFLICT and RETURNING
+    _insert_statement: $ => seq(
+      $.insert,
+      optional($.returning),
+    ),
+
+    insert: $ => seq(
+      $.keyword_insert,
+      optional($.keyword_into),
+      $.object_reference,
+      optional(
+        seq(
+          $.keyword_as,
+          field('alias', $.identifier),
+        ),
+      ),
+      choice(
+        $._insert_values,
+        $._set_values,
+      ),
+      optional($._on_conflict),
+    ),
+
+    // PostgreSQL: DELETE supports RETURNING
+    _delete_statement: $ => seq(
+      $.delete,
+      alias($._delete_from, $.from),
+      optional($.returning),
+    ),
+
+    // PostgreSQL: UPDATE supports RETURNING
+    _update_statement: $ => seq(
+      $.update,
+      optional($.returning),
     ),
 
     _create_statement: $ => seq(
@@ -291,6 +327,70 @@ export default grammar(base, {
       seq($.keyword_type, $.identifier),
       seq($.keyword_view, $.object_reference),
     ),
+
+    // PostgreSQL-specific keywords (not ANSI)
+    keyword_concurrently:   _ => make_keyword("concurrently"),
+    keyword_btree:          _ => make_keyword("btree"),
+    keyword_hash:           _ => make_keyword("hash"),
+    keyword_gist:           _ => make_keyword("gist"),
+    keyword_spgist:         _ => make_keyword("spgist"),
+    keyword_gin:            _ => make_keyword("gin"),
+    keyword_brin:           _ => make_keyword("brin"),
+    keyword_unlogged:       _ => make_keyword("unlogged"),
+    keyword_logged:         _ => make_keyword("logged"),
+    keyword_extension:      _ => make_keyword("extension"),
+    keyword_policy:         _ => make_keyword("policy"),
+    keyword_permissive:     _ => make_keyword("permissive"),
+    keyword_restrictive:    _ => make_keyword("restrictive"),
+    keyword_vacuum:         _ => make_keyword("vacuum"),
+    keyword_copy:           _ => make_keyword("copy"),
+    keyword_stdin:          _ => make_keyword("stdin"),
+    keyword_freeze:         _ => make_keyword("freeze"),
+    keyword_escape:         _ => make_keyword("escape"),
+    keyword_encoding:       _ => make_keyword("encoding"),
+    keyword_force_quote:    _ => make_keyword("force_quote"),
+    keyword_quote:          _ => make_keyword("quote"),
+    keyword_force_null:     _ => make_keyword("force_null"),
+    keyword_force_not_null: _ => make_keyword("force_not_null"),
+    keyword_header:         _ => make_keyword("header"),
+    keyword_program:        _ => make_keyword("program"),
+    keyword_plain:          _ => make_keyword("plain"),
+    keyword_extended:       _ => make_keyword("extended"),
+    keyword_main:           _ => make_keyword("main"),
+    keyword_storage:        _ => make_keyword("storage"),
+    keyword_compression:    _ => make_keyword("compression"),
+    keyword_returning:      _ => make_keyword("returning"),
+    keyword_conflict:       _ => make_keyword("conflict"),
+    keyword_upsert:         _ => make_keyword("upsert"),
+    keyword_nowait:         _ => make_keyword("nowait"),
+    keyword_wait:           _ => make_keyword("wait"),
+    keyword_tablespace:     _ => make_keyword("tablespace"),
+    keyword_replication:    _ => make_keyword("replication"),
+    keyword_oid:            _ => make_keyword("oid"),
+    keyword_oids:           _ => make_keyword("oids"),
+    keyword_name:           _ => make_keyword("name"),
+    keyword_regclass:       _ => make_keyword("regclass"),
+    keyword_regnamespace:   _ => make_keyword("regnamespace"),
+    keyword_regproc:        _ => make_keyword("regproc"),
+    keyword_regtype:        _ => make_keyword("regtype"),
+    keyword_ilike:          _ => make_keyword("ilike"),
+    keyword_setof:          _ => make_keyword("setof"),
+    keyword_variadic:       _ => make_keyword("variadic"),
+    keyword_leakproof:      _ => make_keyword("leakproof"),
+    keyword_parallel:       _ => make_keyword("parallel"),
+    keyword_safe:           _ => make_keyword("safe"),
+    keyword_unsafe:         _ => make_keyword("unsafe"),
+    keyword_restricted:     _ => make_keyword("restricted"),
+    keyword_called:         _ => make_keyword("called"),
+    keyword_strict:         _ => make_keyword("strict"),
+    keyword_support:        _ => make_keyword("support"),
+    keyword_cost:           _ => make_keyword("cost"),
+    keyword_ordinality:     _ => make_keyword("ordinality"),
+    keyword_attribute:      _ => make_keyword("attribute"),
+    keyword_statistics:     _ => make_keyword("statistics"),
+    keyword_format:         _ => make_keyword("format"),
+    keyword_delimiter:      _ => make_keyword("delimiter"),
+    keyword_csv:            _ => make_keyword("csv"),
 
     ...pg_copy_rules,
     ...pg_optimize_rules,

@@ -1,4 +1,84 @@
 ================================================================================
+MySQL: Create table with generated always (STORED/VIRTUAL)
+================================================================================
+
+CREATE TABLE "Role" (
+  "roleId" bigint generated always as identity,
+  "name" varchar NOT NULL,
+  height_in numeric GENERATED ALWAYS AS (height_cm / 2.54) STORED,
+  item_type_name TEXT GENERATED ALWAYS AS (
+     CASE item_type
+       WHEN 1 THEN 'foo'
+       WHEN 2 THEN 'bar'
+       ELSE 'UNKNOWN'
+     END
+  ) VIRTUAL
+);
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (create_table
+      (keyword_create)
+      (keyword_table)
+      (object_reference
+        name: (identifier))
+      (column_definitions
+        (column_definition
+          name: (identifier)
+          type: (bigint
+            (keyword_bigint))
+          (keyword_generated)
+          (keyword_always)
+          (keyword_as)
+          (field
+            name: (identifier)))
+        (column_definition
+          name: (identifier)
+          type: (varchar
+            (keyword_varchar))
+          (keyword_not)
+          (keyword_null))
+        (column_definition
+          name: (identifier)
+          type: (numeric
+            (keyword_numeric))
+          (keyword_generated)
+          (keyword_always)
+          (keyword_as)
+          (parenthesized_expression
+            (binary_expression
+              left: (field
+                name: (identifier))
+              right: (literal)))
+          (keyword_stored))
+        (column_definition
+          name: (identifier)
+          custom_type: (object_reference
+            name: (identifier))
+          (keyword_generated)
+          (keyword_always)
+          (keyword_as)
+          (parenthesized_expression
+            (case
+              (keyword_case)
+              (field
+                name: (identifier))
+              (keyword_when)
+              (literal)
+              (keyword_then)
+              (literal)
+              (keyword_when)
+              (literal)
+              (keyword_then)
+              (literal)
+              (keyword_else)
+              (literal)
+              (keyword_end)))
+          (keyword_virtual))))))
+
+================================================================================
 MySQL: Create table with table options
 ================================================================================
 

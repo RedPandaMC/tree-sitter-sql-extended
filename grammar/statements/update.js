@@ -4,7 +4,6 @@ export default {
 
   _update_statement: $ => seq(
     $.update,
-    optional($.returning),
   ),
 
   update: $ => seq(

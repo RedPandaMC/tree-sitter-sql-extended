@@ -1,5 +1,5 @@
 import base from '../grammar.js';
-import { paren_list, optional_parenthesis, comma_list, wrapped_in_parenthesis } from '../grammar/helpers.js';
+import { paren_list, optional_parenthesis, comma_list, wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 
 import sf_qualify_rules     from './grammar/qualify.js';
 import sf_pivot_rules       from './grammar/pivot.js';
@@ -193,6 +193,40 @@ export default grammar(base, {
       // Snowflake-specific
       $.sf_variant_access,
     )),
+
+    // Snowflake-specific keywords (not ANSI)
+    keyword_at:             _ => make_keyword("at"),
+    keyword_one:            _ => make_keyword("one"),
+    keyword_per:            _ => make_keyword("per"),
+    keyword_past:           _ => make_keyword("past"),
+    keyword_next:           _ => make_keyword("next"),
+    keyword_match_recognize:_ => make_keyword("match_recognize"),
+    keyword_measures:       _ => make_keyword("measures"),
+    keyword_pattern:        _ => make_keyword("pattern"),
+    keyword_define:         _ => make_keyword("define"),
+    keyword_skip:           _ => make_keyword("skip"),
+    keyword_let:            _ => make_keyword("let"),
+    keyword_raise:          _ => make_keyword("raise"),
+    keyword_exception:      _ => make_keyword("exception"),
+    keyword_task:           _ => make_keyword("task"),
+    keyword_stream:         _ => make_keyword("stream"),
+    keyword_dynamic:        _ => make_keyword("dynamic"),
+    keyword_warehouse:      _ => make_keyword("warehouse"),
+    keyword_schedule:       _ => make_keyword("schedule"),
+    keyword_secure:         _ => make_keyword("secure"),
+    keyword_masking:        _ => make_keyword("masking"),
+    keyword_target_lag:     _ => make_keyword("target_lag"),
+    keyword_access:         _ => make_keyword("access"),
+    keyword_secondary:      _ => make_keyword("secondary"),
+    keyword_roles:          _ => make_keyword("roles"),
+    keyword_source:         _ => make_keyword("source"),
+    keyword_qualify:        _ => make_keyword("qualify"),
+    keyword_pivot:          _ => make_keyword("pivot"),
+    keyword_unpivot:        _ => make_keyword("unpivot"),
+    keyword_string:         _ => make_keyword("string"),
+    keyword_rlike:          _ => choice(make_keyword("rlike"), make_keyword("regexp")),
+    keyword_copy:           _ => make_keyword("copy"),
+    keyword_policy:         _ => make_keyword("policy"),
 
     // ── Spread all Snowflake rule modules ───────────────────────────────────
     ...sf_qualify_rules,

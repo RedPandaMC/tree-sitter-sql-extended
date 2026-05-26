@@ -343,3 +343,48 @@ Every keyword reachable in a parse tree (present in `src/node-types.json`) must 
 
 This check applies to the **base** grammar only. Dialect-specific keywords live in the dialect's
 own `queries/highlights.scm` and are not checked by `test-keywords.sh`.
+
+---
+
+## Keyword architecture rule
+
+**All keyword token definitions must live in the base `grammar/keywords.js`**, even if a keyword
+is only used by one specific dialect. This is a hard constraint imposed by tree-sitter's keyword
+extraction mechanism.
+
+### Why this matters
+
+tree-sitter performs *keyword extraction* during parser generation: it builds a `ts_lex_keywords`
+function in the generated C parser that maps identifier tokens to keyword tokens. This function
+is only populated from the **base** grammar. Keywords defined solely in a dialect
+`grammar(base, overrides)` block are added to the parser's symbol table but NOT to the keyword
+extraction function. As a result, they are never recognized as keywords in ambiguous positions
+where both a keyword and an identifier are grammatically valid — the parser treats them as
+plain identifiers instead, producing incorrect parse trees.
+
+### Rule
+
+- `grammar/keywords.js`: define **all** keywords (ANSI and dialect-specific) using `make_keyword()`
+- Dialect grammars (`spark/grammar.js`, `postgres/grammar.js`, etc.): may **override** a keyword
+  definition (e.g., to split `keyword_like` / `keyword_ilike`) but must NOT be the sole place
+  where a keyword token is defined
+- Base grammar **rules** should only reference ANSI SQL keywords in ANSI constructs — dialect
+  keywords defined in `grammar/keywords.js` for extraction purposes may remain unused by any
+  base grammar rule
+
+### The keyword_like / keyword_ilike split
+
+`keyword_ilike` (PostgreSQL-only `ILIKE` operator) is defined in base `grammar/keywords.js` for
+keyword extraction, but is **not used** in any base grammar rule. Postgres overrides the
+`binary_expression` (via its expression rules) to add `$.keyword_ilike` as a valid operator.
+The base keeps only `keyword_like` in its `binary_expression` rule.
+
+### Adding a new dialect-specific keyword
+
+1. Add the definition in `grammar/keywords.js`:
+   ```javascript
+   keyword_myfoo: _ => make_keyword("myfoo"),
+   ```
+2. Use it only in the relevant dialect's grammar rules (no need to add it to any base rule)
+3. Add it to the dialect's `queries/highlights.scm` if it should be highlighted
+4. Do NOT duplicate the definition inside the dialect's `grammar.js` rules block
