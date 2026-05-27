@@ -1150,11 +1150,35 @@
           "named": true
         },
         {
+          "type": "iceberg_partition_transform",
+          "named": true
+        },
+        {
+          "type": "iceberg_write_order",
+          "named": true
+        },
+        {
+          "type": "keyword_add",
+          "named": true
+        },
+        {
           "type": "keyword_alter",
           "named": true
         },
         {
+          "type": "keyword_by",
+          "named": true
+        },
+        {
           "type": "keyword_disable",
+          "named": true
+        },
+        {
+          "type": "keyword_distributed",
+          "named": true
+        },
+        {
+          "type": "keyword_drop",
           "named": true
         },
         {
@@ -1163,6 +1187,10 @@
         },
         {
           "type": "keyword_exists",
+          "named": true
+        },
+        {
+          "type": "keyword_field",
           "named": true
         },
         {
@@ -1186,6 +1214,14 @@
           "named": true
         },
         {
+          "type": "keyword_partition",
+          "named": true
+        },
+        {
+          "type": "keyword_replace",
+          "named": true
+        },
+        {
           "type": "keyword_row",
           "named": true
         },
@@ -1195,6 +1231,14 @@
         },
         {
           "type": "keyword_table",
+          "named": true
+        },
+        {
+          "type": "keyword_with",
+          "named": true
+        },
+        {
+          "type": "keyword_write",
           "named": true
         },
         {
@@ -2509,6 +2553,118 @@
         },
         {
           "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "procedure": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "collate_expression",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_call",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variant_path_expression",
+          "named": true
+        },
+        {
+          "type": "window_function",
           "named": true
         }
       ]
@@ -7531,6 +7687,69 @@
     }
   },
   {
+    "type": "iceberg_partition_transform",
+    "named": true,
+    "fields": {
+      "column": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      },
+      "transform": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "iceberg_write_order",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_by",
+          "named": true
+        },
+        {
+          "type": "keyword_ordered",
+          "named": true
+        },
+        {
+          "type": "keyword_write",
+          "named": true
+        },
+        {
+          "type": "order_target",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "identifier",
     "named": true,
     "fields": {}
@@ -10718,6 +10937,10 @@
           "named": true
         },
         {
+          "type": "call_statement",
+          "named": true
+        },
+        {
           "type": "comment_statement",
           "named": true
         },
@@ -13068,6 +13291,10 @@
     "named": false
   },
   {
+    "type": "=>",
+    "named": false
+  },
+  {
     "type": ">",
     "named": false
   },
@@ -13214,6 +13441,10 @@
   },
   {
     "type": "keyword_cached",
+    "named": true
+  },
+  {
+    "type": "keyword_call",
     "named": true
   },
   {
@@ -13417,6 +13648,10 @@
     "named": true
   },
   {
+    "type": "keyword_distributed",
+    "named": true
+  },
+  {
     "type": "keyword_do",
     "named": true
   },
@@ -13502,6 +13737,10 @@
   },
   {
     "type": "keyword_false",
+    "named": true
+  },
+  {
+    "type": "keyword_field",
     "named": true
   },
   {
@@ -13878,6 +14117,10 @@
   },
   {
     "type": "keyword_order",
+    "named": true
+  },
+  {
+    "type": "keyword_ordered",
     "named": true
   },
   {

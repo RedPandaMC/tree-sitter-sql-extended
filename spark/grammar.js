@@ -4,6 +4,7 @@ import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
+import spark_iceberg_rules from './grammar/iceberg.js';
 
 export default grammar(base, {
   name: 'spark_sql',
@@ -24,6 +25,7 @@ export default grammar(base, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
+    [$.iceberg_write_order],
   ],
 
   rules: {
@@ -111,7 +113,7 @@ export default grammar(base, {
       $._spark_analyze,
     ),
 
-    // Override _ddl_statement to add Spark 4.0 variable statements
+    // Override _ddl_statement to add Spark 4.0 variable statements and CALL
     _ddl_statement: $ => choice(
       $._create_statement,
       $._alter_statement,
@@ -126,6 +128,7 @@ export default grammar(base, {
       $.use_statement,
       $.declare_variable_statement,
       $.set_variable_statement,
+      $.call_statement,
     ),
 
     // Override set_statement to add scripting assignment: SET var = expr
@@ -308,6 +311,14 @@ export default grammar(base, {
       $.rename_column,
       $.set_schema,
       $.change_ownership,
+      // Iceberg partition field operations
+      seq($.keyword_add, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
+      seq($.keyword_drop, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
+      seq($.keyword_replace, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform,
+          $.keyword_with, $.iceberg_partition_transform),
+      // Iceberg write order
+      $.iceberg_write_order,
+      seq($.keyword_write, $.keyword_distributed, $.keyword_by, $.keyword_partition),
     ),
 
     tablesample: $ => seq(
@@ -397,10 +408,12 @@ export default grammar(base, {
     keyword_shallow:            _ => make_keyword("shallow"),
     keyword_deep:               _ => make_keyword("deep"),
     keyword_clone:              _ => make_keyword("clone"),
+    keyword_field:              _ => make_keyword("field"),
 
     ...spark_create_rules,
     ...spark_optimize_rules,
     ...spark_spark4_rules,
     ...spark_scripting_rules,
+    ...spark_iceberg_rules,
   },
 });

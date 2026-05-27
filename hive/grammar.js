@@ -24,6 +24,7 @@ export default grammar(spark, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
+    [$.iceberg_write_order],
     [$.lateral_view],
     [$.stored_by],
     [$.row_format],
@@ -47,6 +48,7 @@ export default grammar(spark, {
       $.use_statement,
       $.declare_variable_statement,
       $.set_variable_statement,
+      $.call_statement,
       $.msck_repair_statement,
     ),
 
