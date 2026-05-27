@@ -4,6 +4,7 @@ import mariadb_temporal_rules from './grammar/temporal.js';
 import mariadb_versioning_rules from './grammar/versioning.js';
 import mariadb_returning_rules from './grammar/returning.js';
 import mariadb_package_rules from './grammar/package.js';
+import mariadb_invisible_rules from './grammar/invisible.js';
 
 export default grammar(mysql, {
   name: 'mariadb_sql',
@@ -49,11 +50,14 @@ export default grammar(mysql, {
     keyword_period:      _ => token(prec(1, make_keyword("period"))),
     keyword_package:     _ => token(prec(1, make_keyword("package"))),
     keyword_body:        _ => token(prec(1, make_keyword("body"))),
+    keyword_invisible:   _ => token(prec(1, make_keyword("invisible"))),
+    keyword_visible:     _ => token(prec(1, make_keyword("visible"))),
 
     ...mariadb_temporal_rules,
     ...mariadb_versioning_rules,
     ...mariadb_returning_rules,
     ...mariadb_package_rules,
+    ...mariadb_invisible_rules,
 
   },
 });
