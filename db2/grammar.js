@@ -110,6 +110,8 @@ export default grammar(base, {
     keyword_cs:         _ => token(prec(1, make_keyword("cs"))),
     keyword_rs:         _ => token(prec(1, make_keyword("rs"))),
     keyword_rr:         _ => token(prec(1, make_keyword("rr"))),
+    keyword_preserve:   _ => token(prec(1, make_keyword("preserve"))),
+    keyword_path:       _ => token(prec(1, make_keyword("path"))),
 
     ...db2_modules_rules,
     ...db2_data_control_rules,

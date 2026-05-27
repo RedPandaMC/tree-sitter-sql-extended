@@ -43,12 +43,12 @@ export default grammar(mysql, {
     ),
 
     // MariaDB-specific keywords (dialect-local redefinitions for correct scoping)
-    keyword_system:      _ => make_keyword("system"),
-    keyword_system_time: _ => make_keyword("system_time"),
-    keyword_versioning:  _ => make_keyword("versioning"),
-    keyword_period:     _ => make_keyword("period"),
-    keyword_package:    _ => make_keyword("package"),
-    keyword_body:       _ => make_keyword("body"),
+    keyword_system:      _ => token(prec(1, make_keyword("system"))),
+    keyword_system_time: _ => token(prec(1, make_keyword("system_time"))),
+    keyword_versioning:  _ => token(prec(1, make_keyword("versioning"))),
+    keyword_period:      _ => token(prec(1, make_keyword("period"))),
+    keyword_package:     _ => token(prec(1, make_keyword("package"))),
+    keyword_body:        _ => token(prec(1, make_keyword("body"))),
 
     ...mariadb_temporal_rules,
     ...mariadb_versioning_rules,
