@@ -5,6 +5,8 @@ import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 import spark_iceberg_rules from './grammar/iceberg.js';
+import hive_compat_storage_rules from '../grammar/hive_compat/table_storage.js';
+import hive_compat_alter_rules from '../grammar/hive_compat/alter.js';
 
 export default grammar(base, {
   name: 'spark_sql',
@@ -282,22 +284,6 @@ export default grammar(base, {
       ),
     ),
 
-    // Hive/Spark: ALTER TABLE t ADD [IF NOT EXISTS] PARTITION (key=val) [LOCATION path]
-    add_partition: $ => seq(
-      $.keyword_add,
-      optional($._if_not_exists),
-      repeat1(
-        seq(
-          $.keyword_partition,
-          paren_list(
-            seq($.identifier, '=', $._expression),
-            true,
-          ),
-          optional(seq($.keyword_location, $._literal_string)),
-        ),
-      ),
-    ),
-
     _alter_specifications: $ => choice(
       $.add_partition,
       $.add_column,
@@ -410,6 +396,8 @@ export default grammar(base, {
     keyword_clone:              _ => make_keyword("clone"),
     keyword_field:              _ => make_keyword("field"),
 
+    ...hive_compat_storage_rules,
+    ...hive_compat_alter_rules,
     ...spark_create_rules,
     ...spark_optimize_rules,
     ...spark_spark4_rules,
