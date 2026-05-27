@@ -77,84 +77,34 @@ jobs:
           test-python: true
 
       - name: Run tests (Spark SQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: spark
+        run: cd spark && tree-sitter test
 
       - name: Run tests (Databricks SQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: databricks
+        run: cd databricks && tree-sitter test
 
       - name: Run tests (PostgreSQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: postgres
+        run: cd postgres && tree-sitter test
 
       - name: Run tests (MySQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: mysql
+        run: cd mysql && tree-sitter test
 
       - name: Run tests (Snowflake)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: snowflake
+        run: cd snowflake && tree-sitter test
 
       - name: Run tests (MariaDB)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: mariadb
+        run: cd mariadb && tree-sitter test
 
       - name: Run tests (SQLite)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: sqlite
+        run: cd sqlite && tree-sitter test
 
       - name: Run tests (Apache Hive)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: hive
+        run: cd hive && tree-sitter test
 
       - name: Run tests (Oracle/PL-SQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: oracle
+        run: cd oracle && tree-sitter test
 
       - name: Run tests (IBM Db2)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: db2
+        run: cd db2 && tree-sitter test
 
       - run: scripts/test-keywords.sh
 
