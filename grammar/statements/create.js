@@ -56,7 +56,7 @@ export default {
     seq($.keyword_collate, $.identifier),
     field('name', $.keyword_default),
     seq(
-      field('name', choice($.keyword_engine, $.identifier, $._literal_string)),
+      field('name', choice($.identifier, $._literal_string)),
       '=',
       field('value', choice($.identifier, $._literal_string, alias($._integer, $.literal))),
     ),
@@ -164,7 +164,6 @@ export default {
     ),
   ),
   tablespace: $ => seq($.keyword_tablespace, $.identifier),
-  tablet_split: $ => seq($.keyword_split, $.keyword_into, $._natural_number, $.keyword_tablets),
 
   covering_columns: $ => seq(
     $.keyword_include,

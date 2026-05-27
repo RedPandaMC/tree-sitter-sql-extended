@@ -4,20 +4,11 @@ export default {
 
   _insert_statement: $ => seq(
     $.insert,
-    optional($.returning),
   ),
 
   insert: $ => seq(
-    choice(
-      $.keyword_insert,
-      $.keyword_replace
-    ),
-    optional($.keyword_ignore),
-    optional(
-      choice(
-        $.keyword_into,
-      ),
-    ),
+    $.keyword_insert,
+    optional($.keyword_into),
     $.object_reference,
     optional(
       seq(
@@ -29,12 +20,6 @@ export default {
     choice(
       $._insert_values,
       $._set_values,
-    ),
-    optional(
-      choice(
-        $._on_conflict,
-        $._on_duplicate_key_update,
-      ),
     ),
   ),
 

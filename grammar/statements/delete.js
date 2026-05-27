@@ -3,7 +3,6 @@ export default {
   _delete_statement: $ => seq(
     $.delete,
     alias($._delete_from, $.from),
-    optional($.returning),
   ),
 
   _delete_from: $ => seq(
@@ -19,7 +18,6 @@ export default {
 
   delete: $ => seq(
     $.keyword_delete,
-    optional($.index_hint),
   ),
 
 };
