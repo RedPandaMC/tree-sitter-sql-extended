@@ -38,8 +38,18 @@ jobs:
             mysql/src/node-types.json
             snowflake/src/parser.c
             snowflake/src/node-types.json
+            mariadb/src/parser.c
+            mariadb/src/node-types.json
+            sqlite/src/parser.c
+            sqlite/src/node-types.json
+            hive/src/parser.c
+            hive/src/node-types.json
+            oracle/src/parser.c
+            oracle/src/node-types.json
+            db2/src/parser.c
+            db2/src/node-types.json
             .grammar-cache/
-          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**') }}
+          key: parsers-${{ hashFiles('grammar.js', 'grammar/**', 'spark/grammar.js', 'spark/grammar/**', 'databricks/grammar.js', 'databricks/grammar/**', 'postgres/grammar.js', 'postgres/grammar/**', 'mysql/grammar.js', 'mysql/grammar/**', 'snowflake/grammar.js', 'snowflake/grammar/**', 'mariadb/grammar.js', 'mariadb/grammar/**', 'sqlite/grammar.js', 'sqlite/grammar/**', 'hive/grammar.js', 'hive/grammar/**', 'oracle/grammar.js', 'oracle/grammar/**', 'db2/grammar.js', 'db2/grammar/**') }}
 
       # Generate in dependency order; independent dialects run in parallel.
       # base → [spark | postgres | mysql | snowflake] → databricks
@@ -52,6 +62,12 @@ jobs:
           node scripts/generate.js snowflake &
           wait
           node scripts/generate.js databricks
+          node scripts/generate.js mariadb
+          node scripts/generate.js sqlite &
+          node scripts/generate.js hive &
+          node scripts/generate.js oracle &
+          node scripts/generate.js db2 &
+          wait
 
       - name: Run tests (base SQL)
         uses: tree-sitter/parser-test-action@v3
@@ -61,44 +77,34 @@ jobs:
           test-python: true
 
       - name: Run tests (Spark SQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: spark
+        run: cd spark && tree-sitter test
 
       - name: Run tests (Databricks SQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: databricks
+        run: cd databricks && tree-sitter test
 
       - name: Run tests (PostgreSQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: postgres
+        run: cd postgres && tree-sitter test
 
       - name: Run tests (MySQL)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: mysql
+        run: cd mysql && tree-sitter test
 
       - name: Run tests (Snowflake)
-        uses: tree-sitter/parser-test-action@v3
-        with:
-          test-rust: false
-          test-node: false
-          test-python: false
-          grammar-path: snowflake
+        run: cd snowflake && tree-sitter test
+
+      - name: Run tests (MariaDB)
+        run: cd mariadb && tree-sitter test
+
+      - name: Run tests (SQLite)
+        run: cd sqlite && tree-sitter test
+
+      - name: Run tests (Apache Hive)
+        run: cd hive && tree-sitter test
+
+      - name: Run tests (Oracle/PL-SQL)
+        run: cd oracle && tree-sitter test
+
+      - name: Run tests (IBM Db2)
+        run: cd db2 && tree-sitter test
 
       - run: scripts/test-keywords.sh
 
@@ -145,7 +151,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           STATUS=0
-          for dir in test spark/test databricks/test postgres/test mysql/test snowflake/test; do
+          for dir in test spark/test databricks/test postgres/test mysql/test snowflake/test mariadb/test sqlite/test hive/test oracle/test db2/test; do
             if [[ $(grep -rn --exclude=errors.txt ERROR "$dir/" 2>/dev/null | wc -l) -gt 0 ]]; then
                 echo "Found 'ERROR' in $dir: "
                 grep -rn --exclude=errors.txt ERROR "$dir/" | cut -f1,2 -d:

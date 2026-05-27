@@ -1,4 +1,55 @@
 ================================================================================
+MySQL: REPLACE INTO with column ordering
+================================================================================
+
+REPLACE INTO my_table (name, id, year)
+VALUES ('foo', 123, '2020');
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (insert
+      (keyword_replace)
+      (keyword_into)
+      (object_reference
+        name: (identifier))
+      (list
+        (column
+          (identifier))
+        (column
+          (identifier))
+        (column
+          (identifier)))
+      (keyword_values)
+      (list
+        (literal)
+        (literal)
+        (literal)))))
+
+================================================================================
+MySQL: Insert with IGNORE
+================================================================================
+
+INSERT IGNORE my_table
+VALUES('foo','bar', 3);
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (insert
+      (keyword_insert)
+      (keyword_ignore)
+      (object_reference
+        name: (identifier))
+      (keyword_values)
+      (list
+        (literal)
+        (literal)
+        (literal)))))
+
+================================================================================
 MySQL: Insert with LOW_PRIORITY
 ================================================================================
 

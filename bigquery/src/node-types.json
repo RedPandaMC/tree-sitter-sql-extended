@@ -1678,21 +1678,6 @@
     }
   },
   {
-    "type": "assignment_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "between_expression",
     "named": true,
     "fields": {
@@ -4747,10 +4732,6 @@
           "named": true
         },
         {
-          "type": "keyword_auto_increment",
-          "named": true
-        },
-        {
           "type": "keyword_cascade",
           "named": true
         },
@@ -4819,19 +4800,11 @@
           "named": true
         },
         {
-          "type": "keyword_stored",
-          "named": true
-        },
-        {
           "type": "keyword_unique",
           "named": true
         },
         {
           "type": "keyword_update",
-          "named": true
-        },
-        {
-          "type": "keyword_virtual",
           "named": true
         },
         {
@@ -6710,13 +6683,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "index_hint",
-          "named": true
-        },
         {
           "type": "keyword_delete",
           "named": true
@@ -8575,52 +8544,6 @@
     }
   },
   {
-    "type": "index_hint",
-    "named": true,
-    "fields": {
-      "index_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_for",
-          "named": true
-        },
-        {
-          "type": "keyword_force",
-          "named": true
-        },
-        {
-          "type": "keyword_ignore",
-          "named": true
-        },
-        {
-          "type": "keyword_index",
-          "named": true
-        },
-        {
-          "type": "keyword_join",
-          "named": true
-        },
-        {
-          "type": "keyword_use",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "insert",
     "named": true,
     "fields": {
@@ -8644,10 +8567,6 @@
           "named": true
         },
         {
-          "type": "assignment_list",
-          "named": true
-        },
-        {
           "type": "cte",
           "named": true
         },
@@ -8660,22 +8579,6 @@
           "named": true
         },
         {
-          "type": "keyword_conflict",
-          "named": true
-        },
-        {
-          "type": "keyword_do",
-          "named": true
-        },
-        {
-          "type": "keyword_duplicate",
-          "named": true
-        },
-        {
-          "type": "keyword_ignore",
-          "named": true
-        },
-        {
           "type": "keyword_insert",
           "named": true
         },
@@ -8684,31 +8587,11 @@
           "named": true
         },
         {
-          "type": "keyword_key",
-          "named": true
-        },
-        {
-          "type": "keyword_nothing",
-          "named": true
-        },
-        {
-          "type": "keyword_on",
-          "named": true
-        },
-        {
           "type": "keyword_recursive",
           "named": true
         },
         {
-          "type": "keyword_replace",
-          "named": true
-        },
-        {
           "type": "keyword_set",
-          "named": true
-        },
-        {
-          "type": "keyword_update",
           "named": true
         },
         {
@@ -8737,10 +8620,6 @@
         },
         {
           "type": "set_operation",
-          "named": true
-        },
-        {
-          "type": "where",
           "named": true
         }
       ]
@@ -9035,11 +8914,6 @@
   },
   {
     "type": "keyword_int",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "keyword_like",
     "named": true,
     "fields": {}
   },
@@ -10360,25 +10234,6 @@
     }
   },
   {
-    "type": "returning",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_returning",
-          "named": true
-        },
-        {
-          "type": "select_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "select",
     "named": true,
     "fields": {},
@@ -11097,10 +10952,6 @@
         },
         {
           "type": "refresh_materialized_view",
-          "named": true
-        },
-        {
-          "type": "returning",
           "named": true
         },
         {
@@ -12706,10 +12557,6 @@
     "named": true
   },
   {
-    "type": "keyword_auto_increment",
-    "named": true
-  },
-  {
     "type": "keyword_before",
     "named": true
   },
@@ -12799,10 +12646,6 @@
   },
   {
     "type": "keyword_concurrently",
-    "named": true
-  },
-  {
-    "type": "keyword_conflict",
     "named": true
   },
   {
@@ -12907,10 +12750,6 @@
   },
   {
     "type": "keyword_drop",
-    "named": true
-  },
-  {
-    "type": "keyword_duplicate",
     "named": true
   },
   {
@@ -13062,10 +12901,6 @@
     "named": true
   },
   {
-    "type": "keyword_ignore",
-    "named": true
-  },
-  {
     "type": "keyword_immediate",
     "named": true
   },
@@ -13186,6 +13021,10 @@
     "named": true
   },
   {
+    "type": "keyword_like",
+    "named": true
+  },
+  {
     "type": "keyword_limit",
     "named": true
   },
@@ -13255,10 +13094,6 @@
   },
   {
     "type": "keyword_not",
-    "named": true
-  },
-  {
-    "type": "keyword_nothing",
     "named": true
   },
   {
@@ -13446,10 +13281,6 @@
     "named": true
   },
   {
-    "type": "keyword_returning",
-    "named": true
-  },
-  {
     "type": "keyword_returns",
     "named": true
   },
@@ -13551,10 +13382,6 @@
   },
   {
     "type": "keyword_storage",
-    "named": true
-  },
-  {
-    "type": "keyword_stored",
     "named": true
   },
   {
@@ -13674,10 +13501,6 @@
     "named": true
   },
   {
-    "type": "keyword_use",
-    "named": true
-  },
-  {
     "type": "keyword_user",
     "named": true
   },
@@ -13715,10 +13538,6 @@
   },
   {
     "type": "keyword_view",
-    "named": true
-  },
-  {
-    "type": "keyword_virtual",
     "named": true
   },
   {

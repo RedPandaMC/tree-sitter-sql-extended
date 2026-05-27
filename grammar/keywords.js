@@ -181,7 +181,7 @@ export default {
   keyword_spgist: _ => make_keyword("spgist"),
   keyword_gin:  _ => make_keyword("gin"),
   keyword_brin: _ => make_keyword("brin"),
-  keyword_like: _ => choice(make_keyword("like"),make_keyword("ilike")),
+  keyword_like: _ => make_keyword("like"),
   keyword_rlike: _ => choice(make_keyword("rlike"),make_keyword("regexp")),
   keyword_similar: _ => make_keyword("similar"),
 
@@ -572,5 +572,6 @@ export default {
   keyword_regnamespace: _ => make_keyword("regnamespace"),
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
+
 
 }

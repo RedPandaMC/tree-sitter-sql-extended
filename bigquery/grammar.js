@@ -1,5 +1,5 @@
 import base from '../grammar.js';
-import { paren_list, comma_list, optional_parenthesis, wrapped_in_parenthesis } from '../grammar/helpers.js';
+import { paren_list, comma_list, optional_parenthesis, wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 
 import bq_select_rules    from './grammar/select.js';
 import bq_expr_rules      from './grammar/expressions.js';
@@ -139,6 +139,27 @@ export default grammar(base, {
       $.bq_triple_single_quoted_string,
       $.bq_ml_function,
     )),
+
+    // BigQuery-specific keywords (not ANSI)
+    keyword_struct:    _ => make_keyword("struct"),
+    keyword_export:    _ => make_keyword("export"),
+    keyword_model:     _ => make_keyword("model"),
+    keyword_ml:        _ => make_keyword("ml"),
+    keyword_predict:   _ => make_keyword("predict"),
+    keyword_evaluate:  _ => make_keyword("evaluate"),
+    keyword_assert:    _ => make_keyword("assert"),
+    keyword_continue:  _ => make_keyword("continue"),
+    keyword_error:     _ => make_keyword("error"),
+    keyword_exception: _ => make_keyword("exception"),
+    keyword_qualify:   _ => make_keyword("qualify"),
+    keyword_string:    _ => make_keyword("string"),
+    keyword_while:     _ => make_keyword("while"),
+    keyword_loop:      _ => make_keyword("loop"),
+    keyword_leave:     _ => make_keyword("leave"),
+    keyword_iterate:   _ => make_keyword("iterate"),
+    keyword_elseif:    _ => make_keyword("elseif"),
+    keyword_source:    _ => make_keyword("source"),
+    keyword_options:   _ => make_keyword("options"),
 
     // ── Spread all BigQuery rule modules ────────────────────────────────────
     ...bq_select_rules,

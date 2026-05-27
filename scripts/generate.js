@@ -57,6 +57,8 @@ const entryHash = readFileSync(grammarPath, 'utf8');
 const parentHashes = [];
 if (dialect) parentHashes.push(readFileSync(join(ROOT, 'grammar.js'), 'utf8'));
 if (dialect === 'databricks') parentHashes.push(readFileSync(join(ROOT, 'spark', 'grammar.js'), 'utf8'));
+if (dialect === 'mariadb') parentHashes.push(readFileSync(join(ROOT, 'mysql', 'grammar.js'), 'utf8'));
+if (dialect === 'hive') parentHashes.push(readFileSync(join(ROOT, 'spark', 'grammar.js'), 'utf8'));
 
 const currentHash = [sharedHash, dialectHash, entryHash, ...parentHashes].join('|');
 

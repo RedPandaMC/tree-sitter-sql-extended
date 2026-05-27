@@ -1,9 +1,10 @@
 import base from '../grammar.js';
-import { paren_list, optional_parenthesis, comma_list } from '../grammar/helpers.js';
+import { paren_list, optional_parenthesis, comma_list, make_keyword } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
+import spark_iceberg_rules from './grammar/iceberg.js';
 
 export default grammar(base, {
   name: 'spark_sql',
@@ -24,6 +25,7 @@ export default grammar(base, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
+    [$.iceberg_write_order],
   ],
 
   rules: {
@@ -111,7 +113,7 @@ export default grammar(base, {
       $._spark_analyze,
     ),
 
-    // Override _ddl_statement to add Spark 4.0 variable statements
+    // Override _ddl_statement to add Spark 4.0 variable statements and CALL
     _ddl_statement: $ => choice(
       $._create_statement,
       $._alter_statement,
@@ -126,6 +128,7 @@ export default grammar(base, {
       $.use_statement,
       $.declare_variable_statement,
       $.set_variable_statement,
+      $.call_statement,
     ),
 
     // Override set_statement to add scripting assignment: SET var = expr
@@ -308,6 +311,14 @@ export default grammar(base, {
       $.rename_column,
       $.set_schema,
       $.change_ownership,
+      // Iceberg partition field operations
+      seq($.keyword_add, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
+      seq($.keyword_drop, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
+      seq($.keyword_replace, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform,
+          $.keyword_with, $.iceberg_partition_transform),
+      // Iceberg write order
+      $.iceberg_write_order,
+      seq($.keyword_write, $.keyword_distributed, $.keyword_by, $.keyword_partition),
     ),
 
     tablesample: $ => seq(
@@ -321,9 +332,88 @@ export default grammar(base, {
       ')',
     ),
 
+    // Spark/Hive-specific keywords (not ANSI)
+    keyword_overwrite:          _ => make_keyword("overwrite"),
+    keyword_clustered:          _ => make_keyword("clustered"),
+    keyword_buckets:            _ => make_keyword("buckets"),
+    keyword_tblproperties:      _ => make_keyword("tblproperties"),
+    keyword_format:             _ => make_keyword("format"),
+    keyword_delimited:          _ => make_keyword("delimited"),
+    keyword_delimiter:          _ => make_keyword("delimiter"),
+    keyword_fields:             _ => make_keyword("fields"),
+    keyword_terminated:         _ => make_keyword("terminated"),
+    keyword_escaped:            _ => make_keyword("escaped"),
+    keyword_lines:              _ => make_keyword("lines"),
+    keyword_parquet:            _ => make_keyword("parquet"),
+    keyword_rcfile:             _ => make_keyword("rcfile"),
+    keyword_csv:                _ => make_keyword("csv"),
+    keyword_textfile:           _ => make_keyword("textfile"),
+    keyword_avro:               _ => make_keyword("avro"),
+    keyword_sequencefile:       _ => make_keyword("sequencefile"),
+    keyword_orc:                _ => make_keyword("orc"),
+    keyword_jsonfile:           _ => make_keyword("jsonfile"),
+    keyword_stored:             _ => make_keyword("stored"),
+    keyword_virtual:            _ => make_keyword("virtual"),
+    keyword_cached:             _ => make_keyword("cached"),
+    keyword_uncached:           _ => make_keyword("uncached"),
+    keyword_replication:        _ => make_keyword("replication"),
+    keyword_compute:            _ => make_keyword("compute"),
+    keyword_stats:              _ => make_keyword("stats"),
+    keyword_optimize:           _ => make_keyword("optimize"),
+    keyword_rewrite:            _ => make_keyword("rewrite"),
+    keyword_bin_pack:           _ => make_keyword("bin_pack"),
+    keyword_incremental:        _ => make_keyword("incremental"),
+    keyword_location:           _ => make_keyword("location"),
+    keyword_partitioned:        _ => make_keyword("partitioned"),
+    keyword_sort:               _ => make_keyword("sort"),
+    keyword_sorted:             _ => make_keyword("sorted"),
+    keyword_metadata:           _ => make_keyword("metadata"),
+    keyword_noscan:             _ => make_keyword("noscan"),
+    keyword_ignore:             _ => make_keyword("ignore"),
+    keyword_rlike:              _ => choice(make_keyword("rlike"), make_keyword("regexp")),
+    keyword_schedule:           _ => make_keyword("schedule"),
+    keyword_while:              _ => make_keyword("while"),
+    keyword_elseif:             _ => make_keyword("elseif"),
+    keyword_loop:               _ => make_keyword("loop"),
+    keyword_repeat:             _ => make_keyword("repeat"),
+    keyword_signal:             _ => make_keyword("signal"),
+    keyword_resignal:           _ => make_keyword("resignal"),
+    keyword_leave:              _ => make_keyword("leave"),
+    keyword_iterate:            _ => make_keyword("iterate"),
+    keyword_diagnostics:        _ => make_keyword("diagnostics"),
+    keyword_sqlstate:           _ => make_keyword("sqlstate"),
+    keyword_returned_sqlstate:  _ => make_keyword("returned_sqlstate"),
+    keyword_message_text:       _ => make_keyword("message_text"),
+    keyword_message:            _ => make_keyword("message"),
+    keyword_condition:          _ => make_keyword("condition"),
+    keyword_get:                _ => make_keyword("get"),
+    keyword_qualify:            _ => make_keyword("qualify"),
+    keyword_pivot:              _ => make_keyword("pivot"),
+    keyword_unpivot:            _ => make_keyword("unpivot"),
+    keyword_bucket:             _ => make_keyword("bucket"),
+    keyword_cluster:            _ => make_keyword("cluster"),
+    keyword_distribute:         _ => make_keyword("distribute"),
+    keyword_transform:          _ => make_keyword("transform"),
+    keyword_var:                _ => make_keyword("var"),
+    keyword_variable:           _ => make_keyword("variable"),
+    keyword_variant:            _ => make_keyword("variant"),
+    keyword_string:             _ => make_keyword("string"),
+    keyword_inpath:             _ => make_keyword("inpath"),
+    keyword_directory:          _ => make_keyword("directory"),
+    keyword_load:               _ => make_keyword("load"),
+    keyword_changes:            _ => make_keyword("changes"),
+    keyword_oids:               _ => make_keyword("oids"),
+    keyword_delta:              _ => make_keyword("delta"),
+    keyword_source:             _ => make_keyword("source"),
+    keyword_shallow:            _ => make_keyword("shallow"),
+    keyword_deep:               _ => make_keyword("deep"),
+    keyword_clone:              _ => make_keyword("clone"),
+    keyword_field:              _ => make_keyword("field"),
+
     ...spark_create_rules,
     ...spark_optimize_rules,
     ...spark_spark4_rules,
     ...spark_scripting_rules,
+    ...spark_iceberg_rules,
   },
 });

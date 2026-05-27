@@ -62,7 +62,6 @@
  (keyword_desc)
  (keyword_nulls)
  (keyword_last)
- (keyword_auto_increment)
  (keyword_default)
  (keyword_collate)
  (keyword_concurrently)
@@ -164,7 +163,6 @@
   (keyword_foreign)
   (keyword_constraint)
   (keyword_force)
-  (keyword_use)
   (keyword_include)
   (keyword_for)
   (keyword_if)
@@ -198,7 +196,6 @@
   (keyword_all)
   (keyword_any)
   (keyword_some)
-  (keyword_returning)
   (keyword_only)
   (keyword_like)
   (keyword_rlike)
@@ -225,8 +222,6 @@
 [
   (keyword_row)
   (keyword_comment)
-  (keyword_stored)
-  (keyword_virtual)
   (keyword_analyze)
   (keyword_explain)
   (keyword_verbose)
@@ -238,7 +233,6 @@
 [
   (keyword_language)
   (keyword_called)
-  (keyword_conflict)
   (keyword_filter)
   (keyword_function)
   (keyword_input)
@@ -340,7 +334,6 @@
 
 ; --- Dialect-compat (reachable in base grammar) ---
 [
-  (keyword_duplicate)
   (keyword_jar)
   (keyword_environment)
   (keyword_handler)
@@ -359,8 +352,6 @@
  (keyword_unbounded)
  (keyword_unique)
  (keyword_cascade)
- (keyword_ignore)
- (keyword_nothing)
  (keyword_check)
  (keyword_option)
  (keyword_local)
@@ -417,7 +408,6 @@
   (keyword_not)
   (keyword_by)
   (keyword_on)
-  (keyword_do)
   (keyword_union)
   (keyword_except)
   (keyword_intersect)

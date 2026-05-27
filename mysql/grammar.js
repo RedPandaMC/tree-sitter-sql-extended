@@ -1,7 +1,9 @@
 import base from '../grammar.js';
-import { comma_list, wrapped_in_parenthesis } from '../grammar/helpers.js';
+import { comma_list, optional_parenthesis, wrapped_in_parenthesis, make_keyword, paren_list } from '../grammar/helpers.js';
 import mysql_create_rules from './grammar/create.js';
 import mysql_optimize_rules from './grammar/optimize.js';
+import mysql_load_data_rules from './grammar/load_data.js';
+import mysql_events_rules from './grammar/events.js';
 
 export default grammar(base, {
   name: 'mysql_sql',
@@ -32,6 +34,27 @@ export default grammar(base, {
       ),
     ),
 
+    _create_statement: $ => seq(
+      choice(
+        $.create_table,
+        $.create_view,
+        $.create_materialized_view,
+        $.create_index,
+        $.create_function,
+        $.create_procedure,
+        $.create_type,
+        $.create_database,
+        $.create_role,
+        $.create_sequence,
+        $.create_trigger,
+        $.create_event,
+        prec.left(seq(
+          $.create_schema,
+          repeat($._create_statement),
+        )),
+      ),
+    ),
+
     _optimize_statement: $ => $._mariadb_optimize_table,
 
     _ddl_statement: $ => choice(
@@ -43,6 +66,29 @@ export default grammar(base, {
       $._merge_statement,
       $._refresh_statement,
       $.set_statement,
+    ),
+
+    _dml_write: $ => seq(
+      optional($._cte),
+      choice(
+        $._delete_statement,
+        $._insert_statement,
+        $._update_statement,
+        $._truncate_statement,
+        $.load_data_statement,
+      ),
+    ),
+
+    _dml_read: $ => seq(
+      optional(optional_parenthesis($._cte)),
+      optional_parenthesis(
+        choice(
+          $._select_statement,
+          $.set_operation,
+          $.values_row_statement,
+          $.table_statement,
+        ),
+      ),
     ),
 
     insert: $ => seq(
@@ -128,6 +174,146 @@ export default grammar(base, {
       ),
     ),
 
+    // MySQL: relation includes JSON_TABLE
+    relation: $ => prec.right(
+      seq(
+        choice(
+          $.subquery,
+          $.invocation,
+          $.json_table,
+          $.object_reference,
+          wrapped_in_parenthesis($.values),
+        ),
+        optional($.tablesample),
+        optional(
+          seq(
+            $._alias,
+            optional(alias($._column_list, $.list)),
+          ),
+        ),
+      ),
+    ),
+
+    // MySQL: GROUP BY supports WITH ROLLUP
+    group_by: $ => prec.left(seq(
+      $.keyword_group,
+      $.keyword_by,
+      comma_list($._expression, true),
+      optional(seq($.keyword_with, $.keyword_rollup)),
+    )),
+
+    // MySQL: window functions support IGNORE/RESPECT NULLS
+    window_function: $ => seq(
+      $.invocation,
+      optional(choice(
+        seq($.keyword_ignore, $.keyword_nulls),
+        seq($.keyword_respect, $.keyword_nulls),
+      )),
+      $.keyword_over,
+      choice(
+        $.identifier,
+        $.window_specification,
+      ),
+    ),
+
+    // MySQL: override _column_constraint to add AUTO_INCREMENT, STORED/VIRTUAL, INVISIBLE
+    _column_constraint: $ => prec.left(choice(
+      choice(
+        $.keyword_null,
+        $._not_null,
+      ),
+      seq(
+        $.keyword_references,
+        $.object_reference,
+        paren_list($.identifier, true),
+        repeat(
+          seq(
+            $.keyword_on,
+            choice($.keyword_delete, $.keyword_update),
+            choice(
+              seq($.keyword_no, $.keyword_action),
+              $.keyword_restrict,
+              $.keyword_cascade,
+              seq(
+                $.keyword_set,
+                choice($.keyword_null, $.keyword_default),
+                  optional(paren_list($.identifier, true))
+              ),
+            ),
+          ),
+        ),
+      ),
+      $._default_expression,
+      $._primary_key,
+      $.keyword_auto_increment,
+      $.direction,
+      $._column_comment,
+      $._check_constraint,
+      // Generated / computed column: GENERATED ALWAYS AS (expr) [STORED|VIRTUAL]
+      seq(
+        optional(seq($.keyword_generated, $.keyword_always)),
+        $.keyword_as,
+        wrapped_in_parenthesis($._expression),
+        optional(choice($.keyword_stored, $.keyword_virtual)),
+      ),
+      $.keyword_invisible,
+      $.keyword_visible,
+      $.keyword_unique,
+    )),
+
+    // MySQL: override table_option to support ENGINE=
+    table_option: $ => choice(
+      seq($.keyword_default, $.keyword_character, $.keyword_set, $.identifier),
+      seq($.keyword_collate, $.identifier),
+      field('name', $.keyword_default),
+      seq(
+        field('name', choice($.keyword_engine, $.identifier, $._literal_string)),
+        '=',
+        field('value', choice($.identifier, $._literal_string, alias($._integer, $.literal))),
+      ),
+    ),
+
+    // MySQL 8: VALUES ROW(...) constructor
+    values_row_statement: $ => seq(
+      $.keyword_values,
+      comma_list(
+        seq(
+          $.keyword_row,
+          wrapped_in_parenthesis(comma_list($._expression, true)),
+        ),
+        true,
+      ),
+    ),
+
+    // MySQL 8: TABLE t [ORDER BY ...] [LIMIT n]
+    table_statement: $ => seq(
+      $.keyword_table,
+      $.object_reference,
+      optional($.order_by),
+      optional($.limit),
+    ),
+
+    // MySQL: JSON_TABLE(expr, path COLUMNS (...))
+    json_table: $ => seq(
+      $.keyword_json_table,
+      '(',
+      field('expr', $._expression),
+      ',',
+      field('path', alias($._literal_string, $.literal)),
+      $.keyword_columns,
+      '(',
+      comma_list($._json_table_column_def, true),
+      ')',
+      ')',
+    ),
+
+    _json_table_column_def: $ => seq(
+      field('name', $.identifier),
+      field('type', $._type),
+      $.keyword_path,
+      field('path', alias($._literal_string, $.literal)),
+    ),
+
     _backtick_quoted_string: _ => /`[^`]*`/,
 
     identifier: $ => choice(
@@ -137,8 +323,42 @@ export default grammar(base, {
       seq("`", $._identifier, "`"),
     ),
 
+    // MySQL-specific keywords (not ANSI) — also defined in grammar/keywords.js for extraction
+    keyword_auto_increment: _ => make_keyword("auto_increment"),
+    keyword_stored:         _ => make_keyword("stored"),
+    keyword_virtual:        _ => make_keyword("virtual"),
+    keyword_optimize:       _ => make_keyword("optimize"),
+    keyword_engine:         _ => make_keyword("engine"),
+    keyword_high_priority:  _ => make_keyword("high_priority"),
+    keyword_low_priority:   _ => make_keyword("low_priority"),
+    keyword_delayed:        _ => make_keyword("delayed"),
+    keyword_rlike:          _ => choice(make_keyword("rlike"), make_keyword("regexp")),
+    keyword_split:          _ => make_keyword("split"),
+    keyword_tablets:        _ => make_keyword("tablets"),
+    keyword_ignore:         _ => make_keyword("ignore"),
+    keyword_fields:         _ => make_keyword("fields"),
+    keyword_terminated:     _ => make_keyword("terminated"),
+    keyword_lines:          _ => make_keyword("lines"),
+    keyword_rollup:         _ => token(prec(1, make_keyword("rollup"))),
+    keyword_event:          _ => token(prec(1, make_keyword("event"))),
+    keyword_every:          _ => token(prec(1, make_keyword("every"))),
+    keyword_starts:         _ => token(prec(1, make_keyword("starts"))),
+    keyword_ends:           _ => token(prec(1, make_keyword("ends"))),
+    keyword_invisible:      _ => token(prec(1, make_keyword("invisible"))),
+    keyword_visible:        _ => token(prec(1, make_keyword("visible"))),
+    keyword_enclosed:       _ => token(prec(1, make_keyword("enclosed"))),
+    keyword_respect:        _ => token(prec(1, make_keyword("respect"))),
+    keyword_completion:     _ => token(prec(1, make_keyword("completion"))),
+    keyword_preserve:       _ => token(prec(1, make_keyword("preserve"))),
+    keyword_slave:          _ => token(prec(1, make_keyword("slave"))),
+    keyword_json_table:     _ => token(prec(1, make_keyword("json_table"))),
+    keyword_path:           _ => token(prec(1, make_keyword("path"))),
+    keyword_infile:         _ => token(prec(1, make_keyword("infile"))),
+
     ...mysql_create_rules,
     ...mysql_optimize_rules,
+    ...mysql_load_data_rules,
+    ...mysql_events_rules,
 
   },
 });

@@ -61,7 +61,6 @@ export default {
     ),
     $._default_expression,
     $._primary_key,
-    $.keyword_auto_increment,
     $.direction,
     $._column_comment,
     $._check_constraint,
@@ -69,10 +68,6 @@ export default {
       optional(seq($.keyword_generated, $.keyword_always)),
       $.keyword_as,
       $._expression,
-    ),
-    choice(
-      $.keyword_stored,
-      $.keyword_virtual,
     ),
     $.keyword_unique
   )),
