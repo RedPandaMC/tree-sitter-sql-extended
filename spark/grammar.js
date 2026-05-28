@@ -1,14 +1,12 @@
-import base from '../grammar.js';
+import hive from '../hive/grammar.js';
 import { paren_list, optional_parenthesis, comma_list, make_keyword } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 import spark_iceberg_rules from './grammar/iceberg.js';
-import hive_compat_storage_rules from '../grammar/hive_compat/table_storage.js';
-import hive_compat_alter_rules from '../grammar/hive_compat/alter.js';
 
-export default grammar(base, {
+export default grammar(hive, {
   name: 'spark_sql',
 
   conflicts: $ => [
@@ -28,6 +26,9 @@ export default grammar(base, {
     [$.subquery, $.lateral_subquery],
     [$.order_target],
     [$.iceberg_write_order],
+    // Inherited from Hive: SERDE optional WITH SERDEPROPERTIES ambiguity
+    [$.row_format],
+    [$.lateral_view],
   ],
 
   rules: {
@@ -396,8 +397,6 @@ export default grammar(base, {
     keyword_clone:              _ => make_keyword("clone"),
     keyword_field:              _ => make_keyword("field"),
 
-    ...hive_compat_storage_rules,
-    ...hive_compat_alter_rules,
     ...spark_create_rules,
     ...spark_optimize_rules,
     ...spark_spark4_rules,
