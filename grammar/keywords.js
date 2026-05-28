@@ -1,5 +1,21 @@
 import { make_keyword } from "./helpers.js";
 
+// ─── Architecture note ────────────────────────────────────────────────────────
+// ALL keywords — including dialect-specific ones — MUST be defined here in the
+// base grammar.  Tree-sitter's keyword extraction (`ts_lex_keywords`) only runs
+// on the root grammar file; a keyword defined solely in a dialect grammar is
+// added to the symbol table but bypasses `ts_lex_keywords`, so the lexer treats
+// it as a plain identifier in ambiguous positions and parse trees break.
+//
+// Dialect grammars re-declare the keywords they use with
+//   `token(prec(1, make_keyword("...")))``
+// This gives their lexer states the right preference without needing to move
+// the definition out of the base.  The dialect-specific comment sections below
+// (Delta, Unity Catalog, Snowflake, Hive, BigQuery, PostgreSQL types, …) exist
+// for exactly this reason: the keywords live here because tree-sitter requires
+// it, not because they are ANSI SQL.
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default {
 
   keyword_select: _ => make_keyword("select"),
@@ -573,5 +589,7 @@ export default {
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
 
+  // ANSI SQL — TRIM(BOTH x FROM y)
+  keyword_both: _ => make_keyword("both"),
 
 }

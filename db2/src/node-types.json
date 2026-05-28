@@ -3208,6 +3208,68 @@
     }
   },
   {
+    "type": "create_audit_policy",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_all",
+          "named": true
+        },
+        {
+          "type": "keyword_audit",
+          "named": true
+        },
+        {
+          "type": "keyword_both",
+          "named": true
+        },
+        {
+          "type": "keyword_categories",
+          "named": true
+        },
+        {
+          "type": "keyword_create",
+          "named": true
+        },
+        {
+          "type": "keyword_failure",
+          "named": true
+        },
+        {
+          "type": "keyword_policy",
+          "named": true
+        },
+        {
+          "type": "keyword_status",
+          "named": true
+        },
+        {
+          "type": "keyword_success",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "create_database",
     "named": true,
     "fields": {
@@ -5473,6 +5535,40 @@
     }
   },
   {
+    "type": "drop_audit_policy",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_audit",
+          "named": true
+        },
+        {
+          "type": "keyword_drop",
+          "named": true
+        },
+        {
+          "type": "keyword_policy",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "drop_column",
     "named": true,
     "fields": {
@@ -6965,6 +7061,46 @@
         },
         {
           "type": "keyword_volatile",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "get_diagnostics_statement",
+    "named": true,
+    "fields": {
+      "item": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_diagnostics",
+          "named": true
+        },
+        {
+          "type": "keyword_get",
           "named": true
         }
       ]
@@ -8734,6 +8870,122 @@
     }
   },
   {
+    "type": "resignal_statement",
+    "named": true,
+    "fields": {
+      "message": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      },
+      "sqlstate": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_message_text",
+          "named": true
+        },
+        {
+          "type": "keyword_resignal",
+          "named": true
+        },
+        {
+          "type": "keyword_set",
+          "named": true
+        },
+        {
+          "type": "keyword_sqlstate",
+          "named": true
+        },
+        {
+          "type": "keyword_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "select",
     "named": true,
     "fields": {},
@@ -9079,6 +9331,122 @@
     }
   },
   {
+    "type": "signal_statement",
+    "named": true,
+    "fields": {
+      "message": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      },
+      "sqlstate": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_message_text",
+          "named": true
+        },
+        {
+          "type": "keyword_set",
+          "named": true
+        },
+        {
+          "type": "keyword_signal",
+          "named": true
+        },
+        {
+          "type": "keyword_sqlstate",
+          "named": true
+        },
+        {
+          "type": "keyword_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "similar_to",
     "named": true,
     "fields": {},
@@ -9302,6 +9670,10 @@
           "named": true
         },
         {
+          "type": "create_audit_policy",
+          "named": true
+        },
+        {
           "type": "create_database",
           "named": true
         },
@@ -9382,6 +9754,10 @@
           "named": true
         },
         {
+          "type": "drop_audit_policy",
+          "named": true
+        },
+        {
           "type": "drop_database",
           "named": true
         },
@@ -9427,6 +9803,10 @@
         },
         {
           "type": "from",
+          "named": true
+        },
+        {
+          "type": "get_diagnostics_statement",
           "named": true
         },
         {
@@ -9530,6 +9910,10 @@
           "named": true
         },
         {
+          "type": "resignal_statement",
+          "named": true
+        },
+        {
           "type": "select",
           "named": true
         },
@@ -9543,6 +9927,10 @@
         },
         {
           "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "signal_statement",
           "named": true
         },
         {
@@ -11063,6 +11451,10 @@
     "named": true
   },
   {
+    "type": "keyword_audit",
+    "named": true
+  },
+  {
     "type": "keyword_authorization",
     "named": true
   },
@@ -11095,6 +11487,10 @@
     "named": true
   },
   {
+    "type": "keyword_both",
+    "named": true
+  },
+  {
     "type": "keyword_by",
     "named": true
   },
@@ -11120,6 +11516,10 @@
   },
   {
     "type": "keyword_cast",
+    "named": true
+  },
+  {
+    "type": "keyword_categories",
     "named": true
   },
   {
@@ -11243,6 +11643,10 @@
     "named": true
   },
   {
+    "type": "keyword_diagnostics",
+    "named": true
+  },
+  {
     "type": "keyword_disable",
     "named": true
   },
@@ -11319,6 +11723,10 @@
     "named": true
   },
   {
+    "type": "keyword_failure",
+    "named": true
+  },
+  {
     "type": "keyword_false",
     "named": true
   },
@@ -11364,6 +11772,10 @@
   },
   {
     "type": "keyword_generated",
+    "named": true
+  },
+  {
+    "type": "keyword_get",
     "named": true
   },
   {
@@ -11543,6 +11955,10 @@
     "named": true
   },
   {
+    "type": "keyword_message_text",
+    "named": true
+  },
+  {
     "type": "keyword_minvalue",
     "named": true
   },
@@ -11707,6 +12123,10 @@
     "named": true
   },
   {
+    "type": "keyword_policy",
+    "named": true
+  },
+  {
     "type": "keyword_preceding",
     "named": true
   },
@@ -11772,6 +12192,10 @@
   },
   {
     "type": "keyword_reset",
+    "named": true
+  },
+  {
+    "type": "keyword_resignal",
     "named": true
   },
   {
@@ -11867,6 +12291,10 @@
     "named": true
   },
   {
+    "type": "keyword_signal",
+    "named": true
+  },
+  {
     "type": "keyword_similar",
     "named": true
   },
@@ -11880,6 +12308,10 @@
   },
   {
     "type": "keyword_some",
+    "named": true
+  },
+  {
+    "type": "keyword_sqlstate",
     "named": true
   },
   {
@@ -11899,6 +12331,10 @@
     "named": true
   },
   {
+    "type": "keyword_status",
+    "named": true
+  },
+  {
     "type": "keyword_storage",
     "named": true
   },
@@ -11912,6 +12348,10 @@
   },
   {
     "type": "keyword_style",
+    "named": true
+  },
+  {
+    "type": "keyword_success",
     "named": true
   },
   {

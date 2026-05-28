@@ -6,7 +6,7 @@ export default {
   plsql_block: $ => seq(
     optional(seq(
       $.keyword_declare,
-      repeat($.plsql_declaration),
+      repeat(choice($.plsql_declaration, $.cursor_declaration)),
     )),
     $.keyword_begin,
     repeat(seq($.statement, ';')),
@@ -24,12 +24,14 @@ export default {
     choice(
       seq(
         $._type,
-        optional(seq($.keyword_default, $._expression)),
+        optional(seq($.keyword_not, $.keyword_null)),
+        optional(seq(choice($.keyword_default, ':='), $._expression)),
         ';',
       ),
       seq(
         field('base', $.object_reference),
         $.type_attribute,
+        optional(seq(choice($.keyword_default, ':='), $._expression)),
         ';',
       ),
       seq(

@@ -4,6 +4,8 @@ import db2_modules_rules from './grammar/modules.js';
 import db2_data_control_rules from './grammar/data_control.js';
 import db2_isolation_rules from './grammar/isolation.js';
 import db2_special_register_rules from './grammar/special_registers.js';
+import db2_diagnostics_rules from './grammar/diagnostics.js';
+import db2_audit_rules from './grammar/audit.js';
 
 export default grammar(base, {
   name: 'db2_sql',
@@ -30,6 +32,9 @@ export default grammar(base, {
       $._refresh_statement,
       $.set_statement,
       $.transfer_ownership,
+      $.signal_statement,
+      $.resignal_statement,
+      $.get_diagnostics_statement,
     ),
 
     // Extend _create_statement to add Db2-specific CREATE statements
@@ -52,10 +57,29 @@ export default grammar(base, {
         $.create_module,
         $.create_mask,
         $.create_permission,
+        $.create_audit_policy,
         prec.left(seq(
           $.create_schema,
           repeat($._create_statement),
         )),
+      ),
+    ),
+
+    // Extend _drop_statement to add DROP AUDIT POLICY
+    _drop_statement: $ => seq(
+      choice(
+        $.drop_table,
+        $.drop_view,
+        $.drop_materialized_view,
+        $.drop_index,
+        $.drop_type,
+        $.drop_schema,
+        $.drop_database,
+        $.drop_role,
+        $.drop_sequence,
+        $.drop_function,
+        $.drop_procedure,
+        $.drop_audit_policy,
       ),
     ),
 
@@ -112,11 +136,20 @@ export default grammar(base, {
     keyword_rr:         _ => token(prec(1, make_keyword("rr"))),
     keyword_preserve:   _ => token(prec(1, make_keyword("preserve"))),
     keyword_path:       _ => token(prec(1, make_keyword("path"))),
+    keyword_audit:      _ => token(prec(1, make_keyword("audit"))),
+    keyword_categories: _ => token(prec(1, make_keyword("categories"))),
+    keyword_status:     _ => token(prec(1, make_keyword("status"))),
+    keyword_both:       _ => token(prec(1, make_keyword("both"))),
+    keyword_failure:    _ => token(prec(1, make_keyword("failure"))),
+    keyword_success:    _ => token(prec(1, make_keyword("success"))),
+    keyword_value:      _ => token(prec(1, make_keyword("value"))),
 
     ...db2_modules_rules,
     ...db2_data_control_rules,
     ...db2_isolation_rules,
     ...db2_special_register_rules,
+    ...db2_diagnostics_rules,
+    ...db2_audit_rules,
 
   },
 });

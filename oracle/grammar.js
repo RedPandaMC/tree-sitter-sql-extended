@@ -4,6 +4,8 @@ import oracle_hierarchical_rules from './grammar/hierarchical.js';
 import oracle_plsql_rules from './grammar/plsql_blocks.js';
 import oracle_bulk_rules from './grammar/bulk_ops.js';
 import oracle_merge_rules from './grammar/merge_ext.js';
+import oracle_cursor_rules from './grammar/cursor.js';
+import oracle_package_rules from './grammar/package.js';
 
 export default grammar(base, {
   name: 'oracle_sql',
@@ -35,15 +37,52 @@ export default grammar(base, {
     [$.object_reference],
     [$.between_expression, $.binary_expression],
     [$.create_function],
-    [$.connect_by_clause],
-    [$.plsql_block],
-    [$.time],
-    [$.timestamp],
   ],
 
   rules: {
 
-    // Extend statement to add PL/SQL blocks, FORALL, EXECUTE IMMEDIATE
+    // Extend _create_statement to add CREATE PACKAGE / PACKAGE BODY
+    _create_statement: $ => seq(
+      choice(
+        $.create_table,
+        $.create_view,
+        $.create_materialized_view,
+        $.create_index,
+        $.create_function,
+        $.create_procedure,
+        $.create_type,
+        $.create_database,
+        $.create_role,
+        $.create_sequence,
+        $.create_trigger,
+        $.create_package,
+        $.create_package_body,
+        prec.left(seq(
+          $.create_schema,
+          repeat($._create_statement),
+        )),
+      ),
+    ),
+
+    // Extend _drop_statement to add DROP PACKAGE
+    _drop_statement: $ => seq(
+      choice(
+        $.drop_table,
+        $.drop_view,
+        $.drop_materialized_view,
+        $.drop_index,
+        $.drop_type,
+        $.drop_schema,
+        $.drop_database,
+        $.drop_role,
+        $.drop_sequence,
+        $.drop_function,
+        $.drop_procedure,
+        $.drop_package,
+      ),
+    ),
+
+    // Extend statement to add PL/SQL blocks, FORALL, EXECUTE IMMEDIATE, cursors
     statement: $ => seq(
       optional(seq(
         $.keyword_explain,
@@ -57,6 +96,10 @@ export default grammar(base, {
         $.plsql_block,
         $.forall_statement,
         $.execute_immediate_statement,
+        $.cursor_for_loop,
+        $.cursor_open_statement,
+        $.cursor_fetch_statement,
+        $.cursor_close_statement,
       ),
     ),
 
@@ -102,25 +145,37 @@ export default grammar(base, {
 
     // Oracle-specific keywords — token(prec(1,...)) needed so lexer prefers
     // these over base _identifier when both are valid in the same state.
-    keyword_exceptions: _ => token(prec(1, make_keyword("exceptions"))),
-    keyword_connect:  _ => token(prec(1, make_keyword("connect"))),
-    keyword_prior:    _ => token(prec(1, make_keyword("prior"))),
-    keyword_nocycle:  _ => token(prec(1, make_keyword("nocycle"))),
-    keyword_siblings: _ => token(prec(1, make_keyword("siblings"))),
-    keyword_forall:   _ => token(prec(1, make_keyword("forall"))),
-    keyword_bulk:     _ => token(prec(1, make_keyword("bulk"))),
-    keyword_collect:  _ => token(prec(1, make_keyword("collect"))),
-    keyword_indices:  _ => token(prec(1, make_keyword("indices"))),
-    keyword_rowtype:  _ => token(prec(1, make_keyword("rowtype"))),
-    keyword_save:     _ => token(prec(1, make_keyword("save"))),
-    keyword_target:   _ => token(prec(1, make_keyword("target"))),
-    keyword_rownum:   _ => token(prec(1, make_keyword("rownum"))),
-    keyword_dual:     _ => token(prec(1, make_keyword("dual"))),
+    keyword_exceptions:     _ => token(prec(1, make_keyword("exceptions"))),
+    keyword_connect:        _ => token(prec(1, make_keyword("connect"))),
+    keyword_prior:          _ => token(prec(1, make_keyword("prior"))),
+    keyword_nocycle:        _ => token(prec(1, make_keyword("nocycle"))),
+    keyword_siblings:       _ => token(prec(1, make_keyword("siblings"))),
+    keyword_forall:         _ => token(prec(1, make_keyword("forall"))),
+    keyword_bulk:           _ => token(prec(1, make_keyword("bulk"))),
+    keyword_collect:        _ => token(prec(1, make_keyword("collect"))),
+    keyword_indices:        _ => token(prec(1, make_keyword("indices"))),
+    keyword_rowtype:        _ => token(prec(1, make_keyword("rowtype"))),
+    keyword_save:           _ => token(prec(1, make_keyword("save"))),
+    keyword_target:         _ => token(prec(1, make_keyword("target"))),
+    keyword_rownum:         _ => token(prec(1, make_keyword("rownum"))),
+    keyword_dual:           _ => token(prec(1, make_keyword("dual"))),
+    keyword_cursor:         _ => token(prec(1, make_keyword("cursor"))),
+    keyword_open:           _ => token(prec(1, make_keyword("open"))),
+    keyword_fetch:          _ => token(prec(1, make_keyword("fetch"))),
+    keyword_close:          _ => token(prec(1, make_keyword("close"))),
+    keyword_package:        _ => token(prec(1, make_keyword("package"))),
+    keyword_body:           _ => token(prec(1, make_keyword("body"))),
+    keyword_editionable:    _ => token(prec(1, make_keyword("editionable"))),
+    keyword_noneditionable: _ => token(prec(1, make_keyword("noneditionable"))),
+    keyword_authid:         _ => token(prec(1, make_keyword("authid"))),
+    keyword_pragma:         _ => token(prec(1, make_keyword("pragma"))),
 
     ...oracle_hierarchical_rules,
     ...oracle_plsql_rules,
     ...oracle_bulk_rules,
     ...oracle_merge_rules,
+    ...oracle_cursor_rules,
+    ...oracle_package_rules,
 
   },
 });

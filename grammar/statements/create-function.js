@@ -84,31 +84,14 @@ export default {
     ),
   ),
 
-    function_arguments: $ => paren_list(
-      $.function_argument,
-      false,
-    ),
+  function_arguments: $ => paren_list(
+    $.function_argument,
+    false,
+  ),
 
   _function_return: $ => seq(
     $.keyword_return,
     $._expression,
-  ),
-
-  function_declaration: $ => seq(
-    $.identifier,
-    $._type,
-    optional(
-      seq(
-        ':=',
-        choice(
-          wrapped_in_parenthesis($.statement),
-          // TODO are there more possibilities here? We can't use `_expression` since
-          // that includes subqueries
-          $.literal,
-        ),
-      ),
-    ),
-    ';',
   ),
 
   _function_body_statement: $ => choice(
@@ -116,6 +99,7 @@ export default {
     $._function_return,
   ),
 
+  // ANSI SQL ISO/IEC 9075-4 compound statement body
   function_body: $ => choice(
     seq(
       $._function_return,
@@ -140,10 +124,6 @@ export default {
 
   function_language: $ => seq(
     $.keyword_language,
-    // TODO Maybe we should do different version of function_body_statement in
-    // regard to the defined language to match either sql, plsql or
-    // plpgsql. Currently the function_body_statement support only sql.  And
-    // maybe for other language the function_body should be a string.
     $.identifier
   ),
 
@@ -220,19 +200,6 @@ export default {
     $.keyword_parameter,
     $.keyword_style,
     $.identifier,
-  ),
-
-  var_declarations: $ => seq($.keyword_declare, repeat1($.var_declaration)),
-  var_declaration: $ => seq(
-    $.identifier,
-    $._type,
-    optional(
-      seq(
-        choice($.keyword_default, '='),
-        $.literal,
-      ),
-    ),
-    optional(','),
   ),
 
 };

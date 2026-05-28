@@ -1,4 +1,4 @@
-import base from '../grammar.js';
+import hive from '../hive/grammar.js';
 import { paren_list, optional_parenthesis, comma_list, make_keyword } from '../grammar/helpers.js';
 import spark_create_rules from './grammar/create.js';
 import spark_optimize_rules from './grammar/optimize.js';
@@ -6,7 +6,7 @@ import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 import spark_iceberg_rules from './grammar/iceberg.js';
 
-export default grammar(base, {
+export default grammar(hive, {
   name: 'spark_sql',
 
   conflicts: $ => [
@@ -17,7 +17,6 @@ export default grammar(base, {
     [$.from],
     [$.create_function],
     [$.term],
-    [$.var_declarations],
     [$.lateral_cross_join],
     [$.values],
     [$.select_expression],
@@ -26,6 +25,9 @@ export default grammar(base, {
     [$.subquery, $.lateral_subquery],
     [$.order_target],
     [$.iceberg_write_order],
+    // Inherited from Hive: SERDE optional WITH SERDEPROPERTIES ambiguity
+    [$.row_format],
+    [$.lateral_view],
   ],
 
   rules: {
@@ -278,22 +280,6 @@ export default grammar(base, {
             $._alias,
             optional(alias($._column_list, $.list)),
           ),
-        ),
-      ),
-    ),
-
-    // Hive/Spark: ALTER TABLE t ADD [IF NOT EXISTS] PARTITION (key=val) [LOCATION path]
-    add_partition: $ => seq(
-      $.keyword_add,
-      optional($._if_not_exists),
-      repeat1(
-        seq(
-          $.keyword_partition,
-          paren_list(
-            seq($.identifier, '=', $._expression),
-            true,
-          ),
-          optional(seq($.keyword_location, $._literal_string)),
         ),
       ),
     ),

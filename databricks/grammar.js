@@ -33,6 +33,9 @@ export default grammar(spark, {
     [$.subquery, $.lateral_subquery],
     [$.order_target],
     [$.lateral_cross_join],
+    // Inherited from Hive via Spark: SERDE optional WITH SERDEPROPERTIES ambiguity
+    [$.row_format],
+    [$.lateral_view],
   ],
 
   rules: {
