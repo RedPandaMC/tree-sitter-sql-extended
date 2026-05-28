@@ -58,7 +58,7 @@ const parentHashes = [];
 if (dialect) parentHashes.push(readFileSync(join(ROOT, 'grammar.js'), 'utf8'));
 if (dialect === 'databricks') parentHashes.push(readFileSync(join(ROOT, 'spark', 'grammar.js'), 'utf8'));
 if (dialect === 'mariadb') parentHashes.push(readFileSync(join(ROOT, 'mysql', 'grammar.js'), 'utf8'));
-if (dialect === 'hive') parentHashes.push(readFileSync(join(ROOT, 'spark', 'grammar.js'), 'utf8'));
+// hive extends base directly — no extra parent hash needed
 
 const currentHash = [sharedHash, dialectHash, entryHash, ...parentHashes].join('|');
 
