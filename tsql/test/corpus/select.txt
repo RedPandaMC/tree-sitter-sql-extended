@@ -1,0 +1,181 @@
+================================================================================
+SELECT TOP N
+================================================================================
+
+SELECT TOP 10 id FROM t;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (top_clause
+        (keyword_top)
+        (literal))
+      (select_expression
+        (term
+          value: (field
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
+
+================================================================================
+SELECT TOP (expr) PERCENT WITH TIES
+================================================================================
+
+SELECT TOP (5 + 5) PERCENT WITH TIES id FROM t;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (top_clause
+        (keyword_top)
+        (binary_expression
+          left: (literal)
+          right: (literal))
+        (keyword_percent)
+        (keyword_with)
+        (keyword_ties))
+      (select_expression
+        (term
+          value: (field
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
+
+================================================================================
+SELECT TOP DISTINCT
+================================================================================
+
+SELECT TOP 3 DISTINCT name FROM users;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (top_clause
+        (keyword_top)
+        (literal))
+      (keyword_distinct)
+      (select_expression
+        (term
+          value: (field
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier))))))
+
+================================================================================
+Bracketed identifier
+================================================================================
+
+SELECT [dbo].[orders].[order_id] FROM [dbo].[orders];
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (field
+            (object_reference
+              schema: (identifier)
+              name: (identifier))
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          schema: (identifier)
+          name: (identifier))))))
+
+================================================================================
+@variable in SELECT
+================================================================================
+
+SELECT @counter;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (tsql_variable))))))
+
+================================================================================
+FOR XML PATH
+================================================================================
+
+SELECT id, name FROM t FOR XML PATH('row');
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (field
+            name: (identifier)))
+        (term
+          value: (field
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier)))
+      (for_clause
+        (keyword_for)
+        (keyword_xml)
+        (tsql_xml_mode
+          (literal))))))
+
+================================================================================
+FOR JSON AUTO
+================================================================================
+
+SELECT id, name FROM t FOR JSON AUTO;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (select
+      (keyword_select)
+      (select_expression
+        (term
+          value: (field
+            name: (identifier)))
+        (term
+          value: (field
+            name: (identifier)))))
+    (from
+      (keyword_from)
+      (relation
+        (object_reference
+          name: (identifier)))
+      (for_clause
+        (keyword_for)
+        (keyword_json)
+        (tsql_json_mode)))))
