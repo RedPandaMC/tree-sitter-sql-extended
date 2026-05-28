@@ -16,7 +16,6 @@ export default grammar(base, {
     [$.from],
     [$.create_function],
     [$.term],
-    [$.var_declarations],
     [$.lateral_cross_join],
     [$.values],
     [$.select_expression],
