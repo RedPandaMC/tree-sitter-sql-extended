@@ -1,7 +1,5 @@
 import base from '../grammar.js';
 import { paren_list, optional_parenthesis, comma_list, make_keyword } from '../grammar/helpers.js';
-import hive_compat_storage_rules from '../grammar/hive_compat/table_storage.js';
-import hive_compat_alter_rules from '../grammar/hive_compat/alter.js';
 import hive_storage_rules from './grammar/storage.js';
 import hive_partition_rules from './grammar/partition.js';
 import hive_lateral_view_rules from './grammar/lateral_view.js';
@@ -174,8 +172,6 @@ export default grammar(base, {
     keyword_skewed:          _ => token(prec(1, make_keyword("skewed"))),
     keyword_directories:     _ => token(prec(1, make_keyword("directories"))),
 
-    ...hive_compat_storage_rules,
-    ...hive_compat_alter_rules,
     ...hive_storage_rules,
     ...hive_partition_rules,
     ...hive_lateral_view_rules,
