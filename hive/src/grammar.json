@@ -19503,10 +19503,6 @@
       "_qualified_field"
     ],
     [
-      "field",
-      "_qualified_field"
-    ],
-    [
       "_column",
       "_qualified_field"
     ],
@@ -19518,34 +19514,7 @@
       "binary_expression"
     ],
     [
-      "from"
-    ],
-    [
       "create_function"
-    ],
-    [
-      "term"
-    ],
-    [
-      "lateral_cross_join"
-    ],
-    [
-      "values"
-    ],
-    [
-      "select_expression"
-    ],
-    [
-      "set_operation"
-    ],
-    [
-      "group_by"
-    ],
-    [
-      "order_target"
-    ],
-    [
-      "lateral_view"
     ],
     [
       "stored_by"

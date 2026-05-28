@@ -37,12 +37,6 @@ export default grammar(base, {
     [$.object_reference],
     [$.between_expression, $.binary_expression],
     [$.create_function],
-    [$.connect_by_clause],
-    [$.plsql_block],
-    [$.time],
-    [$.timestamp],
-    [$.cursor_for_loop],
-    [$.package_subprogram_declaration, $.package_subprogram_body],
   ],
 
   rules: {
