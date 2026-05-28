@@ -2363,105 +2363,9 @@
       "type": "PATTERN",
       "value": "[rR][eE][gG][tT][yY][pP][eE]"
     },
-    "keyword_cursor": {
-      "type": "PATTERN",
-      "value": "[cC][uU][rR][sS][oO][rR]"
-    },
-    "keyword_open": {
-      "type": "PATTERN",
-      "value": "[oO][pP][eE][nN]"
-    },
-    "keyword_fetch": {
-      "type": "PATTERN",
-      "value": "[fF][eE][tT][cC][hH]"
-    },
-    "keyword_close": {
-      "type": "PATTERN",
-      "value": "[cC][lL][oO][sS][eE]"
-    },
-    "keyword_package": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[pP][aA][cC][kK][aA][gG][eE]"
-        }
-      }
-    },
-    "keyword_body": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[bB][oO][dD][yY]"
-        }
-      }
-    },
-    "keyword_editionable": {
-      "type": "PATTERN",
-      "value": "[eE][dD][iI][tT][iI][oO][nN][aA][bB][lL][eE]"
-    },
-    "keyword_noneditionable": {
-      "type": "PATTERN",
-      "value": "[nN][oO][nN][eE][dD][iI][tT][iI][oO][nN][aA][bB][lL][eE]"
-    },
-    "keyword_authid": {
-      "type": "PATTERN",
-      "value": "[aA][uU][tT][hH][iI][dD]"
-    },
-    "keyword_pragma": {
-      "type": "PATTERN",
-      "value": "[pP][rR][aA][gG][mM][aA]"
-    },
-    "keyword_audit": {
-      "type": "PATTERN",
-      "value": "[aA][uU][dD][iI][tT]"
-    },
-    "keyword_categories": {
-      "type": "PATTERN",
-      "value": "[cC][aA][tT][eE][gG][oO][rR][iI][eE][sS]"
-    },
-    "keyword_status": {
-      "type": "PATTERN",
-      "value": "[sS][tT][aA][tT][uU][sS]"
-    },
     "keyword_both": {
       "type": "PATTERN",
       "value": "[bB][oO][tT][hH]"
-    },
-    "keyword_failure": {
-      "type": "PATTERN",
-      "value": "[fF][aA][iI][lL][uU][rR][eE]"
-    },
-    "keyword_success": {
-      "type": "PATTERN",
-      "value": "[sS][uU][cC][cC][eE][sS][sS]"
-    },
-    "keyword_invisible": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[iI][nN][vV][iI][sS][iI][bB][lL][eE]"
-        }
-      }
-    },
-    "keyword_visible": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[vV][iI][sS][iI][bB][lL][eE]"
-        }
-      }
     },
     "_type": {
       "type": "PREC_LEFT",
@@ -18807,6 +18711,28 @@
         }
       }
     },
+    "keyword_invisible": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[iI][nN][vV][iI][sS][iI][bB][lL][eE]"
+        }
+      }
+    },
+    "keyword_visible": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[vV][iI][sS][iI][bB][lL][eE]"
+        }
+      }
+    },
     "keyword_enclosed": {
       "type": "TOKEN",
       "content": {
@@ -19540,6 +19466,28 @@
         "content": {
           "type": "PATTERN",
           "value": "[pP][eE][rR][iI][oO][dD]"
+        }
+      }
+    },
+    "keyword_package": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[pP][aA][cC][kK][aA][gG][eE]"
+        }
+      }
+    },
+    "keyword_body": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[bB][oO][dD][yY]"
         }
       }
     },

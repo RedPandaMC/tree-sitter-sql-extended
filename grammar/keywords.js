@@ -589,28 +589,7 @@ export default {
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
 
-  // Oracle PL/SQL keywords
-  keyword_cursor:         _ => make_keyword("cursor"),
-  keyword_open:           _ => make_keyword("open"),
-  keyword_fetch:          _ => make_keyword("fetch"),
-  keyword_close:          _ => make_keyword("close"),
-  keyword_package:        _ => make_keyword("package"),
-  keyword_body:           _ => make_keyword("body"),
-  keyword_editionable:    _ => make_keyword("editionable"),
-  keyword_noneditionable: _ => make_keyword("noneditionable"),
-  keyword_authid:         _ => make_keyword("authid"),
-  keyword_pragma:         _ => make_keyword("pragma"),
-
-  // IBM Db2 keywords
-  keyword_audit:      _ => make_keyword("audit"),
-  keyword_categories: _ => make_keyword("categories"),
-  keyword_status:     _ => make_keyword("status"),
-  keyword_both:       _ => make_keyword("both"),
-  keyword_failure:    _ => make_keyword("failure"),
-  keyword_success:    _ => make_keyword("success"),
-
-  // MariaDB keywords
-  keyword_invisible: _ => make_keyword("invisible"),
-  keyword_visible:   _ => make_keyword("visible"),
+  // ANSI SQL — TRIM(BOTH x FROM y)
+  keyword_both: _ => make_keyword("both"),
 
 }
