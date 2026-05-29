@@ -1630,6 +1630,126 @@
     }
   },
   {
+    "type": "assignment_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "between_expression",
     "named": true,
     "fields": {
@@ -3084,6 +3204,60 @@
     }
   },
   {
+    "type": "compound_statement",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cursor_declaration",
+          "named": true
+        },
+        {
+          "type": "exception_handler",
+          "named": true
+        },
+        {
+          "type": "keyword_begin",
+          "named": true
+        },
+        {
+          "type": "keyword_declare",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_exception",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "connect_by_clause",
     "named": true,
     "fields": {
@@ -3415,6 +3589,104 @@
       "types": [
         {
           "type": "constraint",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_continue",
+          "named": true
+        },
+        {
+          "type": "keyword_when",
           "named": true
         }
       ]
@@ -4014,7 +4286,7 @@
           "named": true
         },
         {
-          "type": "plsql_declaration",
+          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -4098,7 +4370,7 @@
           "named": true
         },
         {
-          "type": "plsql_declaration",
+          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -6868,6 +7140,104 @@
     }
   },
   {
+    "type": "exit_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_exit",
+          "named": true
+        },
+        {
+          "type": "keyword_when",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "field",
     "named": true,
     "fields": {
@@ -7103,6 +7473,208 @@
       "types": [
         {
           "type": "keyword_float",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "lower": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      },
+      "upper": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_for",
+          "named": true
+        },
+        {
+          "type": "keyword_in",
+          "named": true
+        },
+        {
+          "type": "keyword_loop",
+          "named": true
+        },
+        {
+          "type": "keyword_reverse",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -8648,6 +9220,120 @@
     "fields": {}
   },
   {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_else",
+          "named": true
+        },
+        {
+          "type": "keyword_elsif",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_if",
+          "named": true
+        },
+        {
+          "type": "keyword_then",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "index_fields",
     "named": true,
     "fields": {},
@@ -9369,6 +10055,29 @@
     }
   },
   {
+    "type": "loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_loop",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "modify_column",
     "named": true,
     "fields": {},
@@ -9531,6 +10240,21 @@
         },
         {
           "type": "keyword_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "null_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_null",
           "named": true
         }
       ]
@@ -10171,11 +10895,11 @@
           "named": true
         },
         {
-          "type": "plsql_declaration",
+          "type": "statement",
           "named": true
         },
         {
-          "type": "statement",
+          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -10510,1153 +11234,6 @@
     }
   },
   {
-    "type": "plsql_assign",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "target": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ".",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "plsql_block",
-    "named": true,
-    "fields": {
-      "label": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "cursor_declaration",
-          "named": true
-        },
-        {
-          "type": "exception_handler",
-          "named": true
-        },
-        {
-          "type": "keyword_begin",
-          "named": true
-        },
-        {
-          "type": "keyword_declare",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_exception",
-          "named": true
-        },
-        {
-          "type": "plsql_declaration",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_continue",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_continue",
-          "named": true
-        },
-        {
-          "type": "keyword_when",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_declaration",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      },
-      "custom_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "array_size_definition",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "bigint",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bit",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "char",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double",
-          "named": true
-        },
-        {
-          "type": "enum",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_boolean",
-          "named": true
-        },
-        {
-          "type": "keyword_date",
-          "named": true
-        },
-        {
-          "type": "keyword_default",
-          "named": true
-        },
-        {
-          "type": "keyword_interval",
-          "named": true
-        },
-        {
-          "type": "keyword_json",
-          "named": true
-        },
-        {
-          "type": "keyword_not",
-          "named": true
-        },
-        {
-          "type": "keyword_null",
-          "named": true
-        },
-        {
-          "type": "keyword_string",
-          "named": true
-        },
-        {
-          "type": "keyword_xml",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "nchar",
-          "named": true
-        },
-        {
-          "type": "numeric",
-          "named": true
-        },
-        {
-          "type": "nvarchar",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "rowtype_attribute",
-          "named": true
-        },
-        {
-          "type": "smallint",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "time",
-          "named": true
-        },
-        {
-          "type": "timestamp",
-          "named": true
-        },
-        {
-          "type": "trim_expression",
-          "named": true
-        },
-        {
-          "type": "type_attribute",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "varbinary",
-          "named": true
-        },
-        {
-          "type": "varchar",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_exit",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_exit",
-          "named": true
-        },
-        {
-          "type": "keyword_when",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_for",
-    "named": true,
-    "fields": {
-      "index": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "lower": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      },
-      "upper": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_for",
-          "named": true
-        },
-        {
-          "type": "keyword_in",
-          "named": true
-        },
-        {
-          "type": "keyword_loop",
-          "named": true
-        },
-        {
-          "type": "keyword_reverse",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_if",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_else",
-          "named": true
-        },
-        {
-          "type": "keyword_elsif",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_if",
-          "named": true
-        },
-        {
-          "type": "keyword_then",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_loop",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_loop",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_null",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_null",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_return",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_return",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "trim_expression",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "plsql_while",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "trim_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_loop",
-          "named": true
-        },
-        {
-          "type": "keyword_while",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "procedure_body",
     "named": true,
     "fields": {},
@@ -11938,6 +11515,93 @@
         },
         {
           "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_return",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "trim_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "window_function",
           "named": true
         }
       ]
@@ -12725,6 +12389,18 @@
           "named": true
         },
         {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
           "type": "create_database",
           "named": true
         },
@@ -12857,6 +12533,14 @@
           "named": true
         },
         {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "forall_statement",
           "named": true
         },
@@ -12866,6 +12550,10 @@
         },
         {
           "type": "grant_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -12961,51 +12649,23 @@
           "named": true
         },
         {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
           "type": "object_reference",
           "named": true
         },
         {
-          "type": "plsql_assign",
-          "named": true
-        },
-        {
-          "type": "plsql_block",
-          "named": true
-        },
-        {
-          "type": "plsql_continue",
-          "named": true
-        },
-        {
-          "type": "plsql_exit",
-          "named": true
-        },
-        {
-          "type": "plsql_for",
-          "named": true
-        },
-        {
-          "type": "plsql_if",
-          "named": true
-        },
-        {
-          "type": "plsql_loop",
-          "named": true
-        },
-        {
-          "type": "plsql_null",
-          "named": true
-        },
-        {
-          "type": "plsql_return",
-          "named": true
-        },
-        {
-          "type": "plsql_while",
-          "named": true
-        },
-        {
           "type": "refresh_materialized_view",
+          "named": true
+        },
+        {
+          "type": "return_statement",
           "named": true
         },
         {
@@ -13038,6 +12698,10 @@
         },
         {
           "type": "when_clause",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -14016,6 +13680,236 @@
     }
   },
   {
+    "type": "variable_declaration",
+    "named": true,
+    "fields": {
+      "base": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      },
+      "custom_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "array_size_definition",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "bigint",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "bit",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_boolean",
+          "named": true
+        },
+        {
+          "type": "keyword_date",
+          "named": true
+        },
+        {
+          "type": "keyword_default",
+          "named": true
+        },
+        {
+          "type": "keyword_interval",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "keyword_not",
+          "named": true
+        },
+        {
+          "type": "keyword_null",
+          "named": true
+        },
+        {
+          "type": "keyword_string",
+          "named": true
+        },
+        {
+          "type": "keyword_xml",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "nchar",
+          "named": true
+        },
+        {
+          "type": "numeric",
+          "named": true
+        },
+        {
+          "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "rowtype_attribute",
+          "named": true
+        },
+        {
+          "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "trim_expression",
+          "named": true
+        },
+        {
+          "type": "type_attribute",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "varbinary",
+          "named": true
+        },
+        {
+          "type": "varchar",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "when_clause",
     "named": true,
     "fields": {
@@ -14372,6 +14266,112 @@
       "types": [
         {
           "type": "keyword_where",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "trim_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_loop",
+          "named": true
+        },
+        {
+          "type": "keyword_while",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]

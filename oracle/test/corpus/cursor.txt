@@ -8,7 +8,7 @@ DECLARE CURSOR emp_cursor IS SELECT name FROM employees; BEGIN FOR r IN emp_curs
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_declare)
       (cursor_declaration
         (keyword_cursor)
@@ -56,7 +56,7 @@ BEGIN FOR r IN (SELECT id FROM orders WHERE status = 'NEW') LOOP INSERT INTO log
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (cursor_for_loop
@@ -104,7 +104,7 @@ BEGIN OPEN emp_cursor(10); FETCH emp_cursor INTO v_name, v_salary; CLOSE emp_cur
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (cursor_open_statement

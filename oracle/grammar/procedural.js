@@ -3,14 +3,14 @@ import { comma_list } from '../../grammar/helpers.js';
 export default {
 
   // target := expression
-  plsql_assign: $ => seq(
+  assignment_statement: $ => seq(
     field('target', choice($.identifier, $._qualified_field)),
     ':=',
     field('value', $._expression),
   ),
 
   // IF cond THEN ... [ELSIF cond THEN ...] [ELSE ...] END IF
-  plsql_if: $ => seq(
+  if_statement: $ => seq(
     $.keyword_if,
     field('condition', $._expression),
     $.keyword_then,
@@ -30,7 +30,7 @@ export default {
   ),
 
   // WHILE condition LOOP ... END LOOP
-  plsql_while: $ => seq(
+  while_statement: $ => seq(
     $.keyword_while,
     field('condition', $._expression),
     $.keyword_loop,
@@ -40,7 +40,7 @@ export default {
   ),
 
   // LOOP ... END LOOP (infinite / EXIT-controlled)
-  plsql_loop: $ => seq(
+  loop_statement: $ => seq(
     $.keyword_loop,
     repeat(seq($.statement, ';')),
     $.keyword_end,
@@ -48,7 +48,7 @@ export default {
   ),
 
   // FOR i IN lower..upper [REVERSE] LOOP ... END LOOP
-  plsql_for: $ => seq(
+  for_statement: $ => seq(
     $.keyword_for,
     field('index', $.identifier),
     $.keyword_in,
@@ -63,24 +63,24 @@ export default {
   ),
 
   // RETURN [expression]
-  plsql_return: $ => seq(
+  return_statement: $ => seq(
     $.keyword_return,
     optional($._expression),
   ),
 
   // EXIT [WHEN condition]
-  plsql_exit: $ => seq(
+  exit_statement: $ => seq(
     $.keyword_exit,
     optional(seq($.keyword_when, field('condition', $._expression))),
   ),
 
   // CONTINUE [WHEN condition]
-  plsql_continue: $ => seq(
+  continue_statement: $ => seq(
     $.keyword_continue,
     optional(seq($.keyword_when, field('condition', $._expression))),
   ),
 
   // NULL (no-op statement)
-  plsql_null: $ => $.keyword_null,
+  null_statement: $ => $.keyword_null,
 
 };

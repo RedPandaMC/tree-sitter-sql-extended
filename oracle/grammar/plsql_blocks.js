@@ -3,10 +3,10 @@ import { comma_list } from '../../grammar/helpers.js';
 export default {
 
   // Anonymous PL/SQL block: [DECLARE ...] BEGIN ... [EXCEPTION ...] END;
-  plsql_block: $ => seq(
+  compound_statement: $ => seq(
     optional(seq(
       $.keyword_declare,
-      repeat(choice($.plsql_declaration, $.cursor_declaration)),
+      repeat(choice($.variable_declaration, $.cursor_declaration)),
     )),
     $.keyword_begin,
     repeat(seq($.statement, ';')),
@@ -19,7 +19,7 @@ export default {
   ),
 
   // Variable / cursor declaration inside DECLARE block
-  plsql_declaration: $ => seq(
+  variable_declaration: $ => seq(
     field('name', $.identifier),
     choice(
       seq(

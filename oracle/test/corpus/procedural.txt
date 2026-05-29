@@ -10,10 +10,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_assign
+        (assignment_statement
           target: (identifier)
           value: (literal)))
       (keyword_end))))
@@ -34,10 +34,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_if
+        (if_statement
           (keyword_if)
           condition: (binary_expression
             left: (field
@@ -45,12 +45,12 @@ END;
             right: (literal))
           (keyword_then)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (literal)))
           (keyword_else)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (literal)))
           (keyword_end)
@@ -73,10 +73,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_if
+        (if_statement
           (keyword_if)
           condition: (binary_expression
             left: (field
@@ -84,7 +84,7 @@ END;
             right: (literal))
           (keyword_then)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (literal)))
           (keyword_elsif)
@@ -94,7 +94,7 @@ END;
             right: (literal))
           (keyword_then)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (literal)))
           (keyword_end)
@@ -115,10 +115,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_while
+        (while_statement
           (keyword_while)
           condition: (binary_expression
             left: (field
@@ -126,7 +126,7 @@ END;
             right: (literal))
           (keyword_loop)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (binary_expression
                 left: (field
@@ -151,20 +151,20 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_loop
+        (loop_statement
           (keyword_loop)
           (statement
-            (plsql_assign
+            (assignment_statement
               target: (identifier)
               value: (binary_expression
                 left: (field
                   name: (identifier))
                 right: (literal))))
           (statement
-            (plsql_exit
+            (exit_statement
               (keyword_exit)
               (keyword_when)
               condition: (binary_expression
@@ -189,10 +189,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_for
+        (for_statement
           (keyword_for)
           index: (identifier)
           (keyword_in)
@@ -200,7 +200,7 @@ END;
           upper: (literal)
           (keyword_loop)
           (statement
-            (plsql_null
+            (null_statement
               (keyword_null)))
           (keyword_end)
           (keyword_loop)))
@@ -220,10 +220,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_for
+        (for_statement
           (keyword_for)
           index: (identifier)
           (keyword_in)
@@ -232,7 +232,7 @@ END;
           upper: (literal)
           (keyword_loop)
           (statement
-            (plsql_null
+            (null_statement
               (keyword_null)))
           (keyword_end)
           (keyword_loop)))
@@ -250,10 +250,10 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_return
+        (return_statement
           (keyword_return)
           (literal)))
       (keyword_end))))
@@ -272,13 +272,13 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
-        (plsql_loop
+        (loop_statement
           (keyword_loop)
           (statement
-            (plsql_continue
+            (continue_statement
               (keyword_continue)
               (keyword_when)
               condition: (binary_expression
@@ -302,7 +302,7 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (forall_statement
@@ -351,7 +351,7 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (execute_immediate_statement

@@ -8149,7 +8149,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_block"
+              "name": "compound_statement"
             },
             {
               "type": "SYMBOL",
@@ -8177,39 +8177,39 @@
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_if"
+              "name": "if_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_while"
+              "name": "while_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_loop"
+              "name": "loop_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_for"
+              "name": "for_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_return"
+              "name": "return_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_exit"
+              "name": "exit_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_continue"
+              "name": "continue_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_null"
+              "name": "null_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "plsql_assign"
+              "name": "assignment_statement"
             }
           ]
         }
@@ -19685,7 +19685,7 @@
         }
       ]
     },
-    "plsql_block": {
+    "compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -19705,7 +19705,7 @@
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "plsql_declaration"
+                        "name": "variable_declaration"
                       },
                       {
                         "type": "SYMBOL",
@@ -19787,7 +19787,7 @@
         }
       ]
     },
-    "plsql_declaration": {
+    "variable_declaration": {
       "type": "SEQ",
       "members": [
         {
@@ -20838,7 +20838,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "plsql_declaration"
+          "name": "variable_declaration"
         },
         {
           "type": "SYMBOL",
@@ -20863,7 +20863,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "plsql_declaration"
+          "name": "variable_declaration"
         },
         {
           "type": "SYMBOL",
@@ -21219,7 +21219,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "plsql_declaration"
+            "name": "variable_declaration"
           }
         },
         {
@@ -21355,7 +21355,7 @@
         }
       ]
     },
-    "plsql_assign": {
+    "assignment_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21389,7 +21389,7 @@
         }
       ]
     },
-    "plsql_if": {
+    "if_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21507,7 +21507,7 @@
         }
       ]
     },
-    "plsql_while": {
+    "while_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21552,7 +21552,7 @@
         }
       ]
     },
-    "plsql_loop": {
+    "loop_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21585,7 +21585,7 @@
         }
       ]
     },
-    "plsql_for": {
+    "for_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21666,7 +21666,7 @@
         }
       ]
     },
-    "plsql_return": {
+    "return_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21687,7 +21687,7 @@
         }
       ]
     },
-    "plsql_exit": {
+    "exit_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21721,7 +21721,7 @@
         }
       ]
     },
-    "plsql_continue": {
+    "continue_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21755,7 +21755,7 @@
         }
       ]
     },
-    "plsql_null": {
+    "null_statement": {
       "type": "SYMBOL",
       "name": "keyword_null"
     }
@@ -21817,16 +21817,16 @@
       "interval"
     ],
     [
-      "plsql_assign",
+      "assignment_statement",
       "_qualified_field"
     ],
     [
       "_function_return",
-      "plsql_return"
+      "return_statement"
     ],
     [
       "cursor_for_loop",
-      "plsql_for"
+      "for_statement"
     ]
   ],
   "precedences": [
