@@ -14,8 +14,8 @@ export default {
       ),
       optional($.tablesample),
       optional(choice(
-        $.tsql_pivot,
-        $.tsql_unpivot,
+        $.pivot_clause,
+        $.unpivot_clause,
       )),
       optional(
         seq(
@@ -23,19 +23,19 @@ export default {
           optional(alias($._column_list, $.list)),
         ),
       ),
-      optional($.tsql_table_hints),
+      optional($.table_hints),
     ),
   ),
 
   // WITH ( hint [, ...] )
-  tsql_table_hints: $ => seq(
+  table_hints: $ => seq(
     $.keyword_with,
     '(',
-    comma_list($.tsql_table_hint, true),
+    comma_list($.table_hint, true),
     ')',
   ),
 
-  tsql_table_hint: $ => choice(
+  table_hint: $ => choice(
     $.keyword_nolock,
     $.keyword_rowlock,
     $.keyword_updlock,

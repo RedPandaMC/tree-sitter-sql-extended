@@ -153,6 +153,10 @@
             "named": true
           },
           {
+            "type": "datetime2",
+            "named": true
+          },
+          {
             "type": "decimal",
             "named": true
           },
@@ -197,6 +201,10 @@
             "named": true
           },
           {
+            "type": "money_type",
+            "named": true
+          },
+          {
             "type": "nchar",
             "named": true
           },
@@ -213,6 +221,10 @@
             "named": true
           },
           {
+            "type": "smalldatetime",
+            "named": true
+          },
+          {
             "type": "smallint",
             "named": true
           },
@@ -225,19 +237,7 @@
             "named": true
           },
           {
-            "type": "tsql_datetime2",
-            "named": true
-          },
-          {
-            "type": "tsql_money_type",
-            "named": true
-          },
-          {
-            "type": "tsql_smalldatetime",
-            "named": true
-          },
-          {
-            "type": "tsql_uniqueidentifier",
+            "type": "uniqueidentifier",
             "named": true
           },
           {
@@ -390,11 +390,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -828,6 +828,10 @@
           "named": true
         },
         {
+          "type": "datetime2",
+          "named": true
+        },
+        {
           "type": "decimal",
           "named": true
         },
@@ -964,6 +968,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -984,6 +992,10 @@
           "named": true
         },
         {
+          "type": "smalldatetime",
+          "named": true
+        },
+        {
           "type": "smallint",
           "named": true
         },
@@ -996,19 +1008,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -1173,6 +1173,10 @@
           "named": true
         },
         {
+          "type": "datetime2",
+          "named": true
+        },
+        {
           "type": "decimal",
           "named": true
         },
@@ -1297,6 +1301,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -1317,6 +1325,10 @@
           "named": true
         },
         {
+          "type": "smalldatetime",
+          "named": true
+        },
+        {
           "type": "smallint",
           "named": true
         },
@@ -1329,19 +1341,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -1543,11 +1543,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -1662,11 +1662,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -1746,11 +1746,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -1824,11 +1824,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -1902,11 +1902,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -2062,11 +2062,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -2258,11 +2258,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -2312,6 +2312,10 @@
       "required": true,
       "types": [
         {
+          "type": "bulk_option",
+          "named": true
+        },
+        {
           "type": "keyword_bulk",
           "named": true
         },
@@ -2334,9 +2338,24 @@
         {
           "type": "object_reference",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bulk_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
         },
         {
-          "type": "tsql_bulk_option",
+          "type": "literal",
           "named": true
         }
       ]
@@ -2431,11 +2450,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -2534,11 +2553,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -2570,6 +2589,10 @@
         },
         {
           "type": "char",
+          "named": true
+        },
+        {
+          "type": "datetime2",
           "named": true
         },
         {
@@ -2621,6 +2644,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -2630,6 +2657,10 @@
         },
         {
           "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "smalldatetime",
           "named": true
         },
         {
@@ -2645,19 +2676,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -2857,6 +2876,10 @@
             "named": true
           },
           {
+            "type": "datetime2",
+            "named": true
+          },
+          {
             "type": "decimal",
             "named": true
           },
@@ -2901,6 +2924,10 @@
             "named": true
           },
           {
+            "type": "money_type",
+            "named": true
+          },
+          {
             "type": "nchar",
             "named": true
           },
@@ -2917,6 +2944,10 @@
             "named": true
           },
           {
+            "type": "smalldatetime",
+            "named": true
+          },
+          {
             "type": "smallint",
             "named": true
           },
@@ -2929,19 +2960,7 @@
             "named": true
           },
           {
-            "type": "tsql_datetime2",
-            "named": true
-          },
-          {
-            "type": "tsql_money_type",
-            "named": true
-          },
-          {
-            "type": "tsql_smalldatetime",
-            "named": true
-          },
-          {
-            "type": "tsql_uniqueidentifier",
+            "type": "uniqueidentifier",
             "named": true
           },
           {
@@ -3120,11 +3139,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -3197,6 +3216,29 @@
         },
         {
           "type": "keyword_hash",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "compound_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_begin",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -3388,7 +3430,7 @@
           "named": true
         },
         {
-          "type": "tsql_with_option",
+          "type": "with_option",
           "named": true
         }
       ]
@@ -3522,7 +3564,7 @@
           "named": true
         },
         {
-          "type": "tsql_with_option",
+          "type": "with_option",
           "named": true
         }
       ]
@@ -3573,7 +3615,7 @@
           "named": true
         },
         {
-          "type": "tsql_with_option",
+          "type": "with_option",
           "named": true
         }
       ]
@@ -3624,7 +3666,7 @@
           "named": true
         },
         {
-          "type": "tsql_with_option",
+          "type": "with_option",
           "named": true
         }
       ]
@@ -3691,6 +3733,10 @@
         },
         {
           "type": "column_definitions",
+          "named": true
+        },
+        {
+          "type": "datetime2",
           "named": true
         },
         {
@@ -3850,6 +3896,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -3866,6 +3916,10 @@
           "named": true
         },
         {
+          "type": "smalldatetime",
+          "named": true
+        },
+        {
           "type": "smallint",
           "named": true
         },
@@ -3878,19 +3932,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -4398,6 +4440,10 @@
           "named": true
         },
         {
+          "type": "datetime2",
+          "named": true
+        },
+        {
           "type": "decimal",
           "named": true
         },
@@ -4526,6 +4572,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -4542,6 +4592,10 @@
           "named": true
         },
         {
+          "type": "smalldatetime",
+          "named": true
+        },
+        {
           "type": "smallint",
           "named": true
         },
@@ -4554,19 +4608,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -4621,7 +4663,7 @@
           "named": true
         },
         {
-          "type": "tsql_with_option",
+          "type": "with_option",
           "named": true
         }
       ]
@@ -4684,7 +4726,7 @@
           "named": true
         },
         {
-          "type": "tsql_table_with_options",
+          "type": "table_with_options",
           "named": true
         }
       ]
@@ -4926,11 +4968,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -5098,6 +5140,48 @@
         },
         {
           "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cross_apply",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_apply",
+          "named": true
+        },
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_cross",
+          "named": true
+        },
+        {
+          "type": "subquery",
           "named": true
         }
       ]
@@ -5278,11 +5362,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -5361,15 +5445,34 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
           "type": "unary_expression",
           "named": true
         },
         {
+          "type": "variable",
+          "named": true
+        },
+        {
           "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "datetime2",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_datetime2",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         }
       ]
@@ -5482,6 +5585,33 @@
         },
         {
           "type": "keyword_is",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "distribution",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_hash",
+          "named": true
+        },
+        {
+          "type": "keyword_replicate",
+          "named": true
+        },
+        {
+          "type": "keyword_round_robin",
           "named": true
         }
       ]
@@ -6212,11 +6342,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -6371,6 +6501,10 @@
       "required": true,
       "types": [
         {
+          "type": "json_mode",
+          "named": true
+        },
+        {
           "type": "keyword_for",
           "named": true
         },
@@ -6383,11 +6517,37 @@
           "named": true
         },
         {
-          "type": "tsql_json_mode",
+          "type": "xml_mode",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_json_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
-          "type": "tsql_xml_mode",
+          "type": "literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_xml_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "literal",
           "named": true
         }
       ]
@@ -6470,6 +6630,10 @@
       "required": true,
       "types": [
         {
+          "type": "cross_apply",
+          "named": true
+        },
+        {
           "type": "cross_join",
           "named": true
         },
@@ -6518,15 +6682,11 @@
           "named": true
         },
         {
+          "type": "outer_apply",
+          "named": true
+        },
+        {
           "type": "relation",
-          "named": true
-        },
-        {
-          "type": "tsql_cross_apply",
-          "named": true
-        },
-        {
-          "type": "tsql_outer_apply",
           "named": true
         },
         {
@@ -6577,6 +6737,10 @@
         },
         {
           "type": "char",
+          "named": true
+        },
+        {
+          "type": "datetime2",
           "named": true
         },
         {
@@ -6652,6 +6816,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -6661,6 +6829,10 @@
         },
         {
           "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "smalldatetime",
           "named": true
         },
         {
@@ -6676,19 +6848,7 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -6810,11 +6970,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -7312,11 +7472,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -7395,11 +7555,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -7490,11 +7650,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -7577,11 +7737,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -7595,6 +7755,101 @@
     "type": "identifier",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_else",
+          "named": true
+        },
+        {
+          "type": "keyword_if",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "index_fields",
@@ -7913,11 +8168,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -7977,6 +8232,25 @@
         },
         {
           "type": "relation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "json_mode",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "for_json_option",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         }
       ]
@@ -8184,11 +8458,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -8294,11 +8568,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -8361,6 +8635,25 @@
         },
         {
           "type": "keyword_modify",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "money_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_money",
+          "named": true
+        },
+        {
+          "type": "keyword_smallmoney",
           "named": true
         }
       ]
@@ -8728,11 +9021,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -8752,6 +9045,48 @@
       "types": [
         {
           "type": "column",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "outer_apply",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_apply",
+          "named": true
+        },
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_outer",
+          "named": true
+        },
+        {
+          "type": "subquery",
           "named": true
         }
       ]
@@ -8786,7 +9121,7 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "variable",
           "named": true
         }
       ]
@@ -8880,11 +9215,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -8963,11 +9298,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -9054,11 +9389,131 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_clause",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "pivot_col": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_for",
+          "named": true
+        },
+        {
+          "type": "keyword_in",
+          "named": true
+        },
+        {
+          "type": "keyword_pivot",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
           "named": true
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         },
         {
@@ -9141,11 +9596,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -9248,11 +9703,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -9375,11 +9830,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -9468,7 +9923,15 @@
           "named": true
         },
         {
+          "type": "pivot_clause",
+          "named": true
+        },
+        {
           "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "table_hints",
           "named": true
         },
         {
@@ -9476,15 +9939,7 @@
           "named": true
         },
         {
-          "type": "tsql_pivot",
-          "named": true
-        },
-        {
-          "type": "tsql_table_hints",
-          "named": true
-        },
-        {
-          "type": "tsql_unpivot",
+          "type": "unpivot_clause",
           "named": true
         },
         {
@@ -9773,11 +10228,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -9856,11 +10311,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -10201,11 +10656,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -10229,6 +10684,21 @@
         },
         {
           "type": "keyword_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "smalldatetime",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_smalldatetime",
           "named": true
         }
       ]
@@ -10339,11 +10809,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -10405,6 +10875,10 @@
         },
         {
           "type": "bulk_insert_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
           "named": true
         },
         {
@@ -10537,6 +11011,10 @@
         },
         {
           "type": "grant_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -10700,18 +11178,6 @@
           "named": true
         },
         {
-          "type": "tsql_block",
-          "named": true
-        },
-        {
-          "type": "tsql_if_statement",
-          "named": true
-        },
-        {
-          "type": "tsql_while_statement",
-          "named": true
-        },
-        {
           "type": "update",
           "named": true
         },
@@ -10721,6 +11187,10 @@
         },
         {
           "type": "where",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -10838,11 +11308,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -10916,11 +11386,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -10994,11 +11464,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -11072,11 +11542,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -11085,6 +11555,198 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "table_hint",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_index",
+          "named": true
+        },
+        {
+          "type": "keyword_nolock",
+          "named": true
+        },
+        {
+          "type": "keyword_readpast",
+          "named": true
+        },
+        {
+          "type": "keyword_rowlock",
+          "named": true
+        },
+        {
+          "type": "keyword_tablock",
+          "named": true
+        },
+        {
+          "type": "keyword_tablockx",
+          "named": true
+        },
+        {
+          "type": "keyword_updlock",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_hints",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_with",
+          "named": true
+        },
+        {
+          "type": "table_hint",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_with_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "distribution",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_clustered",
+          "named": true
+        },
+        {
+          "type": "keyword_columnstore",
+          "named": true
+        },
+        {
+          "type": "keyword_distribution",
+          "named": true
+        },
+        {
+          "type": "keyword_heap",
+          "named": true
+        },
+        {
+          "type": "keyword_index",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_with_options",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_with",
+          "named": true
+        },
+        {
+          "type": "table_with_option",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -11212,11 +11874,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -11310,11 +11972,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -11489,11 +12151,11 @@
           "named": true
         },
         {
-          "type": "tsql_variable",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "unary_expression",
+          "type": "variable",
           "named": true
         },
         {
@@ -11560,868 +12222,6 @@
         },
         {
           "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_begin",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_bulk_option",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_cross_apply",
-    "named": true,
-    "fields": {
-      "alias": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_apply",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_cross",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_datetime2",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_datetime2",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_distribution",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_hash",
-          "named": true
-        },
-        {
-          "type": "keyword_replicate",
-          "named": true
-        },
-        {
-          "type": "keyword_round_robin",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_for_json_option",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_for_xml_option",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_if_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_else",
-          "named": true
-        },
-        {
-          "type": "keyword_if",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "tsql_block",
-          "named": true
-        },
-        {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_json_mode",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "tsql_for_json_option",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_money_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_money",
-          "named": true
-        },
-        {
-          "type": "keyword_smallmoney",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_outer_apply",
-    "named": true,
-    "fields": {
-      "alias": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_apply",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_outer",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_pivot",
-    "named": true,
-    "fields": {
-      "alias": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "pivot_col": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_for",
-          "named": true
-        },
-        {
-          "type": "keyword_in",
-          "named": true
-        },
-        {
-          "type": "keyword_pivot",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_smalldatetime",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_smalldatetime",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_table_hint",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_index",
-          "named": true
-        },
-        {
-          "type": "keyword_nolock",
-          "named": true
-        },
-        {
-          "type": "keyword_readpast",
-          "named": true
-        },
-        {
-          "type": "keyword_rowlock",
-          "named": true
-        },
-        {
-          "type": "keyword_tablock",
-          "named": true
-        },
-        {
-          "type": "keyword_tablockx",
-          "named": true
-        },
-        {
-          "type": "keyword_updlock",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_table_hints",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_with",
-          "named": true
-        },
-        {
-          "type": "tsql_table_hint",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_table_option",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_clustered",
-          "named": true
-        },
-        {
-          "type": "keyword_columnstore",
-          "named": true
-        },
-        {
-          "type": "keyword_distribution",
-          "named": true
-        },
-        {
-          "type": "keyword_heap",
-          "named": true
-        },
-        {
-          "type": "keyword_index",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "tsql_distribution",
-          "named": true
-        },
-        {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_table_with_options",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_with",
-          "named": true
-        },
-        {
-          "type": "tsql_table_option",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_uniqueidentifier",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_uniqueidentifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_unpivot",
-    "named": true,
-    "fields": {
-      "name_col": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value_col": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_for",
-          "named": true
-        },
-        {
-          "type": "keyword_in",
-          "named": true
-        },
-        {
-          "type": "keyword_unpivot",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_while_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_while",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "tsql_block",
-          "named": true
-        },
-        {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_with_option",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        },
-        {
-          "type": "tsql_distribution",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tsql_xml_mode",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "tsql_for_xml_option",
           "named": true
         }
       ]
@@ -12496,11 +12296,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -12539,6 +12339,69 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "uniqueidentifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_uniqueidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unpivot_clause",
+    "named": true,
+    "fields": {
+      "name_col": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value_col": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_for",
+          "named": true
+        },
+        {
+          "type": "keyword_in",
+          "named": true
+        },
+        {
+          "type": "keyword_unpivot",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -12715,6 +12578,10 @@
           "named": true
         },
         {
+          "type": "datetime2",
+          "named": true
+        },
+        {
           "type": "decimal",
           "named": true
         },
@@ -12791,6 +12658,10 @@
           "named": true
         },
         {
+          "type": "money_type",
+          "named": true
+        },
+        {
           "type": "nchar",
           "named": true
         },
@@ -12808,6 +12679,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "smalldatetime",
           "named": true
         },
         {
@@ -12831,27 +12706,11 @@
           "named": true
         },
         {
-          "type": "tsql_datetime2",
-          "named": true
-        },
-        {
-          "type": "tsql_money_type",
-          "named": true
-        },
-        {
-          "type": "tsql_smalldatetime",
-          "named": true
-        },
-        {
-          "type": "tsql_uniqueidentifier",
-          "named": true
-        },
-        {
-          "type": "tsql_variable",
-          "named": true
-        },
-        {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "uniqueidentifier",
           "named": true
         },
         {
@@ -12860,6 +12719,10 @@
         },
         {
           "type": "varchar",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         },
         {
@@ -12938,11 +12801,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -13120,11 +12983,11 @@
             "named": true
           },
           {
-            "type": "tsql_variable",
+            "type": "unary_expression",
             "named": true
           },
           {
-            "type": "unary_expression",
+            "type": "variable",
             "named": true
           },
           {
@@ -13140,6 +13003,97 @@
       "types": [
         {
           "type": "keyword_where",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_while",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_function",
           "named": true
         }
       ]
@@ -13286,6 +13240,33 @@
     }
   },
   {
+    "type": "with_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "distribution",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "within_group",
     "named": true,
     "fields": {},
@@ -13303,6 +13284,25 @@
         },
         {
           "type": "order_by",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_mode",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "for_xml_option",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         }
       ]
@@ -14655,7 +14655,7 @@
     "named": true
   },
   {
-    "type": "tsql_variable",
+    "type": "variable",
     "named": true
   }
 ]

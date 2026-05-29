@@ -2542,19 +2542,19 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "tsql_datetime2"
+                "name": "datetime2"
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_smalldatetime"
+                "name": "smalldatetime"
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_money_type"
+                "name": "money_type"
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_uniqueidentifier"
+                "name": "uniqueidentifier"
               },
               {
                 "type": "SYMBOL",
@@ -5306,7 +5306,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "tsql_variable"
+            "name": "variable"
           },
           {
             "type": "SYMBOL",
@@ -8163,15 +8163,15 @@
             },
             {
               "type": "SYMBOL",
-              "name": "tsql_if_statement"
+              "name": "if_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "tsql_while_statement"
+              "name": "while_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "tsql_block"
+              "name": "compound_statement"
             },
             {
               "type": "SYMBOL",
@@ -8363,7 +8363,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "tsql_table_with_options"
+                "name": "table_with_options"
               },
               {
                 "type": "BLANK"
@@ -17036,11 +17036,11 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_cross_apply"
+                "name": "cross_apply"
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_outer_apply"
+                "name": "outer_apply"
               }
             ]
           }
@@ -17191,11 +17191,11 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_pivot"
+                    "name": "pivot_clause"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_unpivot"
+                    "name": "unpivot_clause"
                   }
                 ]
               },
@@ -17243,7 +17243,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "tsql_table_hints"
+                "name": "table_hints"
               },
               {
                 "type": "BLANK"
@@ -18561,7 +18561,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_variable"
+                "name": "variable"
               },
               {
                 "type": "STRING",
@@ -19511,7 +19511,7 @@
         "value": "##?[A-Za-z_][0-9A-Za-z_]*"
       }
     },
-    "tsql_variable": {
+    "variable": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
@@ -19958,7 +19958,7 @@
         }
       ]
     },
-    "tsql_cross_apply": {
+    "cross_apply": {
       "type": "SEQ",
       "members": [
         {
@@ -19996,7 +19996,7 @@
         }
       ]
     },
-    "tsql_outer_apply": {
+    "outer_apply": {
       "type": "SEQ",
       "members": [
         {
@@ -20034,7 +20034,7 @@
         }
       ]
     },
-    "tsql_pivot": {
+    "pivot_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20169,7 +20169,7 @@
         }
       ]
     },
-    "tsql_unpivot": {
+    "unpivot_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20267,7 +20267,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "tsql_xml_mode"
+                  "name": "xml_mode"
                 }
               ]
             },
@@ -20280,7 +20280,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "tsql_json_mode"
+                  "name": "json_mode"
                 }
               ]
             }
@@ -20288,7 +20288,7 @@
         }
       ]
     },
-    "tsql_xml_mode": {
+    "xml_mode": {
       "type": "SEQ",
       "members": [
         {
@@ -20358,14 +20358,14 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_for_xml_option"
+                "name": "for_xml_option"
               }
             ]
           }
         }
       ]
     },
-    "tsql_for_xml_option": {
+    "for_xml_option": {
       "type": "CHOICE",
       "members": [
         {
@@ -20459,7 +20459,7 @@
         }
       ]
     },
-    "tsql_json_mode": {
+    "json_mode": {
       "type": "SEQ",
       "members": [
         {
@@ -20521,14 +20521,14 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "tsql_for_json_option"
+                "name": "for_json_option"
               }
             ]
           }
         }
       ]
     },
-    "tsql_for_json_option": {
+    "for_json_option": {
       "type": "CHOICE",
       "members": [
         {
@@ -20580,7 +20580,7 @@
         }
       ]
     },
-    "tsql_datetime2": {
+    "datetime2": {
       "type": "PREC_RIGHT",
       "value": 1,
       "content": {
@@ -20624,11 +20624,11 @@
         ]
       }
     },
-    "tsql_smalldatetime": {
+    "smalldatetime": {
       "type": "SYMBOL",
       "name": "keyword_smalldatetime"
     },
-    "tsql_money_type": {
+    "money_type": {
       "type": "CHOICE",
       "members": [
         {
@@ -20641,11 +20641,11 @@
         }
       ]
     },
-    "tsql_uniqueidentifier": {
+    "uniqueidentifier": {
       "type": "SYMBOL",
       "name": "keyword_uniqueidentifier"
     },
-    "tsql_table_hints": {
+    "table_hints": {
       "type": "SEQ",
       "members": [
         {
@@ -20661,7 +20661,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_table_hint"
+              "name": "table_hint"
             },
             {
               "type": "REPEAT",
@@ -20674,7 +20674,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_table_hint"
+                    "name": "table_hint"
                   }
                 ]
               }
@@ -20687,7 +20687,7 @@
         }
       ]
     },
-    "tsql_table_hint": {
+    "table_hint": {
       "type": "CHOICE",
       "members": [
         {
@@ -20835,7 +20835,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "tsql_variable"
+                      "name": "variable"
                     }
                   ]
                 },
@@ -20993,7 +20993,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "tsql_bulk_option"
+                      "name": "bulk_option"
                     },
                     {
                       "type": "REPEAT",
@@ -21006,7 +21006,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "tsql_bulk_option"
+                            "name": "bulk_option"
                           }
                         ]
                       }
@@ -21026,7 +21026,7 @@
         }
       ]
     },
-    "tsql_bulk_option": {
+    "bulk_option": {
       "type": "SEQ",
       "members": [
         {
@@ -21118,7 +21118,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "tsql_variable"
+          "name": "variable"
         },
         {
           "type": "CHOICE",
@@ -21168,7 +21168,7 @@
         }
       ]
     },
-    "tsql_if_statement": {
+    "if_statement": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
@@ -21210,7 +21210,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "tsql_block"
+            "name": "compound_statement"
           },
           {
             "type": "CHOICE",
@@ -21224,7 +21224,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_block"
+                    "name": "compound_statement"
                   }
                 ]
               },
@@ -21236,7 +21236,7 @@
         ]
       }
     },
-    "tsql_while_statement": {
+    "while_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21275,11 +21275,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "tsql_block"
+          "name": "compound_statement"
         }
       ]
     },
-    "tsql_block": {
+    "compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21601,7 +21601,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_with_option"
+              "name": "with_option"
             },
             {
               "type": "REPEAT",
@@ -21614,7 +21614,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_with_option"
+                    "name": "with_option"
                   }
                 ]
               }
@@ -21675,7 +21675,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_with_option"
+              "name": "with_option"
             },
             {
               "type": "REPEAT",
@@ -21688,7 +21688,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_with_option"
+                    "name": "with_option"
                   }
                 ]
               }
@@ -21757,7 +21757,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_with_option"
+              "name": "with_option"
             },
             {
               "type": "REPEAT",
@@ -21770,7 +21770,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_with_option"
+                    "name": "with_option"
                   }
                 ]
               }
@@ -21876,7 +21876,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "tsql_with_option"
+                      "name": "with_option"
                     },
                     {
                       "type": "REPEAT",
@@ -21889,7 +21889,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "tsql_with_option"
+                            "name": "with_option"
                           }
                         ]
                       }
@@ -21957,7 +21957,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_with_option"
+              "name": "with_option"
             },
             {
               "type": "REPEAT",
@@ -21970,7 +21970,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_with_option"
+                    "name": "with_option"
                   }
                 ]
               }
@@ -21983,7 +21983,7 @@
         }
       ]
     },
-    "tsql_with_option": {
+    "with_option": {
       "type": "SEQ",
       "members": [
         {
@@ -22017,7 +22017,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "tsql_distribution"
+              "name": "distribution"
             },
             {
               "type": "SYMBOL",
@@ -22027,7 +22027,7 @@
         }
       ]
     },
-    "tsql_distribution": {
+    "distribution": {
       "type": "CHOICE",
       "members": [
         {
@@ -22061,7 +22061,7 @@
         }
       ]
     },
-    "tsql_table_with_options": {
+    "table_with_options": {
       "type": "SEQ",
       "members": [
         {
@@ -22077,7 +22077,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tsql_table_option"
+              "name": "table_with_option"
             },
             {
               "type": "REPEAT",
@@ -22090,7 +22090,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tsql_table_option"
+                    "name": "table_with_option"
                   }
                 ]
               }
@@ -22103,7 +22103,7 @@
         }
       ]
     },
-    "tsql_table_option": {
+    "table_with_option": {
       "type": "CHOICE",
       "members": [
         {
@@ -22119,7 +22119,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "tsql_distribution"
+              "name": "distribution"
             }
           ]
         },

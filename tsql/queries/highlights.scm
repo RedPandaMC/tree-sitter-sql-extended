@@ -1,7 +1,7 @@
 ; inherits: sql
 
 ; T-SQL @variable references
-(tsql_variable) @variable
+(variable) @variable
 
 ; T-SQL-specific keywords
 [
@@ -35,10 +35,10 @@
 
 ; T-SQL-specific types
 [
-  (tsql_datetime2)
-  (tsql_smalldatetime)
-  (tsql_money_type)
-  (tsql_uniqueidentifier)
+  (datetime2)
+  (smalldatetime)
+  (money_type)
+  (uniqueidentifier)
 ] @type.builtin
 
 ; T-SQL type keywords

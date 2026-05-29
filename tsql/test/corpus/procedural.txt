@@ -11,7 +11,7 @@ DECLARE @count INT;
     (declare_statement
       (keyword_declare)
       (variable_declaration
-        (tsql_variable)
+        (variable)
         (int
           (keyword_int))))))
 
@@ -28,7 +28,7 @@ DECLARE @name NVARCHAR(100) = 'Alice';
     (declare_statement
       (keyword_declare)
       (variable_declaration
-        (tsql_variable)
+        (variable)
         (nvarchar
           (keyword_nvarchar)
           (literal))
@@ -47,11 +47,11 @@ DECLARE @x INT, @y INT;
     (declare_statement
       (keyword_declare)
       (variable_declaration
-        (tsql_variable)
+        (variable)
         (int
           (keyword_int)))
       (variable_declaration
-        (tsql_variable)
+        (variable)
         (int
           (keyword_int))))))
 
@@ -68,12 +68,12 @@ END
 
 (program
   (statement
-    (tsql_if_statement
+    (if_statement
       (keyword_if)
       (binary_expression
-        left: (tsql_variable)
+        left: (variable)
         right: (literal))
-      (tsql_block
+      (compound_statement
         (keyword_begin)
         (statement
           (select
@@ -100,12 +100,12 @@ END
 
 (program
   (statement
-    (tsql_if_statement
+    (if_statement
       (keyword_if)
       (binary_expression
-        left: (tsql_variable)
+        left: (variable)
         right: (literal))
-      (tsql_block
+      (compound_statement
         (keyword_begin)
         (statement
           (select
@@ -115,7 +115,7 @@ END
                 value: (literal)))))
         (keyword_end))
       (keyword_else)
-      (tsql_block
+      (compound_statement
         (keyword_begin)
         (statement
           (select
@@ -138,19 +138,19 @@ END;
 
 (program
   (statement
-    (tsql_while_statement
+    (while_statement
       (keyword_while)
       (binary_expression
-        left: (tsql_variable)
+        left: (variable)
         right: (literal))
-      (tsql_block
+      (compound_statement
         (keyword_begin)
         (statement
           (set_statement
             (keyword_set)
-            (tsql_variable)
+            (variable)
             (binary_expression
-              left: (tsql_variable)
+              left: (variable)
               right: (literal))))
         (keyword_end)))))
 

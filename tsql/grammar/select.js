@@ -31,8 +31,8 @@ export default {
         $.cross_join,
         $.lateral_join,
         $.lateral_cross_join,
-        $.tsql_cross_apply,
-        $.tsql_outer_apply,
+        $.cross_apply,
+        $.outer_apply,
       ),
     ),
     optional($.where),
@@ -45,7 +45,7 @@ export default {
   ),
 
   // CROSS APPLY <subquery|function> [alias]
-  tsql_cross_apply: $ => seq(
+  cross_apply: $ => seq(
     $.keyword_cross,
     $.keyword_apply,
     choice($.subquery, $.invocation),
@@ -53,7 +53,7 @@ export default {
   ),
 
   // OUTER APPLY <subquery|function> [alias]
-  tsql_outer_apply: $ => seq(
+  outer_apply: $ => seq(
     $.keyword_outer,
     $.keyword_apply,
     choice($.subquery, $.invocation),
@@ -61,7 +61,7 @@ export default {
   ),
 
   // PIVOT (agg_fn(col) FOR pivot_col IN (val [AS alias], ...)) AS alias
-  tsql_pivot: $ => seq(
+  pivot_clause: $ => seq(
     $.keyword_pivot,
     '(',
     $.invocation,
@@ -76,7 +76,7 @@ export default {
   ),
 
   // UNPIVOT (value_col FOR name_col IN (col, ...)) AS alias
-  tsql_unpivot: $ => seq(
+  unpivot_clause: $ => seq(
     $.keyword_unpivot,
     '(',
     field('value_col', $.identifier),
@@ -93,22 +93,22 @@ export default {
   for_clause: $ => seq(
     $.keyword_for,
     choice(
-      seq($.keyword_xml, $.tsql_xml_mode),
-      seq($.keyword_json, $.tsql_json_mode),
+      seq($.keyword_xml, $.xml_mode),
+      seq($.keyword_json, $.json_mode),
     ),
   ),
 
-  tsql_xml_mode: $ => seq(
+  xml_mode: $ => seq(
     choice(
       make_keyword("raw"),
       make_keyword("auto"),
       make_keyword("explicit"),
       seq(make_keyword("path"), optional(seq('(', alias($._literal_string, $.literal), ')'))),
     ),
-    repeat(seq(',', $.tsql_for_xml_option)),
+    repeat(seq(',', $.for_xml_option)),
   ),
 
-  tsql_for_xml_option: $ => choice(
+  for_xml_option: $ => choice(
     seq(make_keyword("elements"), optional(choice(make_keyword("xsinil"), make_keyword("absent")))),
     make_keyword("xmldata"),
     make_keyword("xmlschema"),
@@ -118,15 +118,15 @@ export default {
     make_keyword("base64"),
   ),
 
-  tsql_json_mode: $ => seq(
+  json_mode: $ => seq(
     choice(
       make_keyword("auto"),
       seq(make_keyword("path"), optional(seq('(', alias($._literal_string, $.literal), ')'))),
     ),
-    repeat(seq(',', $.tsql_for_json_option)),
+    repeat(seq(',', $.for_json_option)),
   ),
 
-  tsql_for_json_option: $ => choice(
+  for_json_option: $ => choice(
     seq(make_keyword("root"), optional(seq('(', alias($._literal_string, $.literal), ')'))),
     make_keyword("include_null_values"),
     make_keyword("without_array_wrapper"),

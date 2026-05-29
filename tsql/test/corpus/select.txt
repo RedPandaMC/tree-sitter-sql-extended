@@ -119,7 +119,7 @@ SELECT @counter;
       (keyword_select)
       (select_expression
         (term
-          value: (tsql_variable))))))
+          value: (variable))))))
 
 ================================================================================
 FOR XML PATH
@@ -148,7 +148,7 @@ SELECT id, name FROM t FOR XML PATH('row');
       (for_clause
         (keyword_for)
         (keyword_xml)
-        (tsql_xml_mode
+        (xml_mode
           (literal))))))
 
 ================================================================================
@@ -178,4 +178,4 @@ SELECT id, name FROM t FOR JSON AUTO;
       (for_clause
         (keyword_for)
         (keyword_json)
-        (tsql_json_mode)))))
+        (json_mode)))))

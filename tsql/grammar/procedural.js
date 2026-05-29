@@ -9,7 +9,7 @@ export default {
   ),
 
   variable_declaration: $ => seq(
-    $.tsql_variable,
+    $.variable,
     optional($.keyword_as),
     $._type,
     optional(seq(
@@ -18,28 +18,28 @@ export default {
     )),
   ),
 
-  // IF condition tsql_block [ELSE tsql_block]
-  tsql_if_statement: $ => prec.right(seq(
+  // IF condition compound_statement [ELSE compound_statement]
+  if_statement: $ => prec.right(seq(
     $.keyword_if,
     optional_parenthesis($._expression),
-    $.tsql_block,
+    $.compound_statement,
     optional(seq(
       $.keyword_else,
-      $.tsql_block,
+      $.compound_statement,
     )),
   )),
 
-  // WHILE condition tsql_block
-  tsql_while_statement: $ => seq(
+  // WHILE condition compound_statement
+  while_statement: $ => seq(
     $.keyword_while,
     optional_parenthesis($._expression),
-    $.tsql_block,
+    $.compound_statement,
   ),
 
   // BEGIN statement; [statement;]* END
   // Requires explicit BEGIN...END delimiters; bare single-statement bodies
   // cause irresolvable shift/reduce conflicts with the program-level rule.
-  tsql_block: $ => seq(
+  compound_statement: $ => seq(
     $.keyword_begin,
     repeat(seq($.statement, ';')),
     $.keyword_end,

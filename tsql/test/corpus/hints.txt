@@ -19,9 +19,9 @@ SELECT id FROM orders WITH (NOLOCK);
       (relation
         (object_reference
           name: (identifier))
-        (tsql_table_hints
+        (table_hints
           (keyword_with)
-          (tsql_table_hint
+          (table_hint
             (keyword_nolock)))))))
 
 ================================================================================
@@ -45,11 +45,11 @@ SELECT id FROM orders WITH (NOLOCK, ROWLOCK);
       (relation
         (object_reference
           name: (identifier))
-        (tsql_table_hints
+        (table_hints
           (keyword_with)
-          (tsql_table_hint
+          (table_hint
             (keyword_nolock))
-          (tsql_table_hint
+          (table_hint
             (keyword_rowlock)))))))
 
 ================================================================================
@@ -73,9 +73,9 @@ SELECT id FROM orders WITH (INDEX(ix_customer));
       (relation
         (object_reference
           name: (identifier))
-        (tsql_table_hints
+        (table_hints
           (keyword_with)
-          (tsql_table_hint
+          (table_hint
             (keyword_index)
             (identifier)))))))
 
@@ -104,7 +104,7 @@ SELECT o.id FROM orders AS o WITH (UPDLOCK);
           name: (identifier))
         (keyword_as)
         alias: (identifier)
-        (tsql_table_hints
+        (table_hints
           (keyword_with)
-          (tsql_table_hint
+          (table_hint
             (keyword_updlock)))))))

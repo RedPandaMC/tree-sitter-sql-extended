@@ -57,9 +57,9 @@ export default grammar(base, {
         optional_parenthesis($._dml_read),
         // T-SQL procedural constructs
         $.declare_statement,
-        $.tsql_if_statement,
-        $.tsql_while_statement,
-        $.tsql_block,
+        $.if_statement,
+        $.while_statement,
+        $.compound_statement,
         $.try_catch_statement,
         $.raiserror_statement,
         $.throw_statement,
@@ -120,7 +120,7 @@ export default grammar(base, {
         optional($._if_not_exists),
         $.object_reference,
         optional($.column_definitions),
-        optional($.tsql_table_with_options),
+        optional($.table_with_options),
         optional(seq($.keyword_as, $.create_query)),
       ),
     ),
@@ -142,7 +142,7 @@ export default grammar(base, {
     // Matches both @@system_var and @local_var.
     // token(prec(1,...)) ensures the lexer prefers this over the '@' entry in
     // op_unary_other when followed by an identifier character.
-    tsql_variable: _ => token(prec(1, /@@?[A-Za-z_][A-Za-z0-9_]*/)),
+    variable: _ => token(prec(1, /@@?[A-Za-z_][A-Za-z0-9_]*/)),
 
     // ── Expression — add @variable ────────────────────────────────────────────
     _expression: $ => prec(1,
@@ -150,7 +150,7 @@ export default grammar(base, {
         $.literal,
         alias($._qualified_field, $.field),
         $.parameter,
-        $.tsql_variable,
+        $.variable,
         $.list,
         $.case,
         $.window_function,
@@ -214,7 +214,7 @@ export default grammar(base, {
 
     // T-SQL SET @variable = expression  (plus base transaction/constraint SET)
     set_statement: $ => prec.right(choice(
-      seq($.keyword_set, $.tsql_variable, '=', $._expression),
+      seq($.keyword_set, $.variable, '=', $._expression),
       seq($.keyword_set, $.keyword_constraints, choice($.keyword_all, comma_list($.identifier, true)), choice($.keyword_deferred, $.keyword_immediate)),
       seq($.keyword_set, $.keyword_transaction, $._transaction_mode),
       seq($.keyword_set, $.keyword_transaction, $.keyword_snapshot, $._transaction_mode),

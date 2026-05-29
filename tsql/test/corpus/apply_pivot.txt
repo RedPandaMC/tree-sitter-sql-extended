@@ -26,7 +26,7 @@ SELECT t.id, a.val FROM t CROSS APPLY (SELECT val FROM v WHERE v.id = t.id) a;
       (relation
         (object_reference
           name: (identifier)))
-      (tsql_cross_apply
+      (cross_apply
         (keyword_cross)
         (keyword_apply)
         (subquery
@@ -82,7 +82,7 @@ SELECT t.id, f.val FROM t OUTER APPLY dbo.GetValues(t.id) f;
       (relation
         (object_reference
           name: (identifier)))
-      (tsql_outer_apply
+      (outer_apply
         (keyword_outer)
         (keyword_apply)
         (invocation
@@ -116,7 +116,7 @@ SELECT * FROM sales PIVOT (SUM(amount) FOR month IN ('Jan', 'Feb', 'Mar')) AS pv
       (relation
         (object_reference
           name: (identifier))
-        (tsql_pivot
+        (pivot_clause
           (keyword_pivot)
           (invocation
             (object_reference
@@ -160,7 +160,7 @@ SELECT name, month, amount FROM sales UNPIVOT (amount FOR month IN (jan, feb, ma
       (relation
         (object_reference
           name: (identifier))
-        (tsql_unpivot
+        (unpivot_clause
           (keyword_unpivot)
           value_col: (identifier)
           (keyword_for)
