@@ -10,11 +10,11 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_set
+        (set_variable_statement
           (keyword_set)
           target: (identifier)
           value: (literal)))
@@ -32,11 +32,11 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_declare
+        (declare_statement
           (keyword_declare)
           (identifier)
           (int
@@ -63,11 +63,11 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_if
+        (if_statement
           (keyword_if)
           condition: (binary_expression
             left: (field
@@ -75,7 +75,7 @@ END;
             right: (literal))
           (keyword_then)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (literal)))
@@ -86,13 +86,13 @@ END;
             right: (literal))
           (keyword_then)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (literal)))
           (keyword_else)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (literal)))
@@ -114,11 +114,11 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_while
+        (while_statement
           (keyword_while)
           condition: (binary_expression
             left: (field
@@ -126,7 +126,7 @@ END;
             right: (literal))
           (keyword_do)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (binary_expression
@@ -152,15 +152,15 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_loop
+        (loop_statement
           label: (identifier)
           (keyword_loop)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (binary_expression
@@ -168,7 +168,7 @@ END;
                   name: (identifier))
                 right: (literal))))
           (statement
-            (db2_leave
+            (leave_statement
               (keyword_leave)
               label: (identifier)))
           (keyword_end)
@@ -191,15 +191,15 @@ END;
 
 (program
   (statement
-    (db2_compound_statement
+    (compound_statement
       (keyword_begin)
       (keyword_atomic)
       (statement
-        (db2_loop
+        (loop_statement
           label: (identifier)
           (keyword_loop)
           (statement
-            (db2_set
+            (set_variable_statement
               (keyword_set)
               target: (identifier)
               value: (binary_expression
@@ -207,7 +207,7 @@ END;
                   name: (identifier))
                 right: (literal))))
           (statement
-            (db2_iterate
+            (iterate_statement
               (keyword_iterate)
               label: (identifier)))
           (keyword_end)

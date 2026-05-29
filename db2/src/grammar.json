@@ -8180,35 +8180,35 @@
             },
             {
               "type": "SYMBOL",
-              "name": "db2_compound_statement"
+              "name": "compound_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_declare"
+              "name": "declare_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_set"
+              "name": "set_variable_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_if"
+              "name": "if_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_while"
+              "name": "while_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_loop"
+              "name": "loop_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_leave"
+              "name": "leave_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "db2_iterate"
+              "name": "iterate_statement"
             }
           ]
         }
@@ -19576,7 +19576,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "db2_options_clause"
+              "name": "options_clause"
             },
             {
               "type": "BLANK"
@@ -19671,7 +19671,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "db2_options_clause"
+              "name": "options_clause"
             },
             {
               "type": "BLANK"
@@ -19716,7 +19716,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "db2_options_clause"
+              "name": "options_clause"
             },
             {
               "type": "BLANK"
@@ -19758,7 +19758,7 @@
         }
       ]
     },
-    "db2_options_clause": {
+    "options_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20557,7 +20557,7 @@
         }
       ]
     },
-    "db2_compound_statement": {
+    "compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20639,7 +20639,7 @@
         }
       ]
     },
-    "db2_declare": {
+    "declare_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20698,7 +20698,7 @@
         }
       ]
     },
-    "db2_set": {
+    "set_variable_statement": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -20740,7 +20740,7 @@
         ]
       }
     },
-    "db2_if": {
+    "if_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20858,7 +20858,7 @@
         }
       ]
     },
-    "db2_while": {
+    "while_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20944,7 +20944,7 @@
         }
       ]
     },
-    "db2_loop": {
+    "loop_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21018,7 +21018,7 @@
         }
       ]
     },
-    "db2_leave": {
+    "leave_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21035,7 +21035,7 @@
         }
       ]
     },
-    "db2_iterate": {
+    "iterate_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -21114,10 +21114,10 @@
     ],
     [
       "transaction",
-      "db2_compound_statement"
+      "compound_statement"
     ],
     [
-      "db2_set",
+      "set_variable_statement",
       "object_reference"
     ]
   ],

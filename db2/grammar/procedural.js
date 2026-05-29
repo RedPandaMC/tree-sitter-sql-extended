@@ -3,7 +3,7 @@ import { comma_list } from '../../grammar/helpers.js';
 export default {
 
   // [label:] BEGIN [ATOMIC] stmts END [label]
-  db2_compound_statement: $ => seq(
+  compound_statement: $ => seq(
     optional(field('label', seq($.identifier, ':'))),
     $.keyword_begin,
     optional($.keyword_atomic),
@@ -13,7 +13,7 @@ export default {
   ),
 
   // DECLARE name [, ...] type [DEFAULT expr]
-  db2_declare: $ => seq(
+  declare_statement: $ => seq(
     $.keyword_declare,
     comma_list($.identifier, true),
     $._type,
@@ -21,7 +21,7 @@ export default {
   ),
 
   // SET name = expr
-  db2_set: $ => prec(1, seq(
+  set_variable_statement: $ => prec(1, seq(
     $.keyword_set,
     field('target', choice($.identifier, $._qualified_field)),
     '=',
@@ -29,7 +29,7 @@ export default {
   )),
 
   // IF cond THEN ... [ELSEIF cond THEN ...] [ELSE ...] END IF
-  db2_if: $ => seq(
+  if_statement: $ => seq(
     $.keyword_if,
     field('condition', $._expression),
     $.keyword_then,
@@ -49,7 +49,7 @@ export default {
   ),
 
   // [label:] WHILE cond DO ... END WHILE [label]
-  db2_while: $ => seq(
+  while_statement: $ => seq(
     optional(field('label', seq($.identifier, ':'))),
     $.keyword_while,
     field('condition', $._expression),
@@ -61,7 +61,7 @@ export default {
   ),
 
   // [label:] LOOP ... END LOOP [label]
-  db2_loop: $ => seq(
+  loop_statement: $ => seq(
     optional(field('label', seq($.identifier, ':'))),
     $.keyword_loop,
     repeat(seq($.statement, ';')),
@@ -71,13 +71,13 @@ export default {
   ),
 
   // LEAVE label
-  db2_leave: $ => seq(
+  leave_statement: $ => seq(
     $.keyword_leave,
     field('label', $.identifier),
   ),
 
   // ITERATE label
-  db2_iterate: $ => seq(
+  iterate_statement: $ => seq(
     $.keyword_iterate,
     field('label', $.identifier),
   ),
