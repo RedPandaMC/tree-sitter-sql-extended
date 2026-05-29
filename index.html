@@ -5,13 +5,18 @@
 </head>
 <body>
   <main>
-    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl"><h1 id="tree-sitter-sql">tree-sitter-sql</h1>
+    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl"><h1 id="tree-sitter-sql-extended">tree-sitter-sql-extended</h1>
 
-<p>The SQL grammar is defined at @ <a href="https://github.com/DerekStride/tree-sitter-sql">github://derekstride/tree-sitter-sql</a>.
-You can view the latest parser artifacts on site or on the <a href="https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages/src">gh-pages
-branch</a>.</p>
+<p>A multi-dialect SQL parser for <a href="https://tree-sitter.github.io/">tree-sitter</a> — a clean ANSI SQL base
+plus 12 independently compiled dialect grammars (Spark, Hive, Databricks, PostgreSQL, MySQL, MariaDB,
+Oracle, Db2, T-SQL, BigQuery, Snowflake, SQLite).</p>
 
-<p>Find previous artifacts in the <a href="https://github.com/DerekStride/tree-sitter-sql/commits/gh-pages">history on GitHub</a>.</p>
+<p>The grammar is defined at <a href="https://github.com/RedPandaMC/tree-sitter-sql-extended">github://redpandamc/tree-sitter-sql-extended</a>.
+It is forked from <a href="https://github.com/DerekStride/tree-sitter-sql">github://derekstride/tree-sitter-sql</a>.</p>
+
+<p>See the <a href="https://github.com/RedPandaMC/tree-sitter-sql-extended#readme">README</a> for dialect coverage and
+<a href="https://github.com/RedPandaMC/tree-sitter-sql-extended/blob/main/AGENTS.md">AGENTS.md</a> for the grammar
+architecture.</p>
 
 <p>The artifacts can also be found here:</p>
 
@@ -82,6 +87,8 @@ branch</a>.</p>
 <p><a href="/tree-sitter-sql/grammar/statements/delete.js">/grammar/statements/delete.js</a></p>
 
 <p><a href="/tree-sitter-sql/grammar/statements/drop.js">/grammar/statements/drop.js</a></p>
+
+<p><a href="/tree-sitter-sql/grammar/statements/grant.js">/grammar/statements/grant.js</a></p>
 
 <p><a href="/tree-sitter-sql/grammar/statements/index.js">/grammar/statements/index.js</a></p>
 

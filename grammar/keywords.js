@@ -83,6 +83,12 @@ export default {
   keyword_owned: _ => make_keyword("owned"),
   keyword_start: _ => make_keyword("start"),
   keyword_restart: _ => make_keyword("restart"),
+  keyword_reverse: _ => make_keyword("reverse"),
+  keyword_usage: _ => make_keyword("usage"),
+  keyword_rollup: _ => make_keyword("rollup"),
+  keyword_cube: _ => make_keyword("cube"),
+  keyword_grouping: _ => make_keyword("grouping"),
+  keyword_sets: _ => make_keyword("sets"),
   keyword_key: _ => make_keyword("key"),
   keyword_keys: _ => make_keyword("keys"),
   keyword_flow: _ => make_keyword("flow"),
@@ -158,12 +164,13 @@ export default {
   keyword_all: _ => make_keyword("all"),
   keyword_any: _ => make_keyword("any"),
   keyword_some: _ => make_keyword("some"),
-  keyword_except: _ => make_keyword("except"),
   keyword_intersect: _ => make_keyword("intersect"),
   keyword_returning: _ => make_keyword("returning"),
   keyword_begin: _ => make_keyword("begin"),
   keyword_commit: _ => make_keyword("commit"),
   keyword_rollback: _ => make_keyword("rollback"),
+  keyword_abort: _ => make_keyword("abort"),
+  keyword_fail: _ => make_keyword("fail"),
   keyword_transaction: _ => make_keyword("transaction"),
   keyword_over: _ => make_keyword("over"),
   keyword_nulls: _ => make_keyword("nulls"),
@@ -173,7 +180,6 @@ export default {
   keyword_last: _ => make_keyword("last"),
   keyword_window: _ => make_keyword("window"),
   keyword_range: _ => make_keyword("range"),
-  keyword_rows: _ => make_keyword("rows"),
   keyword_groups: _ => make_keyword("groups"),
   keyword_between: _ => make_keyword("between"),
   keyword_unbounded: _ => make_keyword("unbounded"),
@@ -184,6 +190,7 @@ export default {
   keyword_exclude: _ => make_keyword("exclude"),
   keyword_current: _ => make_keyword("current"),
   keyword_row: _ => make_keyword("row"),
+  keyword_fetch: _ => make_keyword("fetch"),
   keyword_ties: _ => make_keyword("ties"),
   keyword_others: _ => make_keyword("others"),
   keyword_only: _ => make_keyword("only"),
@@ -219,7 +226,6 @@ export default {
   keyword_attribute: _ => make_keyword("attribute"),
   keyword_authorization: _ => make_keyword("authorization"),
   keyword_action: _ => make_keyword("action"),
-  keyword_extension: _ => make_keyword("extension"),
   keyword_copy: _ => make_keyword("copy"),
   keyword_stdin: _ => make_keyword("stdin"),
   keyword_freeze: _ => make_keyword("freeze"),
@@ -358,6 +364,30 @@ export default {
   keyword_message: _ => make_keyword("message"),
   keyword_condition: _ => make_keyword("condition"),
   keyword_get: _ => make_keyword("get"),
+  // MySQL SHOW / DESCRIBE extensions (#2d)
+  keyword_databases: _ => make_keyword("databases"),
+  keyword_processlist: _ => make_keyword("processlist"),
+  keyword_status: _ => make_keyword("status"),
+  keyword_warnings: _ => make_keyword("warnings"),
+  keyword_errors: _ => make_keyword("errors"),
+  keyword_variables: _ => make_keyword("variables"),
+  keyword_indexes: _ => make_keyword("indexes"),
+  // BigQuery native types and functions (#2e)
+  keyword_int64:      _ => make_keyword("int64"),
+  keyword_float64:    _ => make_keyword("float64"),
+  keyword_bytes:      _ => make_keyword("bytes"),
+  keyword_bignumeric: _ => make_keyword("bignumeric"),
+  keyword_geography:  _ => make_keyword("geography"),
+  keyword_datetime:   _ => make_keyword("datetime"),
+  keyword_unnest:     _ => make_keyword("unnest"),
+  keyword_flatten:    _ => make_keyword("flatten"),
+  // PostgreSQL partitioning and table options (#2h)
+  keyword_inherits:   _ => make_keyword("inherits"),
+  keyword_including:  _ => make_keyword("including"),
+  keyword_excluding:  _ => make_keyword("excluding"),
+  // Oracle PL/SQL procedural keywords (#3a)
+  keyword_elsif:      _ => make_keyword("elsif"),
+  keyword_exit:       _ => make_keyword("exit"),
   // Spark 4.x (#21)
   keyword_var: _ => make_keyword("var"),
   keyword_variable: _ => make_keyword("variable"),
@@ -589,7 +619,13 @@ export default {
   keyword_regproc: _ => make_keyword("regproc"),
   keyword_regtype: _ => make_keyword("regtype"),
 
-  // ANSI SQL — TRIM(BOTH x FROM y)
+  // ANSI SQL — TRIM(BOTH|LEADING|TRAILING x FROM y)
   keyword_both: _ => make_keyword("both"),
+  keyword_leading: _ => make_keyword("leading"),
+  keyword_trailing: _ => make_keyword("trailing"),
+  keyword_trim: _ => make_keyword("trim"),
+
+  // ANSI SQL — WITHIN GROUP (ORDER BY ...)
+  keyword_within: _ => make_keyword("within"),
 
 }

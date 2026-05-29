@@ -146,12 +146,23 @@
   (keyword_order)
   (keyword_partition)
   (keyword_group)
+  (keyword_rollup)
+  (keyword_cube)
+  (keyword_grouping)
+  (keyword_sets)
   (keyword_with)
   (keyword_without)
   (keyword_as)
   (keyword_having)
   (keyword_limit)
   (keyword_offset)
+  (keyword_fetch)
+  (keyword_next)
+  (keyword_within)
+  (keyword_leading)
+  (keyword_trailing)
+  (keyword_trim)
+  (keyword_both)
 ] @keyword
 
 ; --- DDL object ---
@@ -160,6 +171,11 @@
   (keyword_tables)
   (keyword_key)
   (keyword_references)
+  (keyword_usage)
+  (keyword_grant)
+  (keyword_revoke)
+  (keyword_privileges)
+  (keyword_public)
   (keyword_foreign)
   (keyword_constraint)
   (keyword_force)
@@ -342,6 +358,7 @@
   (keyword_style)
   (keyword_tablesample)
 ] @keyword
+
 
 ; ============================================================
 ; Type qualifiers
