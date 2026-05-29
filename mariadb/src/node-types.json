@@ -8151,11 +8151,6 @@
     "fields": {}
   },
   {
-    "type": "keyword_rlike",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "keyword_varchar",
     "named": true,
     "fields": {},
@@ -13588,6 +13583,10 @@
   },
   {
     "type": "keyword_right",
+    "named": true
+  },
+  {
+    "type": "keyword_rlike",
     "named": true
   },
   {

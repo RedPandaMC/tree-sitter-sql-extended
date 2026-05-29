@@ -655,16 +655,37 @@
       "value": "[cC][oO][mM][mM][iI][tT]"
     },
     "keyword_rollback": {
-      "type": "PATTERN",
-      "value": "[rR][oO][lL][lL][bB][aA][cC][kK]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[rR][oO][lL][lL][bB][aA][cC][kK]"
+        }
+      }
     },
     "keyword_abort": {
-      "type": "PATTERN",
-      "value": "[aA][bB][oO][rR][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aA][bB][oO][rR][tT]"
+        }
+      }
     },
     "keyword_fail": {
-      "type": "PATTERN",
-      "value": "[fF][aA][iI][lL]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[fF][aA][iI][lL]"
+        }
+      }
     },
     "keyword_transaction": {
       "type": "PATTERN",
@@ -1076,8 +1097,15 @@
       "value": "[iI][nN][pP][uU][tT]"
     },
     "keyword_strict": {
-      "type": "PATTERN",
-      "value": "[sS][tT][rR][iI][cC][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[sS][tT][rR][iI][cC][tT]"
+        }
+      }
     },
     "keyword_cost": {
       "type": "PATTERN",
@@ -18296,24 +18324,59 @@
       ]
     },
     "keyword_pragma": {
-      "type": "PATTERN",
-      "value": "[pP][rR][aA][gG][mM][aA]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[pP][rR][aA][gG][mM][aA]"
+        }
+      }
     },
     "keyword_attach": {
-      "type": "PATTERN",
-      "value": "[aA][tT][tT][aA][cC][hH]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aA][tT][tT][aA][cC][hH]"
+        }
+      }
     },
     "keyword_detach": {
-      "type": "PATTERN",
-      "value": "[dD][eE][tT][aA][cC][hH]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[dD][eE][tT][aA][cC][hH]"
+        }
+      }
     },
     "keyword_rowid": {
-      "type": "PATTERN",
-      "value": "[rR][oO][wW][iI][dD]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[rR][oO][wW][iI][dD]"
+        }
+      }
     },
     "keyword_reindex": {
-      "type": "PATTERN",
-      "value": "[rR][eE][iI][nN][dD][eE][xX]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[rR][eE][iI][nN][dD][eE][xX]"
+        }
+      }
     },
     "keyword_indexed": {
       "type": "TOKEN",
@@ -18327,16 +18390,37 @@
       }
     },
     "keyword_autoincrement": {
-      "type": "PATTERN",
-      "value": "[aA][uU][tT][oO][iI][nN][cC][rR][eE][mM][eE][nN][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aA][uU][tT][oO][iI][nN][cC][rR][eE][mM][eE][nN][tT]"
+        }
+      }
     },
     "keyword_virtual": {
-      "type": "PATTERN",
-      "value": "[vV][iI][rR][tT][uU][aA][lL]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[vV][iI][rR][tT][uU][aA][lL]"
+        }
+      }
     },
     "keyword_stored": {
-      "type": "PATTERN",
-      "value": "[sS][tT][oO][rR][eE][dD]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[sS][tT][oO][rR][eE][dD]"
+        }
+      }
     },
     "pragma_statement": {
       "type": "SEQ",

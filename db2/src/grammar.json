@@ -18468,40 +18468,103 @@
       }
     },
     "keyword_signal": {
-      "type": "PATTERN",
-      "value": "[sS][iI][gG][nN][aA][lL]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[sS][iI][gG][nN][aA][lL]"
+        }
+      }
     },
     "keyword_sqlstate": {
-      "type": "PATTERN",
-      "value": "[sS][qQ][lL][sS][tT][aA][tT][eE]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[sS][qQ][lL][sS][tT][aA][tT][eE]"
+        }
+      }
     },
     "keyword_resignal": {
-      "type": "PATTERN",
-      "value": "[rR][eE][sS][iI][gG][nN][aA][lL]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[rR][eE][sS][iI][gG][nN][aA][lL]"
+        }
+      }
     },
     "keyword_message_text": {
-      "type": "PATTERN",
-      "value": "[mM][eE][sS][sS][aA][gG][eE][__][tT][eE][xX][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[mM][eE][sS][sS][aA][gG][eE][__][tT][eE][xX][tT]"
+        }
+      }
     },
     "keyword_get": {
-      "type": "PATTERN",
-      "value": "[gG][eE][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[gG][eE][tT]"
+        }
+      }
     },
     "keyword_diagnostics": {
-      "type": "PATTERN",
-      "value": "[dD][iI][aA][gG][nN][oO][sS][tT][iI][cC][sS]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[dD][iI][aA][gG][nN][oO][sS][tT][iI][cC][sS]"
+        }
+      }
     },
     "keyword_access": {
-      "type": "PATTERN",
-      "value": "[aA][cC][cC][eE][sS][sS]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[aA][cC][cC][eE][sS][sS]"
+        }
+      }
     },
     "keyword_optimize": {
-      "type": "PATTERN",
-      "value": "[oO][pP][tT][iI][mM][iI][zZ][eE]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[oO][pP][tT][iI][mM][iI][zZ][eE]"
+        }
+      }
     },
     "keyword_options": {
-      "type": "PATTERN",
-      "value": "[oO][pP][tT][iI][oO][nN][sS]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[oO][pP][tT][iI][oO][nN][sS]"
+        }
+      }
     },
     "create_wrapper": {
       "type": "SEQ",

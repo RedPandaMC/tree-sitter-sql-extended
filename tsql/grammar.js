@@ -193,9 +193,9 @@ export default grammar(base, {
     keyword_money:            _ => token(prec(1, make_keyword("money"))),
     keyword_smallmoney:       _ => token(prec(1, make_keyword("smallmoney"))),
     keyword_uniqueidentifier: _ => token(prec(1, make_keyword("uniqueidentifier"))),
-    keyword_pivot:            _ => make_keyword("pivot"),
-    keyword_unpivot:          _ => make_keyword("unpivot"),
-    keyword_apply:            _ => make_keyword("apply"),
+    keyword_pivot:            _ => token(prec(1, make_keyword("pivot"))),
+    keyword_unpivot:          _ => token(prec(1, make_keyword("unpivot"))),
+    keyword_apply:            _ => token(prec(1, make_keyword("apply"))),
     keyword_distribution:     _ => token(prec(1, make_keyword("distribution"))),
     keyword_round_robin:      _ => token(prec(1, make_keyword("round_robin"))),
     keyword_replicate:        _ => token(prec(1, make_keyword("replicate"))),
@@ -211,9 +211,9 @@ export default grammar(base, {
     keyword_hash:             _ => token(prec(1, make_keyword("hash"))),
     keyword_columnstore:      _ => token(prec(1, make_keyword("columnstore"))),
     keyword_heap:             _ => token(prec(1, make_keyword("heap"))),
-    keyword_file:             _ => make_keyword("file"),
-    keyword_format:           _ => make_keyword("format"),
-    keyword_clustered:        _ => make_keyword("clustered"),
+    keyword_file:             _ => token(prec(1, make_keyword("file"))),
+    keyword_format:           _ => token(prec(1, make_keyword("format"))),
+    keyword_clustered:        _ => token(prec(1, make_keyword("clustered"))),
 
     // T-SQL SET @variable = expression  (plus base transaction/constraint SET)
     set_statement: $ => prec.right(choice(

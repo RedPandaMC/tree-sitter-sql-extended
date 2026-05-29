@@ -18486,20 +18486,48 @@
       }
     },
     "keyword_elsif": {
-      "type": "PATTERN",
-      "value": "[eE][lL][sS][iI][fF]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[eE][lL][sS][iI][fF]"
+        }
+      }
     },
     "keyword_exit": {
-      "type": "PATTERN",
-      "value": "[eE][xX][iI][tT]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[eE][xX][iI][tT]"
+        }
+      }
     },
     "keyword_loop": {
-      "type": "PATTERN",
-      "value": "[lL][oO][oO][pP]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[lL][oO][oO][pP]"
+        }
+      }
     },
     "keyword_exception": {
-      "type": "PATTERN",
-      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN]"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN]"
+        }
+      }
     },
     "connect_by_clause": {
       "type": "SEQ",
