@@ -17,7 +17,7 @@ CREATE TABLE t (id INT64) OPTIONS (description = 'my table');
         (column_definition
           name: (identifier)
           type: (keyword_int64)))
-      (bq_options_clause
+      (options_clause
         (keyword_options)
         key: (identifier)
         value: (literal)))))
@@ -37,10 +37,10 @@ CREATE VIEW v OPTIONS (expiration_timestamp = TIMESTAMP '2025-01-01') AS SELECT 
       (keyword_view)
       (object_reference
         name: (identifier))
-      (bq_options_clause
+      (options_clause
         (keyword_options)
         key: (identifier)
-        value: (bq_typed_literal
+        value: (typed_literal
           (timestamp
             (keyword_timestamp))
           (literal)))
@@ -62,10 +62,10 @@ EXPORT DATA OPTIONS (uri = 'gs://bucket/*.csv', format = 'CSV') AS SELECT * FROM
 
 (program
   (statement
-    (bq_export_data
+    (export_data
       (keyword_export)
       (keyword_data)
-      (bq_options_clause
+      (options_clause
         (keyword_options)
         key: (identifier)
         value: (literal)
@@ -94,7 +94,7 @@ ASSERT (SELECT COUNT(*) FROM t) > 0 AS 'Table must not be empty';
 
 (program
   (statement
-    (bq_assert
+    (assert_statement
       (keyword_assert)
       condition: (binary_expression
         left: (subquery

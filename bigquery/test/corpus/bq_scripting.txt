@@ -8,7 +8,7 @@ DECLARE x INT64 DEFAULT 0;
 
 (program
   (statement
-    (bq_declare_statement
+    (declare_statement
       (keyword_declare)
       (identifier)
       (keyword_int64)
@@ -25,7 +25,7 @@ SET x = x + 1;
 
 (program
   (statement
-    (bq_set_statement
+    (set_variable_statement
       (keyword_set)
       (identifier)
       (binary_expression
@@ -46,14 +46,14 @@ END;
 --------------------------------------------------------------------------------
 
 (program
-  (bq_begin_block
+  (compound_statement
     (keyword_begin)
     (statement
-      (bq_set_statement
+      (set_variable_statement
         (keyword_set)
         (identifier)
         (literal)))
-    (bq_exception_clause
+    (exception_clause
       (keyword_exception)
       (keyword_when)
       (keyword_error)
@@ -83,7 +83,7 @@ END FOR;
 
 (program
   (statement
-    (bq_for_statement
+    (for_statement
       (keyword_for)
       variable: (identifier)
       (keyword_in)
@@ -100,7 +100,7 @@ END FOR;
               name: (identifier)))))
       (keyword_do)
       (statement
-        (bq_set_statement
+        (set_variable_statement
           (keyword_set)
           (identifier)
           (binary_expression
@@ -122,7 +122,7 @@ END WHILE;
 
 (program
   (statement
-    (bq_while_statement
+    (while_statement
       (keyword_while)
       condition: (binary_expression
         left: (field
@@ -130,7 +130,7 @@ END WHILE;
         right: (literal))
       (keyword_do)
       (statement
-        (bq_set_statement
+        (set_variable_statement
           (keyword_set)
           (identifier)
           (binary_expression
@@ -153,10 +153,10 @@ END LOOP;
 
 (program
   (statement
-    (bq_loop_statement
+    (loop_statement
       (keyword_loop)
       (statement
-        (bq_if_statement
+        (if_statement
           (keyword_if)
           condition: (binary_expression
             left: (field
@@ -164,7 +164,7 @@ END LOOP;
             right: (literal))
           (keyword_then)
           (statement
-            (bq_leave_statement
+            (leave_statement
               (keyword_leave)))
           (keyword_end)
           (keyword_if)))
@@ -181,7 +181,7 @@ LEAVE;
 
 (program
   (statement
-    (bq_leave_statement
+    (leave_statement
       (keyword_leave))))
 
 ================================================================================
@@ -194,5 +194,5 @@ CONTINUE;
 
 (program
   (statement
-    (bq_continue_statement
+    (continue_statement
       (keyword_continue))))

@@ -3,7 +3,7 @@ import { comma_list } from '../../grammar/helpers.js';
 export default {
 
   // ARRAY<type>
-  bq_array_type: $ => seq(
+  array_type: $ => seq(
     $.keyword_array,
     '<',
     $._type,
@@ -11,7 +11,7 @@ export default {
   ),
 
   // STRUCT<[name type, ...]>
-  bq_struct_type: $ => seq(
+  struct_type: $ => seq(
     $.keyword_struct,
     '<',
     optional(
@@ -58,8 +58,8 @@ export default {
       $.keyword_geography,
       $.keyword_datetime,
       // BigQuery parametric types
-      $.bq_array_type,
-      $.bq_struct_type,
+      $.array_type,
+      $.struct_type,
       // Fallback: custom type (object_reference)
       field('custom_type', $.object_reference),
     ),

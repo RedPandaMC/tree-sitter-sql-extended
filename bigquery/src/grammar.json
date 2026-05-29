@@ -25,7 +25,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "bq_begin_block"
+                    "name": "compound_statement"
                   }
                 ]
               },
@@ -2676,11 +2676,11 @@
           },
           {
             "type": "SYMBOL",
-            "name": "bq_array_type"
+            "name": "array_type"
           },
           {
             "type": "SYMBOL",
-            "name": "bq_struct_type"
+            "name": "struct_type"
           },
           {
             "type": "FIELD",
@@ -5382,23 +5382,23 @@
           },
           {
             "type": "SYMBOL",
-            "name": "bq_struct"
+            "name": "struct"
           },
           {
             "type": "SYMBOL",
-            "name": "bq_typed_literal"
+            "name": "typed_literal"
           },
           {
             "type": "SYMBOL",
-            "name": "bq_triple_double_quoted_string"
+            "name": "triple_double_quoted_string"
           },
           {
             "type": "SYMBOL",
-            "name": "bq_triple_single_quoted_string"
+            "name": "triple_single_quoted_string"
           },
           {
             "type": "SYMBOL",
-            "name": "bq_ml_function"
+            "name": "ml_function"
           }
         ]
       }
@@ -8191,35 +8191,35 @@
             },
             {
               "type": "SYMBOL",
-              "name": "bq_declare_statement"
+              "name": "declare_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_set_statement"
+              "name": "set_variable_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_for_statement"
+              "name": "for_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_while_statement"
+              "name": "while_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_loop_statement"
+              "name": "loop_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_if_statement"
+              "name": "if_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_leave_statement"
+              "name": "leave_statement"
             },
             {
               "type": "SYMBOL",
-              "name": "bq_continue_statement"
+              "name": "continue_statement"
             }
           ]
         }
@@ -8297,7 +8297,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "bq_create_model"
+              "name": "create_model"
             }
           ]
         }
@@ -8378,7 +8378,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "bq_options_clause"
+                    "name": "options_clause"
                   },
                   {
                     "type": "BLANK"
@@ -8756,7 +8756,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "bq_options_clause"
+                "name": "options_clause"
               },
               {
                 "type": "BLANK"
@@ -16377,11 +16377,11 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "bq_all_fields_except"
+                "name": "all_fields_except"
               },
               {
                 "type": "SYMBOL",
-                "name": "bq_all_fields_replace"
+                "name": "all_fields_replace"
               },
               {
                 "type": "SYMBOL",
@@ -17031,7 +17031,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "bq_unnest"
+                "name": "unnest"
               }
             ]
           },
@@ -19159,11 +19159,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "bq_export_data"
+          "name": "export_data"
         },
         {
           "type": "SYMBOL",
-          "name": "bq_assert"
+          "name": "assert_statement"
         }
       ]
     },
@@ -19321,7 +19321,7 @@
         }
       ]
     },
-    "bq_unnest": {
+    "unnest": {
       "type": "SEQ",
       "members": [
         {
@@ -19368,7 +19368,7 @@
         }
       ]
     },
-    "bq_all_fields_except": {
+    "all_fields_except": {
       "type": "SEQ",
       "members": [
         {
@@ -19440,7 +19440,7 @@
         }
       ]
     },
-    "bq_all_fields_replace": {
+    "all_fields_replace": {
       "type": "SEQ",
       "members": [
         {
@@ -19554,7 +19554,7 @@
         }
       ]
     },
-    "bq_struct": {
+    "struct": {
       "type": "SEQ",
       "members": [
         {
@@ -19669,7 +19669,7 @@
         }
       ]
     },
-    "bq_typed_literal": {
+    "typed_literal": {
       "type": "SEQ",
       "members": [
         {
@@ -19687,7 +19687,7 @@
         }
       ]
     },
-    "bq_triple_double_quoted_string": {
+    "triple_double_quoted_string": {
       "type": "TOKEN",
       "content": {
         "type": "SEQ",
@@ -19707,7 +19707,7 @@
         ]
       }
     },
-    "bq_triple_single_quoted_string": {
+    "triple_single_quoted_string": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
@@ -19731,7 +19731,7 @@
         }
       }
     },
-    "bq_declare_statement": {
+    "declare_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -19798,7 +19798,7 @@
         }
       ]
     },
-    "bq_set_statement": {
+    "set_variable_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -19914,7 +19914,7 @@
         }
       ]
     },
-    "bq_begin_block": {
+    "compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -19942,7 +19942,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "bq_exception_clause"
+              "name": "exception_clause"
             },
             {
               "type": "BLANK"
@@ -19955,7 +19955,7 @@
         }
       ]
     },
-    "bq_exception_clause": {
+    "exception_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -19992,7 +19992,7 @@
         }
       ]
     },
-    "bq_for_statement": {
+    "for_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20045,7 +20045,7 @@
         }
       ]
     },
-    "bq_while_statement": {
+    "while_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20090,7 +20090,7 @@
         }
       ]
     },
-    "bq_loop_statement": {
+    "loop_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20123,7 +20123,7 @@
         }
       ]
     },
-    "bq_if_statement": {
+    "if_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20162,7 +20162,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "bq_elseif_clause"
+            "name": "elseif_clause"
           }
         },
         {
@@ -20170,7 +20170,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "bq_else_clause"
+              "name": "else_clause"
             },
             {
               "type": "BLANK"
@@ -20187,7 +20187,7 @@
         }
       ]
     },
-    "bq_elseif_clause": {
+    "elseif_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20224,7 +20224,7 @@
         }
       ]
     },
-    "bq_else_clause": {
+    "else_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20249,11 +20249,11 @@
         }
       ]
     },
-    "bq_leave_statement": {
+    "leave_statement": {
       "type": "SYMBOL",
       "name": "keyword_leave"
     },
-    "bq_continue_statement": {
+    "continue_statement": {
       "type": "CHOICE",
       "members": [
         {
@@ -20266,7 +20266,7 @@
         }
       ]
     },
-    "bq_options_clause": {
+    "options_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -20350,7 +20350,7 @@
         }
       ]
     },
-    "bq_create_model": {
+    "create_model": {
       "type": "SEQ",
       "members": [
         {
@@ -20394,7 +20394,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "bq_options_clause"
+              "name": "options_clause"
             },
             {
               "type": "BLANK"
@@ -20411,7 +20411,7 @@
         }
       ]
     },
-    "bq_export_data": {
+    "export_data": {
       "type": "SEQ",
       "members": [
         {
@@ -20452,7 +20452,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "bq_options_clause"
+              "name": "options_clause"
             },
             {
               "type": "BLANK"
@@ -20469,7 +20469,7 @@
         }
       ]
     },
-    "bq_assert": {
+    "assert_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -20512,7 +20512,7 @@
         }
       ]
     },
-    "bq_ml_function": {
+    "ml_function": {
       "type": "SEQ",
       "members": [
         {
@@ -20590,7 +20590,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "bq_options_clause"
+                  "name": "options_clause"
                 }
               ]
             },
@@ -20605,7 +20605,7 @@
         }
       ]
     },
-    "bq_array_type": {
+    "array_type": {
       "type": "SEQ",
       "members": [
         {
@@ -20626,7 +20626,7 @@
         }
       ]
     },
-    "bq_struct_type": {
+    "struct_type": {
       "type": "SEQ",
       "members": [
         {
@@ -20785,17 +20785,17 @@
     ],
     [
       "all_fields",
-      "bq_all_fields_except"
+      "all_fields_except"
     ],
     [
       "qualify"
     ],
     [
-      "bq_array_type",
-      "bq_struct_type"
+      "array_type",
+      "struct_type"
     ],
     [
-      "bq_unnest"
+      "unnest"
     ]
   ],
   "precedences": [

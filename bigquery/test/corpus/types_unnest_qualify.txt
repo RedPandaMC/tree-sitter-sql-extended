@@ -68,7 +68,7 @@ CREATE TABLE t (tags ARRAY<STRING>);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (bq_array_type
+          type: (array_type
             (keyword_array)
             (keyword_string)))))))
 
@@ -90,7 +90,7 @@ CREATE TABLE t (address STRUCT<city STRING, zip INT64>);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (bq_struct_type
+          type: (struct_type
             (keyword_struct)
             name: (identifier)
             (keyword_string)
@@ -116,7 +116,7 @@ SELECT elem FROM UNNEST(arr) AS elem;
     (from
       (keyword_from)
       (relation
-        (bq_unnest
+        (unnest
           (keyword_unnest)
           (field
             name: (identifier)))
@@ -145,7 +145,7 @@ SELECT elem, pos FROM UNNEST(arr) WITH OFFSET AS pos;
     (from
       (keyword_from)
       (relation
-        (bq_unnest
+        (unnest
           (keyword_unnest)
           (field
             name: (identifier))

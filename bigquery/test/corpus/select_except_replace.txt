@@ -12,7 +12,7 @@ SELECT * EXCEPT (col1) FROM t
       (keyword_select)
       (select_expression
         (term
-          value: (bq_all_fields_except
+          value: (all_fields_except
             (keyword_except)
             (identifier)))))
     (from
@@ -35,7 +35,7 @@ SELECT * EXCEPT (col1, col2) FROM t
       (keyword_select)
       (select_expression
         (term
-          value: (bq_all_fields_except
+          value: (all_fields_except
             (keyword_except)
             (identifier)
             (identifier)))))
@@ -59,7 +59,7 @@ SELECT t.* EXCEPT (sensitive) FROM t
       (keyword_select)
       (select_expression
         (term
-          value: (bq_all_fields_except
+          value: (all_fields_except
             (object_reference
               name: (identifier))
             (keyword_except)
@@ -84,7 +84,7 @@ SELECT * REPLACE (col1 * 2 AS col1) FROM t
       (keyword_select)
       (select_expression
         (term
-          value: (bq_all_fields_replace
+          value: (all_fields_replace
             (keyword_replace)
             value: (binary_expression
               left: (field
@@ -112,7 +112,7 @@ SELECT * REPLACE (price * 1.1 AS price, discount * 0.9 AS discount) FROM product
       (keyword_select)
       (select_expression
         (term
-          value: (bq_all_fields_replace
+          value: (all_fields_replace
             (keyword_replace)
             value: (binary_expression
               left: (field

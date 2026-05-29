@@ -81,6 +81,157 @@
     }
   },
   {
+    "type": "all_fields_except",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_except",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "all_fields_replace",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_replace",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "alter_column",
     "named": true,
     "fields": {
@@ -133,6 +284,10 @@
         "required": false,
         "types": [
           {
+            "type": "array_type",
+            "named": true
+          },
+          {
             "type": "bigint",
             "named": true
           },
@@ -142,14 +297,6 @@
           },
           {
             "type": "bit",
-            "named": true
-          },
-          {
-            "type": "bq_array_type",
-            "named": true
-          },
-          {
-            "type": "bq_struct_type",
             "named": true
           },
           {
@@ -245,6 +392,10 @@
             "named": true
           },
           {
+            "type": "struct_type",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -287,26 +438,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -406,6 +537,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -414,11 +549,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -832,6 +983,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -841,14 +996,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -1044,6 +1191,10 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -1189,6 +1340,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -1198,14 +1353,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -1389,6 +1536,10 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -1511,26 +1662,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -1587,6 +1718,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -1607,6 +1742,10 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
@@ -1615,11 +1754,291 @@
           "named": true
         },
         {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         },
         {
           "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_type",
+    "named": true,
+    "fields": {
+      "custom_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "bigint",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bit",
+          "named": true
+        },
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "keyword_array",
+          "named": true
+        },
+        {
+          "type": "keyword_bignumeric",
+          "named": true
+        },
+        {
+          "type": "keyword_boolean",
+          "named": true
+        },
+        {
+          "type": "keyword_bytes",
+          "named": true
+        },
+        {
+          "type": "keyword_date",
+          "named": true
+        },
+        {
+          "type": "keyword_datetime",
+          "named": true
+        },
+        {
+          "type": "keyword_float64",
+          "named": true
+        },
+        {
+          "type": "keyword_geography",
+          "named": true
+        },
+        {
+          "type": "keyword_int64",
+          "named": true
+        },
+        {
+          "type": "keyword_interval",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "keyword_string",
+          "named": true
+        },
+        {
+          "type": "keyword_xml",
+          "named": true
+        },
+        {
+          "type": "nchar",
+          "named": true
+        },
+        {
+          "type": "numeric",
+          "named": true
+        },
+        {
+          "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "varbinary",
+          "named": true
+        },
+        {
+          "type": "varchar",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "assert_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_assert",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         }
       ]
@@ -1656,26 +2075,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -1708,6 +2107,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -1716,11 +2119,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -1756,26 +2175,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -1808,6 +2207,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -1816,11 +2219,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -1850,26 +2269,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -1902,6 +2301,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -1910,11 +2313,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -1944,26 +2363,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -1996,6 +2395,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -2004,11 +2407,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -2120,26 +2539,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -2172,6 +2571,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -2180,11 +2583,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -2332,26 +2751,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -2384,6 +2783,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -2392,11 +2795,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -2442,2138 +2861,6 @@
     }
   },
   {
-    "type": "bq_all_fields_except",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_except",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_all_fields_replace",
-    "named": true,
-    "fields": {
-      "alias": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_replace",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_array_type",
-    "named": true,
-    "fields": {
-      "custom_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bigint",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
-          "named": true
-        },
-        {
-          "type": "char",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double",
-          "named": true
-        },
-        {
-          "type": "enum",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "keyword_array",
-          "named": true
-        },
-        {
-          "type": "keyword_bignumeric",
-          "named": true
-        },
-        {
-          "type": "keyword_boolean",
-          "named": true
-        },
-        {
-          "type": "keyword_bytes",
-          "named": true
-        },
-        {
-          "type": "keyword_date",
-          "named": true
-        },
-        {
-          "type": "keyword_datetime",
-          "named": true
-        },
-        {
-          "type": "keyword_float64",
-          "named": true
-        },
-        {
-          "type": "keyword_geography",
-          "named": true
-        },
-        {
-          "type": "keyword_int64",
-          "named": true
-        },
-        {
-          "type": "keyword_interval",
-          "named": true
-        },
-        {
-          "type": "keyword_json",
-          "named": true
-        },
-        {
-          "type": "keyword_string",
-          "named": true
-        },
-        {
-          "type": "keyword_xml",
-          "named": true
-        },
-        {
-          "type": "nchar",
-          "named": true
-        },
-        {
-          "type": "numeric",
-          "named": true
-        },
-        {
-          "type": "nvarchar",
-          "named": true
-        },
-        {
-          "type": "smallint",
-          "named": true
-        },
-        {
-          "type": "time",
-          "named": true
-        },
-        {
-          "type": "timestamp",
-          "named": true
-        },
-        {
-          "type": "varbinary",
-          "named": true
-        },
-        {
-          "type": "varchar",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_assert",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_assert",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_begin_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bq_exception_clause",
-          "named": true
-        },
-        {
-          "type": "keyword_begin",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_continue_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_continue",
-          "named": true
-        },
-        {
-          "type": "keyword_iterate",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_create_model",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bq_options_clause",
-          "named": true
-        },
-        {
-          "type": "create_query",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_create",
-          "named": true
-        },
-        {
-          "type": "keyword_exists",
-          "named": true
-        },
-        {
-          "type": "keyword_if",
-          "named": true
-        },
-        {
-          "type": "keyword_model",
-          "named": true
-        },
-        {
-          "type": "keyword_not",
-          "named": true
-        },
-        {
-          "type": "keyword_or",
-          "named": true
-        },
-        {
-          "type": "keyword_replace",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_declare_statement",
-    "named": true,
-    "fields": {
-      "custom_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "bigint",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "char",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double",
-          "named": true
-        },
-        {
-          "type": "enum",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_bignumeric",
-          "named": true
-        },
-        {
-          "type": "keyword_boolean",
-          "named": true
-        },
-        {
-          "type": "keyword_bytes",
-          "named": true
-        },
-        {
-          "type": "keyword_date",
-          "named": true
-        },
-        {
-          "type": "keyword_datetime",
-          "named": true
-        },
-        {
-          "type": "keyword_declare",
-          "named": true
-        },
-        {
-          "type": "keyword_default",
-          "named": true
-        },
-        {
-          "type": "keyword_float64",
-          "named": true
-        },
-        {
-          "type": "keyword_geography",
-          "named": true
-        },
-        {
-          "type": "keyword_int64",
-          "named": true
-        },
-        {
-          "type": "keyword_interval",
-          "named": true
-        },
-        {
-          "type": "keyword_json",
-          "named": true
-        },
-        {
-          "type": "keyword_string",
-          "named": true
-        },
-        {
-          "type": "keyword_xml",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "nchar",
-          "named": true
-        },
-        {
-          "type": "numeric",
-          "named": true
-        },
-        {
-          "type": "nvarchar",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "smallint",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "time",
-          "named": true
-        },
-        {
-          "type": "timestamp",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "varbinary",
-          "named": true
-        },
-        {
-          "type": "varchar",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_else_clause",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_else",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_elseif_clause",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_elseif",
-          "named": true
-        },
-        {
-          "type": "keyword_then",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_exception_clause",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_error",
-          "named": true
-        },
-        {
-          "type": "keyword_exception",
-          "named": true
-        },
-        {
-          "type": "keyword_then",
-          "named": true
-        },
-        {
-          "type": "keyword_when",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_export_data",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bq_options_clause",
-          "named": true
-        },
-        {
-          "type": "create_query",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_connection",
-          "named": true
-        },
-        {
-          "type": "keyword_data",
-          "named": true
-        },
-        {
-          "type": "keyword_export",
-          "named": true
-        },
-        {
-          "type": "keyword_with",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_for_statement",
-    "named": true,
-    "fields": {
-      "variable": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_do",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_for",
-          "named": true
-        },
-        {
-          "type": "keyword_in",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_if_statement",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bq_else_clause",
-          "named": true
-        },
-        {
-          "type": "bq_elseif_clause",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_if",
-          "named": true
-        },
-        {
-          "type": "keyword_then",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_leave_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_leave",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_loop_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_loop",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_ml_function",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bq_options_clause",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_evaluate",
-          "named": true
-        },
-        {
-          "type": "keyword_ml",
-          "named": true
-        },
-        {
-          "type": "keyword_model",
-          "named": true
-        },
-        {
-          "type": "keyword_predict",
-          "named": true
-        },
-        {
-          "type": "keyword_table",
-          "named": true
-        },
-        {
-          "type": "object_reference",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_options_clause",
-    "named": true,
-    "fields": {
-      "key": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_options",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_set_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_set",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_struct",
-    "named": true,
-    "fields": {
-      "alias": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_as",
-          "named": true
-        },
-        {
-          "type": "keyword_struct",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_struct_type",
-    "named": true,
-    "fields": {
-      "custom_type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bigint",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
-          "named": true
-        },
-        {
-          "type": "char",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double",
-          "named": true
-        },
-        {
-          "type": "enum",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "keyword_bignumeric",
-          "named": true
-        },
-        {
-          "type": "keyword_boolean",
-          "named": true
-        },
-        {
-          "type": "keyword_bytes",
-          "named": true
-        },
-        {
-          "type": "keyword_date",
-          "named": true
-        },
-        {
-          "type": "keyword_datetime",
-          "named": true
-        },
-        {
-          "type": "keyword_float64",
-          "named": true
-        },
-        {
-          "type": "keyword_geography",
-          "named": true
-        },
-        {
-          "type": "keyword_int64",
-          "named": true
-        },
-        {
-          "type": "keyword_interval",
-          "named": true
-        },
-        {
-          "type": "keyword_json",
-          "named": true
-        },
-        {
-          "type": "keyword_string",
-          "named": true
-        },
-        {
-          "type": "keyword_struct",
-          "named": true
-        },
-        {
-          "type": "keyword_xml",
-          "named": true
-        },
-        {
-          "type": "nchar",
-          "named": true
-        },
-        {
-          "type": "numeric",
-          "named": true
-        },
-        {
-          "type": "nvarchar",
-          "named": true
-        },
-        {
-          "type": "smallint",
-          "named": true
-        },
-        {
-          "type": "time",
-          "named": true
-        },
-        {
-          "type": "timestamp",
-          "named": true
-        },
-        {
-          "type": "varbinary",
-          "named": true
-        },
-        {
-          "type": "varchar",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_typed_literal",
-    "named": true,
-    "fields": {
-      "custom_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "object_reference",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bigint",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
-          "named": true
-        },
-        {
-          "type": "char",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double",
-          "named": true
-        },
-        {
-          "type": "enum",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "keyword_bignumeric",
-          "named": true
-        },
-        {
-          "type": "keyword_boolean",
-          "named": true
-        },
-        {
-          "type": "keyword_bytes",
-          "named": true
-        },
-        {
-          "type": "keyword_date",
-          "named": true
-        },
-        {
-          "type": "keyword_datetime",
-          "named": true
-        },
-        {
-          "type": "keyword_float64",
-          "named": true
-        },
-        {
-          "type": "keyword_geography",
-          "named": true
-        },
-        {
-          "type": "keyword_int64",
-          "named": true
-        },
-        {
-          "type": "keyword_interval",
-          "named": true
-        },
-        {
-          "type": "keyword_json",
-          "named": true
-        },
-        {
-          "type": "keyword_string",
-          "named": true
-        },
-        {
-          "type": "keyword_xml",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "nchar",
-          "named": true
-        },
-        {
-          "type": "numeric",
-          "named": true
-        },
-        {
-          "type": "nvarchar",
-          "named": true
-        },
-        {
-          "type": "smallint",
-          "named": true
-        },
-        {
-          "type": "time",
-          "named": true
-        },
-        {
-          "type": "timestamp",
-          "named": true
-        },
-        {
-          "type": "varbinary",
-          "named": true
-        },
-        {
-          "type": "varchar",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_unnest",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "between_expression",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
-          "type": "case",
-          "named": true
-        },
-        {
-          "type": "cast",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "field",
-          "named": true
-        },
-        {
-          "type": "interval",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "keyword_offset",
-          "named": true
-        },
-        {
-          "type": "keyword_unnest",
-          "named": true
-        },
-        {
-          "type": "keyword_with",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "subquery",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "window_function",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bq_while_statement",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "between_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": true
-          },
-          {
-            "type": "cast",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "field",
-            "named": true
-          },
-          {
-            "type": "interval",
-            "named": true
-          },
-          {
-            "type": "invocation",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "literal",
-            "named": true
-          },
-          {
-            "type": "parameter",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subquery",
-            "named": true
-          },
-          {
-            "type": "subscript",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "window_function",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_do",
-          "named": true
-        },
-        {
-          "type": "keyword_end",
-          "named": true
-        },
-        {
-          "type": "keyword_while",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "case",
     "named": true,
     "fields": {},
@@ -4591,26 +2878,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -4666,6 +2933,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -4674,11 +2945,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -4733,26 +3020,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -4785,6 +3052,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -4793,11 +3064,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -4816,6 +3103,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -4825,14 +3116,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -4925,6 +3208,10 @@
         },
         {
           "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "struct_type",
           "named": true
         },
         {
@@ -5112,6 +3399,10 @@
         "required": true,
         "types": [
           {
+            "type": "array_type",
+            "named": true
+          },
+          {
             "type": "bigint",
             "named": true
           },
@@ -5121,14 +3412,6 @@
           },
           {
             "type": "bit",
-            "named": true
-          },
-          {
-            "type": "bq_array_type",
-            "named": true
-          },
-          {
-            "type": "bq_struct_type",
             "named": true
           },
           {
@@ -5224,6 +3507,10 @@
             "named": true
           },
           {
+            "type": "struct_type",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -5256,26 +3543,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -5407,6 +3674,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "object_reference",
           "named": true
         },
@@ -5419,11 +3690,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -5500,6 +3787,33 @@
         },
         {
           "type": "keyword_hash",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "compound_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exception_clause",
+          "named": true
+        },
+        {
+          "type": "keyword_begin",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -5655,6 +3969,25 @@
     }
   },
   {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_continue",
+          "named": true
+        },
+        {
+          "type": "keyword_iterate",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "covering_columns",
     "named": true,
     "fields": {},
@@ -5777,6 +4110,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -5786,14 +4123,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -6005,6 +4334,10 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -6177,6 +4510,61 @@
         },
         {
           "type": "object_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "create_model",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "create_query",
+          "named": true
+        },
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_create",
+          "named": true
+        },
+        {
+          "type": "keyword_exists",
+          "named": true
+        },
+        {
+          "type": "keyword_if",
+          "named": true
+        },
+        {
+          "type": "keyword_model",
+          "named": true
+        },
+        {
+          "type": "keyword_not",
+          "named": true
+        },
+        {
+          "type": "keyword_or",
+          "named": true
+        },
+        {
+          "type": "keyword_replace",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        },
+        {
+          "type": "options_clause",
           "named": true
         }
       ]
@@ -6497,6 +4885,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -6506,14 +4898,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -6693,6 +5077,10 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -6719,10 +5107,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "bq_options_clause",
-          "named": true
-        },
         {
           "type": "column_definitions",
           "named": true
@@ -6774,6 +5158,10 @@
         {
           "type": "object_reference",
           "named": true
+        },
+        {
+          "type": "options_clause",
+          "named": true
         }
       ]
     }
@@ -6807,26 +5195,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -7014,6 +5382,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "object_reference",
           "named": true
         },
@@ -7026,11 +5398,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -7129,10 +5517,6 @@
       "required": true,
       "types": [
         {
-          "type": "bq_options_clause",
-          "named": true
-        },
-        {
           "type": "create_query",
           "named": true
         },
@@ -7186,6 +5570,10 @@
         },
         {
           "type": "object_reference",
+          "named": true
+        },
+        {
+          "type": "options_clause",
           "named": true
         }
       ]
@@ -7310,26 +5698,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -7370,6 +5738,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -7378,11 +5750,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -7414,26 +5802,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -7469,6 +5837,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -7477,11 +5849,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -7526,6 +5914,252 @@
       "types": [
         {
           "type": "keyword_decimal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "declare_statement",
+    "named": true,
+    "fields": {
+      "custom_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "bigint",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "bit",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_bignumeric",
+          "named": true
+        },
+        {
+          "type": "keyword_boolean",
+          "named": true
+        },
+        {
+          "type": "keyword_bytes",
+          "named": true
+        },
+        {
+          "type": "keyword_date",
+          "named": true
+        },
+        {
+          "type": "keyword_datetime",
+          "named": true
+        },
+        {
+          "type": "keyword_declare",
+          "named": true
+        },
+        {
+          "type": "keyword_default",
+          "named": true
+        },
+        {
+          "type": "keyword_float64",
+          "named": true
+        },
+        {
+          "type": "keyword_geography",
+          "named": true
+        },
+        {
+          "type": "keyword_int64",
+          "named": true
+        },
+        {
+          "type": "keyword_interval",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "keyword_string",
+          "named": true
+        },
+        {
+          "type": "keyword_xml",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "ml_function",
+          "named": true
+        },
+        {
+          "type": "nchar",
+          "named": true
+        },
+        {
+          "type": "numeric",
+          "named": true
+        },
+        {
+          "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "varbinary",
+          "named": true
+        },
+        {
+          "type": "varchar",
+          "named": true
+        },
+        {
+          "type": "window_function",
           "named": true
         }
       ]
@@ -8162,6 +6796,143 @@
     }
   },
   {
+    "type": "else_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_else",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "elseif_clause",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_elseif",
+          "named": true
+        },
+        {
+          "type": "keyword_then",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "enum",
     "named": true,
     "fields": {
@@ -8204,6 +6975,37 @@
     }
   },
   {
+    "type": "exception_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_error",
+          "named": true
+        },
+        {
+          "type": "keyword_exception",
+          "named": true
+        },
+        {
+          "type": "keyword_then",
+          "named": true
+        },
+        {
+          "type": "keyword_when",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "exists",
     "named": true,
     "fields": {},
@@ -8217,6 +7019,49 @@
         },
         {
           "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "export_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "create_query",
+          "named": true
+        },
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_connection",
+          "named": true
+        },
+        {
+          "type": "keyword_data",
+          "named": true
+        },
+        {
+          "type": "keyword_export",
+          "named": true
+        },
+        {
+          "type": "keyword_with",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        },
+        {
+          "type": "options_clause",
           "named": true
         }
       ]
@@ -8265,26 +7110,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -8317,6 +7142,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -8325,11 +7154,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -8474,6 +7319,52 @@
       "types": [
         {
           "type": "keyword_float",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_do",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_for",
+          "named": true
+        },
+        {
+          "type": "keyword_in",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        },
+        {
+          "type": "subquery",
           "named": true
         }
       ]
@@ -8642,6 +7533,10 @@
       "required": false,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
           "type": "bigint",
           "named": true
         },
@@ -8651,14 +7546,6 @@
         },
         {
           "type": "bit",
-          "named": true
-        },
-        {
-          "type": "bq_array_type",
-          "named": true
-        },
-        {
-          "type": "bq_struct_type",
           "named": true
         },
         {
@@ -8778,6 +7665,10 @@
           "named": true
         },
         {
+          "type": "struct_type",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -8829,26 +7720,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -8904,6 +7775,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -8916,11 +7791,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -9342,26 +8233,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -9422,6 +8293,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -9434,11 +8309,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -9470,26 +8361,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -9525,6 +8396,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -9533,11 +8408,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -9569,26 +8460,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -9636,6 +8507,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -9644,11 +8519,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -9680,26 +8571,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -9739,6 +8610,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -9747,11 +8622,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -9769,6 +8660,136 @@
     "type": "identifier",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "elseif_clause",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_if",
+          "named": true
+        },
+        {
+          "type": "keyword_then",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "index_fields",
@@ -10035,26 +9056,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -10087,6 +9088,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -10095,11 +9100,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -10276,26 +9297,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -10364,11 +9365,19 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "struct",
           "named": true
         },
         {
@@ -10380,11 +9389,38 @@
           "named": true
         },
         {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         },
         {
           "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "leave_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_leave",
           "named": true
         }
       ]
@@ -10434,26 +9470,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -10490,6 +9506,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -10498,11 +9518,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -10534,6 +9570,76 @@
         },
         {
           "type": "keyword_true",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_loop",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ml_function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_evaluate",
+          "named": true
+        },
+        {
+          "type": "keyword_ml",
+          "named": true
+        },
+        {
+          "type": "keyword_model",
+          "named": true
+        },
+        {
+          "type": "keyword_predict",
+          "named": true
+        },
+        {
+          "type": "keyword_table",
+          "named": true
+        },
+        {
+          "type": "object_reference",
+          "named": true
+        },
+        {
+          "type": "options_clause",
+          "named": true
+        },
+        {
+          "type": "subquery",
           "named": true
         }
       ]
@@ -10872,6 +9978,126 @@
     }
   },
   {
+    "type": "options_clause",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_options",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "order_by",
     "named": true,
     "fields": {},
@@ -10912,26 +10138,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -10987,6 +10193,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -10995,11 +10205,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -11049,26 +10275,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -11101,6 +10307,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -11109,11 +10319,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -11145,26 +10371,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -11208,6 +10414,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -11216,11 +10426,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -11252,26 +10478,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -11327,6 +10533,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -11339,11 +10549,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -11367,7 +10593,7 @@
       "required": false,
       "types": [
         {
-          "type": "bq_begin_block",
+          "type": "compound_statement",
           "named": true
         },
         {
@@ -11399,26 +10625,6 @@
           },
           {
             "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
             "named": true
           },
           {
@@ -11454,6 +10660,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -11462,11 +10672,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -11554,10 +10780,6 @@
       "required": true,
       "types": [
         {
-          "type": "bq_unnest",
-          "named": true
-        },
-        {
           "type": "invocation",
           "named": true
         },
@@ -11579,6 +10801,10 @@
         },
         {
           "type": "tablesample",
+          "named": true
+        },
+        {
+          "type": "unnest",
           "named": true
         },
         {
@@ -11811,26 +11037,6 @@
           "named": true
         },
         {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
-          "named": true
-        },
-        {
           "type": "case",
           "named": true
         },
@@ -11867,6 +11073,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -11879,11 +11089,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -11915,26 +11141,6 @@
         },
         {
           "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bq_ml_function",
-          "named": true
-        },
-        {
-          "type": "bq_struct",
-          "named": true
-        },
-        {
-          "type": "bq_triple_double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_triple_single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "bq_typed_literal",
           "named": true
         },
         {
@@ -11970,6 +11176,10 @@
           "named": true
         },
         {
+          "type": "ml_function",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
@@ -11978,11 +11188,27 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
         {
           "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
           "named": true
         },
         {
@@ -12266,6 +11492,113 @@
     }
   },
   {
+    "type": "set_variable_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_set",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "ml_function",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "similar_to",
     "named": true,
     "fields": {},
@@ -12341,26 +11674,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -12393,6 +11706,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -12401,11 +11718,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -12470,47 +11803,11 @@
           "named": true
         },
         {
-          "type": "bq_assert",
+          "type": "assert_statement",
           "named": true
         },
         {
-          "type": "bq_continue_statement",
-          "named": true
-        },
-        {
-          "type": "bq_create_model",
-          "named": true
-        },
-        {
-          "type": "bq_declare_statement",
-          "named": true
-        },
-        {
-          "type": "bq_export_data",
-          "named": true
-        },
-        {
-          "type": "bq_for_statement",
-          "named": true
-        },
-        {
-          "type": "bq_if_statement",
-          "named": true
-        },
-        {
-          "type": "bq_leave_statement",
-          "named": true
-        },
-        {
-          "type": "bq_loop_statement",
-          "named": true
-        },
-        {
-          "type": "bq_set_statement",
-          "named": true
-        },
-        {
-          "type": "bq_while_statement",
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -12527,6 +11824,10 @@
         },
         {
           "type": "create_materialized_view",
+          "named": true
+        },
+        {
+          "type": "create_model",
           "named": true
         },
         {
@@ -12563,6 +11864,10 @@
         },
         {
           "type": "cte",
+          "named": true
+        },
+        {
+          "type": "declare_statement",
           "named": true
         },
         {
@@ -12614,11 +11919,23 @@
           "named": true
         },
         {
+          "type": "export_data",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "from",
           "named": true
         },
         {
           "type": "grant_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -12714,6 +12031,14 @@
           "named": true
         },
         {
+          "type": "leave_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
           "type": "object_reference",
           "named": true
         },
@@ -12742,6 +12067,10 @@
           "named": true
         },
         {
+          "type": "set_variable_statement",
+          "named": true
+        },
+        {
           "type": "subquery",
           "named": true
         },
@@ -12751,6 +12080,294 @@
         },
         {
           "type": "when_clause",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "exists",
+            "named": true
+          },
+          {
+            "type": "field",
+            "named": true
+          },
+          {
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_as",
+          "named": true
+        },
+        {
+          "type": "keyword_struct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_type",
+    "named": true,
+    "fields": {
+      "custom_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "bigint",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bit",
+          "named": true
+        },
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "keyword_bignumeric",
+          "named": true
+        },
+        {
+          "type": "keyword_boolean",
+          "named": true
+        },
+        {
+          "type": "keyword_bytes",
+          "named": true
+        },
+        {
+          "type": "keyword_date",
+          "named": true
+        },
+        {
+          "type": "keyword_datetime",
+          "named": true
+        },
+        {
+          "type": "keyword_float64",
+          "named": true
+        },
+        {
+          "type": "keyword_geography",
+          "named": true
+        },
+        {
+          "type": "keyword_int64",
+          "named": true
+        },
+        {
+          "type": "keyword_interval",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "keyword_string",
+          "named": true
+        },
+        {
+          "type": "keyword_struct",
+          "named": true
+        },
+        {
+          "type": "keyword_xml",
+          "named": true
+        },
+        {
+          "type": "nchar",
+          "named": true
+        },
+        {
+          "type": "numeric",
+          "named": true
+        },
+        {
+          "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "varbinary",
+          "named": true
+        },
+        {
+          "type": "varchar",
           "named": true
         }
       ]
@@ -12820,26 +12437,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -12872,6 +12469,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -12880,11 +12481,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -12914,26 +12531,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -12966,6 +12563,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -12974,11 +12575,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13008,26 +12625,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -13060,6 +12657,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13068,11 +12669,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13102,26 +12719,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -13154,6 +12751,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13162,11 +12763,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13246,6 +12863,14 @@
             "named": true
           },
           {
+            "type": "all_fields_except",
+            "named": true
+          },
+          {
+            "type": "all_fields_replace",
+            "named": true
+          },
+          {
             "type": "array",
             "named": true
           },
@@ -13255,34 +12880,6 @@
           },
           {
             "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_all_fields_except",
-            "named": true
-          },
-          {
-            "type": "bq_all_fields_replace",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
             "named": true
           },
           {
@@ -13318,6 +12915,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13326,11 +12927,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13467,6 +13084,156 @@
     }
   },
   {
+    "type": "typed_literal",
+    "named": true,
+    "fields": {
+      "custom_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "bigint",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bit",
+          "named": true
+        },
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "keyword_bignumeric",
+          "named": true
+        },
+        {
+          "type": "keyword_boolean",
+          "named": true
+        },
+        {
+          "type": "keyword_bytes",
+          "named": true
+        },
+        {
+          "type": "keyword_date",
+          "named": true
+        },
+        {
+          "type": "keyword_datetime",
+          "named": true
+        },
+        {
+          "type": "keyword_float64",
+          "named": true
+        },
+        {
+          "type": "keyword_geography",
+          "named": true
+        },
+        {
+          "type": "keyword_int64",
+          "named": true
+        },
+        {
+          "type": "keyword_interval",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "keyword_string",
+          "named": true
+        },
+        {
+          "type": "keyword_xml",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "nchar",
+          "named": true
+        },
+        {
+          "type": "numeric",
+          "named": true
+        },
+        {
+          "type": "nvarchar",
+          "named": true
+        },
+        {
+          "type": "smallint",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "varbinary",
+          "named": true
+        },
+        {
+          "type": "varchar",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unary_expression",
     "named": true,
     "fields": {
@@ -13484,26 +13251,6 @@
           },
           {
             "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
             "named": true
           },
           {
@@ -13539,6 +13286,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13547,11 +13298,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13594,6 +13361,117 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "unnest",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "between_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "exists",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "interval",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "keyword_offset",
+          "named": true
+        },
+        {
+          "type": "keyword_unnest",
+          "named": true
+        },
+        {
+          "type": "keyword_with",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "ml_function",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "triple_double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "triple_single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "typed_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "window_function",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -13731,26 +13609,6 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
-            "named": true
-          },
-          {
-            "type": "bq_struct",
-            "named": true
-          },
-          {
-            "type": "bq_triple_double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_triple_single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "bq_typed_literal",
-            "named": true
-          },
-          {
             "type": "case",
             "named": true
           },
@@ -13783,6 +13641,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13791,11 +13653,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -13929,23 +13807,113 @@
             "named": true
           },
           {
-            "type": "bq_ml_function",
+            "type": "case",
             "named": true
           },
           {
-            "type": "bq_struct",
+            "type": "cast",
             "named": true
           },
           {
-            "type": "bq_triple_double_quoted_string",
+            "type": "exists",
             "named": true
           },
           {
-            "type": "bq_triple_single_quoted_string",
+            "type": "field",
             "named": true
           },
           {
-            "type": "bq_typed_literal",
+            "type": "interval",
+            "named": true
+          },
+          {
+            "type": "invocation",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "ml_function",
+            "named": true
+          },
+          {
+            "type": "parameter",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "subquery",
+            "named": true
+          },
+          {
+            "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "window_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_where",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "between_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
             "named": true
           },
           {
@@ -13981,6 +13949,10 @@
             "named": true
           },
           {
+            "type": "ml_function",
+            "named": true
+          },
+          {
             "type": "parameter",
             "named": true
           },
@@ -13989,11 +13961,27 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": true
+          },
+          {
             "type": "subquery",
             "named": true
           },
           {
             "type": "subscript",
+            "named": true
+          },
+          {
+            "type": "triple_double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "triple_single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "typed_literal",
             "named": true
           },
           {
@@ -14008,11 +13996,23 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "keyword_where",
+          "type": "keyword_do",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "keyword_while",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -14267,14 +14267,6 @@
   },
   {
     "type": "bang",
-    "named": true
-  },
-  {
-    "type": "bq_triple_double_quoted_string",
-    "named": true
-  },
-  {
-    "type": "bq_triple_single_quoted_string",
     "named": true
   },
   {
@@ -15477,6 +15469,14 @@
   },
   {
     "type": "parameter",
+    "named": true
+  },
+  {
+    "type": "triple_double_quoted_string",
+    "named": true
+  },
+  {
+    "type": "triple_single_quoted_string",
     "named": true
   }
 ]

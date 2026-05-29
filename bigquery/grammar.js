@@ -1,13 +1,13 @@
 import base from '../grammar.js';
 import { paren_list, comma_list, optional_parenthesis, wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 
-import bq_select_rules    from './grammar/select.js';
-import bq_expr_rules      from './grammar/expressions.js';
-import bq_string_rules    from './grammar/strings.js';
-import bq_scripting_rules from './grammar/scripting.js';
-import bq_ddl_rules       from './grammar/ddl.js';
-import bq_ml_rules        from './grammar/ml.js';
-import bq_types_rules     from './grammar/types.js';
+import select_rules    from './grammar/select.js';
+import expr_rules      from './grammar/expressions.js';
+import string_rules    from './grammar/strings.js';
+import scripting_rules from './grammar/scripting.js';
+import ddl_rules       from './grammar/ddl.js';
+import ml_rules        from './grammar/ml.js';
+import types_rules     from './grammar/types.js';
 
 export default grammar(base, {
   name: 'bigquery_sql',
@@ -25,10 +25,10 @@ export default grammar(base, {
     [$.list, $.cube_element],
     [$.interval],
     // BigQuery-specific
-    [$.all_fields, $.bq_all_fields_except],
+    [$.all_fields, $.all_fields_except],
     [$.qualify],
-    [$.bq_array_type, $.bq_struct_type],
-    [$.bq_unnest],
+    [$.array_type, $.struct_type],
+    [$.unnest],
   ],
 
   rules: {
@@ -39,7 +39,7 @@ export default grammar(base, {
         choice(
           $.transaction,
           $.statement,
-          $.bq_begin_block,
+          $.compound_statement,
         ),
         ';',
       )),
@@ -57,14 +57,14 @@ export default grammar(base, {
         $._ddl_statement,
         $._dml_write,
         optional_parenthesis($._dml_read),
-        $.bq_declare_statement,
-        $.bq_set_statement,
-        $.bq_for_statement,
-        $.bq_while_statement,
-        $.bq_loop_statement,
-        $.bq_if_statement,
-        $.bq_leave_statement,
-        $.bq_continue_statement,
+        $.declare_statement,
+        $.set_variable_statement,
+        $.for_statement,
+        $.while_statement,
+        $.loop_statement,
+        $.if_statement,
+        $.leave_statement,
+        $.continue_statement,
       ),
     ),
 
@@ -81,8 +81,8 @@ export default grammar(base, {
       $.grant_statement,
       $.revoke_statement,
       // BigQuery additions
-      $.bq_export_data,
-      $.bq_assert,
+      $.export_data,
+      $.assert_statement,
     ),
 
     // ── CREATE: add BigQuery CREATE types ──────────────────────────────────
@@ -105,7 +105,7 @@ export default grammar(base, {
           repeat($._create_statement),
         )),
         // BigQuery-specific
-        $.bq_create_model,
+        $.create_model,
       ),
     ),
 
@@ -115,8 +115,8 @@ export default grammar(base, {
         'value',
         choice(
           $.all_fields,
-          $.bq_all_fields_except,
-          $.bq_all_fields_replace,
+          $.all_fields_except,
+          $.all_fields_replace,
           $._expression,
         ),
       ),
@@ -143,11 +143,11 @@ export default grammar(base, {
       $.between_expression,
       $.parenthesized_expression,
       // BigQuery-specific
-      $.bq_struct,
-      $.bq_typed_literal,
-      $.bq_triple_double_quoted_string,
-      $.bq_triple_single_quoted_string,
-      $.bq_ml_function,
+      $.struct,
+      $.typed_literal,
+      $.triple_double_quoted_string,
+      $.triple_single_quoted_string,
+      $.ml_function,
     )),
 
     // ── from: add QUALIFY after HAVING ─────────────────────────────────────
@@ -181,7 +181,7 @@ export default grammar(base, {
           $.invocation,
           $.object_reference,
           wrapped_in_parenthesis($.values),
-          $.bq_unnest,
+          $.unnest,
         ),
         optional($.tablesample),
         optional(
@@ -231,13 +231,13 @@ export default grammar(base, {
     keyword_unnest:     _ => token(prec(1, make_keyword("unnest"))),
 
     // ── Spread all BigQuery rule modules ────────────────────────────────────
-    ...bq_select_rules,
-    ...bq_expr_rules,
-    ...bq_string_rules,
-    ...bq_scripting_rules,
-    ...bq_ddl_rules,
-    ...bq_ml_rules,
-    ...bq_types_rules,
+    ...select_rules,
+    ...expr_rules,
+    ...string_rules,
+    ...scripting_rules,
+    ...ddl_rules,
+    ...ml_rules,
+    ...types_rules,
 
   },
 });

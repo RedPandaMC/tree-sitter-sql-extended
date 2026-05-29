@@ -7,14 +7,14 @@ export default {
 
   // UNNEST(<array>) [WITH OFFSET]
   // The outer alias ([AS alias]) is handled by the relation rule
-  bq_unnest: $ => seq(
+  unnest: $ => seq(
     $.keyword_unnest,
     wrapped_in_parenthesis($._expression),
     optional(seq($.keyword_with, $.keyword_offset)),
   ),
 
   // SELECT * EXCEPT (col1, col2) FROM t
-  bq_all_fields_except: $ => seq(
+  all_fields_except: $ => seq(
     optional(seq($.object_reference, '.')),
     '*',
     $.keyword_except,
@@ -22,7 +22,7 @@ export default {
   ),
 
   // SELECT * REPLACE (expr AS col) FROM t
-  bq_all_fields_replace: $ => seq(
+  all_fields_replace: $ => seq(
     optional(seq($.object_reference, '.')),
     '*',
     $.keyword_replace,
