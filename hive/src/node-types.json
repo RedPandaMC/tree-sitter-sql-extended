@@ -205,16 +205,6 @@
           }
         ]
       },
-      "key": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -222,20 +212,6 @@
           {
             "type": "identifier",
             "named": true
-          }
-        ]
-      },
-      "statistics": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
           }
         ]
       },
@@ -344,16 +320,6 @@
             "named": true
           }
         ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -405,10 +371,6 @@
           "named": true
         },
         {
-          "type": "keyword_compression",
-          "named": true
-        },
-        {
           "type": "keyword_data",
           "named": true
         },
@@ -421,18 +383,6 @@
           "named": true
         },
         {
-          "type": "keyword_extended",
-          "named": true
-        },
-        {
-          "type": "keyword_external",
-          "named": true
-        },
-        {
-          "type": "keyword_main",
-          "named": true
-        },
-        {
           "type": "keyword_not",
           "named": true
         },
@@ -441,19 +391,7 @@
           "named": true
         },
         {
-          "type": "keyword_plain",
-          "named": true
-        },
-        {
           "type": "keyword_set",
-          "named": true
-        },
-        {
-          "type": "keyword_statistics",
-          "named": true
-        },
-        {
-          "type": "keyword_storage",
           "named": true
         },
         {
@@ -593,10 +531,6 @@
           "named": true
         },
         {
-          "type": "keyword_column",
-          "named": true
-        },
-        {
           "type": "keyword_exists",
           "named": true
         },
@@ -617,15 +551,7 @@
           "named": true
         },
         {
-          "type": "keyword_statistics",
-          "named": true
-        },
-        {
           "type": "keyword_tablespace",
-          "named": true
-        },
-        {
-          "type": "literal",
           "named": true
         },
         {
@@ -13028,10 +12954,6 @@
     "named": true
   },
   {
-    "type": "keyword_compression",
-    "named": true
-  },
-  {
     "type": "keyword_concurrently",
     "named": true
   },
@@ -13213,10 +13135,6 @@
   },
   {
     "type": "keyword_explain",
-    "named": true
-  },
-  {
-    "type": "keyword_extended",
     "named": true
   },
   {
@@ -13476,10 +13394,6 @@
     "named": true
   },
   {
-    "type": "keyword_main",
-    "named": true
-  },
-  {
     "type": "keyword_matched",
     "named": true
   },
@@ -13661,10 +13575,6 @@
   },
   {
     "type": "keyword_percent",
-    "named": true
-  },
-  {
-    "type": "keyword_plain",
     "named": true
   },
   {
@@ -13889,14 +13799,6 @@
   },
   {
     "type": "keyword_statement",
-    "named": true
-  },
-  {
-    "type": "keyword_statistics",
-    "named": true
-  },
-  {
-    "type": "keyword_storage",
     "named": true
   },
   {

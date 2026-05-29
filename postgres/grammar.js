@@ -539,6 +539,8 @@ export default grammar(base, {
     keyword_including:      _ => token(prec(1, make_keyword("including"))),
     keyword_excluding:      _ => token(prec(1, make_keyword("excluding"))),
     keyword_indexes:        _ => token(prec(1, make_keyword("indexes"))),
+    keyword_object_id:      _ => make_keyword("object_id"),
+    keyword_list:           _ => make_keyword("list"),
 
     ...pg_copy_rules,
     ...pg_optimize_rules,

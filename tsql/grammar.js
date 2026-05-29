@@ -211,6 +211,9 @@ export default grammar(base, {
     keyword_hash:             _ => token(prec(1, make_keyword("hash"))),
     keyword_columnstore:      _ => token(prec(1, make_keyword("columnstore"))),
     keyword_heap:             _ => token(prec(1, make_keyword("heap"))),
+    keyword_file:             _ => make_keyword("file"),
+    keyword_format:           _ => make_keyword("format"),
+    keyword_clustered:        _ => make_keyword("clustered"),
 
     // T-SQL SET @variable = expression  (plus base transaction/constraint SET)
     set_statement: $ => prec.right(choice(

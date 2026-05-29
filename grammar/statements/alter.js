@@ -87,65 +87,22 @@ export default {
   ),
 
   alter_column: $ => seq(
-    // TODO constraint management
     $.keyword_alter,
-    optional(
-      $.keyword_column,
-    ),
+    optional($.keyword_column),
     field('name', $.identifier),
     choice(
       seq(
-        choice(
-          $.keyword_set,
-          $.keyword_drop,
-        ),
+        choice($.keyword_set, $.keyword_drop),
         $.keyword_not,
         $.keyword_null,
       ),
       seq(
-        optional(
-          seq(
-            $.keyword_set,
-            $.keyword_data,
-          ),
-        ),
+        optional(seq($.keyword_set, $.keyword_data)),
         $.keyword_type,
         field('type', $._type),
       ),
-      seq(
-        $.keyword_set,
-        choice(
-          seq(
-            $.keyword_statistics,
-            field('statistics', $._integer)
-          ),
-          seq(
-            $.keyword_storage,
-            choice(
-              $.keyword_plain,
-              $.keyword_external,
-              $.keyword_extended,
-              $.keyword_main,
-              $.keyword_default,
-            ),
-          ),
-          seq(
-            $.keyword_compression,
-            field('compression_method', $._identifier)
-          ),
-          seq(
-            paren_list($._key_value_pair, true),
-          ),
-          seq(
-            $.keyword_default,
-            $._expression,
-          ),
-        )
-      ),
-      seq(
-        $.keyword_drop,
-        $.keyword_default,
-      ),
+      seq($.keyword_set, $.keyword_default, $._expression),
+      seq($.keyword_drop, $.keyword_default),
     ),
   ),
 
@@ -312,14 +269,6 @@ export default {
     $.identifier,
     choice(
       $.rename_object,
-      seq(
-        $.keyword_alter,
-        optional($.keyword_column),
-        alias($._natural_number, $.literal),
-        $.keyword_set,
-        $.keyword_statistics,
-        alias($._natural_number, $.literal),
-      ),
       seq($.keyword_reset, paren_list($.identifier)),
       seq(
         $.keyword_set,

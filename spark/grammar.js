@@ -394,6 +394,7 @@ export default grammar(hive, {
     keyword_rewrite:            _ => make_keyword("rewrite"),
     keyword_bin_pack:           _ => make_keyword("bin_pack"),
     keyword_incremental:        _ => make_keyword("incremental"),
+    keyword_statistics:         _ => make_keyword("statistics"),
     keyword_location:           _ => make_keyword("location"),
     keyword_partitioned:        _ => make_keyword("partitioned"),
     keyword_sort:               _ => make_keyword("sort"),
@@ -440,6 +441,10 @@ export default grammar(hive, {
     keyword_deep:               _ => make_keyword("deep"),
     keyword_clone:              _ => make_keyword("clone"),
     keyword_field:              _ => make_keyword("field"),
+    keyword_call:               _ => make_keyword("call"),
+    keyword_ordered:            _ => make_keyword("ordered"),
+    keyword_options:            _ => make_keyword("options"),
+    keyword_distributed:        _ => make_keyword("distributed"),
 
     ...spark_create_rules,
     ...spark_optimize_rules,

@@ -449,6 +449,12 @@ export default grammar(base, {
     keyword_errors:         _ => token(prec(1, make_keyword("errors"))),
     keyword_variables:      _ => token(prec(1, make_keyword("variables"))),
     keyword_indexes:        _ => token(prec(1, make_keyword("indexes"))),
+    keyword_describe:       _ => make_keyword("describe"),
+    keyword_schedule:       _ => make_keyword("schedule"),
+    keyword_at:             _ => make_keyword("at"),
+    keyword_load:           _ => make_keyword("load"),
+    keyword_escaped:        _ => make_keyword("escaped"),
+    keyword_grants:         _ => make_keyword("grants"),
 
     ...mysql_create_rules,
     ...mysql_optimize_rules,

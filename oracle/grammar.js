@@ -191,6 +191,10 @@ export default grammar(base, {
     keyword_pragma:         _ => token(prec(1, make_keyword("pragma"))),
     keyword_reverse:        _ => token(prec(1, make_keyword("reverse"))),
     keyword_continue:       _ => token(prec(1, make_keyword("continue"))),
+    keyword_elsif:          _ => make_keyword("elsif"),
+    keyword_exit:           _ => make_keyword("exit"),
+    keyword_loop:           _ => make_keyword("loop"),
+    keyword_exception:      _ => make_keyword("exception"),
 
     ...oracle_hierarchical_rules,
     ...oracle_plsql_rules,
