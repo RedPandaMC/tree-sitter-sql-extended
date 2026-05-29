@@ -3,9 +3,6 @@
 ; T-SQL @variable references
 (tsql_variable) @variable
 
-; T-SQL bracketed identifiers highlight same as regular identifiers
-(_tsql_bracket_identifier) @string.special
-
 ; T-SQL-specific keywords
 [
   (keyword_top)
@@ -51,5 +48,4 @@
   (keyword_money)
   (keyword_smallmoney)
   (keyword_uniqueidentifier)
-  (keyword_openrowset)
 ] @type.builtin

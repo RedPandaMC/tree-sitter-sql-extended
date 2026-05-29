@@ -9,7 +9,6 @@
 ] @type.builtin
 
 (keyword_unnest) @function.call
-(keyword_flatten) @function.call
 
 (keyword_struct) @keyword
 (keyword_export) @keyword
