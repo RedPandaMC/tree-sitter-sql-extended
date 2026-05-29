@@ -458,7 +458,7 @@ ALTER TABLE my_table WRITE ORDERED BY (ts, id);
       (keyword_table)
       (object_reference
         name: (identifier))
-      (iceberg_write_order
+      (write_order
         (keyword_write)
         (keyword_ordered)
         (keyword_by)

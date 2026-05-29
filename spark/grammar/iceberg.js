@@ -19,7 +19,7 @@ export default {
   ),
 
   // ADD/DROP/REPLACE PARTITION FIELD year(col) [WITH col]
-  iceberg_partition_transform: $ => choice(
+  partition_transform: $ => choice(
     seq(
       field('transform', $.identifier),
       '(',
@@ -31,7 +31,7 @@ export default {
   ),
 
   // ALTER TABLE t WRITE ORDERED BY col1 DESC, col2
-  iceberg_write_order: $ => seq(
+  write_order: $ => seq(
     $.keyword_write,
     $.keyword_ordered,
     $.keyword_by,

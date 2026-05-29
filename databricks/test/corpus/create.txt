@@ -1,4 +1,3 @@
-
 ================================================================================
 Shallow Clone
 ================================================================================
@@ -12,11 +11,13 @@ CREATE TABLE target SHALLOW CLONE source
     (create_table
       (keyword_create)
       (keyword_table)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (shallow_clone
         (keyword_shallow)
         (keyword_clone)
-        (object_reference (identifier))))))
+        (object_reference
+          (identifier))))))
 
 ================================================================================
 Create Namespace
@@ -34,7 +35,8 @@ CREATE NAMESPACE IF NOT EXISTS my_ns
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (object_reference (identifier)))))
+      (object_reference
+        (identifier)))))
 
 ================================================================================
 Create Streaming Table (minimal)
@@ -50,16 +52,20 @@ CREATE STREAMING TABLE bronze AS SELECT * FROM raw_data
       (keyword_create)
       (keyword_streaming)
       (keyword_table)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_as)
       (create_query
         (select
           (keyword_select)
-          (select_expression (term (all_fields))))
+          (select_expression
+            (term
+              (all_fields))))
         (from
           (keyword_from)
           (relation
-            (object_reference (identifier))))))))
+            (object_reference
+              (identifier))))))))
 
 ================================================================================
 Create Streaming Table with cluster by and comment
@@ -83,7 +89,10 @@ CREATE OR REPLACE STREAMING TABLE IF NOT EXISTS catalog.schema.bronze
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (object_reference (identifier) (identifier) (identifier))
+      (object_reference
+        (identifier)
+        (identifier)
+        (identifier))
       (keyword_cluster)
       (keyword_by)
       (identifier)
@@ -94,11 +103,14 @@ CREATE OR REPLACE STREAMING TABLE IF NOT EXISTS catalog.schema.bronze
       (create_query
         (select
           (keyword_select)
-          (select_expression (term (all_fields))))
+          (select_expression
+            (term
+              (all_fields))))
         (from
           (keyword_from)
           (relation
-            (object_reference (identifier))))))))
+            (object_reference
+              (identifier))))))))
 
 ================================================================================
 Create Live Table
@@ -114,16 +126,20 @@ CREATE LIVE TABLE silver AS SELECT * FROM bronze
       (keyword_create)
       (keyword_live)
       (keyword_table)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_as)
       (create_query
         (select
           (keyword_select)
-          (select_expression (term (all_fields))))
+          (select_expression
+            (term
+              (all_fields))))
         (from
           (keyword_from)
           (relation
-            (object_reference (identifier))))))))
+            (object_reference
+              (identifier))))))))
 
 ================================================================================
 Create Table Like
@@ -138,9 +154,11 @@ CREATE TABLE new_table LIKE existing_table
     (create_table_like
       (keyword_create)
       (keyword_table)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_like)
-      (object_reference (identifier)))))
+      (object_reference
+        (identifier)))))
 
 ================================================================================
 Create Table Like with format
@@ -158,9 +176,11 @@ CREATE TABLE IF NOT EXISTS new_table LIKE existing_table USING parquet
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_like)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_using)
       (identifier))))
 
@@ -177,7 +197,8 @@ CREATE TABLE events (ts TIMESTAMP) PARTITIONED BY (year(ts), bucket(16, id))
     (create_table
       (keyword_create)
       (keyword_table)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (column_definitions
         (column_definition
           (identifier)
@@ -186,10 +207,10 @@ CREATE TABLE events (ts TIMESTAMP) PARTITIONED BY (year(ts), bucket(16, id))
       (table_partition
         (keyword_partitioned)
         (keyword_by)
-        (iceberg_partition_field
+        (partition_field
           (identifier)
           (identifier))
-        (iceberg_partition_field
+        (partition_field
           (identifier)
           (literal)
           (identifier))))))
@@ -207,7 +228,8 @@ CREATE CATALOG my_catalog
     (create_catalog
       (keyword_create)
       (keyword_catalog)
-      (object_reference (identifier)))))
+      (object_reference
+        (identifier)))))
 
 ================================================================================
 Create Catalog with comment
@@ -225,7 +247,8 @@ CREATE CATALOG IF NOT EXISTS prod_catalog COMMENT 'Production catalog'
       (keyword_if)
       (keyword_not)
       (keyword_exists)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_comment)
       (literal))))
 
@@ -242,7 +265,10 @@ CREATE VOLUME my_catalog.my_schema.my_vol LOCATION 'abfss://container@account.df
     (create_volume
       (keyword_create)
       (keyword_volume)
-      (object_reference (identifier) (identifier) (identifier))
+      (object_reference
+        (identifier)
+        (identifier)
+        (identifier))
       (keyword_location)
       (literal))))
 
@@ -259,7 +285,8 @@ CREATE CREDENTIAL my_cred COMMENT 'Azure storage credential'
     (create_credential
       (keyword_create)
       (keyword_credential)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_comment)
       (literal))))
 
@@ -277,7 +304,8 @@ CREATE EXTERNAL LOCATION my_ext URL 'abfss://container@account.dfs.core.windows.
       (keyword_create)
       (keyword_external)
       (keyword_location)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_url)
       (literal))))
 
@@ -294,7 +322,8 @@ CREATE SHARE my_share COMMENT 'Partner share'
     (create_share
       (keyword_create)
       (keyword_share)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_comment)
       (literal))))
 
@@ -311,7 +340,8 @@ CREATE RECIPIENT partner_recipient
     (create_recipient
       (keyword_create)
       (keyword_recipient)
-      (object_reference (identifier)))))
+      (object_reference
+        (identifier)))))
 
 ================================================================================
 Create Provider
@@ -326,7 +356,8 @@ CREATE PROVIDER data_provider
     (create_provider
       (keyword_create)
       (keyword_provider)
-      (object_reference (identifier)))))
+      (object_reference
+        (identifier)))))
 
 ================================================================================
 Create Policy
@@ -341,6 +372,7 @@ CREATE POLICY row_filter COMMENT 'Row-level security policy'
     (create_policy
       (keyword_create)
       (keyword_policy)
-      (object_reference (identifier))
+      (object_reference
+        (identifier))
       (keyword_comment)
       (literal))))
