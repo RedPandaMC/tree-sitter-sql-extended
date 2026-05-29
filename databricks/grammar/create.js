@@ -57,7 +57,7 @@ export default {
 
   // Iceberg partition transform: year(ts), month(ts), day(ts), hour(ts),
   //   bucket(16, id), truncate(10, name), identity(col)
-  iceberg_partition_field: $ => choice(
+  partition_field: $ => choice(
     seq(
       field('transform', $.identifier),
       '(',

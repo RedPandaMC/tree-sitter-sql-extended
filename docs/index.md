@@ -2,13 +2,18 @@
 layout: default
 ---
 
-# tree-sitter-sql
+# tree-sitter-sql-extended
 
-The SQL grammar is defined at @ [github://derekstride/tree-sitter-sql](https://github.com/DerekStride/tree-sitter-sql).
-You can view the latest parser artifacts on site or on the [gh-pages
-branch](https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages/src).
+A multi-dialect SQL parser for [tree-sitter](https://tree-sitter.github.io/) — a clean ANSI SQL base
+plus 12 independently compiled dialect grammars (Spark, Hive, Databricks, PostgreSQL, MySQL, MariaDB,
+Oracle, Db2, T-SQL, BigQuery, Snowflake, SQLite).
 
-Find previous artifacts in the [history on GitHub](https://github.com/DerekStride/tree-sitter-sql/commits/gh-pages).
+The grammar is defined at [github://redpandamc/tree-sitter-sql-extended](https://github.com/RedPandaMC/tree-sitter-sql-extended).
+It is forked from [github://derekstride/tree-sitter-sql](https://github.com/DerekStride/tree-sitter-sql).
+
+See the [README](https://github.com/RedPandaMC/tree-sitter-sql-extended#readme) for dialect coverage and
+[AGENTS.md](https://github.com/RedPandaMC/tree-sitter-sql-extended/blob/main/AGENTS.md) for the grammar
+architecture.
 
 The artifacts can also be found here:
 

@@ -50,7 +50,7 @@ export default {
   // Package spec items: variable declarations, procedure/function forward
   // declarations, cursor declarations, exception declarations, and pragmas.
   _package_spec_item: $ => choice(
-    $.plsql_declaration,
+    $.variable_declaration,
     $.cursor_declaration,
     $.package_exception_declaration,
     $.package_subprogram_declaration,
@@ -59,7 +59,7 @@ export default {
 
   // Package body items may be any spec item plus full subprogram bodies.
   _package_body_item: $ => choice(
-    $.plsql_declaration,
+    $.variable_declaration,
     $.cursor_declaration,
     $.package_exception_declaration,
     $.package_subprogram_body,
@@ -110,7 +110,7 @@ export default {
       ),
     ),
     choice($.keyword_is, $.keyword_as),
-    repeat($.plsql_declaration),
+    repeat($.variable_declaration),
     $.keyword_begin,
     repeat(seq($.statement, ';')),
     optional(seq(

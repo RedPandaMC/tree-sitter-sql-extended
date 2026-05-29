@@ -4,7 +4,7 @@ export default {
 
   // PIVOT ( agg_fn(col) FOR col IN ('v1', 'v2') )  — standard
   // PIVOT ( agg_fn(col) FOR col IN (ANY ORDER BY col) )  — dynamic pivot
-  sf_pivot_clause: $ => seq(
+  pivot_clause: $ => seq(
     $.keyword_pivot,
     '(',
     $.invocation,
@@ -12,20 +12,20 @@ export default {
     $.identifier,
     $.keyword_in,
     choice(
-      $.sf_pivot_in_list,
-      $.sf_pivot_in_any,
+      $.pivot_in_list,
+      $.pivot_in_any,
     ),
     ')',
   ),
 
   // ('val1', 'val2', ...)
-  sf_pivot_in_list: $ => paren_list(
+  pivot_in_list: $ => paren_list(
     choice(alias($._literal_string, $.literal), alias($._integer, $.literal)),
     true,
   ),
 
   // (ANY ORDER BY col [ASC|DESC] [, ...])
-  sf_pivot_in_any: $ => seq(
+  pivot_in_any: $ => seq(
     '(',
     $.keyword_any,
     $.order_by,
@@ -33,7 +33,7 @@ export default {
   ),
 
   // UNPIVOT [INCLUDE NULLS | EXCLUDE NULLS] (value_col FOR name_col IN (col1, col2))
-  sf_unpivot_clause: $ => seq(
+  unpivot_clause: $ => seq(
     $.keyword_unpivot,
     optional(choice(
       seq($.keyword_include, $.keyword_nulls),

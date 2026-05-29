@@ -9,7 +9,7 @@ export default {
     comma_list($.output_column, true),
     optional(seq(
       $.keyword_into,
-      choice($.object_reference, $.tsql_variable),
+      choice($.object_reference, $.variable),
       optional(paren_list($.identifier, true)),
     )),
   ),
@@ -109,12 +109,12 @@ export default {
     optional(seq(
       $.keyword_with,
       '(',
-      comma_list($.tsql_bulk_option, true),
+      comma_list($.bulk_option, true),
       ')',
     )),
   ),
 
-  tsql_bulk_option: $ => seq(
+  bulk_option: $ => seq(
     $.identifier,
     optional(seq(
       '=',

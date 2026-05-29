@@ -3,7 +3,7 @@ export default {
   // ML.PREDICT(MODEL my_model, TABLE input_table)
   // ML.EVALUATE(MODEL my_model, TABLE test_table)
   // ML.PREDICT(MODEL my_model, (SELECT ...))
-  bq_ml_function: $ => seq(
+  ml_function: $ => seq(
     $.keyword_ml,
     '.',
     choice($.keyword_predict, $.keyword_evaluate, $.identifier),
@@ -15,7 +15,7 @@ export default {
       seq($.keyword_table, $.object_reference),
       $.subquery,
     ),
-    optional(seq(',', $.bq_options_clause)),
+    optional(seq(',', $.options_clause)),
     ')',
   ),
 

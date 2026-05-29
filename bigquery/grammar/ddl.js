@@ -34,7 +34,7 @@ export default {
 
 
   // OPTIONS (key = value, ...)
-  bq_options_clause: $ => seq(
+  options_clause: $ => seq(
     $.keyword_options,
     '(',
     comma_list(
@@ -60,7 +60,7 @@ export default {
       $.object_reference,
       seq(
         optional($.column_definitions),
-        optional($.bq_options_clause),
+        optional($.options_clause),
         optional(seq($.keyword_as, $.create_query)),
       ),
     ),
@@ -77,36 +77,36 @@ export default {
       optional($._if_not_exists),
       $.object_reference,
       optional(paren_list($.identifier)),
-      optional($.bq_options_clause),
+      optional($.options_clause),
       $.keyword_as,
       $.create_query,
     ),
   ),
 
   // CREATE [OR REPLACE] MODEL [IF NOT EXISTS] ref [OPTIONS (...)] AS query
-  bq_create_model: $ => seq(
+  create_model: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_model,
     optional($._if_not_exists),
     $.object_reference,
-    optional($.bq_options_clause),
+    optional($.options_clause),
     $.keyword_as,
     $.create_query,
   ),
 
   // EXPORT DATA [WITH CONNECTION ref] [OPTIONS (...)] AS query
-  bq_export_data: $ => seq(
+  export_data: $ => seq(
     $.keyword_export,
     $.keyword_data,
     optional(seq($.keyword_with, $.keyword_connection, $.object_reference)),
-    optional($.bq_options_clause),
+    optional($.options_clause),
     $.keyword_as,
     $.create_query,
   ),
 
   // ASSERT expr [AS 'message']
-  bq_assert: $ => seq(
+  assert_statement: $ => seq(
     $.keyword_assert,
     field('condition', $._expression),
     optional(seq($.keyword_as, alias($._literal_string, $.literal))),

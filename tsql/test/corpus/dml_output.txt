@@ -138,9 +138,9 @@ WITH (FIELDTERMINATOR = ',', ROWTERMINATOR = '\n');
       (keyword_from)
       (literal)
       (keyword_with)
-      (tsql_bulk_option
+      (bulk_option
         (identifier)
         (literal))
-      (tsql_bulk_option
+      (bulk_option
         (identifier)
         (literal)))))

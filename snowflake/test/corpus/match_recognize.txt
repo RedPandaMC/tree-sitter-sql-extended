@@ -26,7 +26,7 @@ MATCH_RECOGNIZE (
       (relation
         (object_reference
           name: (identifier))
-        (sf_match_recognize_clause
+        (match_recognize_clause
           (keyword_match_recognize)
           (partition_by
             (keyword_partition)
@@ -39,22 +39,22 @@ MATCH_RECOGNIZE (
             (order_target
               (field
                 name: (identifier))))
-          (sf_pattern_clause
+          (pattern_clause
             (keyword_pattern)
-            (sf_pattern_term
+            (pattern_term
               (identifier))
-            (sf_pattern_term
+            (pattern_term
               (identifier)))
-          (sf_define_clause
+          (define_clause
             (keyword_define)
-            (sf_define_item
+            (define_item
               (identifier)
               (keyword_as)
               (binary_expression
                 left: (field
                   name: (identifier))
                 right: (literal)))
-            (sf_define_item
+            (define_item
               (identifier)
               (keyword_as)
               (binary_expression
@@ -88,7 +88,7 @@ MATCH_RECOGNIZE (
       (relation
         (object_reference
           name: (identifier))
-        (sf_match_recognize_clause
+        (match_recognize_clause
           (keyword_match_recognize)
           (order_by
             (keyword_order)
@@ -96,21 +96,21 @@ MATCH_RECOGNIZE (
             (order_target
               (field
                 name: (identifier))))
-          (sf_measures_clause
+          (measures_clause
             (keyword_measures)
-            (sf_measure_item
+            (measure_item
               (invocation
                 (object_reference
                   name: (identifier)))
               (keyword_as)
               alias: (identifier)))
-          (sf_pattern_clause
+          (pattern_clause
             (keyword_pattern)
-            (sf_pattern_term
+            (pattern_term
               (identifier)))
-          (sf_define_clause
+          (define_clause
             (keyword_define)
-            (sf_define_item
+            (define_item
               (identifier)
               (keyword_as)
               (binary_expression

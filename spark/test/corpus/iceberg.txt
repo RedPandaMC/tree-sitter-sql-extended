@@ -56,7 +56,7 @@ ALTER TABLE catalog.db.t ADD PARTITION FIELD year(dt)
       (keyword_add)
       (keyword_partition)
       (keyword_field)
-      (iceberg_partition_transform
+      (partition_transform
         (identifier)
         (identifier)))))
 
@@ -78,7 +78,7 @@ ALTER TABLE t DROP PARTITION FIELD region
       (keyword_drop)
       (keyword_partition)
       (keyword_field)
-      (iceberg_partition_transform
+      (partition_transform
         (identifier)))))
 
 ================================================================================
@@ -99,11 +99,11 @@ ALTER TABLE t REPLACE PARTITION FIELD year(ts) WITH day(ts)
       (keyword_replace)
       (keyword_partition)
       (keyword_field)
-      (iceberg_partition_transform
+      (partition_transform
         (identifier)
         (identifier))
       (keyword_with)
-      (iceberg_partition_transform
+      (partition_transform
         (identifier)
         (identifier)))))
 
@@ -122,7 +122,7 @@ ALTER TABLE t WRITE ORDERED BY dt DESC, id
       (keyword_table)
       (object_reference
         (identifier))
-      (iceberg_write_order
+      (write_order
         (keyword_write)
         (keyword_ordered)
         (keyword_by)

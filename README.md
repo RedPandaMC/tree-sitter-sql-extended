@@ -1,28 +1,37 @@
 # tree-sitter-sql-extended
 
-A fork of [DerekStride/tree-sitter-sql](https://github.com/DerekStride/tree-sitter-sql) extended with
-Databricks-specific DDL, Apache Spark SQL constructs, and Unity Catalog statements.
+A multi-dialect SQL parser for [tree-sitter](https://tree-sitter.github.io/), forked from
+[DerekStride/tree-sitter-sql](https://github.com/DerekStride/tree-sitter-sql). It restructures the
+upstream "permissive" grammar into a clean ANSI SQL base plus **12 independently compiled dialect
+grammars**, each layered on top via tree-sitter's `grammar(parent, overrides)` composition.
 
-Used as the SQL parser backend for [burnt](https://github.com/RedPandaMC/burnt) — a cost compiler and
-linter for Spark pipelines.
+Originally built as the SQL parser backend for [burnt](https://github.com/RedPandaMC/burnt) — a cost
+compiler and linter for Spark pipelines — it now aims for broad dialect coverage across the SQL ecosystem.
 
 ---
 
-## What's different from upstream
+## Dialects
 
-The upstream grammar covers standard SQL (SELECT, INSERT, CREATE TABLE, etc.) and common extensions well.
-This fork adds constructs that Databricks and Spark users write every day but that the upstream grammar
-does not yet parse:
+Each dialect compiles to its own `<dialect>/src/parser.c` and can be used independently.
 
-| Category | Examples |
-|----------|---------|
-| Delta / DLT | `CREATE STREAMING TABLE`, `CREATE LIVE TABLE`, `OPTIMIZE … ZORDER BY`, `VACUUM RETAIN`, `RESTORE TABLE`, `CONVERT TO DELTA`, `REORG TABLE … APPLY (PURGE)` |
-| Spark SELECT | `FOR VERSION AS OF` / `FOR TIMESTAMP AS OF` time travel, `QUALIFY`, `PIVOT` / `UNPIVOT`, `LATERAL VIEW`, `SORT BY` / `CLUSTER BY` / `DISTRIBUTE BY` |
-| Unity Catalog | `CREATE/ALTER/DROP CATALOG`, `CREATE/DROP VOLUME`, `CREATE EXTERNAL LOCATION`, `GRANT … ON … TO`, `REVOKE`, `SHOW CATALOGS`, `USE CATALOG`, `SET CATALOG` |
-| Iceberg | Partition transforms (`bucket()`, `year()`, `hour()`…), branch/tag DDL, `ALTER TABLE … REPLACE COLUMNS`, `CALL catalog.system.*` |
-| Procedural | `BEGIN … END`, `IF … END IF`, `FOR … END FOR`, `WHILE … END WHILE`, `EXECUTE IMMEDIATE` |
+| Dialect | Extends | Highlights |
+|---------|---------|-----------|
+| **base** (ANSI) | — | `GRANT`/`REVOKE`, `GROUP BY ROLLUP`/`CUBE`/`GROUPING SETS`, `FETCH FIRST`/`OFFSET … FETCH`, `WITHIN GROUP`, `TRIM(… FROM …)`, interval qualifiers |
+| **hive** | base | `LATERAL VIEW`, `STORED AS`/`STORED BY`, multi-table `INSERT`, `LOAD DATA INPATH`, `CLUSTER`/`DISTRIBUTE`/`SORT BY` |
+| **spark** | hive | `QUALIFY`, `PIVOT`/`UNPIVOT`, time travel, scripting (`IF`/`WHILE`/`LOOP`), Iceberg, `VARIANT`, `CREATE TABLE … USING/OPTIONS` |
+| **databricks** | spark | Delta/DLT (`OPTIMIZE … ZORDER BY`, `VACUUM`, `RESTORE`), Unity Catalog (`CATALOG`/`VOLUME`/`EXTERNAL LOCATION`, `GRANT`), Iceberg `CALL` |
+| **postgres** | base | `COPY`, `VACUUM`, `PARTITION BY`/`PARTITION OF`, `CREATE TABLE (LIKE …)`, `INHERITS`, extensions, RLS policies, `::` cast |
+| **mysql** | base | `ENGINE=`/`CHARSET=`, index hints, `SHOW`, `DESCRIBE`, `LIMIT offset, count`, `@`/`@@` variables |
+| **mariadb** | mysql | `INVISIBLE` columns (plus inherited MySQL features) |
+| **oracle** | base | `CONNECT BY`, PL/SQL blocks, packages, cursors, `FORALL`, `BULK COLLECT`, numeric `FOR … IN 1..10` |
+| **db2** | base | SQL PL (`BEGIN…END`, `IF`/`WHILE`/`LOOP`, `LEAVE`/`ITERATE`), modules, audit policies, federated objects |
+| **tsql** | base | T-SQL scripting, `CROSS`/`OUTER APPLY`, query hints, `#temp`/`##global` identifiers |
+| **bigquery** | base | `INT64`/`STRUCT<…>`/`ARRAY<…>` types, `UNNEST`, backtick identifiers, `QUALIFY` |
+| **snowflake** | base | scripting, `LATERAL FLATTEN`, time travel, `@stage` sources, `::` cast |
+| **sqlite** | base | `INSERT OR REPLACE/IGNORE`, UPSERT, `AUTOINCREMENT`, `INDEXED BY` |
 
-See the [grammar extension tracker (issue #1)](https://github.com/RedPandaMC/tree-sitter-sql-extended/issues/1) for the full issue list and implementation status.
+Dependency chains: `databricks → spark → hive → base` and `mariadb → mysql → base`. Regenerate the child
+when a parent grammar changes. See [AGENTS.md](AGENTS.md) for the full architecture.
 
 ---
 
@@ -61,27 +70,33 @@ npm install -g tree-sitter-cli
 ### Workflow
 
 ```bash
-# After editing grammar/grammar.js or grammar/statements/*.js:
-tree-sitter generate
+# Regenerate the base parser after editing grammar.js or grammar/**/*.js
+npm run generate
 
-# Run all corpus tests
-tree-sitter test
+# Regenerate a single dialect (and its parent chain as needed)
+npm run generate:spark
 
-# Test a specific file
-tree-sitter test --include "select_spark"
+# Regenerate every parser (base + all 12 dialects)
+npm run generate:all
 
-# Inspect parse output for a snippet
-echo "OPTIMIZE my_table ZORDER BY (id)" | tree-sitter parse /dev/stdin
+# Run corpus tests for the base grammar
+npm run test:corpus
+
+# Run corpus tests for a specific dialect
+npm run test:corpus:spark
+
+# Verify base keyword ↔ queries/highlights.scm sync
+npm run test:keywords
 ```
 
-Grammar statements are split across `grammar/statements/*.js`. Adding a new construct usually means:
-1. Editing the relevant `*.js` file (or creating a new one for a new statement class)
-2. Adding an entry to `grammar/statements/index.js`
-3. Running `tree-sitter generate`
-4. Adding corpus tests in `test/corpus/<file>.txt`
-5. Running `tree-sitter test`
+Generation is hash-cached: `npm run generate*` skips `tree-sitter generate` when the relevant grammar
+sources are unchanged. Use `npm run generate:force` to bypass the cache.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more detail.
+Base grammar rules are split across `grammar/` (e.g. `grammar/statements/*.js`, `grammar/expressions.js`,
+`grammar/keywords.js`). Dialect rules live under `<dialect>/grammar/`. A change to the base ripples to all
+12 parsers, so regenerate and test all of them after editing base files.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) for more detail.
 
 ---
 
@@ -98,9 +113,18 @@ too vendor-specific will live here permanently.
 - [Wikipedia SQL syntax](https://en.wikipedia.org/wiki/SQL_syntax)
 - [Databricks SQL reference](https://docs.databricks.com/en/sql/language-manual/index.html)
 - [Apache Spark SQL reference](https://spark.apache.org/docs/latest/sql-ref.html)
+- [Apache Hive language manual](https://cwiki.apache.org/confluence/display/Hive/LanguageManual)
 - [Unity Catalog SQL reference](https://docs.databricks.com/en/data-governance/unity-catalog/index.html)
 - [Apache Iceberg Spark procedures](https://iceberg.apache.org/docs/latest/spark-procedures/)
 - [PostgreSQL syntax](https://www.postgresql.org/docs/current/sql-commands.html)
+- [MySQL reference manual](https://dev.mysql.com/doc/refman/8.4/en/)
+- [MariaDB SQL statements](https://mariadb.com/kb/en/sql-statements/)
+- [Oracle PL/SQL language reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/index.html)
+- [IBM Db2 SQL reference](https://www.ibm.com/docs/en/db2/11.5?topic=reference-sql)
+- [Microsoft T-SQL reference](https://learn.microsoft.com/en-us/sql/t-sql/language-reference)
+- [BigQuery SQL reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+- [Snowflake SQL reference](https://docs.snowflake.com/en/sql-reference)
+- [SQLite SQL syntax](https://www.sqlite.org/lang.html)
 
 ### Other SQL tree-sitter grammars
 

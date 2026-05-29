@@ -8,7 +8,7 @@ LET x INT := 42;
 
 (program
   (statement
-    (sf_let_statement
+    (let_statement
       (keyword_let)
       (identifier)
       (int
@@ -25,7 +25,7 @@ RETURN x + 1;
 
 (program
   (statement
-    (sf_return_statement
+    (return_statement
       (keyword_return)
       (binary_expression
         left: (field
@@ -42,7 +42,7 @@ RAISE my_exception;
 
 (program
   (statement
-    (sf_raise_statement
+    (raise_statement
       (keyword_raise)
       (identifier))))
 
@@ -58,7 +58,7 @@ END FOR;
 
 (program
   (statement
-    (sf_for_statement
+    (for_statement
       (keyword_for)
       variable: (identifier)
       (keyword_in)
@@ -67,7 +67,7 @@ END FOR;
       (literal)
       (keyword_do)
       (statement
-        (sf_let_statement
+        (let_statement
           (keyword_let)
           (identifier)
           (int
@@ -88,10 +88,10 @@ END;
 --------------------------------------------------------------------------------
 
 (program
-  (sf_begin_block
+  (compound_statement
     (keyword_begin)
     (statement
-      (sf_let_statement
+      (let_statement
         (keyword_let)
         (identifier)
         (int

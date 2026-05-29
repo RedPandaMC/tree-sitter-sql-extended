@@ -10,7 +10,7 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (insert
@@ -37,9 +37,9 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_declare)
-      (plsql_declaration
+      (variable_declaration
         (identifier)
         (object_reference
           (identifier)))
@@ -73,7 +73,7 @@ END;
 
 (program
   (statement
-    (plsql_block
+    (compound_statement
       (keyword_begin)
       (statement
         (insert

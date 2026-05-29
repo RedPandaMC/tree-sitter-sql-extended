@@ -17,6 +17,10 @@ export default grammar(base, {
     [$.object_reference],
     [$.between_expression, $.binary_expression],
     [$.create_function],
+    [$.list, $.grouping_set],
+    [$.list, $.rollup_element],
+    [$.list, $.cube_element],
+    [$.interval],
     // output_clause: optional paren column list after INTO @var is ambiguous
     [$.output_clause],
     // EXPLAIN followed by keyword_continue / keyword_break is ambiguous — resolved by tree-sitter
@@ -53,9 +57,9 @@ export default grammar(base, {
         optional_parenthesis($._dml_read),
         // T-SQL procedural constructs
         $.declare_statement,
-        $.tsql_if_statement,
-        $.tsql_while_statement,
-        $.tsql_block,
+        $.if_statement,
+        $.while_statement,
+        $.compound_statement,
         $.try_catch_statement,
         $.raiserror_statement,
         $.throw_statement,
@@ -78,6 +82,8 @@ export default grammar(base, {
       $._refresh_statement,
       $.set_statement,
       $.copy_into_statement,
+      $.grant_statement,
+      $.revoke_statement,
     ),
 
     // ── CREATE dispatch ───────────────────────────────────────────────────────
@@ -114,28 +120,29 @@ export default grammar(base, {
         optional($._if_not_exists),
         $.object_reference,
         optional($.column_definitions),
-        optional($.tsql_table_with_options),
+        optional($.table_with_options),
         optional(seq($.keyword_as, $.create_query)),
       ),
     ),
 
-    // ── Identifier — add [bracket] form ──────────────────────────────────────
-    // T-SQL allows [schema].[table].[column] with square-bracket quoting.
-    // The regex token is a single lexer-level match so it doesn't conflict with
-    // the subscript rule (which requires an expression before '[').
+    // ── Identifier — add [bracket] and #temp/##global forms ──────────────────
+    // T-SQL allows [schema].[table].[column] with square-bracket quoting and
+    // #temp / ##global temp table prefixes.
     identifier: $ => choice(
       $._identifier,
       $._double_quote_string,
       $._tsql_bracket_identifier,
+      $._tsql_temp_identifier,
     ),
 
     _tsql_bracket_identifier: _ => token(/\[[^\]\n]*\]/),
+    _tsql_temp_identifier: _ => token(/##?[A-Za-z_][0-9A-Za-z_]*/),
 
     // ── @variable syntax ──────────────────────────────────────────────────────
     // Matches both @@system_var and @local_var.
     // token(prec(1,...)) ensures the lexer prefers this over the '@' entry in
     // op_unary_other when followed by an identifier character.
-    tsql_variable: _ => token(prec(1, /@@?[A-Za-z_][A-Za-z0-9_]*/)),
+    variable: _ => token(prec(1, /@@?[A-Za-z_][A-Za-z0-9_]*/)),
 
     // ── Expression — add @variable ────────────────────────────────────────────
     _expression: $ => prec(1,
@@ -143,7 +150,7 @@ export default grammar(base, {
         $.literal,
         alias($._qualified_field, $.field),
         $.parameter,
-        $.tsql_variable,
+        $.variable,
         $.list,
         $.case,
         $.window_function,
@@ -186,6 +193,9 @@ export default grammar(base, {
     keyword_money:            _ => token(prec(1, make_keyword("money"))),
     keyword_smallmoney:       _ => token(prec(1, make_keyword("smallmoney"))),
     keyword_uniqueidentifier: _ => token(prec(1, make_keyword("uniqueidentifier"))),
+    keyword_pivot:            _ => make_keyword("pivot"),
+    keyword_unpivot:          _ => make_keyword("unpivot"),
+    keyword_apply:            _ => make_keyword("apply"),
     keyword_distribution:     _ => token(prec(1, make_keyword("distribution"))),
     keyword_round_robin:      _ => token(prec(1, make_keyword("round_robin"))),
     keyword_replicate:        _ => token(prec(1, make_keyword("replicate"))),
@@ -204,7 +214,7 @@ export default grammar(base, {
 
     // T-SQL SET @variable = expression  (plus base transaction/constraint SET)
     set_statement: $ => prec.right(choice(
-      seq($.keyword_set, $.tsql_variable, '=', $._expression),
+      seq($.keyword_set, $.variable, '=', $._expression),
       seq($.keyword_set, $.keyword_constraints, choice($.keyword_all, comma_list($.identifier, true)), choice($.keyword_deferred, $.keyword_immediate)),
       seq($.keyword_set, $.keyword_transaction, $._transaction_mode),
       seq($.keyword_set, $.keyword_transaction, $.keyword_snapshot, $._transaction_mode),

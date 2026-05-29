@@ -3,7 +3,7 @@ import { paren_list } from '../../grammar/helpers.js';
 export default {
 
   // CREATE [OR REPLACE] STREAM [IF NOT EXISTS] name ON TABLE table_name
-  sf_create_stream: $ => seq(
+  create_stream: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_stream,
@@ -18,7 +18,7 @@ export default {
   //   SCHEDULE = 'cron_expr'
   //   [WAREHOUSE = wh_name]
   //   AS query
-  sf_create_task: $ => seq(
+  create_task: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_task,
@@ -28,12 +28,12 @@ export default {
     '=',
     alias($._literal_string, $.literal),
     optional(seq($.keyword_warehouse, '=', $.identifier)),
-    repeat($.sf_task_property),
+    repeat($.task_property),
     $.keyword_as,
     $._dml_read,
   ),
 
-  sf_task_property: $ => seq(
+  task_property: $ => seq(
     $.identifier,
     '=',
     choice(
@@ -46,7 +46,7 @@ export default {
   //   TARGET_LAG = 'lag_interval'
   //   WAREHOUSE = wh_name
   //   AS query
-  sf_create_dynamic_table: $ => seq(
+  create_dynamic_table: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_dynamic,
@@ -64,7 +64,7 @@ export default {
   ),
 
   // CREATE [OR REPLACE] SECURE VIEW [IF NOT EXISTS] name AS query
-  sf_create_secure_view: $ => seq(
+  create_secure_view: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_secure,
@@ -78,7 +78,7 @@ export default {
 
   // CREATE [OR REPLACE] MASKING POLICY [IF NOT EXISTS] name
   //   AS (param TYPE [, ...]) RETURNS return_type -> body_expr
-  sf_create_masking_policy: $ => seq(
+  create_masking_policy: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_masking,
@@ -86,7 +86,7 @@ export default {
     optional($._if_not_exists),
     $.object_reference,
     $.keyword_as,
-    paren_list($.sf_policy_param, true),
+    paren_list($.policy_param, true),
     $.keyword_returns,
     $._type,
     '->',
@@ -95,7 +95,7 @@ export default {
 
   // CREATE [OR REPLACE] ROW ACCESS POLICY [IF NOT EXISTS] name
   //   AS (param TYPE [, ...]) RETURNS BOOLEAN -> body_expr
-  sf_create_row_access_policy: $ => seq(
+  create_row_access_policy: $ => seq(
     $.keyword_create,
     optional($._or_replace),
     $.keyword_row,
@@ -104,7 +104,7 @@ export default {
     optional($._if_not_exists),
     $.object_reference,
     $.keyword_as,
-    paren_list($.sf_policy_param, true),
+    paren_list($.policy_param, true),
     $.keyword_returns,
     $.keyword_boolean,
     '->',
@@ -112,6 +112,6 @@ export default {
   ),
 
   // param_name TYPE  (used in MASKING POLICY / ROW ACCESS POLICY signatures)
-  sf_policy_param: $ => seq($.identifier, $._type),
+  policy_param: $ => seq($.identifier, $._type),
 
 };

@@ -25,6 +25,10 @@ export default grammar(spark, {
     [$.between_expression, $.binary_expression],
     [$.from],
     [$.create_function],
+    [$.list, $.grouping_set],
+    [$.list, $.rollup_element],
+    [$.list, $.cube_element],
+    [$.interval],
     [$.term],
     [$.values],
     [$.select_expression],
@@ -32,6 +36,12 @@ export default grammar(spark, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
+    [$.write_order],
+    [$.cluster_by],
+    [$.distribute_by],
+    [$.sort_by],
+    // Inherited from Hive via Spark: multi-table INSERT ambiguity
+    [$.select, $.multi_table_insert],
     [$.lateral_cross_join],
     // Inherited from Hive via Spark: SERDE optional WITH SERDEPROPERTIES ambiguity
     [$.row_format],
@@ -167,7 +177,7 @@ export default grammar(spark, {
         $.keyword_partition,
       ),
       choice(
-        paren_list($.iceberg_partition_field, true),
+        paren_list($.partition_field, true),
         $.column_definitions,
         paren_list($._key_value_pair, true),
       ),
@@ -188,6 +198,14 @@ export default grammar(spark, {
       $.rename_column,
       $.set_schema,
       $.change_ownership,
+      // Spark iceberg partition field operations (inherited from spark, kept here to avoid regression)
+      seq($.keyword_add, $.keyword_partition, $.keyword_field, $.partition_transform),
+      seq($.keyword_drop, $.keyword_partition, $.keyword_field, $.partition_transform),
+      seq($.keyword_replace, $.keyword_partition, $.keyword_field, $.partition_transform,
+          $.keyword_with, $.partition_transform),
+      // Spark iceberg write order (must be kept so ALTER TABLE ... WRITE ORDERED BY still parses)
+      $.write_order,
+      seq($.keyword_write, $.keyword_distributed, $.keyword_by, $.keyword_partition),
       // Iceberg / Unity Catalog specs
       $._alter_table_iceberg_spec,
     ),

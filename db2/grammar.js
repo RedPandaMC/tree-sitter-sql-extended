@@ -6,6 +6,7 @@ import db2_isolation_rules from './grammar/isolation.js';
 import db2_special_register_rules from './grammar/special_registers.js';
 import db2_diagnostics_rules from './grammar/diagnostics.js';
 import db2_audit_rules from './grammar/audit.js';
+import db2_procedural_rules from './grammar/procedural.js';
 
 export default grammar(base, {
   name: 'db2_sql',
@@ -17,7 +18,13 @@ export default grammar(base, {
     [$.object_reference],
     [$.between_expression, $.binary_expression],
     [$.create_function],
+    [$.list, $.grouping_set],
+    [$.list, $.rollup_element],
+    [$.list, $.cube_element],
+    [$.interval],
     [$.from],
+    [$.transaction, $.compound_statement],
+    [$.set_variable_statement, $.object_reference],
   ],
 
   rules: {
@@ -35,6 +42,30 @@ export default grammar(base, {
       $.signal_statement,
       $.resignal_statement,
       $.get_diagnostics_statement,
+      $.grant_statement,
+      $.revoke_statement,
+    ),
+
+    // Extend statement to add Db2 SQL PL procedural constructs
+    statement: $ => seq(
+      optional(seq(
+        $.keyword_explain,
+        optional($.keyword_analyze),
+        optional($.keyword_verbose),
+      )),
+      choice(
+        $._ddl_statement,
+        $._dml_write,
+        optional_parenthesis($._dml_read),
+        $.compound_statement,
+        $.declare_statement,
+        $.set_variable_statement,
+        $.if_statement,
+        $.while_statement,
+        $.loop_statement,
+        $.leave_statement,
+        $.iterate_statement,
+      ),
     ),
 
     // Extend _create_statement to add Db2-specific CREATE statements
@@ -115,6 +146,7 @@ export default grammar(base, {
       optional($.window_clause),
       optional($.order_by),
       optional($.limit),
+      optional($.offset_fetch_clause),
       optional($.optimize_for_clause),
       optional($.with_isolation_clause),
     ),
@@ -143,6 +175,14 @@ export default grammar(base, {
     keyword_failure:    _ => token(prec(1, make_keyword("failure"))),
     keyword_success:    _ => token(prec(1, make_keyword("success"))),
     keyword_value:      _ => token(prec(1, make_keyword("value"))),
+    keyword_do:         _ => token(prec(1, make_keyword("do"))),
+    keyword_leave:      _ => token(prec(1, make_keyword("leave"))),
+    keyword_iterate:    _ => token(prec(1, make_keyword("iterate"))),
+    keyword_loop:       _ => token(prec(1, make_keyword("loop"))),
+    keyword_elseif:     _ => token(prec(1, make_keyword("elseif"))),
+    keyword_while:      _ => token(prec(1, make_keyword("while"))),
+    keyword_declare:    _ => token(prec(1, make_keyword("declare"))),
+    keyword_atomic:     _ => token(prec(1, make_keyword("atomic"))),
 
     ...db2_modules_rules,
     ...db2_data_control_rules,
@@ -150,6 +190,7 @@ export default grammar(base, {
     ...db2_special_register_rules,
     ...db2_diagnostics_rules,
     ...db2_audit_rules,
+    ...db2_procedural_rules,
 
   },
 });

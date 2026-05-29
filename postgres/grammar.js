@@ -6,6 +6,7 @@ import pg_create_rules from './grammar/create.js';
 import pg_alter_rules from './grammar/alter.js';
 import pg_drop_rules from './grammar/drop.js';
 import pg_replication_rules from './grammar/replication.js';
+import pg_partition_rules from './grammar/partition.js';
 
 export default grammar(base, {
   name: 'postgres_sql',
@@ -18,6 +19,10 @@ export default grammar(base, {
     [$.time],
     [$.timestamp],
     [$.create_function],
+    [$.list, $.grouping_set],
+    [$.list, $.rollup_element],
+    [$.list, $.cube_element],
+    [$.interval],
   ],
 
   externals: $ => [
@@ -111,9 +116,26 @@ export default grammar(base, {
         $.keyword_table,
         optional($._if_not_exists),
         $.object_reference,
-        seq(
-          optional($.column_definitions),
-          optional(seq($.keyword_as, $.create_query)),
+        choice(
+          // PARTITION OF parent [FOR VALUES spec | DEFAULT]
+          seq(
+            $.keyword_partition,
+            $.keyword_of,
+            $.object_reference,
+            optional(choice($.partition_bound, $.keyword_default)),
+          ),
+          // Regular table body: optional column_definitions or (LIKE parent)
+          seq(
+            optional(
+              choice(
+                $.column_definitions,
+                seq('(', $.like_clause, ')'),
+              ),
+            ),
+            optional(seq($.keyword_as, $.create_query)),
+            optional($.inherits_clause),
+            optional($.table_partition_by),
+          ),
         ),
       ),
     ),
@@ -260,6 +282,8 @@ export default grammar(base, {
       $.comment_statement,
       $._show_statement,
       $.do_statement,
+      $.grant_statement,
+      $.revoke_statement,
     ),
 
     // PostgreSQL: DO $$ ... $$ anonymous block
@@ -511,6 +535,10 @@ export default grammar(base, {
     keyword_format:         _ => make_keyword("format"),
     keyword_delimiter:      _ => make_keyword("delimiter"),
     keyword_csv:            _ => make_keyword("csv"),
+    keyword_inherits:       _ => token(prec(1, make_keyword("inherits"))),
+    keyword_including:      _ => token(prec(1, make_keyword("including"))),
+    keyword_excluding:      _ => token(prec(1, make_keyword("excluding"))),
+    keyword_indexes:        _ => token(prec(1, make_keyword("indexes"))),
 
     ...pg_copy_rules,
     ...pg_optimize_rules,
@@ -518,6 +546,7 @@ export default grammar(base, {
     ...pg_alter_rules,
     ...pg_drop_rules,
     ...pg_replication_rules,
+    ...pg_partition_rules,
 
   },
 });

@@ -16,7 +16,7 @@ CREATE TABLE t (created_at DATETIME2(3));
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (tsql_datetime2
+          type: (datetime2
             (keyword_datetime2)
             (literal)))))))
 
@@ -38,7 +38,7 @@ CREATE TABLE t (ts DATETIME2);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (tsql_datetime2
+          type: (datetime2
             (keyword_datetime2)))))))
 
 ================================================================================
@@ -59,11 +59,11 @@ CREATE TABLE t (price MONEY, discount SMALLMONEY);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (tsql_money_type
+          type: (money_type
             (keyword_money)))
         (column_definition
           name: (identifier)
-          type: (tsql_money_type
+          type: (money_type
             (keyword_smallmoney)))))))
 
 ================================================================================
@@ -84,7 +84,7 @@ CREATE TABLE t (id UNIQUEIDENTIFIER);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (tsql_uniqueidentifier
+          type: (uniqueidentifier
             (keyword_uniqueidentifier)))))))
 
 ================================================================================
@@ -105,5 +105,5 @@ CREATE TABLE t (scheduled SMALLDATETIME);
       (column_definitions
         (column_definition
           name: (identifier)
-          type: (tsql_smalldatetime
+          type: (smalldatetime
             (keyword_smalldatetime)))))))

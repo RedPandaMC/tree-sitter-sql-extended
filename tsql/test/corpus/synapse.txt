@@ -29,11 +29,11 @@ WITH (DISTRIBUTION = HASH(order_id));
           name: (identifier)
           type: (int
             (keyword_int))))
-      (tsql_table_with_options
+      (table_with_options
         (keyword_with)
-        (tsql_table_option
+        (table_with_option
           (keyword_distribution)
-          (tsql_distribution
+          (distribution
             (keyword_hash)
             (identifier)))))))
 
@@ -58,7 +58,7 @@ WITH (FILE_TYPE = 'CSV');
       (keyword_from)
       (literal)
       (keyword_with)
-      (tsql_with_option
+      (with_option
         (identifier)
         (literal)))))
 
@@ -81,6 +81,6 @@ WITH (LOCATION = 'abfss://container@account.dfs.core.windows.net/');
       (object_reference
         name: (identifier))
       (keyword_with)
-      (tsql_with_option
+      (with_option
         (identifier)
         (literal)))))

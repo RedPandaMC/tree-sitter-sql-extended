@@ -7,7 +7,7 @@ export default {
     $.keyword_create,
     $.keyword_wrapper,
     field('name', $.identifier),
-    optional($.db2_options_clause),
+    optional($.options_clause),
   ),
 
   // CREATE SERVER name [TYPE type] [VERSION version] WRAPPER wrp [OPTIONS (...)]
@@ -19,7 +19,7 @@ export default {
     optional(seq($.keyword_version, field('version', $._expression))),
     $.keyword_wrapper,
     field('wrapper', $.identifier),
-    optional($.db2_options_clause),
+    optional($.options_clause),
   ),
 
   // CREATE NICKNAME schema.nickname FOR server.schema.table
@@ -29,7 +29,7 @@ export default {
     field('name', $.object_reference),
     $.keyword_for,
     field('remote', $.object_reference),
-    optional($.db2_options_clause),
+    optional($.options_clause),
   ),
 
   // CREATE [OR REPLACE] MODULE name
@@ -41,7 +41,7 @@ export default {
   ),
 
   // OPTIONS (key 'value' [, key 'value']) — Db2 federation options
-  db2_options_clause: $ => seq(
+  options_clause: $ => seq(
     $.keyword_options,
     paren_list(
       seq(field('key', $.identifier), field('value', $._literal_string)),

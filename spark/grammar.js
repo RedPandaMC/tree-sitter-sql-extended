@@ -5,6 +5,7 @@ import spark_optimize_rules from './grammar/optimize.js';
 import spark_spark4_rules from './grammar/spark4.js'; // TODO change file name
 import spark_scripting_rules from './grammar/scripting.js';
 import spark_iceberg_rules from './grammar/iceberg.js';
+import spark_select_rules from './grammar/select.js';
 
 export default grammar(hive, {
   name: 'spark_sql',
@@ -16,6 +17,10 @@ export default grammar(hive, {
     [$.between_expression, $.binary_expression],
     [$.from],
     [$.create_function],
+    [$.list, $.grouping_set],
+    [$.list, $.rollup_element],
+    [$.list, $.cube_element],
+    [$.interval],
     [$.term],
     [$.lateral_cross_join],
     [$.values],
@@ -24,7 +29,13 @@ export default grammar(hive, {
     [$.group_by],
     [$.subquery, $.lateral_subquery],
     [$.order_target],
-    [$.iceberg_write_order],
+    [$.write_order],
+    [$.cluster_by],
+    [$.distribute_by],
+    [$.sort_by],
+    [$.qualify],
+    // Inherited from Hive: multi-table INSERT ambiguity
+    [$.select, $.multi_table_insert],
     // Inherited from Hive: SERDE optional WITH SERDEPROPERTIES ambiguity
     [$.row_format],
     [$.lateral_view],
@@ -131,6 +142,8 @@ export default grammar(hive, {
       $.declare_variable_statement,
       $.set_variable_statement,
       $.call_statement,
+      $.grant_statement,
+      $.revoke_statement,
     ),
 
     // Override set_statement to add scripting assignment: SET var = expr
@@ -264,7 +277,7 @@ export default grammar(hive, {
       optional($.select_except_clause),
     ),
 
-    // Override relation to support standalone LATERAL subquery
+    // Override relation to support LATERAL subquery, PIVOT, and UNPIVOT
     relation: $ => prec.right(
       seq(
         choice(
@@ -275,6 +288,7 @@ export default grammar(hive, {
           $.values,
         ),
         optional($.tablesample),
+        optional(choice($.pivot_clause, $.unpivot_clause)),
         optional(
           seq(
             $._alias,
@@ -282,6 +296,37 @@ export default grammar(hive, {
           ),
         ),
       ),
+    ),
+
+    // Override from to add: LATERAL VIEW, QUALIFY, CLUSTER/DISTRIBUTE/SORT BY
+    from: $ => seq(
+      $.keyword_from,
+      optional($.keyword_only),
+      comma_list($.relation, true),
+      repeat(
+        choice(
+          $.join,
+          $.cross_join,
+          $.lateral_join,
+          $.lateral_cross_join,
+          $.lateral_view,
+        ),
+      ),
+      optional($.where),
+      optional($.group_by),
+      optional($.having),
+      optional($.qualify),
+      optional($.window_clause),
+      optional($.order_by),
+      optional(
+        choice(
+          $.cluster_by,
+          $.distribute_by,
+          $.sort_by,
+        ),
+      ),
+      optional($.limit),
+      optional($.offset_fetch_clause),
     ),
 
     _alter_specifications: $ => choice(
@@ -298,12 +343,12 @@ export default grammar(hive, {
       $.set_schema,
       $.change_ownership,
       // Iceberg partition field operations
-      seq($.keyword_add, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
-      seq($.keyword_drop, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform),
-      seq($.keyword_replace, $.keyword_partition, $.keyword_field, $.iceberg_partition_transform,
-          $.keyword_with, $.iceberg_partition_transform),
+      seq($.keyword_add, $.keyword_partition, $.keyword_field, $.partition_transform),
+      seq($.keyword_drop, $.keyword_partition, $.keyword_field, $.partition_transform),
+      seq($.keyword_replace, $.keyword_partition, $.keyword_field, $.partition_transform,
+          $.keyword_with, $.partition_transform),
       // Iceberg write order
-      $.iceberg_write_order,
+      $.write_order,
       seq($.keyword_write, $.keyword_distributed, $.keyword_by, $.keyword_partition),
     ),
 
@@ -401,5 +446,6 @@ export default grammar(hive, {
     ...spark_spark4_rules,
     ...spark_scripting_rules,
     ...spark_iceberg_rules,
+    ...spark_select_rules,
   },
 });

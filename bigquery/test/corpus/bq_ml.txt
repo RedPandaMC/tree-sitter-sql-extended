@@ -8,12 +8,12 @@ CREATE MODEL my_model OPTIONS (model_type = 'LINEAR_REG') AS SELECT * FROM train
 
 (program
   (statement
-    (bq_create_model
+    (create_model
       (keyword_create)
       (keyword_model)
       (object_reference
         name: (identifier))
-      (bq_options_clause
+      (options_clause
         (keyword_options)
         key: (identifier)
         value: (literal))

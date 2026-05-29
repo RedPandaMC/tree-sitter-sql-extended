@@ -1,36 +1,41 @@
-import { comma_list, paren_list } from '../../grammar/helpers.js';
+import { comma_list, paren_list, wrapped_in_parenthesis } from '../../grammar/helpers.js';
 
 export default {
 
-  // Override relation to support T-SQL table hints: FROM t [AS alias] WITH (NOLOCK)
-  // T-SQL syntax: table_name [[AS] alias] [WITH (hint [,...])]
+  // Override relation to support T-SQL table hints AND PIVOT/UNPIVOT.
+  // T-SQL syntax: table_name [PIVOT|UNPIVOT (...)] [[AS] alias] [WITH (hint [,...])]
   relation: $ => prec.right(
     seq(
       choice(
         $.subquery,
         $.invocation,
         $.object_reference,
+        wrapped_in_parenthesis($.values),
       ),
       optional($.tablesample),
+      optional(choice(
+        $.pivot_clause,
+        $.unpivot_clause,
+      )),
       optional(
         seq(
           $._alias,
           optional(alias($._column_list, $.list)),
         ),
       ),
-      optional($.tsql_table_hints),
+      optional($.table_hints),
     ),
   ),
 
   // WITH ( hint [, ...] )
-  tsql_table_hints: $ => seq(
+  table_hints: $ => seq(
     $.keyword_with,
     '(',
-    comma_list($.tsql_table_hint, true),
+    comma_list($.table_hint, true),
     ')',
   ),
 
-  tsql_table_hint: $ => choice(
+  table_hint: $ => choice(
     $.keyword_nolock,
     $.keyword_rowlock,
     $.keyword_updlock,

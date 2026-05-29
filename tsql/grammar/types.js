@@ -8,10 +8,10 @@ export default {
     seq(
       choice(
         // T-SQL-specific types
-        $.tsql_datetime2,
-        $.tsql_smalldatetime,
-        $.tsql_money_type,
-        $.tsql_uniqueidentifier,
+        $.datetime2,
+        $.smalldatetime,
+        $.money_type,
+        $.uniqueidentifier,
         // Base types (unchanged)
         $.keyword_boolean,
         $.bit,
@@ -43,7 +43,7 @@ export default {
   ),
 
   // DATETIME2 [ ( fractional_seconds_precision ) ]
-  tsql_datetime2: $ => prec.right(1,
+  datetime2: $ => prec.right(1,
     choice(
       $.keyword_datetime2,
       seq($.keyword_datetime2, wrapped_in_parenthesis(alias($._natural_number, $.literal))),
@@ -51,15 +51,15 @@ export default {
   ),
 
   // SMALLDATETIME — no precision parameter
-  tsql_smalldatetime: $ => $.keyword_smalldatetime,
+  smalldatetime: $ => $.keyword_smalldatetime,
 
   // MONEY | SMALLMONEY
-  tsql_money_type: $ => choice(
+  money_type: $ => choice(
     $.keyword_money,
     $.keyword_smallmoney,
   ),
 
   // UNIQUEIDENTIFIER
-  tsql_uniqueidentifier: $ => $.keyword_uniqueidentifier,
+  uniqueidentifier: $ => $.keyword_uniqueidentifier,
 
 };

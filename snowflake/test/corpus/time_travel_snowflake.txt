@@ -18,9 +18,9 @@ SELECT * FROM my_table AT (TIMESTAMP => '2024-01-01 00:00:00');
       (relation
         (object_reference
           name: (identifier))
-        (sf_time_travel_clause
+        (time_travel_clause
           (keyword_at)
-          (sf_time_travel_spec
+          (time_travel_spec
             (keyword_timestamp)
             (literal)))))))
 
@@ -44,9 +44,9 @@ SELECT * FROM my_table AT (OFFSET => -60);
       (relation
         (object_reference
           name: (identifier))
-        (sf_time_travel_clause
+        (time_travel_clause
           (keyword_at)
-          (sf_time_travel_spec
+          (time_travel_spec
             (keyword_offset)
             (literal)))))))
 
@@ -70,8 +70,8 @@ SELECT * FROM my_table BEFORE (STATEMENT => '8e5d0ca9-005e-44e6-b858-a8f5b37c572
       (relation
         (object_reference
           name: (identifier))
-        (sf_time_travel_clause
+        (time_travel_clause
           (keyword_before)
-          (sf_time_travel_spec
+          (time_travel_spec
             (keyword_statement)
             (literal)))))))

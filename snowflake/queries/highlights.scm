@@ -44,4 +44,4 @@
 
 ; ── Stage references (@stage_name) ─────────────────────────────────────────
 
-(sf_stage_ref) @string.special
+(stage_ref) @string.special

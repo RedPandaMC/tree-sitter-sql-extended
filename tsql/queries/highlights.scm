@@ -1,10 +1,7 @@
 ; inherits: sql
 
 ; T-SQL @variable references
-(tsql_variable) @variable
-
-; T-SQL bracketed identifiers highlight same as regular identifiers
-(_tsql_bracket_identifier) @string.special
+(variable) @variable
 
 ; T-SQL-specific keywords
 [
@@ -38,10 +35,10 @@
 
 ; T-SQL-specific types
 [
-  (tsql_datetime2)
-  (tsql_smalldatetime)
-  (tsql_money_type)
-  (tsql_uniqueidentifier)
+  (datetime2)
+  (smalldatetime)
+  (money_type)
+  (uniqueidentifier)
 ] @type.builtin
 
 ; T-SQL type keywords
@@ -51,5 +48,4 @@
   (keyword_money)
   (keyword_smallmoney)
   (keyword_uniqueidentifier)
-  (keyword_openrowset)
 ] @type.builtin

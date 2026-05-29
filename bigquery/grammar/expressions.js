@@ -3,7 +3,7 @@ import { paren_list, comma_list } from '../../grammar/helpers.js';
 export default {
 
   // STRUCT('Alice', 30)  or  STRUCT(1 AS x, 2 AS y)
-  bq_struct: $ => seq(
+  struct: $ => seq(
     $.keyword_struct,
     paren_list(
       choice(
@@ -15,7 +15,7 @@ export default {
   ),
 
   // TIMESTAMP '2025-01-01'  /  DATE '2024-12-31'  etc.
-  bq_typed_literal: $ => seq(
+  typed_literal: $ => seq(
     $._type,
     alias($._literal_string, $.literal),
   ),

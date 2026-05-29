@@ -4,7 +4,7 @@ export default {
 
   // EXECUTE IMMEDIATE 'sql' [USING (v1, v2)]
   // EXECUTE IMMEDIATE :var [USING (v1, v2)]
-  sf_execute_immediate: $ => seq(
+  execute_immediate_statement: $ => seq(
     $.keyword_execute,
     $.keyword_immediate,
     choice(
@@ -18,7 +18,7 @@ export default {
   ),
 
   // EXECUTE TASK task_name
-  sf_execute_task: $ => seq(
+  execute_task: $ => seq(
     $.keyword_execute,
     $.keyword_task,
     $.object_reference,

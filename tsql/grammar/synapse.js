@@ -12,7 +12,7 @@ export default {
     $.object_reference,
     $.keyword_with,
     '(',
-    comma_list($.tsql_with_option, true),
+    comma_list($.with_option, true),
     ')',
   ),
 
@@ -26,7 +26,7 @@ export default {
     $.object_reference,
     $.keyword_with,
     '(',
-    comma_list($.tsql_with_option, true),
+    comma_list($.with_option, true),
     ')',
   ),
 
@@ -40,7 +40,7 @@ export default {
     optional($.column_definitions),
     $.keyword_with,
     '(',
-    comma_list($.tsql_with_option, true),
+    comma_list($.with_option, true),
     ')',
   ),
 
@@ -55,7 +55,7 @@ export default {
     optional(seq(
       $.keyword_with,
       '(',
-      comma_list($.tsql_with_option, true),
+      comma_list($.with_option, true),
       ')',
     )),
   ),
@@ -70,39 +70,39 @@ export default {
     $.object_reference,
     $.keyword_using,
     '(',
-    comma_list($.tsql_with_option, true),
+    comma_list($.with_option, true),
     ')',
   ),
 
   // key = value — used in WITH clauses across Synapse DDL
-  tsql_with_option: $ => seq(
+  with_option: $ => seq(
     $.identifier,
     '=',
     choice(
       alias($._literal_string, $.literal),
       alias($._natural_number, $.literal),
-      $.tsql_distribution,
+      $.distribution,
       $.object_reference,
     ),
   ),
 
   // DISTRIBUTION = HASH(col) | ROUND_ROBIN | REPLICATE
-  tsql_distribution: $ => choice(
+  distribution: $ => choice(
     seq($.keyword_hash, '(', $.identifier, ')'),
     $.keyword_round_robin,
     $.keyword_replicate,
   ),
 
   // CREATE TABLE with WITH (...) for Synapse distribution / index options
-  tsql_table_with_options: $ => seq(
+  table_with_options: $ => seq(
     $.keyword_with,
     '(',
-    comma_list($.tsql_table_option, true),
+    comma_list($.table_with_option, true),
     ')',
   ),
 
-  tsql_table_option: $ => choice(
-    seq($.keyword_distribution, '=', $.tsql_distribution),
+  table_with_option: $ => choice(
+    seq($.keyword_distribution, '=', $.distribution),
     seq($.keyword_clustered, $.keyword_columnstore, $.keyword_index),
     $.keyword_heap,
     seq($.identifier, optional(seq('=', $._expression))),
