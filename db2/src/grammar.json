@@ -645,10 +645,6 @@
       "type": "PATTERN",
       "value": "[sS][oO][mM][eE]"
     },
-    "keyword_except": {
-      "type": "PATTERN",
-      "value": "[eE][xX][cC][eE][pP][tT]"
-    },
     "keyword_intersect": {
       "type": "PATTERN",
       "value": "[iI][nN][tT][eE][rR][sS][eE][cC][tT]"
@@ -712,10 +708,6 @@
     "keyword_range": {
       "type": "PATTERN",
       "value": "[rR][aA][nN][gG][eE]"
-    },
-    "keyword_rows": {
-      "type": "PATTERN",
-      "value": "[rR][oO][wW][sS]"
     },
     "keyword_groups": {
       "type": "PATTERN",
@@ -912,10 +904,6 @@
     "keyword_action": {
       "type": "PATTERN",
       "value": "[aA][cC][tT][iI][oO][nN]"
-    },
-    "keyword_extension": {
-      "type": "PATTERN",
-      "value": "[eE][xX][tT][eE][nN][sS][iI][oO][nN]"
     },
     "keyword_copy": {
       "type": "PATTERN",
@@ -1635,6 +1623,10 @@
       "type": "PATTERN",
       "value": "[sS][oO][uU][rR][cC][eE]"
     },
+    "keyword_except": {
+      "type": "PATTERN",
+      "value": "[eE][xX][cC][eE][pP][tT]"
+    },
     "keyword_trigger": {
       "type": "PATTERN",
       "value": "[tT][rR][iI][gG][gG][eE][rR]"
@@ -1729,6 +1721,10 @@
       "type": "PATTERN",
       "value": "[cC][oO][sS][tT]"
     },
+    "keyword_rows": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW][sS]"
+    },
     "keyword_support": {
       "type": "PATTERN",
       "value": "[sS][uU][pP][pP][oO][rR][tT]"
@@ -1748,6 +1744,10 @@
     "keyword_version": {
       "type": "PATTERN",
       "value": "[vV][eE][rR][sS][iI][oO][nN]"
+    },
+    "keyword_extension": {
+      "type": "PATTERN",
+      "value": "[eE][xX][tT][eE][nN][sS][iI][oO][nN]"
     },
     "keyword_out": {
       "type": "PATTERN",
