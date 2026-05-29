@@ -122,19 +122,19 @@ export default grammar(base, {
             $.keyword_partition,
             $.keyword_of,
             $.object_reference,
-            optional(choice($.pg_partition_bound, $.keyword_default)),
+            optional(choice($.partition_bound, $.keyword_default)),
           ),
           // Regular table body: optional column_definitions or (LIKE parent)
           seq(
             optional(
               choice(
                 $.column_definitions,
-                seq('(', $.pg_like_clause, ')'),
+                seq('(', $.like_clause, ')'),
               ),
             ),
             optional(seq($.keyword_as, $.create_query)),
-            optional($.pg_inherits),
-            optional($.pg_partition_by),
+            optional($.inherits_clause),
+            optional($.table_partition_by),
           ),
         ),
       ),

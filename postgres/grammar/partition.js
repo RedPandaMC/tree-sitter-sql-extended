@@ -3,7 +3,7 @@ import { comma_list, paren_list } from '../../grammar/helpers.js';
 export default {
 
   // PARTITION BY {RANGE|LIST|HASH} (col [, ...])
-  pg_partition_by: $ => seq(
+  table_partition_by: $ => seq(
     $.keyword_partition,
     $.keyword_by,
     choice($.keyword_range, $.keyword_list, $.keyword_hash),
@@ -12,7 +12,7 @@ export default {
 
   // FOR VALUES partition_bound | DEFAULT
   // Simplified: just capture the FOR VALUES clause for PARTITION OF
-  pg_partition_bound: $ => seq(
+  partition_bound: $ => seq(
     $.keyword_for,
     $.keyword_values,
     choice(
@@ -37,13 +37,13 @@ export default {
   ),
 
   // INHERITS (parent [, ...])
-  pg_inherits: $ => seq(
+  inherits_clause: $ => seq(
     $.keyword_inherits,
     paren_list($.object_reference, true),
   ),
 
   // LIKE parent [INCLUDING|EXCLUDING {ALL|CONSTRAINTS|INDEXES|DEFAULTS|GENERATED|IDENTITY|STATISTICS|STORAGE|COMMENTS}]
-  pg_like_clause: $ => seq(
+  like_clause: $ => seq(
     $.keyword_like,
     $.object_reference,
     repeat(seq(
