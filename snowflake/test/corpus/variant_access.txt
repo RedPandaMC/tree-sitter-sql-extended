@@ -12,7 +12,7 @@ SELECT src:name FROM raw_data;
       (keyword_select)
       (select_expression
         (term
-          value: (sf_variant_access
+          value: (variant_access
             (field
               name: (identifier))
             (identifier)))))
@@ -36,7 +36,7 @@ SELECT col:address.city FROM customers;
       (keyword_select)
       (select_expression
         (term
-          value: (sf_variant_access
+          value: (variant_access
             (field
               name: (identifier))
             (identifier)
@@ -62,7 +62,7 @@ SELECT payload:items[0] FROM events;
       (select_expression
         (term
           value: (subscript
-            expression: (sf_variant_access
+            expression: (variant_access
               (field
                 name: (identifier))
               (identifier))

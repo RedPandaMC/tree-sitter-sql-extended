@@ -39,7 +39,7 @@ QUALIFY rn = 1;
       (relation
         (object_reference
           name: (identifier)))
-      (sf_qualify_clause
+      (qualify
         (keyword_qualify)
         predicate: (binary_expression
           left: (field
@@ -88,7 +88,7 @@ QUALIFY rn = 1;
       (relation
         (object_reference
           name: (identifier)))
-      (sf_qualify_clause
+      (qualify
         (keyword_qualify)
         predicate: (binary_expression
           left: (field
@@ -142,7 +142,7 @@ QUALIFY RANK() OVER (ORDER BY cnt DESC) <= 3;
             parameter: (term
               value: (all_fields)))
           right: (literal)))
-      (sf_qualify_clause
+      (qualify
         (keyword_qualify)
         predicate: (binary_expression
           left: (window_function

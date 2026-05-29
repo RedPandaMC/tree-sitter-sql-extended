@@ -18,7 +18,7 @@ SELECT * FROM sales PIVOT (SUM(amount) FOR region IN ('NA', 'EMEA'));
       (relation
         (object_reference
           name: (identifier))
-        (sf_pivot_clause
+        (pivot_clause
           (keyword_pivot)
           (invocation
             (object_reference
@@ -29,7 +29,7 @@ SELECT * FROM sales PIVOT (SUM(amount) FOR region IN ('NA', 'EMEA'));
           (keyword_for)
           (identifier)
           (keyword_in)
-          (sf_pivot_in_list
+          (pivot_in_list
             (literal)
             (literal)))))))
 
@@ -53,7 +53,7 @@ SELECT * FROM quarterly_sales UNPIVOT INCLUDE NULLS (amount FOR quarter IN (q1, 
       (relation
         (object_reference
           name: (identifier))
-        (sf_unpivot_clause
+        (unpivot_clause
           (keyword_unpivot)
           (keyword_include)
           (keyword_nulls)

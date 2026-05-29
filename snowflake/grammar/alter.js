@@ -1,7 +1,7 @@
 export default {
 
   // ALTER SESSION SET param = value
-  sf_alter_session: $ => seq(
+  alter_session: $ => seq(
     $.keyword_alter,
     $.keyword_session,
     $.keyword_set,
@@ -11,7 +11,7 @@ export default {
   ),
 
   // ALTER TABLE t MODIFY COLUMN col SET MASKING POLICY policy_name
-  sf_alter_table_masking: $ => seq(
+  alter_table_masking: $ => seq(
     $.keyword_alter,
     $.keyword_table,
     $.object_reference,

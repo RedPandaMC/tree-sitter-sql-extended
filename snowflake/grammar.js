@@ -1,17 +1,17 @@
 import base from '../grammar.js';
 import { paren_list, optional_parenthesis, comma_list, wrapped_in_parenthesis, make_keyword } from '../grammar/helpers.js';
 
-import sf_qualify_rules     from './grammar/qualify.js';
-import sf_pivot_rules       from './grammar/pivot.js';
-import sf_match_rec_rules   from './grammar/match_recognize.js';
-import sf_time_travel_rules from './grammar/time_travel.js';
-import sf_variant_rules     from './grammar/variant.js';
-import sf_scripting_rules   from './grammar/scripting.js';
-import sf_execute_rules     from './grammar/execute.js';
-import sf_copy_rules        from './grammar/copy.js';
-import sf_create_rules      from './grammar/create.js';
-import sf_alter_rules       from './grammar/alter.js';
-import sf_use_rules         from './grammar/use.js';
+import qualify_rules     from './grammar/qualify.js';
+import pivot_rules       from './grammar/pivot.js';
+import match_rec_rules   from './grammar/match_recognize.js';
+import time_travel_rules from './grammar/time_travel.js';
+import variant_rules     from './grammar/variant.js';
+import scripting_rules   from './grammar/scripting.js';
+import execute_rules     from './grammar/execute.js';
+import copy_rules        from './grammar/copy.js';
+import create_rules      from './grammar/create.js';
+import alter_rules       from './grammar/alter.js';
+import use_rules         from './grammar/use.js';
 
 export default grammar(base, {
   name: 'snowflake_sql',
@@ -29,7 +29,7 @@ export default grammar(base, {
     [$.list, $.cube_element],
     [$.interval],
     // Snowflake-specific conflicts
-    [$._function_return, $.sf_return_statement],
+    [$._function_return, $.return_statement],
     [$.time],
     [$.timestamp],
   ],
@@ -42,8 +42,8 @@ export default grammar(base, {
         choice(
           $.transaction,
           $.statement,
-          $.sf_declare_block,
-          $.sf_begin_block,
+          $.declare_block,
+          $.compound_statement,
         ),
         ';',
       )),
@@ -61,10 +61,10 @@ export default grammar(base, {
         $._ddl_statement,
         $._dml_write,
         optional_parenthesis($._dml_read),
-        $.sf_let_statement,
-        $.sf_return_statement,
-        $.sf_raise_statement,
-        $.sf_for_statement,
+        $.let_statement,
+        $.return_statement,
+        $.raise_statement,
+        $.for_statement,
       ),
     ),
 
@@ -81,10 +81,10 @@ export default grammar(base, {
       $.grant_statement,
       $.revoke_statement,
       // Snowflake additions
-      $.sf_execute_immediate,
-      $.sf_execute_task,
-      $.sf_copy_into,
-      $.sf_use_secondary_roles,
+      $.execute_immediate_statement,
+      $.execute_task,
+      $.copy_into,
+      $.use_secondary_roles,
     ),
 
     // ── CREATE: add Snowflake CREATE types ─────────────────────────────────
@@ -107,12 +107,12 @@ export default grammar(base, {
           repeat($._create_statement),
         )),
         // Snowflake-specific
-        $.sf_create_stream,
-        $.sf_create_task,
-        $.sf_create_dynamic_table,
-        $.sf_create_secure_view,
-        $.sf_create_masking_policy,
-        $.sf_create_row_access_policy,
+        $.create_stream,
+        $.create_task,
+        $.create_dynamic_table,
+        $.create_secure_view,
+        $.create_masking_policy,
+        $.create_row_access_policy,
       ),
     ),
 
@@ -130,8 +130,8 @@ export default grammar(base, {
         $.alter_role,
         $.alter_sequence,
         // Snowflake-specific
-        $.sf_alter_session,
-        $.sf_alter_table_masking,
+        $.alter_session,
+        $.alter_table_masking,
       ),
     ),
 
@@ -150,7 +150,7 @@ export default grammar(base, {
       optional($.where),
       optional($.group_by),
       optional($.having),
-      optional($.sf_qualify_clause),
+      optional($.qualify),
       optional($.window_clause),
       optional($.order_by),
       optional($.limit),
@@ -166,15 +166,15 @@ export default grammar(base, {
           $.object_reference,
           wrapped_in_parenthesis($.values),
           // Snowflake: @stage as a FROM source
-          $.sf_stage_ref,
+          $.stage_ref,
         ),
-        optional($.sf_time_travel_clause),
+        optional($.time_travel_clause),
         optional($.tablesample),
         optional(choice(
-          $.sf_pivot_clause,
-          $.sf_unpivot_clause,
+          $.pivot_clause,
+          $.unpivot_clause,
         )),
-        optional($.sf_match_recognize_clause),
+        optional($.match_recognize_clause),
         optional(seq(
           $._alias,
           optional(alias($._column_list, $.list)),
@@ -192,7 +192,7 @@ export default grammar(base, {
       $.window_function,
       $.subquery,
       $.cast,
-      alias($.sf_cast, $.cast),
+      alias($._colon_cast, $.cast),
       $.exists,
       $.invocation,
       $.binary_expression,
@@ -203,11 +203,11 @@ export default grammar(base, {
       $.between_expression,
       $.parenthesized_expression,
       // Snowflake-specific
-      $.sf_variant_access,
+      $.variant_access,
     )),
 
     // ── :: type cast (Snowflake-specific; Postgres has same pattern) ─────────
-    sf_cast: $ => seq(
+    _colon_cast: $ => seq(
       $._expression,
       '::',
       $._type,
@@ -249,17 +249,17 @@ export default grammar(base, {
     keyword_policy:         _ => make_keyword("policy"),
 
     // ── Spread all Snowflake rule modules ───────────────────────────────────
-    ...sf_qualify_rules,
-    ...sf_pivot_rules,
-    ...sf_match_rec_rules,
-    ...sf_time_travel_rules,
-    ...sf_variant_rules,
-    ...sf_scripting_rules,
-    ...sf_execute_rules,
-    ...sf_copy_rules,
-    ...sf_create_rules,
-    ...sf_alter_rules,
-    ...sf_use_rules,
+    ...qualify_rules,
+    ...pivot_rules,
+    ...match_rec_rules,
+    ...time_travel_rules,
+    ...variant_rules,
+    ...scripting_rules,
+    ...execute_rules,
+    ...copy_rules,
+    ...create_rules,
+    ...alter_rules,
+    ...use_rules,
 
   },
 });

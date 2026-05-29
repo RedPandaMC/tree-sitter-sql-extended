@@ -90,4 +90,4 @@ SELECT $1, $2 FROM @my_stage;
     (from
       (keyword_from)
       (relation
-        (sf_stage_ref)))))
+        (stage_ref)))))

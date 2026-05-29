@@ -8,7 +8,7 @@ CREATE STREAM my_stream ON TABLE my_table;
 
 (program
   (statement
-    (sf_create_stream
+    (create_stream
       (keyword_create)
       (keyword_stream)
       (object_reference
@@ -28,7 +28,7 @@ CREATE OR REPLACE SECURE VIEW my_view AS SELECT id FROM t;
 
 (program
   (statement
-    (sf_create_secure_view
+    (create_secure_view
       (keyword_create)
       (keyword_or)
       (keyword_replace)
@@ -60,7 +60,7 @@ CREATE DYNAMIC TABLE my_dt TARGET_LAG = '1 minute' WAREHOUSE = my_wh AS SELECT i
 
 (program
   (statement
-    (sf_create_dynamic_table
+    (create_dynamic_table
       (keyword_create)
       (keyword_dynamic)
       (keyword_table)
@@ -93,14 +93,14 @@ CREATE MASKING POLICY email_mask AS (val STRING) RETURNS STRING -> CASE WHEN CUR
 
 (program
   (statement
-    (sf_create_masking_policy
+    (create_masking_policy
       (keyword_create)
       (keyword_masking)
       (keyword_policy)
       (object_reference
         name: (identifier))
       (keyword_as)
-      (sf_policy_param
+      (policy_param
         (identifier)
         (keyword_string))
       (keyword_returns)
@@ -132,7 +132,7 @@ ALTER SESSION SET TIMEZONE = 'America/Chicago';
 
 (program
   (statement
-    (sf_alter_session
+    (alter_session
       (keyword_alter)
       (keyword_session)
       (keyword_set)
@@ -149,7 +149,7 @@ USE SECONDARY ROLES ALL;
 
 (program
   (statement
-    (sf_use_secondary_roles
+    (use_secondary_roles
       (keyword_use)
       (keyword_secondary)
       (keyword_roles)
