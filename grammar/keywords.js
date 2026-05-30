@@ -1,19 +1,11 @@
 import { make_keyword } from "./helpers.js";
 
 // ─── Architecture note ────────────────────────────────────────────────────────
-// ALL keywords — including dialect-specific ones — MUST be defined here in the
-// base grammar.  Tree-sitter's keyword extraction (`ts_lex_keywords`) only runs
-// on the root grammar file; a keyword defined solely in a dialect grammar is
-// added to the symbol table but bypasses `ts_lex_keywords`, so the lexer treats
-// it as a plain identifier in ambiguous positions and parse trees break.
-//
-// Dialect grammars re-declare the keywords they use with
-//   `token(prec(1, make_keyword("...")))``
-// This gives their lexer states the right preference without needing to move
-// the definition out of the base.  The dialect-specific comment sections below
-// (Delta, Unity Catalog, Snowflake, Hive, BigQuery, PostgreSQL types, …) exist
-// for exactly this reason: the keywords live here because tree-sitter requires
-// it, not because they are ANSI SQL.
+// This file contains ANSI SQL keywords and keywords required by base grammar
+// rules.  Non-ANSI, dialect-specific keywords belong in each dialect's own
+// grammar.js, not here.  Each dialect independently declares the keywords it
+// needs; inheritance flows base → x → y only.  Duplication across dialects is
+// intentional and preferred over a shared keyword pool.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default {
@@ -245,182 +237,21 @@ export default {
   keyword_compression: _ => make_keyword("compression"),
   keyword_while: _ => make_keyword("while"),
 
-  // Delta / Databricks keywords
-  keyword_retain: _ => make_keyword("retain"),
-  keyword_hours: _ => make_keyword("hours"),
-  keyword_dry: _ => make_keyword("dry"),
-  keyword_run: _ => make_keyword("run"),
-  keyword_zorder: _ => make_keyword("zorder"),
-  keyword_restore: _ => make_keyword("restore"),
-  keyword_convert: _ => make_keyword("convert"),
-  keyword_delta: _ => make_keyword("delta"),
-  keyword_fsck: _ => make_keyword("fsck"),
-  keyword_repair: _ => make_keyword("repair"),
-  keyword_reorg: _ => make_keyword("reorg"),
-  keyword_apply: _ => make_keyword("apply"),
-  keyword_purge: _ => make_keyword("purge"),
-  keyword_generate: _ => make_keyword("generate"),
-  keyword_msck: _ => make_keyword("msck"),
-  keyword_partitions: _ => make_keyword("partitions"),
-  keyword_sync: _ => make_keyword("sync"),
-
-  // Unity Catalog / grant keywords
+  // ANSI SQL grant/revoke/catalog
   keyword_grant: _ => make_keyword("grant"),
   keyword_revoke: _ => make_keyword("revoke"),
-  keyword_deny: _ => make_keyword("deny"),
   keyword_privileges: _ => make_keyword("privileges"),
-  keyword_service: _ => make_keyword("service"),
-  keyword_principal: _ => make_keyword("principal"),
-  keyword_recipient: _ => make_keyword("recipient"),
-  keyword_metastore: _ => make_keyword("metastore"),
-  keyword_volume: _ => make_keyword("volume"),
-  keyword_credential: _ => make_keyword("credential"),
-  keyword_share: _ => make_keyword("share"),
-  keyword_files: _ => make_keyword("files"),
-  keyword_file: _ => make_keyword("file"),
   keyword_catalog: _ => make_keyword("catalog"),
 
-  keyword_describe: _ => make_keyword("describe"),
-  keyword_query: _ => make_keyword("query"),
-
-  // Sprint 1+ Databricks / Spark SQL keywords
-  // SELECT extensions (#2)
-  keyword_qualify: _ => make_keyword("qualify"),
-  keyword_pivot: _ => make_keyword("pivot"),
-  keyword_unpivot: _ => make_keyword("unpivot"),
+  // ANSI SQL — tablesample/percent (used in base grammar tablesample rule)
   keyword_tablesample: _ => make_keyword("tablesample"),
   keyword_percent: _ => make_keyword("percent"),
-  keyword_bucket: _ => make_keyword("bucket"),
-  keyword_cluster: _ => make_keyword("cluster"),
-  keyword_distribute: _ => make_keyword("distribute"),
-  keyword_transform: _ => make_keyword("transform"),
-  keyword_clustered: _ => make_keyword("clustered"),
-  keyword_buckets: _ => make_keyword("buckets"),
-  // Plural forms needed for SHOW extensions (#9)
-  keyword_catalogs: _ => make_keyword("catalogs"),
-  keyword_namespaces: _ => make_keyword("namespaces"),
-  keyword_volumes: _ => make_keyword("volumes"),
-  keyword_connections: _ => make_keyword("connections"),
-  keyword_credentials: _ => make_keyword("credentials"),
-  keyword_shares: _ => make_keyword("shares"),
-  keyword_recipients: _ => make_keyword("recipients"),
-  keyword_providers: _ => make_keyword("providers"),
-  // CREATE / DROP / SHOW / DESCRIBE extensions (#3, #5, #9, #10)
-  keyword_namespace: _ => make_keyword("namespace"),
-  keyword_streaming: _ => make_keyword("streaming"),
-  keyword_live: _ => make_keyword("live"),
-  keyword_provider: _ => make_keyword("provider"),
-  keyword_options: _ => make_keyword("options"),
-  keyword_url: _ => make_keyword("url"),
-  keyword_grants: _ => make_keyword("grants"),
-  keyword_history: _ => make_keyword("history"),
-  keyword_detail: _ => make_keyword("detail"),
-  // SET extensions (#14)
-  keyword_global: _ => make_keyword("global"),
-  // CACHE extensions (#15)
-  keyword_lazy: _ => make_keyword("lazy"),
-  keyword_clear: _ => make_keyword("clear"),
-  keyword_uncache: _ => make_keyword("uncache"),
-  // Resource management (#16)
-  keyword_jar: _ => make_keyword("jar"),
-  // CREATE FUNCTION Databricks options
-  keyword_handler: _ => make_keyword("handler"),
-  keyword_environment: _ => make_keyword("environment"),
-  keyword_parameter: _ => make_keyword("parameter"),
-  keyword_style: _ => make_keyword("style"),
-  keyword_shallow: _ => make_keyword("shallow"),
-  keyword_deep: _ => make_keyword("deep"),
-  keyword_clone: _ => make_keyword("clone"),
-  keyword_jars: _ => make_keyword("jars"),
-  keyword_archive: _ => make_keyword("archive"),
-  keyword_archives: _ => make_keyword("archives"),
-  keyword_list: _ => make_keyword("list"),
-  // CALL + EXECUTE IMMEDIATE (#13)
-  keyword_call: _ => make_keyword("call"),
-  // INSERT / LOAD extensions (#12)
-  keyword_changes: _ => make_keyword("changes"),
-  keyword_directory: _ => make_keyword("directory"),
-  keyword_load: _ => make_keyword("load"),
-  keyword_inpath: _ => make_keyword("inpath"),
-  // ALTER TABLE extensions — Iceberg branches/tags (#4)
-  keyword_branch: _ => make_keyword("branch"),
-  keyword_tag: _ => make_keyword("tag"),
-  keyword_identity: _ => make_keyword("identity"),
-  keyword_position: _ => make_keyword("position"),
-  keyword_distributed: _ => make_keyword("distributed"),
-  keyword_ordered: _ => make_keyword("ordered"),
-  // Procedural scripting (#17)
-  keyword_elseif: _ => make_keyword("elseif"),
-  keyword_loop: _ => make_keyword("loop"),
-  keyword_repeat: _ => make_keyword("repeat"),
-  keyword_signal: _ => make_keyword("signal"),
-  keyword_resignal: _ => make_keyword("resignal"),
-  keyword_leave: _ => make_keyword("leave"),
-  keyword_iterate: _ => make_keyword("iterate"),
-  keyword_diagnostics: _ => make_keyword("diagnostics"),
-  keyword_sqlstate: _ => make_keyword("sqlstate"),
-  keyword_returned_sqlstate: _ => make_keyword("returned_sqlstate"),
-  keyword_message_text: _ => make_keyword("message_text"),
-  keyword_message: _ => make_keyword("message"),
-  keyword_condition: _ => make_keyword("condition"),
-  keyword_get: _ => make_keyword("get"),
-  // MySQL SHOW / DESCRIBE extensions (#2d)
-  keyword_databases: _ => make_keyword("databases"),
-  keyword_processlist: _ => make_keyword("processlist"),
-  keyword_status: _ => make_keyword("status"),
-  keyword_warnings: _ => make_keyword("warnings"),
-  keyword_errors: _ => make_keyword("errors"),
-  keyword_variables: _ => make_keyword("variables"),
-  keyword_indexes: _ => make_keyword("indexes"),
-  // BigQuery native types and functions (#2e)
-  keyword_int64:      _ => make_keyword("int64"),
-  keyword_float64:    _ => make_keyword("float64"),
-  keyword_bytes:      _ => make_keyword("bytes"),
-  keyword_bignumeric: _ => make_keyword("bignumeric"),
-  keyword_geography:  _ => make_keyword("geography"),
-  keyword_datetime:   _ => make_keyword("datetime"),
-  keyword_unnest:     _ => make_keyword("unnest"),
-  keyword_flatten:    _ => make_keyword("flatten"),
-  // PostgreSQL partitioning and table options (#2h)
-  keyword_inherits:   _ => make_keyword("inherits"),
-  keyword_including:  _ => make_keyword("including"),
-  keyword_excluding:  _ => make_keyword("excluding"),
-  // Oracle PL/SQL procedural keywords (#3a)
-  keyword_elsif:      _ => make_keyword("elsif"),
-  keyword_exit:       _ => make_keyword("exit"),
-  // Spark 4.x (#21)
-  keyword_var: _ => make_keyword("var"),
-  keyword_variable: _ => make_keyword("variable"),
-  keyword_variant: _ => make_keyword("variant"),
 
-  // Common dialect types
+  // Common dialect type — string (used in base _type rule)
   keyword_string: _ => make_keyword("string"),
 
-  // Snowflake dialect keywords
-  keyword_at: _ => make_keyword("at"),
-  keyword_one: _ => make_keyword("one"),
-  keyword_per: _ => make_keyword("per"),
-  keyword_past: _ => make_keyword("past"),
+  // ANSI SQL — FETCH NEXT n ROWS
   keyword_next: _ => make_keyword("next"),
-  keyword_match_recognize: _ => make_keyword("match_recognize"),
-  keyword_measures: _ => make_keyword("measures"),
-  keyword_pattern: _ => make_keyword("pattern"),
-  keyword_define: _ => make_keyword("define"),
-  keyword_skip: _ => make_keyword("skip"),
-  keyword_let: _ => make_keyword("let"),
-  keyword_raise: _ => make_keyword("raise"),
-  keyword_exception: _ => make_keyword("exception"),
-  keyword_task: _ => make_keyword("task"),
-  keyword_stream: _ => make_keyword("stream"),
-  keyword_dynamic: _ => make_keyword("dynamic"),
-  keyword_warehouse: _ => make_keyword("warehouse"),
-  keyword_schedule: _ => make_keyword("schedule"),
-  keyword_secure: _ => make_keyword("secure"),
-  keyword_masking: _ => make_keyword("masking"),
-  keyword_target_lag: _ => make_keyword("target_lag"),
-  keyword_access: _ => make_keyword("access"),
-  keyword_secondary: _ => make_keyword("secondary"),
-  keyword_roles: _ => make_keyword("roles"),
 
   keyword_source: _ => make_keyword("source"),
   keyword_except: _ => make_keyword("except"),
@@ -489,46 +320,12 @@ export default {
   keyword_procedure: _ => make_keyword("procedure"),
   keyword_object_id: _ => make_keyword("object_id"),
 
-  // Hive Keywords
+  // ANSI SQL — used in base CREATE TABLE (CREATE EXTERNAL TABLE)
   keyword_external: _ => make_keyword("external"),
-  keyword_stored: _ => make_keyword("stored"),
-  keyword_virtual: _ => make_keyword("virtual"),
-  keyword_cached: _ => make_keyword("cached"),
-  keyword_uncached: _ => make_keyword("uncached"),
-  keyword_replication: _ => make_keyword("replication"),
-  keyword_tblproperties: _ => make_keyword("tblproperties"),
-  keyword_compute: _ => make_keyword("compute"),
-  keyword_stats: _ => make_keyword("stats"),
-  keyword_statistics: _ => make_keyword("statistics"),
-  keyword_optimize: _ => make_keyword("optimize"),
-  keyword_rewrite: _ => make_keyword("rewrite"),
-  keyword_bin_pack: _ => make_keyword("bin_pack"),
-  keyword_incremental: _ => make_keyword("incremental"),
-  keyword_location: _ => make_keyword("location"),
-  keyword_partitioned: _ => make_keyword("partitioned"),
+  // ANSI SQL — used in base COMMENT ON statement
   keyword_comment: _ => make_keyword("comment"),
-  keyword_sort: _ => make_keyword("sort"),
-  keyword_sorted: _ => make_keyword("sorted"),
-  keyword_format: _ => make_keyword("format"),
-  keyword_delimited: _ => make_keyword("delimited"),
-  keyword_delimiter: _ => make_keyword("delimiter"),
-  keyword_fields: _ => make_keyword("fields"),
-  keyword_terminated: _ => make_keyword("terminated"),
-  keyword_escaped: _ => make_keyword("escaped"),
-  keyword_lines: _ => make_keyword("lines"),
+  // ANSI SQL — used in base ALTER SEQUENCE ... CACHE n
   keyword_cache: _ => make_keyword("cache"),
-  keyword_metadata: _ => make_keyword("metadata"),
-  keyword_noscan: _ => make_keyword("noscan"),
-
-  // Hive file formats
-  keyword_parquet: _ => make_keyword("parquet"),
-  keyword_rcfile: _ => make_keyword("rcfile"),
-  keyword_csv: _ => make_keyword("csv"),
-  keyword_textfile: _ => make_keyword("textfile"),
-  keyword_avro: _ => make_keyword("avro"),
-  keyword_sequencefile: _ => make_keyword("sequencefile"),
-  keyword_orc: _ => make_keyword("orc"),
-  keyword_jsonfile: _ => make_keyword("jsonfile"),
 
   // Operators
   is_not: $ => prec.left(seq($.keyword_is, $.keyword_not)),
@@ -598,26 +395,6 @@ export default {
   keyword_interval: _ => make_keyword("interval"),
 
   keyword_array: _ => make_keyword("array"), // not included in _type since it's a constructor literal
-
-  // BigQuery-specific keywords
-  keyword_struct: _ => make_keyword("struct"),
-  keyword_export: _ => make_keyword("export"),
-  keyword_model: _ => make_keyword("model"),
-  keyword_ml: _ => make_keyword("ml"),
-  keyword_predict: _ => make_keyword("predict"),
-  keyword_evaluate: _ => make_keyword("evaluate"),
-  keyword_assert: _ => make_keyword("assert"),
-  keyword_continue: _ => make_keyword("continue"),
-  keyword_error: _ => make_keyword("error"),
-
-  // PostgreSQL-specific types (non-ANSI)
-  keyword_oid: _ => make_keyword("oid"),
-  keyword_oids: _ => make_keyword("oids"),
-  keyword_name: _ => make_keyword("name"),
-  keyword_regclass: _ => make_keyword("regclass"),
-  keyword_regnamespace: _ => make_keyword("regnamespace"),
-  keyword_regproc: _ => make_keyword("regproc"),
-  keyword_regtype: _ => make_keyword("regtype"),
 
   // ANSI SQL — TRIM(BOTH|LEADING|TRAILING x FROM y)
   keyword_both: _ => make_keyword("both"),
