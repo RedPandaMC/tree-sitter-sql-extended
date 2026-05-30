@@ -32,9 +32,6 @@ export default {
             $.function_cost,
             $.function_rows,
             $.function_support,
-            $.function_handler,
-            $.function_environment,
-            $.function_parameter_style,
           ),
         ),
         optional($.function_body),
@@ -49,17 +46,8 @@ export default {
             $.function_cost,
             $.function_rows,
             $.function_support,
-            $.function_handler,
-            $.function_environment,
-            $.function_parameter_style,
           ),
         ),
-      ),
-      // Hive/Databricks class-backed UDF: FUNCTION name AS 'java.class.Name' [USING jar]
-      seq(
-        $.keyword_as,
-        field('class', alias($._literal_string, $.literal)),
-        optional(seq($.keyword_using, $.keyword_jar, field('jar', alias($._literal_string, $.literal)))),
       ),
     ),
   )),
@@ -182,24 +170,6 @@ export default {
   function_support: $ => seq(
     $.keyword_support,
     alias($._literal_string, $.literal),
-  ),
-
-  function_handler: $ => seq(
-    $.keyword_handler,
-    alias($._literal_string, $.literal),
-  ),
-
-  function_environment: $ => seq(
-    $.keyword_environment,
-    '(',
-    repeat(seq($.identifier, '=', alias($._literal_string, $.literal), optional(','))),
-    ')',
-  ),
-
-  function_parameter_style: $ => seq(
-    $.keyword_parameter,
-    $.keyword_style,
-    $.identifier,
   ),
 
 };

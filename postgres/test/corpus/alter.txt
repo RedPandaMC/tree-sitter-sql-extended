@@ -526,3 +526,154 @@ ALTER TABLE my_table
       (keyword_row)
       (keyword_level)
       (keyword_security))))
+
+================================================================================
+Alter index alter column set statistics
+================================================================================
+
+ALTER INDEX coord_idx ALTER COLUMN 3 SET STATISTICS 1000;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (alter_index
+      (keyword_alter)
+      (keyword_index)
+      (identifier)
+      (keyword_alter)
+      (keyword_column)
+      (literal)
+      (keyword_set)
+      (keyword_statistics)
+      (literal))))
+
+================================================================================
+Alter Column Set Storage
+================================================================================
+
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STORAGE PLAIN;
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STORAGE EXTERNAL;
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STORAGE EXTENDED;
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STORAGE MAIN;
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STORAGE DEFAULT;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_storage)
+        (keyword_plain))))
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_storage)
+        (keyword_external))))
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_storage)
+        (keyword_extended))))
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_storage)
+        (keyword_main))))
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_storage)
+        (keyword_default)))))
+
+================================================================================
+Alter Column Set Compression
+================================================================================
+
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET COMPRESSION lz4;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_compression)))))
+
+================================================================================
+Alter Column Set Statistics
+================================================================================
+
+ALTER TABLE table_name
+    ALTER COLUMN col1 SET STATISTICS 100;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (alter_table
+      (keyword_alter)
+      (keyword_table)
+      (object_reference
+        (identifier))
+      (alter_column
+        (keyword_alter)
+        (keyword_column)
+        (identifier)
+        (keyword_set)
+        (keyword_statistics)))))

@@ -338,24 +338,10 @@
   (keyword_execute)
 ] @keyword
 
-; --- Column storage ---
+; --- Procedure / tablesample ---
 [
   (keyword_procedure)
-  (keyword_extended)
-  (keyword_main)
-  (keyword_plain)
-  (keyword_storage)
-  (keyword_compression)
-] @keyword
-
-; --- Dialect-compat (reachable in base grammar) ---
-[
-  (keyword_jar)
-  (keyword_environment)
-  (keyword_handler)
-  (keyword_parameter)
   (keyword_percent)
-  (keyword_style)
   (keyword_tablesample)
 ] @keyword
 
@@ -375,7 +361,6 @@
  (keyword_cascaded)
  (keyword_wait)
  (keyword_nowait)
- (keyword_statistics)
  (keyword_maxvalue)
  (keyword_minvalue)
 ] @type.qualifier

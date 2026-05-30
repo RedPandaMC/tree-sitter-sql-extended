@@ -189,12 +189,21 @@ merging. Dispatch lists must therefore re-enumerate all base alternatives plus t
    )),
    ```
 
-4. **New keywords**: add to `grammar/keywords.js` using `make_keyword()`:
+4. **New keywords**:
+   - ANSI SQL or base-grammar keywords → add to `grammar/keywords.js`
+   - Dialect-specific keywords → add directly to the dialect's `grammar.js` rules block
+   - Never add dialect-specific keywords to the base `grammar/keywords.js`
    ```javascript
+   // In grammar/keywords.js (ANSI/base only):
    keyword_streaming: _ => make_keyword("streaming"),
+
+   // In spark/grammar.js (dialect-specific):
+   keyword_delta: _ => make_keyword("delta"),
    ```
 
-5. **Highlight**: add to `queries/highlights.scm`:
+5. **Highlight**: add to the appropriate `highlights.scm`:
+   - ANSI keywords → `queries/highlights.scm`
+   - Dialect keywords → `<dialect>/queries/highlights.scm`
    ```scheme
    (keyword_streaming) @keyword
    ```
@@ -358,43 +367,40 @@ own `queries/highlights.scm` and are not checked by `test-keywords.sh`.
 
 ## Keyword architecture rule
 
-**All keyword token definitions must live in the base `grammar/keywords.js`**, even if a keyword
-is only used by one specific dialect. This is a hard constraint imposed by tree-sitter's keyword
-extraction mechanism.
-
-### Why this matters
-
-tree-sitter performs *keyword extraction* during parser generation: it builds a `ts_lex_keywords`
-function in the generated C parser that maps identifier tokens to keyword tokens. This function
-is only populated from the **base** grammar. Keywords defined solely in a dialect
-`grammar(base, overrides)` block are added to the parser's symbol table but NOT to the keyword
-extraction function. As a result, they are never recognized as keywords in ambiguous positions
-where both a keyword and an identifier are grammatically valid — the parser treats them as
-plain identifiers instead, producing incorrect parse trees.
+**Non-ANSI, dialect-specific keywords belong in each dialect's own `grammar.js`, not in the
+base `grammar/keywords.js`.** The base file contains only ANSI SQL keywords and keywords
+actually referenced by base grammar rules.
 
 ### Rule
 
-- `grammar/keywords.js`: define **all** keywords (ANSI and dialect-specific) using `make_keyword()`
-- Dialect grammars (`spark/grammar.js`, `postgres/grammar.js`, etc.): may **override** a keyword
-  definition (e.g., to split `keyword_like` / `keyword_ilike`) but must NOT be the sole place
-  where a keyword token is defined
-- Base grammar **rules** should only reference ANSI SQL keywords in ANSI constructs — dialect
-  keywords defined in `grammar/keywords.js` for extraction purposes may remain unused by any
-  base grammar rule
+- `grammar/keywords.js`: ANSI SQL keywords and keywords used by base grammar rules only
+- Dialect grammars (`spark/grammar.js`, `postgres/grammar.js`, etc.): define their own
+  dialect-specific keywords directly in the `rules: { ... }` block
+- Inheritance flows base → dialect only. Duplication across sibling dialects is acceptable
+  and preferred over a shared keyword pool.
+- Use `token(prec(1, make_keyword(...)))` for any keyword that can also parse as an identifier
+  in the same parse state (most dialect-specific keywords need this)
 
-### The keyword_like / keyword_ilike split
+### How keyword extraction works
 
-`keyword_ilike` (PostgreSQL-only `ILIKE` operator) is defined in base `grammar/keywords.js` for
-keyword extraction, but is **not used** in any base grammar rule. Postgres overrides the
-`binary_expression` (via its expression rules) to add `$.keyword_ilike` as a valid operator.
-The base keeps only `keyword_like` in its `binary_expression` rule.
+tree-sitter performs *keyword extraction* during parser generation: it builds a `ts_lex_keywords`
+function in the generated C parser. **Each generated parser has its own keyword extraction** —
+base and each dialect produce independent parsers with independent `ts_lex_keywords` functions.
+This means dialect-specific keywords defined in a dialect's own `grammar.js` are fully extracted
+for that dialect's parser. No shared keyword pool is needed.
 
 ### Adding a new dialect-specific keyword
 
-1. Add the definition in `grammar/keywords.js`:
+1. Add the definition in the dialect's `grammar.js` rules block:
    ```javascript
-   keyword_myfoo: _ => make_keyword("myfoo"),
+   keyword_myfoo: _ => token(prec(1, make_keyword("myfoo"))),
    ```
-2. Use it only in the relevant dialect's grammar rules (no need to add it to any base rule)
+2. Use it in the dialect's grammar rules
 3. Add it to the dialect's `queries/highlights.scm` if it should be highlighted
-4. Do NOT duplicate the definition inside the dialect's `grammar.js` rules block
+4. Do NOT add it to `grammar/keywords.js` — that file is for ANSI/base only
+
+### The keyword_like / keyword_ilike split
+
+`keyword_ilike` (PostgreSQL-only `ILIKE` operator) is defined in `postgres/grammar.js`. The
+base grammar keeps only `keyword_like` in its `binary_expression` rule. Postgres overrides
+`binary_expression` to add `$.keyword_ilike` as a valid operator.

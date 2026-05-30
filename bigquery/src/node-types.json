@@ -245,16 +245,6 @@
           }
         ]
       },
-      "key": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -262,20 +252,6 @@
           {
             "type": "identifier",
             "named": true
-          }
-        ]
-      },
-      "statistics": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
           }
         ]
       },
@@ -412,16 +388,6 @@
             "named": true
           }
         ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -473,10 +439,6 @@
           "named": true
         },
         {
-          "type": "keyword_compression",
-          "named": true
-        },
-        {
           "type": "keyword_data",
           "named": true
         },
@@ -489,18 +451,6 @@
           "named": true
         },
         {
-          "type": "keyword_extended",
-          "named": true
-        },
-        {
-          "type": "keyword_external",
-          "named": true
-        },
-        {
-          "type": "keyword_main",
-          "named": true
-        },
-        {
           "type": "keyword_not",
           "named": true
         },
@@ -509,19 +459,7 @@
           "named": true
         },
         {
-          "type": "keyword_plain",
-          "named": true
-        },
-        {
           "type": "keyword_set",
-          "named": true
-        },
-        {
-          "type": "keyword_statistics",
-          "named": true
-        },
-        {
-          "type": "keyword_storage",
           "named": true
         },
         {
@@ -677,10 +615,6 @@
           "named": true
         },
         {
-          "type": "keyword_column",
-          "named": true
-        },
-        {
           "type": "keyword_exists",
           "named": true
         },
@@ -701,15 +635,7 @@
           "named": true
         },
         {
-          "type": "keyword_statistics",
-          "named": true
-        },
-        {
           "type": "keyword_tablespace",
-          "named": true
-        },
-        {
-          "type": "literal",
           "named": true
         },
         {
@@ -4074,32 +4000,12 @@
     "type": "create_function",
     "named": true,
     "fields": {
-      "class": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
-      },
       "custom_type": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "object_reference",
-            "named": true
-          }
-        ]
-      },
-      "jar": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
             "named": true
           }
         ]
@@ -4162,23 +4068,11 @@
           "named": true
         },
         {
-          "type": "function_environment",
-          "named": true
-        },
-        {
-          "type": "function_handler",
-          "named": true
-        },
-        {
           "type": "function_language",
           "named": true
         },
         {
           "type": "function_leakproof",
-          "named": true
-        },
-        {
-          "type": "function_parameter_style",
           "named": true
         },
         {
@@ -4207,10 +4101,6 @@
         },
         {
           "type": "int",
-          "named": true
-        },
-        {
-          "type": "keyword_as",
           "named": true
         },
         {
@@ -4266,10 +4156,6 @@
           "named": true
         },
         {
-          "type": "keyword_jar",
-          "named": true
-        },
-        {
           "type": "keyword_json",
           "named": true
         },
@@ -4303,10 +4189,6 @@
         },
         {
           "type": "keyword_trigger",
-          "named": true
-        },
-        {
-          "type": "keyword_using",
           "named": true
         },
         {
@@ -7841,48 +7723,6 @@
     }
   },
   {
-    "type": "function_environment",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_environment",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_handler",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "keyword_handler",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "function_language",
     "named": true,
     "fields": {},
@@ -7915,29 +7755,6 @@
         },
         {
           "type": "keyword_not",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_parameter_style",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "keyword_parameter",
-          "named": true
-        },
-        {
-          "type": "keyword_style",
           "named": true
         }
       ]
@@ -14435,10 +14252,6 @@
     "named": true
   },
   {
-    "type": "keyword_compression",
-    "named": true
-  },
-  {
     "type": "keyword_concurrently",
     "named": true
   },
@@ -14583,10 +14396,6 @@
     "named": true
   },
   {
-    "type": "keyword_environment",
-    "named": true
-  },
-  {
     "type": "keyword_error",
     "named": true
   },
@@ -14620,10 +14429,6 @@
   },
   {
     "type": "keyword_export",
-    "named": true
-  },
-  {
-    "type": "keyword_extended",
     "named": true
   },
   {
@@ -14704,10 +14509,6 @@
   },
   {
     "type": "keyword_groups",
-    "named": true
-  },
-  {
-    "type": "keyword_handler",
     "named": true
   },
   {
@@ -14803,10 +14604,6 @@
     "named": true
   },
   {
-    "type": "keyword_jar",
-    "named": true
-  },
-  {
     "type": "keyword_join",
     "named": true
   },
@@ -14860,10 +14657,6 @@
   },
   {
     "type": "keyword_loop",
-    "named": true
-  },
-  {
-    "type": "keyword_main",
     "named": true
   },
   {
@@ -15015,10 +14808,6 @@
     "named": true
   },
   {
-    "type": "keyword_parameter",
-    "named": true
-  },
-  {
     "type": "keyword_partition",
     "named": true
   },
@@ -15028,10 +14817,6 @@
   },
   {
     "type": "keyword_percent",
-    "named": true
-  },
-  {
-    "type": "keyword_plain",
     "named": true
   },
   {
@@ -15235,14 +15020,6 @@
     "named": true
   },
   {
-    "type": "keyword_statistics",
-    "named": true
-  },
-  {
-    "type": "keyword_storage",
-    "named": true
-  },
-  {
     "type": "keyword_strict",
     "named": true
   },
@@ -15252,10 +15029,6 @@
   },
   {
     "type": "keyword_struct",
-    "named": true
-  },
-  {
-    "type": "keyword_style",
     "named": true
   },
   {
